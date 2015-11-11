@@ -6,6 +6,8 @@ This mod provides various signs with text display. Text is locked if area is pro
 
 **License**: WTFPL
 
+(Font taken from VanessaE's homedecor/signs_lib)
+
 ## Recipes
 
 **Blue Street Sign**
