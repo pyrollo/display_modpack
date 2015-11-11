@@ -202,8 +202,7 @@ end
 
 -- Generic callback for show_formspec displayed formspecs
 minetest.register_on_player_receive_fields(function(player, formname, fields)
-	local found, mod, node_name, pos
-	found, _, mod, node_name, pos = formname:find("([%w_]+):([%w_]+)@(.+)")
+	local found, _, mod, node_name, pos = formname:find("([%w_]+):([%w_]+)@(.+)")
 
 	if found then
 		if mod ~= 'signs' then return end
