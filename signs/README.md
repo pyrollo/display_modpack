@@ -2,29 +2,19 @@
 
 This mod provides various signs with text display. Text is locked if area is protected.
 
-**Dependancies**: display_lib, default
+**Dependancies**: default, display\_lib, font\_lib
 
 **License**: WTFPL
 
-(Font taken from VanessaE's homedecor/signs_lib)
-
 ## Recipes
 
-**Blue Street Sign**
+**Sign** (overrides default sign)
 
-		B W S
-		S S S
-		- - -
+		W W W
+		W W W
+		- S -
 
-B = Blue Dye, W = White Dye, S = Steel Ingot
-
-**Green Street Sign**
-
-		G W S
-		S S S 
-		- - -
-
-G = Green Dye, W = White Dye, S = Steel Ingot
+W = Wooden Plank, S = Stick
 
 **Poster**
 
@@ -43,12 +33,4 @@ Poster displays only title, much more text can be read by right-clicking on it.
 		- - -
 
 W = Wooden Plank (group)
-
-**Black direction sign**
-
-		B W S
-		S S -
-		- - -
-
-B = Black Dye, W = White Dye, S = Steel Ingot
 

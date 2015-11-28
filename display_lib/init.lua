@@ -6,13 +6,58 @@ display_lib = {}
 
 -- Miscelaneous values depending on wallmounted param2
 local wallmounted_values = {
-	[0]={dx=0,  dz=0,  lx=0, lz=0,  yaw=0,          rotate=0}, -- Should never be used
-		{dx=1,  dz=0,  lx=0, lz=0,  yaw=0,          rotate=1}, -- Should never be used 
-		{dx=1,  dz=0,  lx=0, lz=-1, yaw=-math.pi/2, rotate=4},
-		{dx=-1, dz=0,  lx=0, lz=1,  yaw=math.pi/2,  rotate=5},
-		{dx=0,  dz=1,  lx=1, lz=0,  yaw=0,          rotate=3},
-		{dx=0,  dz=-1, lx=-1, lz=0, yaw=math.pi,    rotate=2}
+	[0]={dx=0,  dz=0,  rx=0,  rz=0,  yaw=0,          rotate=0}, -- Should never be used
+		{dx=0,  dz=0,  rx=0,  rz=0,  yaw=0,          rotate=1}, -- Should never be used
+		{dx=-1, dz=0,  rx=0,  rz=-1, yaw=-math.pi/2, rotate=5},
+		{dx=1,  dz=0,  rx=0,  rz=1,  yaw=math.pi/2,  rotate=4},
+		{dx=0,  dz=-1, rx=1,  rz=0,  yaw=0,          rotate=2},
+		{dx=0,  dz=1,  rx=-1, rz=0,  yaw=math.pi,    rotate=3}
 }
+
+-- Miscelaneous values depending on facedir param2
+local facedir_values = {
+	[0]={dx=0,  dz=-1, rx=1,  rz=0,  yaw=0,          rotate=1},
+	    {dx=-1, dz=0,  rx=0,  rz=-1, yaw=-math.pi/2, rotate=2},
+	    {dx=0,  dz=1,  rx=-1, rz=0,  yaw=math.pi,    rotate=3},
+		{dx=1,  dz=0,  rx=0,  rz=1,  yaw=math.pi/2,  rotate=0},
+	    -- Forbiden values :
+	    {dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
+	    {dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
+	    {dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
+	    {dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
+	    {dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
+	    {dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
+	    {dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
+	    {dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
+	    {dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
+	    {dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
+	    {dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
+	    {dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
+	    {dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
+	    {dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
+	    {dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
+	    {dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
+	    {dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
+	    {dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
+	    {dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
+	    {dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
+	}
+
+-- dx/dy = depth vector, rx/ly = right vector, yaw = yaw of entity,
+-- rotate = next facedir/wallmount on rotate
+
+local function get_values(node)
+	local ndef = minetest.registered_nodes[node.name]
+
+	if ndef then
+		if ndef.paramtype2 == "wallmounted" then
+			return wallmounted_values[node.param2]
+		end
+		if ndef.paramtype2 == "facedir" then
+			return facedir_values[node.param2]
+		end
+	end
+end
 
 --- Gets the display entities attached with a node. Removes extra ones
 local function get_entities(pos)
@@ -45,23 +90,24 @@ end
 local function place_entities(pos)
 	local node = minetest.get_node(pos)
 	local ndef = minetest.registered_nodes[node.name]
-	local values = wallmounted_values[node.param2]
+	local values = get_values(node)
 	local objrefs = get_entities(pos)
 
-	if ndef and ndef.display_entities then
+	if values and ndef and ndef.display_entities then
+
 		for entity_name, props in pairs(ndef.display_entities) do
 			local depth = clip_pos_prop(props.depth)
-			local top = clip_pos_prop(props.top)
-			local left = clip_pos_prop(props.left)
+			local height = clip_pos_prop(props.height)
+			local right = clip_pos_prop(props.right)
 			
 			if not objrefs[entity_name] then
 				objrefs[entity_name] = minetest.add_entity(pos, entity_name)
 			end
 
 			objrefs[entity_name]:setpos({
-				x = pos.x - values.dx * depth + values.lx * left,
-				y = pos.y + top,
-				z = pos.z - values.dz * depth + values.lz * left})
+				x = pos.x - values.dx * depth + values.rx * right,
+				y = pos.y + height,
+				z = pos.z - values.dz * depth + values.rz * right})
 
 			objrefs[entity_name]:setyaw(values.yaw)
 		end
@@ -97,19 +143,26 @@ end
 --- On_place callback for display_lib items. Does nothing more than preventing item
 --- from being placed on ceiling or ground 
 function display_lib.on_place(itemstack, placer, pointed_thing)
+	local ndef = minetest.registered_nodes[itemstack.name]
 	local above = pointed_thing.above
 	local under = pointed_thing.under
 	local dir = {x = under.x - above.x,
 				 y = under.y - above.y,
 				 z = under.z - above.z}
-	local wdir = minetest.dir_to_wallmounted(dir)
 
-	if wdir == 0 or wdir == 1 then
-		dir = placer:get_look_dir()
-		dir.y = 0
-		wdir = minetest.dir_to_wallmounted(dir)
+	if ndef and ndef.paramtype2 == "wallmounted" then
+		local wdir = minetest.dir_to_wallmounted(dir)
+
+		if wdir == 0 or wdir == 1 then
+			dir = placer:get_look_dir()
+			dir.y = 0
+			wdir = minetest.dir_to_wallmounted(dir)
+		end
+
+		return minetest.item_place(itemstack, placer, pointed_thing, wdir)
+	else
+		return minetest.item_place(itemstack, placer, pointed_thing)
 	end
-	return minetest.item_place(itemstack, placer, pointed_thing, wdir) 
 end
 
 --- On_construct callback for display_lib items. Creates entities and update them.
@@ -126,13 +179,14 @@ function display_lib.on_destruct(pos)
 	end
 end
 
-
 -- On_rotate (screwdriver) callback for display_lib items. Prevents axis rotation and reorients entities.
 function display_lib.on_rotate(pos, node, user, mode, new_param2)
 	if mode ~= screwdriver.ROTATE_FACE then return false end
 
-	if wallmounted_values[node.param2] then
-		minetest.swap_node(pos, {name = node.name, param1 = node.param1, param2 = wallmounted_values[node.param2].rotate})
+	local values = get_values(node)
+
+	if values then
+		minetest.swap_node(pos, {name = node.name, param1 = node.param1, param2 = values.rotate})
 		place_entities(pos)
 		return true
 	else

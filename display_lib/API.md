@@ -1,5 +1,6 @@
 # Display Lib API
-This document describes Display Lib API. Display Lib allows to add a dynamic display on a node. Node must be wallmounted and Display Lib limits its rotation to vertical positions. 
+This document describes Display Lib API. Display Lib allows to add a dynamic display on a node. Display Lib limits node rotations. For wallmounted, only vertical positionning is available, and for facedir, only first four position are availabel (those with default axis).
+
 ## Provided methods
 ### update\_entities
 **display\_lib.update\_entities(pos)**
@@ -38,7 +39,12 @@ This is a helper to register entities used for display.
 * Register display entities with **register\_display\_entity**
 * Register node with :
 	- **on\_place**, **on\_construct**, **on\_destruct** and **on\_rotate** callbacks using **display\_lib** callbacks.
-	- a **display\_entities** field in node definition containing a entity name indexed table. For each entity, two fields : **depth** indicates the entity position (-0.5 to 0.5) and **on_display_update** is a callback in charge of setting up entity texture.
+	- a **display\_entities** field in node definition containing a entity name indexed table. See below for description of each display\_entities fields.
+
+### Display_entities fields
+**depth**, **right** and **height** : Entity position regarding to node facedir/wallmounted main axis. Values for these fields can be any number between -0.5 and 0.5 (default value is 0). Position 0,0,0 is the center of the node. **depth** goes from front (-0.5) to rear (0.5), **height** goes from bottom (-0.5) to top (0.5) and **height** goes from left (-0.5) to right (0.5).
+
+**on_display_update** is a callback in charge of setting up entity texture. If not set, entity will have no texture and will be displayed as unknown item.
 
 ### Example
 
@@ -60,9 +66,9 @@ This is a helper to register entities used for display.
 			paramtype2 = "wallmounted",
 			...
 			display_entities = {
-				["mymod:entity1"] = { depth = -0.3, 
+				["mymod:entity1"] = { depth = 0.3,
 					on_display_update = my_display_update1},
-				["mymod:entity1"] = { depth = -0.2, 
+				["mymod:entity1"] = { depth = 0.2, height = 0.1,
 					on_display_update = my_display_update2},
 			},
 			...

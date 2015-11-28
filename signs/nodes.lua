@@ -39,44 +39,21 @@ local function on_receive_fields_poster(pos, formname, fields, player)
 	end
 end
 
-signs.sign_models = {
-	blue_street={
-		depth=1/16,
-		width=14/16,
-		height=12/16,
-		color="#fff",
-		maxlines = 3,
-		xscale = 1/144,
-		yscale = 1/64,
-		fields = {
-			description="Blue street sign",
-			tiles={"signs_blue_street.png"},
-			inventory_image="signs_blue_street_inventory.png",
-		},
-	},
-	green_street={
-		depth=1/32,
-		width=1,
-		height=6/16,
-		color="#fff",
-		maxlines = 1,
-		xscale = 1/96,
-		yscale = 1/64,
-		fields = {
-			description="Green street sign",
-			tiles={"signs_green_street.png"},
-			inventory_image="signs_green_street_inventory.png",
-		},
-	},
+-- Text entity for all signs
+display_lib.register_display_entity("signs:text")
+
+-- Sign models and registration
+local models = {
 	wooden_right={
 		depth=1/16,
-		width=14/16,
-		height=7/16,
-		color="#000",
-		maxlines = 2,
-		xscale = 1/112,
-		yscale = 1/64,
-		fields = {
+		width = 14/16,
+		height = 7/16,
+		entity_fields = {
+			resolution = { x = 112, y = 64 },
+			maxlines = 2,
+			color="#000",
+		},
+		node_fields = {
 			description="Wooden direction sign",
 			tiles={"signs_wooden_right.png"},
 			inventory_image="signs_wooden_inventory.png",
@@ -87,13 +64,14 @@ signs.sign_models = {
 	},
 	wooden_left={
 		depth=1/16,
-		width=14/16,
-		height=7/16,
-		color="#000",
-		maxlines = 2,
-		xscale = 1/112,
-		yscale = 1/64,
-		fields = {
+		width = 14/16,
+		height = 7/16,
+		entity_fields = {
+			resolution = { x = 112, y = 64 },
+			maxlines = 2,
+			color="#000",
+		},
+		node_fields = {
 			description="Wooden direction sign",
 			tiles={"signs_wooden_left.png"},
 			inventory_image="signs_wooden_inventory.png",
@@ -103,50 +81,17 @@ signs.sign_models = {
 			on_rotate=signs.on_rotate_direction,
 		},
 	},
-	black_right={
-		depth=1/32,
-		width=1,
-		height=0.5,
-		color="#000",
-		maxlines = 1,
-		xscale = 1/96,
-		yscale = 1/64,
-		fields = {
-			description="Black direction sign",
-			tiles={"signs_black_right.png"},
-			inventory_image="signs_black_inventory.png",
-			on_place=signs.on_place_direction,
-			on_rotate=signs.on_rotate_direction,
-		},
-	},
-	black_left={
-		depth=1/32,
-		width=1,
-		height=0.5,
-		color="#000",
-		maxlines = 1,
-		xscale = 1/96,
-		yscale = 1/64,
-		fields = {
-			description="Black direction sign",
-			tiles={"signs_black_left.png"},
-			inventory_image="signs_black_inventory.png",
-			groups={choppy=1,oddly_breakable_by_hand=1,not_in_creative_inventory=1},
-			drop="signs:black_right",
-			on_place=signs.on_place_direction,
-			on_rotate=signs.on_rotate_direction,
-		},
-	},
 	poster={
 		depth=1/32,
-		width=26/32,
-		height=30/32,
-		color="#000",
-		valing="top",
-		maxlines = 1,
-		xscale = 1/144,
-		yscale = 1/64,
-		fields = {
+		width = 26/32,
+		height = 30/32,
+		entity_fields = {
+			resolution = { x = 144, y = 64 },
+			maxlines = 1,
+			color="#000",
+			valign="top",
+		},
+		node_fields = {
 			description="Poster",
 			tiles={"signs_poster.png"},
 			inventory_image="signs_poster_inventory.png",
@@ -157,47 +102,27 @@ signs.sign_models = {
 	},
 }
 
-display_lib.register_display_entity("signs:text")
 
-for model_name, model in pairs(signs.sign_models)
+for name, model in pairs(models)
 do
-	local fields = {
-		sunlight_propagates = true,
-		paramtype = "light",
-		paramtype2 = "wallmounted",
-		drawtype = "nodebox",
-		node_box = {
-			type = "wallmounted",
-			wall_side = {-0.5, -model.height/2, -model.width/2, 
-					     -0.5 + model.depth, model.height/2, model.width/2},
-			wall_bottom = {-model.width/2, -0.5, -model.height/2,
-						   model.width/2, -0.5 + model.depth, model.height/2},
-			wall_top = {-model.width/2, 0.5, -model.height/2,
-						   model.width/2, 0.5 - model.depth, model.height/2}, 
-		},
-		groups = {choppy=1,oddly_breakable_by_hand=1},
-		sign_model = model_name,
-		display_entities = { 
-			["signs:text"] = {
-					depth = model.depth-0.499,
-					on_display_update = signs.on_display_update },
-		},
-		on_place = display_lib.on_place,
-		on_construct = 	function(pos)
-							signs.set_formspec(pos)
-							display_lib.on_construct(pos)
-						end,
-		on_destruct = display_lib.on_destruct,
-		on_rotate = display_lib.on_rotate,
-		on_receive_fields = signs.on_receive_fields,
-	}
-
-	for key, value in pairs(model.fields) do
-		fields[key] = value
-	end
-
-	if not fields.wield_image then fields.wield_image = fields.inventory_image end
-
-	minetest.register_node("signs:"..model_name, fields)
+	signs.register_sign("signs", name, model)
 end
+
+-- Override default sign
+signs.register_sign(":default", "sign_wall", {
+		depth = 1/16,
+		width = 14/16,
+		height = 10/16,
+		entity_fields = {
+			size = { x = 12/16, y = 8/16 },
+			resolution = { x = 144, y = 64 },
+			maxlines = 3,
+			color="#000",
+		},
+		node_fields = {
+			description="Sign",
+			tiles={"signs_default.png"},
+			inventory_image="signs_default_inventory.png",
+		},
+	})
 

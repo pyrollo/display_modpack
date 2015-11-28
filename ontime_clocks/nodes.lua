@@ -16,7 +16,7 @@ minetest.register_node("ontime_clocks:green_digital", {
 	groups = {oddly_breakable_by_hand=1},
 	display_entities = {
 		["ontime_clocks:display"] = {
-			depth = -13/32 + 0.01, 
+			depth = 13/32 - 0.01,
 			on_display_update = function(pos, objref)
 				objref:set_properties(
 					ontime_clocks.get_digital_properties(
@@ -54,7 +54,7 @@ minetest.register_node("ontime_clocks:red_digital", {
 	groups = {oddly_breakable_by_hand=1},
 	display_entities = {
 		["ontime_clocks:display"] = {
-			depth = -13/32 + 0.01, 
+			depth = 13/32 - 0.01,
 			on_display_update = function(pos, objref)
 				objref:set_properties(
 					ontime_clocks.get_digital_properties(
@@ -92,7 +92,7 @@ minetest.register_node("ontime_clocks:white", {
 	groups = {choppy=1,oddly_breakable_by_hand=1},
 	display_entities = { 
 		["ontime_clocks:display"] = {
-			depth = -6/16+0.01,
+			depth = 6/16 - 0.01,
 			on_display_update = function(pos, objref)
 				objref:set_properties(
 					ontime_clocks.get_needles_properties(
@@ -129,7 +129,7 @@ minetest.register_node("ontime_clocks:frameless_black", {
 	groups = {choppy=1,oddly_breakable_by_hand=1},
 	display_entities = { 
 		["ontime_clocks:display"] = {
-			depth = -7/16,
+			depth = 7/16,
 			on_display_update = function(pos, objref)
 				objref:set_properties(
 					ontime_clocks.get_needles_properties(
@@ -166,7 +166,7 @@ minetest.register_node("ontime_clocks:frameless_gold", {
 	groups = {choppy=1,oddly_breakable_by_hand=1},
 	display_entities = { 
 		["ontime_clocks:display"] = {
-			depth = -7/16,
+			depth = 7/16,
 			on_display_update = function(pos, objref)
 				objref:set_properties(
 					ontime_clocks.get_needles_properties(
@@ -203,7 +203,7 @@ minetest.register_node("ontime_clocks:frameless_white", {
 	groups = {choppy=1,oddly_breakable_by_hand=1},
 	display_entities = { 
 		["ontime_clocks:display"] = {
-			depth = -7/16,
+			depth = 7/16,
 			on_display_update = function(pos, objref)
 				objref:set_properties(
 					ontime_clocks.get_needles_properties(

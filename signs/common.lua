@@ -1,120 +1,18 @@
-local font = {}
-signs.font_height = 10
-
--- Get png width, suposing png width is less than 256 (it is the case for all font textures)
-local function get_png_width(filename)
-	local file=assert(io.open(filename,"rb"))
-	-- All font png are smaller than 256x256 --> read only last byte
-	file:seek("set",19)
-	local w = file:read(1)
-	file:close()
-	return w:byte()
-end
-
--- Computes line width for a given font height and text
-function signs.get_line_width(text)
-	local char
-	local width = 0
-
-	for p=1,#text
-	do
-		char = text:sub(p,p):byte()
-		if font[char] then
-			width = width + font[char].width
-		end
-	end
-
-	return width
-end
-
---- Builds texture part for a text line
--- @param text Text to be rendered
--- @param x Starting x position in texture
--- @param width Width of the texture (extra text is not rendered)
--- @param y Vertical position of the line in texture
--- @return Texture string
-function signs.make_line_texture(text, x, width, y)
-	local char
-
-	local texture = ""
-
-	for p=1,#text
-	do
-		char = text:sub(p,p):byte()
-		if font[char] then
-			-- Add image only if it is visible (at least partly)
-			if x + font[char].width >= 0 and x <= width then
-				texture = texture..string.format(":%d,%d=%s", x, y, font[char].filename)
-			end
-			x = x + font[char].width
-		end
-	end
-	return texture
-end
-
-local function split_lines(text, maxlines)
-	local splits = text:split("\n")
-	if maxlines then
-		local lines = {}
-		for num = 1,maxlines do
-			lines[num] = splits[num]
-		end
-		return lines
-	else
-		return splits
-	end
-end
-
-function signs.on_display_update(pos, objref)
-	local meta = minetest.get_meta(pos)
-	local text = meta:get_string("display_text")
-
-	local ndef = minetest.registered_nodes[minetest.get_node(pos).name]
-	if ndef and ndef.sign_model then
-		local model = signs.sign_models[ndef.sign_model]
-		local lines = split_lines(text, model.maxlines)
-
-		local texturew = model.width/model.xscale
-		local textureh = model.height/model.yscale
-
-		local texture = ""
-
-		local y
-		if model.valing == "top" then
-			y = signs.font_height / 2
-		else		
-			y = (textureh - signs.font_height * #lines) / 2 + 1 
-		end
-
-		for _, line in pairs(lines) do
-			texture = texture..signs.make_line_texture(line, 
-				(texturew - signs.get_line_width(line)) / 2, 
-				texturew, y)
-			y = y + signs.font_height
-		end
-
-		local texture = string.format("[combine:%dx%d", texturew, textureh)..texture
-		if model.color then texture = texture.."^[colorize:"..model.color end
-
-		objref:set_properties({ textures={texture}, visual_size = {x=model.width, y=model.height}})
-	end
-end
-
 function signs.set_formspec(pos)
 	local meta = minetest.get_meta(pos)
 	local ndef = minetest.registered_nodes[minetest.get_node(pos).name]
-	if ndef and ndef.sign_model then
-		local model = signs.sign_models[ndef.sign_model]
+	if ndef and ndef.display_entities and ndef.display_entities["signs:text"] then
+		local maxlines = ndef.display_entities["signs:text"].maxlines
 		local formspec
 
-		if model.maxlines == 1 then
+		if maxlines == 1 then
 			formspec = "size[6,3]"..
 				"field[0.5,0.7;5.5,1;display_text;Displayed text;${display_text}]"..
 				"button_exit[2,2;2,1;ok;Write]"
 		else
 			local extralabel = ""
-			if model.maxlines then
-				extralabel = " (first "..model.maxlines.." lines only)"
+			if maxlines then
+				extralabel = " (first "..maxlines.." lines only)"
 			end
 
 			formspec = "size[6,4]"..
@@ -192,14 +90,6 @@ function signs.on_rotate_direction(pos, node, user, mode, new_param2)
 	end
 end
 
--- Populate fonts table
-local w, filename
-for charnum=32,126 do
-	filename = string.format("signs_%02x.png", charnum)
-	w = get_png_width(signs.path.."/textures/"..filename)
-	font[charnum] = {filename=filename, width=w}
-end
-
 -- Generic callback for show_formspec displayed formspecs
 minetest.register_on_player_receive_fields(function(player, formname, fields)
 	local found, _, mod, node_name, pos = formname:find("([%w_]+):([%w_]+)@(.+)")
@@ -214,3 +104,56 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 		end
 	end
 end)
+
+function signs.register_sign(mod, name, model)
+	-- Default fields
+	local fields = {
+		sunlight_propagates = true,
+		paramtype = "light",
+		paramtype2 = "wallmounted",
+		drawtype = "nodebox",
+		node_box = {
+			type = "wallmounted",
+			wall_side = {-0.5, -model.height/2, -model.width/2,
+					     -0.5 + model.depth, model.height/2, model.width/2},
+			wall_bottom = {-model.width/2, -0.5, -model.height/2,
+						   model.width/2, -0.5 + model.depth, model.height/2},
+			wall_top = {-model.width/2, 0.5, -model.height/2,
+						   model.width/2, 0.5 - model.depth, model.height/2},
+		},
+		groups = {choppy=2,dig_immediate=2,attached_node=1},
+		sounds = default.node_sound_defaults(),
+		display_entities = {
+			["signs:text"] = {
+					on_display_update = font_lib.on_display_update,
+					depth = 0.499 - model.depth,
+					size = { x = 1, y = 1 },
+					resolution = { x = 64, y = 64 },
+					maxlines = 1,
+			},
+
+		},
+		on_place = display_lib.on_place,
+		on_construct = 	function(pos)
+							signs.set_formspec(pos)
+							display_lib.on_construct(pos)
+						end,
+		on_destruct = display_lib.on_destruct,
+		on_rotate = display_lib.on_rotate,
+		on_receive_fields = signs.on_receive_fields,
+	}
+
+	-- Node fields override
+	for key, value in pairs(model.node_fields) do
+		fields[key] = value
+	end
+
+	if not fields.wield_image then fields.wield_image = fields.inventory_image end
+
+	-- Entity fields override
+	for key, value in pairs(model.entity_fields) do
+		fields.display_entities["signs:text"][key] = value
+	end
+
+	minetest.register_node(mod..":"..name, fields)
+end
