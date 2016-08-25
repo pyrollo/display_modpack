@@ -1,3 +1,23 @@
+--[[
+    signs mod for Minetest - Various signs with text displayed on
+    (c) Pierre-Yves Rollo
+
+    This file is part of signs.
+
+    signs is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    signs is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with signs.  If not, see <http://www.gnu.org/licenses/>.
+--]]
+
 -- Poster specific formspec
 local function on_rightclick_poster(pos, node, player)
 	local formspec
@@ -49,36 +69,57 @@ local models = {
 		width = 14/16,
 		height = 7/16,
 		entity_fields = {
+			size = { x = 12/16, y = 5/16 },
 			resolution = { x = 112, y = 64 },
 			maxlines = 2,
 			color="#000",
 		},
 		node_fields = {
 			description="Wooden direction sign",
-			tiles={"signs_wooden_right.png"},
+			tiles={"signs_wooden_direction.png"},
 			inventory_image="signs_wooden_inventory.png",
 			on_place=signs.on_place_direction,
-			on_rotate=signs.on_rotate_direction,
-
+            on_rightclick = signs.on_right_click_direction,
+			drawtype = "mesh",
+			mesh = "signs_dir_right.obj",
+			selection_box = { type="wallmounted", 
+				wall_side = {-0.5, -7/32, -7/16, -7/16, 7/32, 0.5},
+				wall_bottom = {-0.5, -0.5, -0.5, 0.5, -7/16, 0.5},
+				wall_top = {-0.5, 0.5, -0.5, 0.5, 7/16, 0.5}},
+			collision_box = { type="wallmounted", 
+				wall_side = {-0.5, -7/32, -7/16, -7/16, 7/32, 0.5},
+				wall_bottom = {-0.5, -0.5, -0.5, 0.5, -7/16, 0.5},
+				wall_top = {-0.5, 0.5, -0.5, 0.5, 7/16, 0.5}},
 		},
 	},
 	wooden_left={
-		depth=1/16,
+		depth = 1/16,
 		width = 14/16,
 		height = 7/16,
 		entity_fields = {
+			size = { x = 12/16, y = 5/16 },
 			resolution = { x = 112, y = 64 },
 			maxlines = 2,
 			color="#000",
 		},
 		node_fields = {
 			description="Wooden direction sign",
-			tiles={"signs_wooden_left.png"},
+			tiles={"signs_wooden_direction.png"},
 			inventory_image="signs_wooden_inventory.png",
+			on_place=signs.on_place_direction,
+            on_rightclick = signs.on_right_click_direction,
+			drawtype = "mesh",
+			mesh = "signs_dir_left.obj",
+			selection_box = { type="wallmounted", 
+				wall_side = {-0.5, -7/32, -0.5, -7/16, 7/32, 7/16},
+				wall_bottom = {-0.5, -0.5, -0.5, 0.5, -7/16, 0.5},
+				wall_top = {-0.5, 0.5, -0.5, 0.5, 7/16, 0.5}},
+			collision_box = { type="wallmounted", 
+				wall_side = {-0.5, -7/32, -0.5, -7/16, 7/32, 7/16},
+				wall_bottom = {-0.5, -0.5, -0.5, 0.5, -7/16, 0.5},
+				wall_top = {-0.5, 0.5, -0.5, 0.5, 7/16, 0.5}},
 			groups={choppy=1,oddly_breakable_by_hand=1,not_in_creative_inventory=1},
 			drop="signs:wooden_right",
-			on_place=signs.on_place_direction,
-			on_rotate=signs.on_rotate_direction,
 		},
 	},
 	poster={
@@ -102,14 +143,16 @@ local models = {
 	},
 }
 
-
 for name, model in pairs(models)
 do
 	signs.register_sign("signs", name, model)
 end
 
+if minetest.get_modpath("homedecor") then
+    print ("["..minetest.get_current_modname().."] homedecor mod is present, not overriding default:sign.")
+else
 -- Override default sign
-signs.register_sign(":default", "sign_wall", {
+    signs.register_sign(":default", "sign_wall", {
 		depth = 1/16,
 		width = 14/16,
 		height = 10/16,
@@ -124,5 +167,6 @@ signs.register_sign(":default", "sign_wall", {
 			tiles={"signs_default.png"},
 			inventory_image="signs_default_inventory.png",
 		},
-	})
+    })
+end
 

@@ -4,9 +4,9 @@ This library for font display on entities (to be used with display_lib for sign 
 
 **Dependancies**: default
 
-**License**: WTFPL
+**License**: LGPL
 
-(Font taken from VanessaE's homedecor/signs_lib)
+(Font taken from VanessaE's homedecor/signs_lib, originally under WTFPL)
 
 **API**: See API.md document please.
 

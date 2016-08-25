@@ -6,7 +6,7 @@ This mod provides stone steles with text display. Text is locked if area is prot
 
 (Technic adds marble and granite steles)
 
-**License**: WTFPL
+**License**: LGPL
 
 ## Recipes
 
@@ -20,3 +20,4 @@ Material (must be all the same) can be : Stone, Desert Stone, Sandstone, Granite
 
 Gives 4 steles of corresponding material. Right click on stele to update text.
 
+(Extra materials can be added in config.lua file)

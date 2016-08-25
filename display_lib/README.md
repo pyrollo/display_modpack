@@ -6,6 +6,6 @@ This library's purpose is to ease creation of nodes with one or more displays on
 
 **Dependancies**:default
 
-**License**: WTFPL
+**License**: LPGL
 
 **API**: See API.md document please.

@@ -4,7 +4,7 @@ This mod provides road signs with text display. Text is locked if area is protec
 
 **Dependancies**: default, display\_lib, font\_lib, signs
 
-**License**: WTFPL
+**License**: Code under LGPL, texture under CC-BY-SA
 
 ## Recipes
 

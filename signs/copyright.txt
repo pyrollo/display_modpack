@@ -1,0 +1,2 @@
+Code and Models by Pierre-Yves Rollo
+Textures by Pierre-Yves Rollo, except signs_default.png and signs_default_inventory.png by Kilbith

@@ -4,7 +4,7 @@ This mod provides various signs with text display. Text is locked if area is pro
 
 **Dependancies**: default, display\_lib, font\_lib
 
-**License**: WTFPL
+**License**: Code under LGPL, Textures and models under CC-BY-SA
 
 ## Recipes
 

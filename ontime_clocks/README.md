@@ -4,7 +4,7 @@ This mod provides clocks that display real ingame time.
 
 **Dependancies**: display_lib, default
 
-**License**: WTFPL
+**License**: Code under LGPL, textures under CC-BY-SA
 
 ## Recipes
 

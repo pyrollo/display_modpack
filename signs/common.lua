@@ -1,3 +1,23 @@
+--[[
+    signs mod for Minetest - Various signs with text displayed on
+    (c) Pierre-Yves Rollo
+
+    This file is part of signs.
+
+    signs is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    signs is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with signs.  If not, see <http://www.gnu.org/licenses/>.
+--]]
+
 function signs.set_formspec(pos)
 	local meta = minetest.get_meta(pos)
 	local ndef = minetest.registered_nodes[minetest.get_node(pos).name]
@@ -70,24 +90,25 @@ function signs.on_place_direction(itemstack, placer, pointed_thing)
 	end
 end
 
--- On_rotate (screwdriver) callback for direction signs
-function signs.on_rotate_direction(pos, node, user, mode, new_param2)
-	if mode == screwdriver.ROTATE_AXIS then 
-		local name
-		if node.name:sub(-string.len("_right")) == "_right" then
-			name = node.name:sub(1, -string.len("_right")).."left"
-		end
-		if node.name:sub(-string.len("_left")) == "_left" then
-			name = node.name:sub(1, -string.len("_left")).."right"
-		end
+-- Screwdriver is no more usable for switching direction as on_rotate
+-- callback is not called anymore for wallmounted nodes since 
+-- minetest_game commit of 24 dec 2015. Now we use right click.
+function signs.on_right_click_direction(pos, node, player, itemstack, pointed_thing)
+	if not minetest.is_protected(pos, player:get_player_name()) then
+	    local name
+	    if node.name:sub(-string.len("_right")) == "_right" then
+		    name = node.name:sub(1, -string.len("_right")).."left"
+	    end
+	    if node.name:sub(-string.len("_left")) == "_left" then
+		    name = node.name:sub(1, -string.len("_left")).."right"
+	    end
 
-		if name then
-			minetest.swap_node(pos, {name = name, param1 = node.param1, param2 = node.param2})
-		end
-		return false
-	else
-		return display_lib.on_rotate(pos, node, user, mode, new_param2)
-	end
+	    if name then
+		    minetest.swap_node(pos, {name = name, param1 = node.param1, param2 = node.param2})
+	    end
+    end
+
+    return itemstack
 end
 
 -- Generic callback for show_formspec displayed formspecs
@@ -139,8 +160,7 @@ function signs.register_sign(mod, name, model)
 							display_lib.on_construct(pos)
 						end,
 		on_destruct = display_lib.on_destruct,
-		on_rotate = display_lib.on_rotate,
-		on_receive_fields = signs.on_receive_fields,
+ 		on_receive_fields = signs.on_receive_fields,
 	}
 
 	-- Node fields override
