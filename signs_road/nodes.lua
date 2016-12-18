@@ -64,7 +64,7 @@ local models = {
 			tiles={"signs_black_right.png"},
 			inventory_image="signs_black_inventory.png",
 			on_place=signs.on_place_direction,
-            on_rightclick=signs.on_right_click_direction,
+			on_rightclick=signs.on_right_click_direction,
 		},
 	},
 	black_left={
@@ -80,10 +80,10 @@ local models = {
 			description="Black direction sign",
 			tiles={"signs_black_left.png"},
 			inventory_image="signs_black_inventory.png",
-			groups={choppy=1,oddly_breakable_by_hand=1,not_in_creative_inventory=1},
-			drop="signs:black_right",
+			groups={not_in_creative_inventory=1},
+			drop="signs_road:black_right",
 			on_place=signs.on_place_direction,
-            on_rightclick=signs.on_right_click_direction,
+			on_rightclick=signs.on_right_click_direction,
 		},
 	},
 }

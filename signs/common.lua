@@ -142,7 +142,7 @@ function signs.register_sign(mod, name, model)
 			wall_top = {-model.width/2, 0.5, -model.height/2,
 						   model.width/2, 0.5 - model.depth, model.height/2},
 		},
-		groups = {choppy=2,dig_immediate=2,attached_node=1},
+		groups = {choppy=2, dig_immediate=2, attached_node=1},
 		sounds = default.node_sound_defaults(),
 		display_entities = {
 			["signs:text"] = {
@@ -165,7 +165,13 @@ function signs.register_sign(mod, name, model)
 
 	-- Node fields override
 	for key, value in pairs(model.node_fields) do
-		fields[key] = value
+		if key == "groups" then
+			for key2, value2 in pairs(value) do
+				fields[key][key2] = value2
+			end
+		else
+			fields[key] = value
+		end
 	end
 
 	if not fields.wield_image then fields.wield_image = fields.inventory_image end

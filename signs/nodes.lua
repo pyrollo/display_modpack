@@ -118,7 +118,7 @@ local models = {
 				wall_side = {-0.5, -7/32, -0.5, -7/16, 7/32, 7/16},
 				wall_bottom = {-0.5, -0.5, -0.5, 0.5, -7/16, 0.5},
 				wall_top = {-0.5, 0.5, -0.5, 0.5, 7/16, 0.5}},
-			groups={choppy=1,oddly_breakable_by_hand=1,not_in_creative_inventory=1},
+			groups={not_in_creative_inventory=1},
 			drop="signs:wooden_right",
 		},
 	},
