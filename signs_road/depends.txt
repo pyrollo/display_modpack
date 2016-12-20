@@ -1,4 +1,5 @@
 default
+dye
 display_lib
 font_lib
 signs
