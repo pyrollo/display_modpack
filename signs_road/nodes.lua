@@ -36,7 +36,7 @@ local models = {
 		},
 	},
 	green_street={
-		depth=1/32,
+		depth = 1/32,
 		width = 1,
 		height = 6/16,
 		entity_fields = {
@@ -51,7 +51,7 @@ local models = {
 		},
 	},
 	black_right={
-		depth=1/32,
+		depth = 1/32,
 		width = 1,
 		height = 0.5,
 		entity_fields = {
@@ -68,7 +68,7 @@ local models = {
 		},
 	},
 	black_left={
-		depth=1/32,
+		depth = 1/32,
 		width = 1,
 		height = 0.5,
 		entity_fields = {
@@ -86,10 +86,68 @@ local models = {
 			on_rightclick=signs.on_right_click_direction,
 		},
 	},
+	green_right={
+		depth = 1/16,
+		width = 14/16,
+		height = 7/16,
+		entity_fields = {
+			size = { x = 12/16, y = 5/16 },
+			resolution = { x = 112, y = 64 },
+			maxlines = 2,
+			color="#fff",
+		},
+		node_fields = {
+			description="Green direction sign",
+			tiles={"signs_green_direction.png"},
+			inventory_image="signs_green_dir_inventory.png",
+			on_place=signs.on_place_direction,
+            on_rightclick = signs.on_right_click_direction,
+			drawtype = "mesh",
+			mesh = "signs_dir_right.obj",
+			selection_box = { type="wallmounted", 
+				wall_side = {-0.5, -7/32, -7/16, -7/16, 7/32, 0.5},
+				wall_bottom = {-0.5, -0.5, -0.5, 0.5, -7/16, 0.5},
+				wall_top = {-0.5, 0.5, -0.5, 0.5, 7/16, 0.5}},
+			collision_box = { type="wallmounted", 
+				wall_side = {-0.5, -7/32, -7/16, -7/16, 7/32, 0.5},
+				wall_bottom = {-0.5, -0.5, -0.5, 0.5, -7/16, 0.5},
+				wall_top = {-0.5, 0.5, -0.5, 0.5, 7/16, 0.5}},
+		},
+	},
+	green_left={
+		depth = 1/16,
+		width = 14/16,
+		height = 7/16,
+		entity_fields = {
+			size = { x = 12/16, y = 5/16 },
+			resolution = { x = 112, y = 64 },
+			maxlines = 2,
+			color="#fff",
+		},
+		node_fields = {
+			description="Green direction sign",
+			tiles={"signs_green_direction.png"},
+			inventory_image="signs_green_dir_inventory.png",
+			on_place=signs.on_place_direction,
+            on_rightclick = signs.on_right_click_direction,
+			drawtype = "mesh",
+			mesh = "signs_dir_left.obj",
+			selection_box = { type="wallmounted", 
+				wall_side = {-0.5, -7/32, -0.5, -7/16, 7/32, 7/16},
+				wall_bottom = {-0.5, -0.5, -0.5, 0.5, -7/16, 0.5},
+				wall_top = {-0.5, 0.5, -0.5, 0.5, 7/16, 0.5}},
+			collision_box = { type="wallmounted", 
+				wall_side = {-0.5, -7/32, -0.5, -7/16, 7/32, 7/16},
+				wall_bottom = {-0.5, -0.5, -0.5, 0.5, -7/16, 0.5},
+				wall_top = {-0.5, 0.5, -0.5, 0.5, 7/16, 0.5}},
+			groups={not_in_creative_inventory=1},
+			drop="signs_road:green_right",
+		},
+	},
 }
-
 
 for name, model in pairs(models)
 do
 	signs.register_sign("signs_road", name, model)
 end
+
