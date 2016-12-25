@@ -17,62 +17,29 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 --]]
 
+-- Global variables
+
 font_lib = {}
 font_lib.path = minetest.get_modpath("font_lib")
-font_lib.font_height = 10
+font_lib.font_height = 12
 font_lib.font = {}
 
--- Get png width, suposing png width is less than 256 (it is the case for all font textures)
-local function get_png_width(filename)
-	local file=assert(io.open(filename,"rb"))
-	-- All font png are smaller than 256x256 --> read only last byte
-	file:seek("set",19)
-	local w = file:read(1)
-	file:close()
-	return w:byte()
-end
+-- Local functions
 
--- Computes line width for a given font height and text
--- @param text Text to be rendered
--- @return Rendered text width
-function font_lib.get_line_width(text)
-	local char
-	local width = 0
-
-	for p=1,#text
-	do
-		char = text:sub(p,p):byte()
-		if font_lib.font[char] then
-			width = width + font_lib.font[char].width
+local function get_next_char(text, pos)
+	pos = pos + 1
+	local char = text:sub(pos, pos):byte()
+	if char >= 0x80 then
+		if char == 0xc2 or char == 0xc3 then
+			pos = pos + 1
+			char = (char - 0xc2) * 0x40 + text:sub(pos, pos):byte()
+		else
+			char = 0
 		end
 	end
+	if font_lib.font[char] == nil then char=0 end
 
-	return width
-end
-
---- Builds texture part for a text line
--- @param text Text to be rendered
--- @param texturew Width of the texture (extra text is not rendered)
--- @param x Starting x position in texture
--- @param y Vertical position of the line in texture
--- @return Texture string
-function font_lib.make_line_texture(text, texturew, x, y)
-	local char
-
-	local texture = ""
-
-	for p=1,#text
-	do
-		char = text:sub(p,p):byte()
-		if font_lib.font[char] then
-			-- Add image only if it is visible (at least partly)
-			if x + font_lib.font[char].width >= 0 and x <= texturew then
-				texture = texture..string.format(":%d,%d=%s", x, y, font_lib.font[char].filename)
-			end
-			x = x + font_lib.font[char].width
-		end
-	end
-	return texture
+	return char, pos
 end
 
 local function split_lines(text, maxlines)
@@ -88,6 +55,51 @@ local function split_lines(text, maxlines)
 	end
 end
 
+-- Computes line width for a given font height and text
+-- @param text Text to be rendered
+-- @return Rendered text width
+
+function font_lib.get_line_width(text)
+	local char
+	local width = 0
+
+    p=0
+ 
+	while p < #text do
+		char, p = get_next_char(text, p)
+		width = width + font_lib.font[char].width
+	end
+
+	return width
+end
+
+--- Builds texture part for a text line
+-- @param text Text to be rendered
+-- @param texturew Width of the texture (extra text is not rendered)
+-- @param x Starting x position in texture
+-- @param y Vertical position of the line in texture
+-- @return Texture string
+
+function font_lib.make_line_texture(text, texturew, x, y)
+	local char
+
+	local texture = ""
+
+    p=0
+ 
+	while p < #text do
+		char, p = get_next_char(text, p)
+
+		-- Add image only if it is visible (at least partly)
+		if x + font_lib.font[char].width >= 0 and x <= texturew then
+			texture = texture..string.format(":%d,%d=%s", x, y, font_lib.font[char].filename)
+		end
+		x = x + font_lib.font[char].width
+
+	end
+	return texture
+end
+
 --- Builds texture for a multiline colored text
 -- @param text Text to be rendered
 -- @param texturew Width of the texture (extra text will be truncated)
@@ -96,15 +108,16 @@ end
 -- @param valign Vertical text align ("top" or "center")
 -- @param color Color of the text
 -- @return Texture string
+
 function font_lib.make_multiline_texture(text, texturew, textureh, maxlines, valign, color)
 	local texture = ""
 	local lines = split_lines(text, maxlines)
 	local y
 
 	if valign == "top" then
-		y = font_lib.font_height / 2
+		y = font_lib.font_height / 2 - 1
 	else		
-		y = (textureh - font_lib.font_height * #lines) / 2 + 1 
+		y = (textureh - font_lib.font_height * #lines) / 2
 	end
 
 	for _, line in pairs(lines) do
@@ -128,7 +141,6 @@ end
 function font_lib.on_display_update(pos, objref)
 	local meta = minetest.get_meta(pos)
 	local text = meta:get_string("display_text")
-
 	local ndef = minetest.registered_nodes[minetest.get_node(pos).name]
 	local entity = objref:get_luaentity()
 
@@ -145,10 +157,18 @@ function font_lib.on_display_update(pos, objref)
 end
 
 -- Populate fonts table
-local w, filename
-for charnum=32,126 do
-	filename = string.format("font_lib_%02x.png", charnum)
-	w = get_png_width(font_lib.path.."/textures/"..filename)
-	font_lib.font[charnum] = {filename=filename, width=w}
+
+local filename
+for char = 0,255 do
+	filename = string.format("font_lib_%02x.png", char)
+	local file=io.open(font_lib.path.."/textures/"..filename,"rb")
+	if file~=nil then 
+		-- Get png width, suposing png width is less than 256 (it is the case for all font textures)
+		-- All font png are smaller than 256x256 --> read only last byte
+		file:seek("set",19)
+		local w = file:read(1)
+		file:close()
+		font_lib.font[char] = {filename=filename, width=w:byte()}
+	end
 end
 
