@@ -18,6 +18,9 @@
     along with steles.  If not, see <http://www.gnu.org/licenses/>.
 --]]
 
+local S = steles.intllib
+local F = function(...) return minetest.formspec_escape(S(...)) end
+
 function steles.on_receive_fields(pos, formname, fields, player)
 	if not minetest.is_protected(pos, player:get_player_name()) then
 		local meta = minetest.get_meta(pos)
@@ -31,7 +34,7 @@ end
 
 display_lib.register_display_entity("steles:text")
 
-for _, material in ipairs(steles.materials) do
+for i, material in ipairs(steles.materials) do
 
 	local ndef = minetest.registered_nodes[material]
 
@@ -39,7 +42,7 @@ for _, material in ipairs(steles.materials) do
 		local parts = material:split(":")
 
 		minetest.register_node("steles:"..parts[2].."_stele", {
-			description = ndef.description.." Stele",
+			description = steles.materials_desc[i],
 			sunlight_propagates = true,
 			paramtype = "light",
 			paramtype2 = "facedir",
@@ -65,9 +68,11 @@ for _, material in ipairs(steles.materials) do
 			on_place = display_lib.on_place,
 			on_construct = 	function(pos)
 								local meta = minetest.get_meta(pos)
-								meta:set_string("formspec", "size[6,4]"..
-									"textarea[0.5,0.7;5.5,2;display_text;Displayed text (3 lines max);${display_text}]"..
-									"button_exit[2,3;2,1;ok;Write]")
+								meta:set_string("formspec", "size[6,4]"
+									.."textarea[0.5,0.7;5.5,2;display_text;"
+									..F("Displayed text (3 lines max)")
+									..";${display_text}]"
+									.."button_exit[2,3;2,1;ok;"..F("Write").."]")
 								display_lib.on_construct(pos)
 							end,
 			on_destruct = display_lib.on_destruct,
@@ -85,4 +90,3 @@ for _, material in ipairs(steles.materials) do
 		})
 	end
 end
-

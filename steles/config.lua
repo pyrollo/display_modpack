@@ -18,6 +18,8 @@
     along with steles.  If not, see <http://www.gnu.org/licenses/>.
 --]]
 
+local S = steles.intllib
+
 steles.materials = {
 	'default:stone', 
 	'default:sandstone', 
@@ -26,3 +28,10 @@ steles.materials = {
 	'technic:granite',
 }
 
+steles.materials_desc = {
+	S("Stone Stele"),
+	S("Sandstone Stele"),
+	S("Desert Stone Stele"),
+	S("Marble Stele"),
+	S("Granite Stele"),
+}

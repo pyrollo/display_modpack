@@ -18,6 +18,9 @@
     along with signs.  If not, see <http://www.gnu.org/licenses/>.
 --]]
 
+local S = signs.intllib
+local F = function(...) return minetest.formspec_escape(S(...)) end
+
 function signs.set_formspec(pos)
 	local meta = minetest.get_meta(pos)
 	local ndef = minetest.registered_nodes[minetest.get_node(pos).name]
@@ -27,17 +30,17 @@ function signs.set_formspec(pos)
 
 		if maxlines == 1 then
 			formspec = "size[6,3]"..
-				"field[0.5,0.7;5.5,1;display_text;Displayed text;${display_text}]"..
-				"button_exit[2,2;2,1;ok;Write]"
+				"field[0.5,0.7;5.5,1;display_text;"..F("Displayed text")..";${display_text}]"..
+				"button_exit[2,2;2,1;ok;"..F("Write").."]"
 		else
 			local extralabel = ""
 			if maxlines then
-				extralabel = " (first "..maxlines.." lines only)"
+				extralabel = F(" (first %s lines only)"):format(maxlines)
 			end
 
 			formspec = "size[6,4]"..
-				"textarea[0.5,0.7;5.5,2;display_text;Displayed text"..extralabel..";${display_text}]"..
-				"button_exit[2,3;2,1;ok;Write]"
+				"textarea[0.5,0.7;5.5,2;display_text;"..F("Displayed text")..""..extralabel..";${display_text}]"..
+				"button_exit[2,3;2,1;ok;"..F("Write").."]"
 		end
 
 		meta:set_string("formspec", formspec)

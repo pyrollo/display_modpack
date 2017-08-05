@@ -19,6 +19,8 @@
     along with signs_road.  If not, see <http://www.gnu.org/licenses/>.
 --]]
 
+local S = signs_road.intllib
+
 local models = {
 	blue_street={
 		depth = 1/16,
@@ -30,7 +32,7 @@ local models = {
 			color="#fff",
 		},
 		node_fields = {
-			description="Blue street sign",
+			description=S("Blue street sign"),
 			tiles={"signs_blue_street.png"},
 			inventory_image="signs_blue_street_inventory.png",
 		},
@@ -45,7 +47,7 @@ local models = {
 			color="#fff",
 		},
 		node_fields = {
-			description="Green street sign",
+			description=S("Green street sign"),
 			tiles={"signs_green_street.png"},
 			inventory_image="signs_green_street_inventory.png",
 		},
@@ -60,7 +62,7 @@ local models = {
 			color="#000",
 		},
 		node_fields = {
-			description="Black direction sign",
+			description=S("Black direction sign"),
 			tiles={"signs_black_right.png"},
 			inventory_image="signs_black_inventory.png",
 			on_place=signs.on_place_direction,
@@ -77,7 +79,7 @@ local models = {
 			color="#000",
 		},
 		node_fields = {
-			description="Black direction sign",
+			description=S("Black direction sign"),
 			tiles={"signs_black_left.png"},
 			inventory_image="signs_black_inventory.png",
 			groups={not_in_creative_inventory=1},
@@ -97,7 +99,7 @@ local models = {
 			color="#fff",
 		},
 		node_fields = {
-			description="Green direction sign",
+			description=S("Green direction sign"),
 			tiles={"signs_green_direction.png"},
 			inventory_image="signs_green_dir_inventory.png",
 			on_place=signs.on_place_direction,
@@ -125,7 +127,7 @@ local models = {
 			color="#fff",
 		},
 		node_fields = {
-			description="Green direction sign",
+			description=S("Green direction sign"),
 			tiles={"signs_green_direction.png"},
 			inventory_image="signs_green_dir_inventory.png",
 			on_place=signs.on_place_direction,
