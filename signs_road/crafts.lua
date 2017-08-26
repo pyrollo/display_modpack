@@ -20,27 +20,82 @@
 --]]
 
 minetest.register_craft({
-	output = 'signs_road:blue_street',
+	output = 'signs_road:blue_street_sign 2',
 	recipe = {
-		{'dye:blue', 'dye:white', 'default:steel_ingot'},
+		{'dye:blue', 'dye:white', ''},
 		{'default:steel_ingot', 'default:steel_ingot', 'default:steel_ingot'},
 		{'', '', ''},
 	}
 })
 
 minetest.register_craft({
-	output = 'signs_road:green_street',
+	output = 'signs_road:red_street_sign 2',
 	recipe = {
-		{'dye:green', 'dye:white', 'default:steel_ingot'},
+		{'dye:white', 'dye:red', ''},
 		{'default:steel_ingot', 'default:steel_ingot', 'default:steel_ingot'},
 		{'', '', ''},
 	}
 })
 
 minetest.register_craft({
-	output = 'signs_road:black_right',
+	output = 'signs_road:white_street_sign 2',
+	recipe = {
+		{'dye:white', 'dye:black', ''},
+		{'default:steel_ingot', 'default:steel_ingot', 'default:steel_ingot'},
+		{'', '', ''},
+	}
+})
+
+minetest.register_craft({
+	output = 'signs_road:green_street_sign 2',
+	recipe = {
+		{'dye:green', 'dye:white', ''},
+		{'default:steel_ingot', 'default:steel_ingot', 'default:steel_ingot'},
+		{'', '', ''},
+	}
+})
+
+minetest.register_craft({
+	output = 'signs_road:yellow_street_sign 2',
+	recipe = {
+		{'dye:yellow', 'dye:black', ''},
+		{'default:steel_ingot', 'default:steel_ingot', 'default:steel_ingot'},
+		{'', '', ''},
+	}
+})
+
+
+minetest.register_craft({
+	output = 'signs_road:black_right_sign 2',
 	recipe = {
 		{'dye:black', 'dye:white', 'default:steel_ingot'},
+		{'default:steel_ingot', 'default:steel_ingot', ''},
+		{'', '', ''},
+	}
+})
+
+minetest.register_craft({
+	output = 'signs_road:green_right_sign 2',
+	recipe = {
+		{'dye:green', 'dye:white', 'default:steel_ingot'},
+		{'default:steel_ingot', 'default:steel_ingot', ''},
+		{'', '', ''},
+	}
+})
+
+minetest.register_craft({
+	output = 'signs_road:yellow_right_sign 2',
+	recipe = {
+		{'dye:yellow', 'dye:white', 'default:steel_ingot'},
+		{'default:steel_ingot', 'default:steel_ingot', ''},
+		{'', '', ''},
+	}
+})
+
+minetest.register_craft({
+	output = 'signs_road:white_right_sign 2',
+	recipe = {
+		{'dye:white', 'dye:black', 'default:steel_ingot'},
 		{'default:steel_ingot', 'default:steel_ingot', ''},
 		{'', '', ''},
 	}

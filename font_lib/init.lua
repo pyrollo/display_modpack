@@ -62,8 +62,7 @@ end
 function font_lib.get_line_width(text)
 	local char
 	local width = 0
-
-    p=0
+    local p=0
  
 	while p < #text do
 		char, p = get_next_char(text, p)
@@ -82,10 +81,8 @@ end
 
 function font_lib.make_line_texture(text, texturew, x, y)
 	local char
-
 	local texture = ""
-
-    p=0
+    local p=0
  
 	while p < #text do
 		char, p = get_next_char(text, p)

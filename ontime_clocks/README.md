@@ -2,6 +2,8 @@
 
 This mod provides clocks that display real ingame time.
 
+For more information, see the [forum topic](https://forum.minetest.net/viewtopic.php?f=11&t=13563) at the Minetest forums.
+
 **Dependancies**: display_lib, default
 
 **License**: Code under LGPL, textures under CC-BY-SA

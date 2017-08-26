@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-05 10:06+0200\n"
+"POT-Creation-Date: 2017-08-26 13:20+0200\n"
 "PO-Revision-Date: 2017-05-08 07:08+0200\n"
 "Last-Translator: Peppy <peppy@twang-factory.com>\n"
 "Language-Team: \n"
@@ -17,9 +17,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.12\n"
 
-#: common.lua
-msgid "Displayed text"
-msgstr "Texte affiché"
+#: common.lua nodes.lua
+msgid "Text"
+msgstr "Texte"
 
 #: common.lua nodes.lua
 msgid "Write"
@@ -35,10 +35,6 @@ msgid "Title"
 msgstr "Titre"
 
 #: nodes.lua
-msgid "Text"
-msgstr "Texte"
-
-#: nodes.lua
 msgid "Close"
 msgstr "Fermer"
 
@@ -48,8 +44,11 @@ msgstr "(Clic-droit pour afficher le texte entier)"
 
 #: nodes.lua
 msgid "Wooden direction sign"
-msgstr "Panneau indicateur en bois"
+msgstr "Panneau de direction en bois"
 
 #: nodes.lua
 msgid "Poster"
 msgstr "Affiche"
+
+#~ msgid "Textd"
+#~ msgstr "Texte"

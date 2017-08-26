@@ -1,2 +1,2 @@
-Code by Pierre-Yves Rollo
-Textures by Vanessa Ezekowitz
+Code by Pierre-Yves Rollo (pyrollo)
+Textures by Vanessa Ezekowitz (VanessaE)

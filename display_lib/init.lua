@@ -114,7 +114,6 @@ local function place_entities(pos)
 			local depth = clip_pos_prop(props.depth)
 			local height = clip_pos_prop(props.height)
 			local right = clip_pos_prop(props.right)
-			
 			if not objrefs[entity_name] then
 				objrefs[entity_name] = minetest.add_entity(pos, entity_name)
 			end
@@ -158,26 +157,30 @@ end
 --- On_place callback for display_lib items. Does nothing more than preventing item
 --- from being placed on ceiling or ground 
 function display_lib.on_place(itemstack, placer, pointed_thing)
-	local ndef = minetest.registered_nodes[itemstack.name]
+	local ndef = itemstack:get_definition()
 	local above = pointed_thing.above
 	local under = pointed_thing.under
 	local dir = {x = under.x - above.x,
 				 y = under.y - above.y,
 				 z = under.z - above.z}
 
-	if ndef and ndef.paramtype2 == "wallmounted" then
-		local wdir = minetest.dir_to_wallmounted(dir)
+	if ndef then
+		if ndef.paramtype2 == "wallmounted" then
 
-		if wdir == 0 or wdir == 1 then
-			dir = placer:get_look_dir()
-			dir.y = 0
-			wdir = minetest.dir_to_wallmounted(dir)
+			local wdir = minetest.dir_to_wallmounted(dir)
+
+			if wdir == 0 or wdir == 1 then
+				dir = placer:get_look_dir()
+				dir.y = 0
+				wdir = minetest.dir_to_wallmounted(dir)
+			end
+
+			return minetest.item_place(itemstack, placer, pointed_thing, wdir)
+		else
+			return minetest.item_place(itemstack, placer, pointed_thing, minetest.dir_to_facedir(dir))
 		end
-
-		return minetest.item_place(itemstack, placer, pointed_thing, wdir)
-	else
-		return minetest.item_place(itemstack, placer, pointed_thing)
 	end
+
 end
 
 --- On_construct callback for display_lib items. Creates entities and update them.
@@ -196,7 +199,7 @@ end
 
 -- On_rotate (screwdriver) callback for display_lib items. Prevents axis rotation and reorients entities.
 function display_lib.on_rotate(pos, node, user, mode, new_param2)
-	if mode ~= screwdriver.ROTATE_FACE then return false end
+	if mode ~= 1 then return false end
 
 	local values = get_values(node)
 

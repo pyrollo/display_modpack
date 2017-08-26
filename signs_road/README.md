@@ -2,6 +2,8 @@
 
 This mod provides road signs with text display. Text is locked if area is protected.
 
+For more information, see the [forum topic](https://forum.minetest.net/viewtopic.php?f=11&t=13563) at the Minetest forums.
+
 **Dependancies**: default, display\_lib, font\_lib, signs
 
 **License**: Code under LGPL, texture under CC-BY-SA
@@ -10,19 +12,19 @@ This mod provides road signs with text display. Text is locked if area is protec
 
 **Blue Street Sign**
 
-		B W S
+		B W -
 		S S S
 		- - -
 
 B = Blue Dye, W = White Dye, S = Steel Ingot
 
-**Green Street Sign**
+**Red and White Street Sign**
 
-		G W S
-		S S S 
+		W R -
+		S S S
 		- - -
 
-G = Green Dye, W = White Dye, S = Steel Ingot
+W = White Dye, R = Red Dye, S = Steel Ingot
 
 **Black direction sign**
 
@@ -31,4 +33,34 @@ G = Green Dye, W = White Dye, S = Steel Ingot
 		- - -
 
 B = Black Dye, W = White Dye, S = Steel Ingot
+
+**White Signs**
+
+Two kinds of signs, normal and direction signs :
+
+		W B -		W B S
+		S S S		S S - 
+		- - -		- - -
+
+W = White Dye, B = Black Dye, S = Steel Ingot
+
+**Green Signs**
+
+Two kinds of signs, normal and direction signs :
+
+		G W -		G W S
+		S S S		S S -
+		- - -		- - -
+
+G = Green Dye, W = White Dye, S = Steel Ingot
+
+**Yellow Signs**
+
+Two kinds of signs, normal and direction signs :
+
+		Y B -		Y B S
+		S S S		S S -
+		- - -		- - -
+
+Y = Yellow Dye, B = Black Dye, S = Steel Ingot
 

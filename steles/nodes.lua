@@ -87,6 +87,7 @@ for i, material in ipairs(steles.materials) do
 										end
 									end
 								end,
+			on_punch = function(pos, node, player, pointed_thing) display_lib.update_entities(pos) end,
 		})
 	end
 end

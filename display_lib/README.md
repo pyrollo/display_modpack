@@ -8,4 +8,7 @@ This library's purpose is to ease creation of nodes with one or more displays on
 
 **License**: LPGL
 
-**API**: See API.md document please.
+**API**: See [API.md](https://github.com/pyrollo/display_modpack/blob/master/display_lib/API.md) document please.
+
+For more information, see the [forum topic](https://forum.minetest.net/viewtopic.php?f=11&t=13563) at the Minetest forums.
+

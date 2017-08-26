@@ -30,7 +30,7 @@ function signs.set_formspec(pos)
 
 		if maxlines == 1 then
 			formspec = "size[6,3]"..
-				"field[0.5,0.7;5.5,1;display_text;"..F("Displayed text")..";${display_text}]"..
+				"field[0.5,0.7;5.5,1;display_text;"..F("Text")..";${display_text}]"..
 				"button_exit[2,2;2,1;ok;"..F("Write").."]"
 		else
 			local extralabel = ""
@@ -39,7 +39,7 @@ function signs.set_formspec(pos)
 			end
 
 			formspec = "size[6,4]"..
-				"textarea[0.5,0.7;5.5,2;display_text;"..F("Displayed text")..""..extralabel..";${display_text}]"..
+				"textarea[0.5,0.7;5.5,2;display_text;"..F("Text")..""..extralabel..";${display_text}]"..
 				"button_exit[2,3;2,1;ok;"..F("Write").."]"
 		end
 
@@ -50,7 +50,7 @@ end
 function signs.on_receive_fields(pos, formname, fields, player)
 	if not minetest.is_protected(pos, player:get_player_name()) then
 		local meta = minetest.get_meta(pos)
-		if fields and fields.ok then
+		if fields and (fields.ok or fields.key_enter) then
 			meta:set_string("display_text", fields.display_text)
 			meta:set_string("infotext", "\""..fields.display_text.."\"")
 			display_lib.update_entities(pos)
@@ -61,63 +61,71 @@ end
 -- On place callback for direction signs 
 -- (chooses which sign according to look direction)
 function signs.on_place_direction(itemstack, placer, pointed_thing)
-	local above = pointed_thing.above
-	local under = pointed_thing.under
-	local wdir = minetest.dir_to_wallmounted(
-				{x = under.x - above.x,
-				 y = under.y - above.y,
-				 z = under.z - above.z})
-	
-	local dir = placer:get_look_dir()
+	local name = itemstack:get_name()
+	local ndef = minetest.registered_nodes[name]
 
-	if wdir == 0 or wdir == 1 then
-		wdir = minetest.dir_to_wallmounted({x=dir.x, y=0, z=dir.z})
+    local bdir = {x = pointed_thing.under.x - pointed_thing.above.x,
+                  y = pointed_thing.under.y - pointed_thing.above.y,
+                  z = pointed_thing.under.z - pointed_thing.above.z}
+	local pdir = placer:get_look_dir()
+
+	local ndir, test
+
+	if ndef.paramtype2 == "facedir" then
+		if bdir.x == 0 and bdir.z == 0 then
+			-- Ceiling or floor pointed (facedir chosen from player dir)
+			ndir = minetest.dir_to_facedir({x=pdir.x, y=0, z=pdir.z})
+		else
+			-- Wall pointed
+			ndir = minetest.dir_to_facedir(bdir)
+		end
+
+		test = {[0]=-pdir.x, pdir.z, pdir.x, -pdir.z}
+    end
+
+	if ndef.paramtype2 == "wallmounted" then
+		ndir = minetest.dir_to_wallmounted(bdir)
+		if ndir == 0 or ndir == 1 then
+			-- Ceiling or floor
+			ndir = minetest.dir_to_wallmounted({x=pdir.x, y=0, z=pdir.z})
+		end
+
+		test = {0, pdir.z, -pdir.z, -pdir.x, pdir.x}
 	end
 
-	local name = itemstack:get_name()
-
-	-- Only for direction signs (ending with _right)
-	if name:sub(-string.len("_right")) == "_right" then
-		name = name:sub(1, -string.len("_right"))
-
-		local test = {0, dir.z, -dir.z, -dir.x, dir.x}
-		if test[wdir] > 0 then
-			itemstack:set_name(name.."left")
+	-- Only for direction signs
+	if ndef.signs_other_dir then
+		if test[ndir] > 0 then
+			itemstack:set_name(ndef.signs_other_dir)
 		end
-		itemstack = minetest.item_place(itemstack, placer, pointed_thing, wdir)
-		itemstack:set_name(name.."right")
+		itemstack = minetest.item_place(itemstack, placer, pointed_thing, ndir)
+		itemstack:set_name(name)
 
 		return itemstack
 	else
-		return minetest.item_place(itemstack, placer, pointed_thing, wdir)
+		return minetest.item_place(itemstack, placer, pointed_thing, ndir)
 	end
 end
 
--- Screwdriver is no more usable for switching direction as on_rotate
--- callback is not called anymore for wallmounted nodes since 
--- minetest_game commit of 24 dec 2015. Now we use right click.
-function signs.on_right_click_direction(pos, node, player, itemstack, pointed_thing)
-	if not minetest.is_protected(pos, player:get_player_name()) then
-	    local name
-	    if node.name:sub(-string.len("_right")) == "_right" then
-		    name = node.name:sub(1, -string.len("_right")).."left"
+-- Handles screwdriver rotation. Direction is affected for direction signs
+function signs.on_rotate(pos, node, player, mode, new_param2)
+	if mode == 2 then
+    	local ndef = minetest.registered_nodes[node.name]
+	    if ndef.signs_other_dir then
+		    minetest.swap_node(pos, {name = ndef.signs_other_dir, 
+                param1 = node.param1, param2 = node.param2})
+			display_lib.update_entities(pos)
 	    end
-	    if node.name:sub(-string.len("_left")) == "_left" then
-		    name = node.name:sub(1, -string.len("_left")).."right"
-	    end
-
-	    if name then
-		    minetest.swap_node(pos, {name = name, param1 = node.param1, param2 = node.param2})
-	    end
-    end
-
-    return itemstack
+	else
+        display_lib.on_rotate(pos, node, user, mode, new_param2)
+	end
+    return false;
 end
 
--- Generic callback for show_formspec displayed formspecs
+-- Generic callback for show_formspec displayed formspecs of "sign" mod
+
 minetest.register_on_player_receive_fields(function(player, formname, fields)
 	local found, _, mod, node_name, pos = formname:find("([%w_]+):([%w_]+)@(.+)")
-
 	if found then
 		if mod ~= 'signs' then return end
 
@@ -134,24 +142,20 @@ function signs.register_sign(mod, name, model)
 	local fields = {
 		sunlight_propagates = true,
 		paramtype = "light",
-		paramtype2 = "wallmounted",
+		paramtype2 = "facedir",
 		drawtype = "nodebox",
 		node_box = {
-			type = "wallmounted",
-			wall_side = {-0.5, -model.height/2, -model.width/2,
-					     -0.5 + model.depth, model.height/2, model.width/2},
-			wall_bottom = {-model.width/2, -0.5, -model.height/2,
-						   model.width/2, -0.5 + model.depth, model.height/2},
-			wall_top = {-model.width/2, 0.5, -model.height/2,
-						   model.width/2, 0.5 - model.depth, model.height/2},
+			type = "fixed",
+			fixed = {-model.width/2, -model.height/2, 0.5,
+					 model.width/2, model.height/2, 0.5 - model.depth},
 		},
-		groups = {choppy=2, dig_immediate=2, attached_node=1},
+		groups = {choppy=2, dig_immediate=2},
 		sounds = default.node_sound_defaults(),
 		display_entities = {
 			["signs:text"] = {
 					on_display_update = font_lib.on_display_update,
 					depth = 0.499 - model.depth,
-					size = { x = 1, y = 1 },
+					size = { x = model.width, y = model.height },
 					resolution = { x = 64, y = 64 },
 					maxlines = 1,
 			},
@@ -163,7 +167,9 @@ function signs.register_sign(mod, name, model)
 							display_lib.on_construct(pos)
 						end,
 		on_destruct = display_lib.on_destruct,
- 		on_receive_fields = signs.on_receive_fields,
+		on_rotate = signs.on_rotate,
+ 		on_receive_fields =  signs.on_receive_fields,
+		on_punch = function(pos, node, player, pointed_thing) display_lib.update_entities(pos) end,
 	}
 
 	-- Node fields override

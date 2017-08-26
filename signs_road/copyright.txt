@@ -1,1 +1,4 @@
-Code, Textures and Models by Pierre-Yves Rollo
+Code, Textures and Models by Pierre-Yves Rollo (pyrollo)
+intllib support (i18n) by fat115
+intllib fallback code and tools by Diego Martínez (kaeza)
+

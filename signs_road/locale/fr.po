@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-05 09:50+0200\n"
+"POT-Creation-Date: 2017-08-26 11:26+0200\n"
 "PO-Revision-Date: 2017-05-08 06:40+0200\n"
 "Last-Translator: Peppy <peppy@twang-factory.com>\n"
 "Language-Team: \n"
@@ -23,13 +23,34 @@ msgid "Blue street sign"
 msgstr "Plaque de rue bleue"
 
 #: nodes.lua
+msgid "Red and white town sign"
+msgstr "Panneau de ville rouge et blanc"
+
+#: nodes.lua
+msgid "White street sign"
+msgstr "Panneau blanc"
+
+#: nodes.lua
 msgid "Green street sign"
-msgstr "Plaque de rue verte"
+msgstr "Panneau vert"
+
+#: nodes.lua
+msgid "Yellow street sign"
+msgstr "Panneau jaune"
 
 #: nodes.lua
 msgid "Black direction sign"
-msgstr "Panneau indicateur noir"
+msgstr "Panneau de direction noir"
 
 #: nodes.lua
 msgid "Green direction sign"
-msgstr "Panneau indicateur vert"
+msgstr "Panneau de direction vert"
+
+#: nodes.lua
+msgid "Yellow direction sign"
+msgstr "Panneau de direction jaune"
+
+#: nodes.lua
+msgid "White direction sign"
+msgstr "Panneau de direction blanc"
+

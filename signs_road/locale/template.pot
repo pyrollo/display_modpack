@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-05 09:50+0200\n"
+"POT-Creation-Date: 2017-08-26 11:28+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,7 +22,19 @@ msgid "Blue street sign"
 msgstr ""
 
 #: nodes.lua
+msgid "Red and white town sign"
+msgstr ""
+
+#: nodes.lua
+msgid "White street sign"
+msgstr ""
+
+#: nodes.lua
 msgid "Green street sign"
+msgstr ""
+
+#: nodes.lua
+msgid "Yellow street sign"
 msgstr ""
 
 #: nodes.lua
@@ -31,4 +43,12 @@ msgstr ""
 
 #: nodes.lua
 msgid "Green direction sign"
+msgstr ""
+
+#: nodes.lua
+msgid "Yellow direction sign"
+msgstr ""
+
+#: nodes.lua
+msgid "White direction sign"
 msgstr ""
