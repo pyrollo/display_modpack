@@ -13,7 +13,7 @@ For more information, see the [forum topic](https://forum.minetest.net/viewtopic
 
 ## Changelog
 
-###2017-08-26
+### 2017-08-26
 
 - Changed signs from wallmounted to facedir to improve textures and make it possible to use screwdriver. 
 **IMPORTANT** : Map will be updated to change to new nodes but inventory items will turn into "Unknown items" and have to be re-crafted.
