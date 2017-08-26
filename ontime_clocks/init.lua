@@ -21,10 +21,11 @@
 ontime_clocks = {}
 ontime_clocks.path = minetest.get_modpath("ontime_clocks")
 
+-- Load support for intllib.
+local MP = minetest.get_modpath(minetest.get_current_modname())
+local S, NS = dofile(MP.."/intllib.lua")
+ontime_clocks.intllib = S
+
 dofile(ontime_clocks.path.."/common.lua")
 dofile(ontime_clocks.path.."/nodes.lua")
 dofile(ontime_clocks.path.."/crafts.lua")
-
-
-
-

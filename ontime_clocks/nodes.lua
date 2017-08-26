@@ -18,9 +18,11 @@
     along with ontime_clocks.  If not, see <http://www.gnu.org/licenses/>.
 --]]
 
+local S = ontime_clocks.intllib
+
 -- Green digital clock
 minetest.register_node("ontime_clocks:green_digital", {
-	description = "Green digital clock",
+	description = S("Green digital clock"),
 	inventory_image = "ontime_clocks_green_digital_inventory.png",
 	wield_image = "ontime_clocks_green_digital_inventory.png",
 	paramtype = "light",
@@ -58,7 +60,7 @@ minetest.register_abm({
 
 -- Red digital clock
 minetest.register_node("ontime_clocks:red_digital", {
-	description = "Red digital clock",
+	description = S("Red digital clock"),
 	inventory_image = "ontime_clocks_red_digital_inventory.png",
 	wield_image = "ontime_clocks_red_digital_inventory.png",
 	paramtype = "light",
@@ -96,7 +98,7 @@ minetest.register_abm({
 
 
 minetest.register_node("ontime_clocks:white", {
-	description = "White clock",
+	description = S("White clock"),
 	inventory_image = "ontime_clocks_white_inventory.png",
 	wield_image = "ontime_clocks_white_inventory.png",
 	paramtype = "light",
@@ -133,7 +135,7 @@ minetest.register_abm({
 })
 
 minetest.register_node("ontime_clocks:frameless_black", {
-	description = "Frameless clock",
+	description = S("Frameless clock"),
 	inventory_image = "ontime_clocks_frameless_inventory.png",
 	wield_image = "ontime_clocks_frameless_inventory.png",
 	paramtype = "light",
@@ -170,7 +172,7 @@ minetest.register_abm({
 })
 
 minetest.register_node("ontime_clocks:frameless_gold", {
-	description = "Frameless gold clock",
+	description = S("Frameless gold clock"),
 	inventory_image = "ontime_clocks_frameless_inventory.png^[colorize:#FF0",
 	wield_image = "ontime_clocks_frameless_inventory.png^[colorize:#FF0",
 	paramtype = "light",
@@ -207,7 +209,7 @@ minetest.register_abm({
 })
 
 minetest.register_node("ontime_clocks:frameless_white", {
-	description = "Frameless white clock",
+	description = S("Frameless white clock"),
 	inventory_image = "ontime_clocks_frameless_inventory.png^[colorize:#FFF",
 	wield_image = "ontime_clocks_frameless_inventory.png^[colorize:#FFF",
 	paramtype = "light",

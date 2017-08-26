@@ -21,10 +21,11 @@
 steles = {}
 steles.path = minetest.get_modpath("steles")
 
+-- Load support for intllib.
+local MP = minetest.get_modpath(minetest.get_current_modname())
+local S, NS = dofile(MP.."/intllib.lua")
+steles.intllib = S
+
 dofile(steles.path.."/config.lua")
 dofile(steles.path.."/nodes.lua")
 dofile(steles.path.."/crafts.lua")
-
-
-
-

@@ -21,11 +21,11 @@
 signs = {}
 signs.path = minetest.get_modpath("signs")
 
+-- Load support for intllib.
+local MP = minetest.get_modpath(minetest.get_current_modname())
+local S, NS = dofile(MP.."/intllib.lua")
+signs.intllib = S
+
 dofile(signs.path.."/common.lua")
 dofile(signs.path.."/nodes.lua")
 dofile(signs.path.."/crafts.lua")
-
-
-
-
-
