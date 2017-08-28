@@ -1,0 +1,46 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Muhammad Nur Hidayat <muhdnurhidayat96@yahoo.com>, 2017.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-08-26 11:29+0200\n"
+"PO-Revision-Date: 2017-08-27 16:13+0800\n"
+"Last-Translator: Muhammad Nur Hidayat <muhdnurhidayat96@yahoo.com>\n"
+"Language-Team: Malay <muhdnurhidayat96@yahoo.com>\n"
+"Language: ms\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Vé 0.1.4\n"
+
+#: config.lua
+msgid "Stone Stele"
+msgstr "Tulisan Batu"
+
+#: config.lua
+msgid "Sandstone Stele"
+msgstr "Tulisan Batu Pasir"
+
+#: config.lua
+msgid "Desert Stone Stele"
+msgstr "Tulisan Batu Gurun"
+
+#: config.lua
+msgid "Marble Stele"
+msgstr "Tulisan Marmar"
+
+#: config.lua
+msgid "Granite Stele"
+msgstr "Tulisan Granit"
+
+#: nodes.lua
+msgid "Displayed text (3 lines max)"
+msgstr "Teks untuk dipaparkan (maksimum 3 baris)"
+
+#: nodes.lua
+msgid "Write"
+msgstr "Tulis"

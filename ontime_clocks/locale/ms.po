@@ -1,0 +1,42 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Muhammad Nur Hidayat <muhdnurhidayat96@yahoo.com>, 2017.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-08-26 11:21+0200\n"
+"PO-Revision-Date: 2017-08-27 09:41+0800\n"
+"Last-Translator: Muhammad Nur Hidayat <muhdnurhidayat96@yahoo.com>\n"
+"Language-Team: Malay <muhdnurhidayat96@yahoo.com>\n"
+"Language: ms\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Vé 0.1.4\n"
+
+#: nodes.lua
+msgid "Green digital clock"
+msgstr "Jam digital hijau"
+
+#: nodes.lua
+msgid "Red digital clock"
+msgstr "Jam digital merah"
+
+#: nodes.lua
+msgid "White clock"
+msgstr "Jam putih"
+
+#: nodes.lua
+msgid "Frameless clock"
+msgstr "Jam tanpa bingkai"
+
+#: nodes.lua
+msgid "Frameless gold clock"
+msgstr "Jam emas tanpa bingkai"
+
+#: nodes.lua
+msgid "Frameless white clock"
+msgstr "Jam putih tanpa bingkai"

@@ -1,0 +1,54 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Muhammad Nur Hidayat <muhdnurhidayat96@yahoo.com>, 2017.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-08-26 11:28+0200\n"
+"PO-Revision-Date: 2017-08-27 15:55+0800\n"
+"Last-Translator: Muhammad Nur Hidayat <muhdnurhidayat96@yahoo.com>\n"
+"Language-Team: Malay <muhdnurhidayat96@yahoo.com>\n"
+"Language: ms\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Vé 0.1.4\n"
+
+#: nodes.lua
+msgid "Blue street sign"
+msgstr "Papan tanda arah biru"
+
+#: nodes.lua
+msgid "Red and white town sign"
+msgstr "Papan tanda bandar merah dan putih"
+
+#: nodes.lua
+msgid "White street sign"
+msgstr "Papan tanda jalan putih"
+
+#: nodes.lua
+msgid "Green street sign"
+msgstr "Papan tanda jalan hijau"
+
+#: nodes.lua
+msgid "Yellow street sign"
+msgstr "Papan tanda jalan kuning"
+
+#: nodes.lua
+msgid "Black direction sign"
+msgstr "Papan tanda arah hitam"
+
+#: nodes.lua
+msgid "Green direction sign"
+msgstr "Papan tanda arah hijau"
+
+#: nodes.lua
+msgid "Yellow direction sign"
+msgstr "Papan tanda arah kuning"
+
+#: nodes.lua
+msgid "White direction sign"
+msgstr "Papan tanda arah putih"
