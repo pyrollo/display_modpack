@@ -66,7 +66,7 @@ local function on_receive_fields_poster(pos, formname, fields, player)
 end
 
 -- Text entity for all signs
-display_lib.register_display_entity("signs:text")
+display_lib.register_display_entity("signs:display_text")
 
 -- Sign models and registration
 local models = {
