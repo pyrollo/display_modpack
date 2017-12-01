@@ -39,6 +39,25 @@ local models = {
 			inventory_image = "signs_road_blue.png",
 		},
 	},
+		large_street_sign = {
+		depth = 1/16,
+		width = 64/16,
+		height = 12/16,
+		entity_fields = {
+			resolution = { x = 30, y = 20 },
+			maxlines = 1,
+			color = "#000",
+		},
+		node_fields = {
+		   visual_scale = 1,
+			description = S("Large banner"),
+			tiles = { "signs_road_sides.png", "signs_road_sides.png", 
+			          "signs_road_sides.png", "signs_road_sides.png", 
+			          "signs_road_sides.png", "station_sign.png" },
+			inventory_image = "signs_road_white.png",
+		},
+	},
+
 	red_street_sign = {
 		depth = 1/16,
 		width = 1,
