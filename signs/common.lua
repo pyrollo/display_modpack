@@ -149,7 +149,7 @@ function signs.register_sign(mod, name, model)
 			fixed = {-model.width/2, -model.height/2, 0.5,
 					 model.width/2, model.height/2, 0.5 - model.depth},
 		},
-		groups = {choppy=2, dig_immediate=2},
+		groups = {choppy=2, dig_immediate=2, not_blocking_trains = 1},
 		sounds = default.node_sound_defaults(),
 		display_entities = {
 			["signs:display_text"] = {
