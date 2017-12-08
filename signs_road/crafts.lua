@@ -47,6 +47,15 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
+      type = "shapeless",
+      output = 'signs_road:large_street_sign',
+      recipe = {'signs_road:white_street_sign','signs_road:white_street_sign','signs_road:white_street_sign','signs_road:white_street_sign'}
+	
+})
+
+
+
+minetest.register_craft({
 	output = 'signs_road:green_street_sign 2',
 	recipe = {
 		{'dye:green', 'dye:white', ''},
