@@ -13,6 +13,12 @@ For more information, see the [forum topic](https://forum.minetest.net/viewtopic
 
 ## Changelog
 
+### 2017-12-10
+
+- Compatibility of signs mod with signs_lib (thanks to gpcf) ;
+
+- Added large banner in road signs (thanks to gpcf) ;
+
 ### 2017-08-26
 
 - Changed signs from wallmounted to facedir to improve textures and make it possible to use screwdriver. 

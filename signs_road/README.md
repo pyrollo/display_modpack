@@ -18,6 +18,16 @@ For more information, see the [forum topic](https://forum.minetest.net/viewtopic
 
 B = Blue Dye, W = White Dye, S = Steel Ingot
 
+**Large Banner**
+
+Shapeless recipe : four white street signs.
+
+		S S S
+		S - -
+		- - -
+
+S = White street sign
+
 **Red and White Street Sign**
 
 		W R -
