@@ -39,7 +39,7 @@ local models = {
 			inventory_image = "signs_road_blue.png",
 		},
 	},
-		large_street_sign = {
+	large_street_sign = {
 		depth = 1/16,
 		width = 64/16,
 		height = 12/16,
@@ -53,7 +53,7 @@ local models = {
 			description = S("Large banner"),
 			tiles = { "signs_road_sides.png", "signs_road_sides.png", 
 			          "signs_road_sides.png", "signs_road_sides.png", 
-			          "signs_road_sides.png", "station_sign.png" },
+			          "signs_road_sides.png", "signs_road_large_white.png" },
 			inventory_image = "signs_road_white.png",
 		},
 	},
