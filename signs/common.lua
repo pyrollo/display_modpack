@@ -24,8 +24,8 @@ local F = function(...) return minetest.formspec_escape(S(...)) end
 function signs.set_formspec(pos)
 	local meta = minetest.get_meta(pos)
 	local ndef = minetest.registered_nodes[minetest.get_node(pos).name]
-	if ndef and ndef.display_entities and ndef.display_entities["signs:text"] then
-		local maxlines = ndef.display_entities["signs:text"].maxlines
+	if ndef and ndef.display_entities and ndef.display_entities["signs:display_text"] then
+		local maxlines = ndef.display_entities["signs:display_text"].maxlines
 		local formspec
 
 		if maxlines == 1 then
@@ -149,10 +149,10 @@ function signs.register_sign(mod, name, model)
 			fixed = {-model.width/2, -model.height/2, 0.5,
 					 model.width/2, model.height/2, 0.5 - model.depth},
 		},
-		groups = {choppy=2, dig_immediate=2},
+		groups = {choppy=2, dig_immediate=2, not_blocking_trains = 1},
 		sounds = default.node_sound_defaults(),
 		display_entities = {
-			["signs:text"] = {
+			["signs:display_text"] = {
 					on_display_update = font_lib.on_display_update,
 					depth = 0.499 - model.depth,
 					size = { x = model.width, y = model.height },
@@ -187,7 +187,7 @@ function signs.register_sign(mod, name, model)
 
 	-- Entity fields override
 	for key, value in pairs(model.entity_fields) do
-		fields.display_entities["signs:text"][key] = value
+		fields.display_entities["signs:display_text"][key] = value
 	end
 
 	minetest.register_node(mod..":"..name, fields)

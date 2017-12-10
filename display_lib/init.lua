@@ -149,9 +149,10 @@ end
 --- On_activate callback for display_lib entities. Calls on_display_update callbacks 
 --- of corresponding node for each entity.
 function display_lib.on_activate(entity, staticdata)
-	if entity then
-		call_node_on_display_update(entity.object:getpos(), entity.object)
-	end
+   if entity then
+      entity.object:set_armor_groups({immortal=1})
+      call_node_on_display_update(entity.object:getpos(), entity.object)
+   end
 end
 
 --- On_place callback for display_lib items. Does nothing more than preventing item
