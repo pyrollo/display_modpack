@@ -19,6 +19,8 @@
 --]]
 
 -- Wallmounted to facedir conversion
+------------------------------------
+
 local wallmounted_to_facedir = {
   [0]=1, -- Should not happend with signs 
   [1]=1, -- Should not happend with signs
@@ -53,6 +55,31 @@ minetest.register_lbm({ name = "signs_road:conpatibility_1",
 	nodenames = {'signs_road:blue_street', 'signs_road:green_street', 'signs_road:black_right',
                  'signs_road:black_left', 'signs_road:green_right', 'signs_road:green_left'},
 	action = compatibility_check,
+})
+
+-- Text entity name change because of signs_lib using signs prefix
+------------------------------------------------------------------
+
+local function compatibility_check_2(pos, node)
+	-- Remove old entity
+	for _, objref in ipairs(minetest.get_objects_inside_radius(pos, 0.5)) do
+		local entity = objref:get_luaentity()
+	    if entity and entity.name == "signs:text" then
+		    objref:remove()
+		end
+	end
+	-- Create new entity
+	display_lib.update_entities(pos)
+end
+
+minetest.register_lbm({ name = "signs_road:conpatibility_2",
+	nodenames = {
+		"signs_road:blue_street_sign", "signs_road:red_street_sign", "signs_road:white_street_sign",
+		"signs_road:green_street_sign", "signs_road:yellow_street_sign", "signs_road:black_right_sign",
+		"signs_road:black_left_sign", "signs_road:green_right_sign", "signs_road:green_left_sign",
+		"signs_road:yellow_right_sign", "signs_road:yellow_left_sign", "signs_road:white_right_sign",
+		"signs_road:white_left_sign"},
+	action = compatibility_check_2,
 })
 
 

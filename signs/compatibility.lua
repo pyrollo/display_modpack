@@ -20,6 +20,8 @@
 
 
 -- Wallmounted to facedir conversion
+------------------------------------
+
 local wallmounted_to_facedir = {
   [0]=1, -- Should not happend with signs 
   [1]=1, -- Should not happend with signs
@@ -36,7 +38,7 @@ local convert_nodes = {
   ['signs:poster']       = 'signs:paper_poster'
 }
 
-local function compatibility_check(pos, node)
+local function compatibility_check_1(pos, node)
     -- Old wallmounted modes to new facedir nodes conversion
     node.name = convert_nodes[node.name]
     if node.name then
@@ -49,7 +51,40 @@ end
 
 minetest.register_lbm({ name = "signs:conpatibility_1",
 	nodenames = {"signs:wooden_right", "signs:wooden_left", "signs:poster"},
-	action = compatibility_check,
+	action = compatibility_check_1,
 })
+
+-- Text entity name change because of signs_lib using signs prefix
+------------------------------------------------------------------
+
+-- If no other mod registered signs:text, register it.
+-- We need to have this entity registered to be able to remove it.
+if minetest.registered_entities["signs:text"] == nil then
+	minetest.register_entity("signs:text", {
+		collisionbox = { 0, 0, 0, 0, 0, 0 },
+		visual = "upright_sprite",
+		textures = {},
+	})
+end
+
+local function compatibility_check_2(pos, node)
+	-- Remove old entity
+	for _, objref in ipairs(minetest.get_objects_inside_radius(pos, 0.5)) do
+		local entity = objref:get_luaentity()
+	    if entity and entity.name == "signs:text" then
+		    objref:remove()
+		end
+	end
+	-- Create new entity
+	display_lib.update_entities(pos)
+end
+
+minetest.register_lbm({ name = "signs:conpatibility_2",
+	nodenames = {"signs:wooden_right_sign", "signs:wooden_left_sign", "signs:paper_poster"},
+	action = compatibility_check_2,
+})
+
+
+
 
 
