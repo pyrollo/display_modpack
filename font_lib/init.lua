@@ -21,26 +21,12 @@
 
 font_lib = {}
 font_lib.path = minetest.get_modpath("font_lib")
-font_lib.font_height = 12
-font_lib.font = {}
+font_lib.registered_fonts = {}
 
 -- Local functions
+------------------
 
-local function get_next_char(text, pos)
-	pos = pos + 1
-	local char = text:sub(pos, pos):byte()
-	if char >= 0x80 then
-		if char == 0xc2 or char == 0xc3 then
-			pos = pos + 1
-			char = (char - 0xc2) * 0x40 + text:sub(pos, pos):byte()
-		else
-			char = 0
-		end
-	end
-	if font_lib.font[char] == nil then char=0 end
-
-	return char, pos
-end
+-- Split multiline text into array of lines, with <maxlines> maximum lines.
 
 local function split_lines(text, maxlines)
 	local splits = text:split("\n")
@@ -55,49 +41,125 @@ local function split_lines(text, maxlines)
 	end
 end
 
--- Computes line width for a given font height and text
--- @param text Text to be rendered
--- @return Rendered text width
+-- Returns next char, managing ascii and unicode plane 0 (0000-FFFF).
 
-function font_lib.get_line_width(text)
-	local char
-	local width = 0
-    local p=0
- 
-	while p < #text do
-		char, p = get_next_char(text, p)
-		width = width + font_lib.font[char].width
+local function get_next_char(text, pos)
+	pos = pos + 1
+	local char = text:sub(pos, pos):byte()
+
+	-- 4 bytes char not managed
+	if char >= 0xF0 then
+		pos = pos + 3
+		return 0, pos
+	end
+		
+	-- 3 bytes char not managed
+	if char >= 0xE0 then
+		pos = pos + 2
+		return 0, pos
+	end
+		
+	-- 2 bytes char (little endian)
+	if char >= 0x80 then
+		pos = pos + 1
+		return char * 0x100 + text:sub(pos, pos):byte(), pos
+	end
+	
+	-- 1 byte char
+	return char, pos
+end
+
+-- Returns font properties to be used according to font_name
+
+local function get_font(font_name)
+	local font = font_lib.registered_fonts[font_name]
+
+	if font == nil then
+		local message 
+
+		if font_name == nil then
+			message = "No font given"
+		else
+			message = "Font \""..font_name.."\" unregistered"
+		end
+
+		if font_lib.fallback_font == nil then
+			minetest.log("error", message.." and no other font registered.")
+		else
+			minetest.log("info", message..", using font \""..font_lib.fallback_font.."\".")
+			font = font_lib.registered_fonts[font_lib.fallback_font]
+		end
 	end
 
-	return width
+	return font
+end
+
+-- API functions
+----------------
+
+-- Computes text size for a given font and text (ignores new lines)
+-- @param font_name Font to be used
+-- @param text Text to be rendered
+-- @return Rendered text (width, height)
+
+function font_lib.get_text_size(font_name, text)
+	local char
+	local width = 0
+    local pos = 0
+	local font = get_font(font_name)
+
+	if font == nil then
+		return 0, 0
+	else
+		while pos < #text do
+			char, pos = get_next_char(text, pos)
+			-- Ignore chars with no texture
+			if font.widths[char] ~= nil then
+				width = width + font.widths[char]
+			end
+		end
+	end
+	
+	return width, font.height
 end
 
 --- Builds texture part for a text line
+-- @param font_name Font to be used
 -- @param text Text to be rendered
--- @param texturew Width of the texture (extra text is not rendered)
+-- @param width Width of the texture (extra text is not rendered)
 -- @param x Starting x position in texture
 -- @param y Vertical position of the line in texture
 -- @return Texture string
 
-function font_lib.make_line_texture(text, texturew, x, y)
-	local char
+--> ADD ALIGN
+function font_lib.make_line_texture(font_name, text, width, x, y)
 	local texture = ""
-    local p=0
- 
-	while p < #text do
-		char, p = get_next_char(text, p)
+	local char
+	local pos = 0
+	local font = get_font(font_name)
 
-		-- Add image only if it is visible (at least partly)
-		if x + font_lib.font[char].width >= 0 and x <= texturew then
-			texture = texture..string.format(":%d,%d=%s", x, y, font_lib.font[char].filename)
+	if font ~= nil then
+		while pos < #text do
+			char, pos = get_next_char(text, pos)
+	
+			-- Ignore chars with no texture
+			if font.widths[char] ~= nil then
+				-- Add image only if it is visible (at least partly)
+				if x + font.widths[char] >= 0 and x <= width then
+					texture = texture..
+						string.format(":%d,%d=font_%s_%04x.png", 
+						              x, y, font.name, char)
+				end
+				x = x + font.widths[char]
+			end
 		end
-		x = x + font_lib.font[char].width
-
 	end
+	
 	return texture
 end
 
 --- Builds texture for a multiline colored text
+-- @param font_name Font to be used
 -- @param text Text to be rendered
 -- @param texturew Width of the texture (extra text will be truncated)
 -- @param textureh Height of the texture
@@ -106,27 +168,76 @@ end
 -- @param color Color of the text
 -- @return Texture string
 
-function font_lib.make_multiline_texture(text, texturew, textureh, maxlines, valign, color)
+function font_lib.make_multiline_texture(font_name, text, width, height, 
+                                         maxlines, valign, color)
 	local texture = ""
-	local lines = split_lines(text, maxlines)
-	local y
-
-	if valign == "top" then
-		y = font_lib.font_height / 2 - 1
-	else		
-		y = (textureh - font_lib.font_height * #lines) / 2
-	end
-
+	local lines = {}
+    local textheight = 0
+	local y, w, h
+    
+    for num, line in pairs(split_lines(text, maxlines)) do
+        w, h = font_lib.get_text_size(font_name, line)
+        lines[num] = { text = line, width = w, height = h, }
+        textheight = textheight + h
+    end
+    
+    if #lines then
+        if valign == "top" then
+            y = 0
+        elseif valign == "bottom" then
+            y = height - textheight
+        else		
+            y = (height - textheight) / 2
+        end
+    end
+    
 	for _, line in pairs(lines) do
-		texture = texture..font_lib.make_line_texture(line, texturew,
-			(texturew - font_lib.get_line_width(line)) / 2, y)
-		y = y + font_lib.font_height
+		texture = texture..
+			font_lib.make_line_texture(font_name, line.text, width,
+			(width - line.width) / 2, y)
+		y = y + line.height
 	end
 
-	texture = string.format("[combine:%dx%d", texturew, textureh)..texture
+	texture = string.format("[combine:%dx%d", width, height)..texture
 	if color then texture = texture.."^[colorize:"..color end
 
 	return texture
+end
+
+--- Register a new font
+-- Textures corresponding to the font should be named after following patern :
+-- font_<name>_<code>.png
+-- <name> : name of the font
+-- <code> : 4 digit hexadecimal unicode of the char
+-- If registering different sizes, add size in the font name (e.g. times_10, times_12...)
+-- @param height Font height in pixels
+-- @param widths Array of character widths in pixel, indexed by unicode number.
+
+function font_lib.register_font(font_name, height, widths)
+	if font_lib.registered_fonts[font_name] ~= nil then
+		minetest.log("error", "Font \""..font_name.."\" already registered.")
+		return
+	end
+	
+	font_lib.registered_fonts[font_name] = 
+		{ name = font_name, height = height, widths = widths }
+	
+	-- If no fallback font, set it (so, first font registered will be the default fallback font)
+	if font_lib.fallback_font == nil then
+		font_lib.fallback_font = font_name
+	end	
+end
+
+--- Define the fallback font
+-- This font will be used instead of given font if not registered.
+-- @param font_name Name of the font to be used as fallback font (has to be registered).
+
+function font_lib.set_fallback_font(font_name)
+	if font_lib.registered_fonts[font_name] == nil then
+		minetest.log("error", "Fallback font \""..font_name.."\" not registered.")
+	else
+		font_lib.fallback_font = font_name
+	end
 end
 
 --- Standard on_display_update entity callback.
@@ -141,31 +252,17 @@ function font_lib.on_display_update(pos, objref)
 	local ndef = minetest.registered_nodes[minetest.get_node(pos).name]
 	local entity = objref:get_luaentity()
 
-    if entity and ndef.display_entities[entity.name] then
+	if entity and ndef.display_entities[entity.name] then
 		local def = ndef.display_entities[entity.name]
 
 		objref:set_properties({ 
 			textures={font_lib.make_multiline_texture(
-				text, def.size.x*def.resolution.x, def.size.y*def.resolution.y, 
+				def.font_name, text, def.size.x*def.resolution.x, def.size.y*def.resolution.y, 
 				def.maxlines, def.valign, def.color)}, 
 			visual_size = def.size
 		})
 	end
 end
 
--- Populate fonts table
-
-local filename
-for char = 0,255 do
-	filename = string.format("font_lib_%02x.png", char)
-	local file=io.open(font_lib.path.."/textures/"..filename,"rb")
-	if file~=nil then 
-		-- Get png width, suposing png width is less than 256 (it is the case for all font textures)
-		-- All font png are smaller than 256x256 --> read only last byte
-		file:seek("set",19)
-		local w = file:read(1)
-		file:close()
-		font_lib.font[char] = {filename=filename, width=w:byte()}
-	end
-end
+dofile(font_lib.path.."/font_default.lua")
 

@@ -13,6 +13,16 @@ For more information, see the [forum topic](https://forum.minetest.net/viewtopic
 
 ## Changelog
 
+### 2017-12-19
+
+This change is a preparation to merge Andrzej Pieńkowski fork (apienk) : new font and support of UTF chars.
+
+- Font\_lib support for multiple fonts (nothing yet visible in mods) ;
+
+- Font\_lib support for Unicode characters (limited to Unicode Plane 0: 0000-FFFF, see [Wikipedia](https://en.wikipedia.org/wiki/Unicode)) ; 
+
+- New "default" font with original textures from Vanessa Ezekowitz (VanessaE) ;
+
 ### 2017-12-10
 
 - Compatibility of signs mod with signs_lib (thanks to gpcf) ;
