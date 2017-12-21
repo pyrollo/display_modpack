@@ -47,6 +47,11 @@ local function get_next_char(text, pos)
 	pos = pos + 1
 	local char = text:sub(pos, pos):byte()
 
+	-- 1 byte char
+	if char < 0x80 then
+	    return char, pos
+    end
+
 	-- 4 bytes char not managed
 	if char >= 0xF0 then
 		pos = pos + 3
@@ -60,13 +65,14 @@ local function get_next_char(text, pos)
 	end
 		
 	-- 2 bytes char (little endian)
-	if char >= 0x80 then
+	if char >= 0xC2 then
 		pos = pos + 1
-		return char * 0x100 + text:sub(pos, pos):byte(), pos
+		return (char - 0xC2) * 0x40 + text:sub(pos, pos):byte(), pos
 	end
-	
-	-- 1 byte char
-	return char, pos
+
+    -- Not an UTF char
+	return 0, pos
+
 end
 
 -- Returns font properties to be used according to font_name
@@ -151,6 +157,8 @@ function font_lib.make_line_texture(font_name, text, width, x, y)
 						              x, y, font.name, char)
 				end
 				x = x + font.widths[char]
+            else
+                print(string.format("Missing char %d (%04x)",char,char))
 			end
 		end
 	end
