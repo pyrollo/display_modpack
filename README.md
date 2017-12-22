@@ -11,6 +11,8 @@ This modpack provides mods with dynamic display. Mods are :
 
 For more information, see the [forum topic](https://forum.minetest.net/viewtopic.php?f=11&t=13563) at the Minetest forums.
 
+![Presentation image of Display_Modpack](http://pyrollo.github.io/display_modpack/presentation.png)
+
 ## Changelog
 
 ### 2017-12-19
