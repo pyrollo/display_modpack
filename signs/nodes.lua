@@ -35,7 +35,7 @@ local function display_poster(pos, node, player)
 	formspec =
 		"size[7,9]"..
 		"image[0,0;8.5,4;"..titletexture.."]"..
-		"textarea[0.5,1;7,8;;"..minetest.colorize("#111", minetest.formspec_escape(meta:get_string("text")))..";]"..
+		"textarea[0.3,1;7,8;;"..minetest.colorize("#111", minetest.formspec_escape(meta:get_string("text")))..";]"..
 		"bgcolor[#eee]"
 
 	if minetest.is_protected(pos, player:get_player_name()) then
