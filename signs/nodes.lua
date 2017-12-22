@@ -22,7 +22,36 @@ local S = signs.intllib
 local F = function(...) return minetest.formspec_escape(S(...)) end
 
 -- Poster specific formspec
-local function on_rightclick_poster(pos, node, player, itemstack, pointed_thing)
+local function display_poster(pos, node, player)
+	local formspec
+	local meta = minetest.get_meta(pos)
+	local def = minetest.registered_nodes[node.name].display_entities["signs:display_text"]
+
+	-- Title texture
+	local titletexture = font_lib.make_multiline_texture(
+	  def.font_name, meta:get_string("display_text"),
+	  116, 50, def.maxlines, def.valign, def.color)
+
+	formspec =
+		"size[7,9]"..
+		"image[0,0;8.5,4;"..titletexture.."]"..
+		"textarea[0.5,1;7,8;;"..minetest.colorize("#111", minetest.formspec_escape(meta:get_string("text")))..";]"..
+		"bgcolor[#eee]"
+
+	if minetest.is_protected(pos, player:get_player_name()) then
+		formspec = formspec..
+			"button_exit[2.5,8;2,1;ok;"..F("Close").."]"
+	else
+		formspec = formspec..
+			"button[1,8;2,1;edit;"..F("Edit").."]"..
+			"button_exit[4,8;2,1;ok;"..F("Close").."]"
+	end
+	minetest.show_formspec(player:get_player_name(),
+		node.name.."@"..minetest.pos_to_string(pos)..":display",
+		formspec)
+end
+
+local function edit_poster(pos, node, player)
 	local formspec
 	local meta = minetest.get_meta(pos)
 
@@ -33,34 +62,31 @@ local function on_rightclick_poster(pos, node, player, itemstack, pointed_thing)
             minetest.formspec_escape(meta:get_string("display_text")).."]"..
 			"textarea[0.5,1.7;6,6;text;"..F("Text")..";"..
             minetest.formspec_escape(meta:get_string("text")).."]"..
-			"button_exit[2,7;2,1;ok;"..F("Write").."]"
+			"button_exit[2.25,7;2,1;write;"..F("Write").."]"
 		minetest.show_formspec(player:get_player_name(),
-			node.name.."@"..minetest.pos_to_string(pos),
-			formspec)
-	else
-		formspec = "size[8,9]"..
-			"size[6.5,7.5]"..
-			"label[0.5,0;"..minetest.formspec_escape(meta:get_string("display_text")).."]"..
-			"textarea[0.5,1;6,7;;"..minetest.formspec_escape(meta:get_string("text"))..";]"..
-			"bgcolor[#111]"..
-			"button_exit[2,7;2,1;ok;"..F("Close").."]"
-		minetest.show_formspec(player:get_player_name(),
-			"",
+			node.name.."@"..minetest.pos_to_string(pos)..":edit",
 			formspec)
 	end
-    return itemstack   
 end
 
 -- Poster specific on_receive_fields callback
 local function on_receive_fields_poster(pos, formname, fields, player)
 	local meta = minetest.get_meta(pos)
-	if not minetest.is_protected(pos, player:get_player_name()) then
-		if fields and (fields.ok or fields.key_enter) then
+	local node = minetest.get_node(pos)
+
+	if not minetest.is_protected(pos, player:get_player_name()) and fields then
+		if formname == node.name.."@"..minetest.pos_to_string(pos)..":display" and 
+		  fields.edit then
+			edit_poster(pos, node, player)
+		end
+		if formname == node.name.."@"..minetest.pos_to_string(pos)..":edit" and
+		   (fields.write or fields.key_enter) then
 			meta:set_string("display_text", fields.display_text)
 			meta:set_string("text", fields.text)
 			meta:set_string("infotext", "\""..fields.display_text
 					.."\"\n"..S("(right-click to read more text)"))
 			display_lib.update_entities(pos)
+			display_poster(pos, node, player)
 		end
 	end
 end
@@ -134,7 +160,7 @@ local models = {
                       "signs_poster_sides.png", "signs_poster.png" },
 			inventory_image = "signs_poster_inventory.png",
 			on_construct = display_lib.on_construct,
-			on_rightclick = on_rightclick_poster,
+			on_rightclick = display_poster,
 			on_receive_fields = on_receive_fields_poster,
 		},
 	},
