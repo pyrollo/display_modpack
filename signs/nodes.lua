@@ -30,13 +30,14 @@ local function display_poster(pos, node, player)
 	-- Title texture
 	local titletexture = font_lib.make_multiline_texture(
 	  def.font_name, meta:get_string("display_text"),
-	  116, 50, def.maxlines, def.valign, def.color)
+	  116, 12, def.maxlines, def.valign, def.color)
 
 	formspec =
 		"size[7,9]"..
-		"image[0,0;8.5,4;"..titletexture.."]"..
-		"textarea[0.3,1;7,8;;"..minetest.colorize("#111", minetest.formspec_escape(meta:get_string("text")))..";]"..
-		"bgcolor[#eee]"
+		"background[0,0;7,9;signs_poster_formspec.png]"..
+		"image[0,0;8.4,1.5;"..titletexture.."]"..
+		"textarea[0.3,1.5;7,8;;"..minetest.colorize("#111", minetest.formspec_escape(meta:get_string("text")))..";]"..
+		"bgcolor[#0000]"
 
 	if minetest.is_protected(pos, player:get_player_name()) then
 		formspec = formspec..
