@@ -21,6 +21,13 @@
 local S = signs.intllib
 local F = function(...) return minetest.formspec_escape(S(...)) end
 
+function signs.set_display_text(pos,text)
+	local meta = minetest.get_meta(pos)
+	meta:set_string("display_text", text)
+	meta:set_string("infotext", "\""..text.."\"")
+	display_lib.update_entities(pos)
+end
+
 function signs.set_formspec(pos)
 	local meta = minetest.get_meta(pos)
 	local ndef = minetest.registered_nodes[minetest.get_node(pos).name]
@@ -49,11 +56,8 @@ end
 
 function signs.on_receive_fields(pos, formname, fields, player)
 	if not minetest.is_protected(pos, player:get_player_name()) then
-		local meta = minetest.get_meta(pos)
 		if fields and (fields.ok or fields.key_enter) then
-			meta:set_string("display_text", fields.display_text)
-			meta:set_string("infotext", "\""..fields.display_text.."\"")
-			display_lib.update_entities(pos)
+			signs.set_display_text(pos, fields.display_text)
 		end
 	end
 end
