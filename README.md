@@ -9,7 +9,7 @@ This modpack provides mods with dynamic display. Mods are :
 - **signs_road**: A mod providing road signs displaying text;
 - **steles**: A mod providing stone steles with text;
 
-For more information, see the [forum topic](https://forum.minetest.net/viewtopic.php?f=11&t=13563) at the Minetest forums.
+For more information, see the [forum topic](https://forum.minetest.net/viewtopic.php?t=19365) at the Minetest forums.
 
 ![Presentation image of Display_Modpack](http://pyrollo.github.io/display_modpack/presentation.png)
 
