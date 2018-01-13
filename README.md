@@ -15,6 +15,20 @@ For more information, see the [forum topic](https://forum.minetest.net/viewtopic
 
 ## Changelog
 
+### 2018-01-13 (Version 1.0)
+
+- Switch to Epilepsy font by KREATIVE SOFTWARE
+
+- Add settings "default_font"
+
+- Add horizontal alignment
+
+- Add tool for creating font textures from .ttf font files
+
+- Fix UTF 8 to Unicode decoding 
+
+- Updated forum thread link in README.md
+
 ### 2017-12-19
 
 This change is a preparation to merge Andrzej Pieńkowski fork (apienk) : new font and support of UTF chars.

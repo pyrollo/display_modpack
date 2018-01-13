@@ -27,7 +27,7 @@ local models = {
 		width = 14/16,
 		height = 12/16,
 		entity_fields = {
-			resolution = { x = 144, y = 64 },
+			resolution = { x = 11, y = 5.5 },
 			maxlines = 3,
 			color = "#fff",
 		},
@@ -44,7 +44,7 @@ local models = {
 		width = 64/16,
 		height = 12/16,
 		entity_fields = {
-			resolution = { x = 30, y = 20 },
+			resolution = { x = 2.5, y = 1.5 },
 			maxlines = 1,
 			color = "#000",
 		},
@@ -63,7 +63,7 @@ local models = {
 		width = 1,
 		height = 7/16,
 		entity_fields = {
-			resolution = { x = 96, y = 64 },
+			resolution = { x = 8, y = 4 },
 			maxlines = 1,
 			color = "#000",
 		},
@@ -80,7 +80,7 @@ local models = {
 		width = 1,
 		height = 7/16,
 		entity_fields = {
-			resolution = { x = 96, y = 64 },
+			resolution = { x = 9, y = 5.5 },
 			maxlines = 2,
 			color = "#000",
 		},
@@ -97,7 +97,7 @@ local models = {
 		width = 1,
 		height = 7/16,
 		entity_fields = {
-			resolution = { x = 96, y = 64 },
+			resolution = { x = 9, y = 5.5 },
 			maxlines = 2,
 			color = "#fff",
 		},
@@ -114,7 +114,7 @@ local models = {
 		width = 1,
 		height = 7/16,
 		entity_fields = {
-			resolution = { x = 96, y = 64 },
+			resolution = { x = 9, y = 5.5 },
 			maxlines = 2,
 			color = "#000",
 		},
@@ -131,7 +131,7 @@ local models = {
 		width = 1,
 		height = 0.5,
 		entity_fields = {
-            resolution = { x = 96, y = 64 },
+            resolution = { x = 7, y = 5 },
 			maxlines = 1,
 			color = "#000",
 		},
@@ -151,7 +151,7 @@ local models = {
 		width = 1,
 		height = 0.5,
 		entity_fields = {
-			resolution = { x = 96, y = 64 },
+			resolution = { x = 7, y = 5 },
 			maxlines = 1,
 			color = "#000",
 		},
@@ -176,7 +176,7 @@ local models = {
 		entity_fields = {
             right = -3/32,
 			size = { x = 12/16, y = 6/16 },
-			resolution = { x = 112, y = 64 },
+			resolution =  { x = 9, y = 5.5 },
 			maxlines = 2,
 			color = "#fff",
 		},
@@ -200,7 +200,7 @@ local models = {
 		entity_fields = {
             right = 3/32,
 			size = { x = 12/16, y = 6/16 },
-			resolution = { x = 112, y = 64 },
+			resolution = { x = 9, y = 5.5 },
 			maxlines = 2,
 			color="#fff",
 		},
@@ -226,7 +226,7 @@ local models = {
 		entity_fields = {
             right = -3/32,
 			size = { x = 12/16, y = 6/16 },
-			resolution = { x = 112, y = 64 },
+			resolution = { x = 9, y = 5.5 },
 			maxlines = 2,
 			color = "#000",
 		},
@@ -250,7 +250,7 @@ local models = {
 		entity_fields = {
             right = 3/32,
 			size = { x = 12/16, y = 6/16 },
-			resolution = { x = 112, y = 64 },
+			resolution = { x = 9, y = 5.5 },
 			maxlines = 2,
 			color = "#000",
 		},
@@ -276,7 +276,7 @@ local models = {
 		entity_fields = {
             right = -3/32,
 			size = { x = 12/16, y = 6/16 },
-			resolution = { x = 112, y = 64 },
+			resolution = { x = 9, y = 5.5 },
 			maxlines = 2,
 			color = "#000",
 		},
@@ -300,7 +300,7 @@ local models = {
 		entity_fields = {
             right = 3/32,
 			size = { x = 12/16, y = 6/16 },
-			resolution = { x = 112, y = 64 },
+			resolution = { x = 9, y = 5.5 },
 			maxlines = 2,
 			color = "#000",
 		},

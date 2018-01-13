@@ -2,7 +2,7 @@
 
 This mod provides various signs with text display. Text is locked if area is protected.
 
-For more information, see the [forum topic](https://forum.minetest.net/viewtopic.php?f=11&t=13563) at the Minetest forums.
+For more information, see the [forum topic](https://forum.minetest.net/viewtopic.php?t=19365) at the Minetest forums.
 
 **Dependancies**: default, display\_lib, font\_lib
 

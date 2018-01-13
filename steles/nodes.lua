@@ -61,7 +61,7 @@ for i, material in ipairs(steles.materials) do
 						on_display_update = font_lib.on_display_update,
 						depth = -2/16-0.001, height = 2/16,
 						size = { x = 14/16, y = 12/16 },
-						resolution = { x = 144, y = 64 },
+						resolution = { x = 11, y = 5 },
 						maxlines = 3,
 				},
 			},

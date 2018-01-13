@@ -104,7 +104,7 @@ local models = {
 		entity_fields = {
             right = -3/32,
 			size = { x = 12/16, y = 6/16 },
-			resolution = { x = 112, y = 64 },
+			resolution = { x = 9, y = 5 },
 			maxlines = 2,
 			color="#000",
 		},
@@ -127,7 +127,7 @@ local models = {
 		entity_fields = {
             right = 3/32,
 			size = { x = 12/16, y = 6/16 },
-			resolution = { x = 112, y = 64 },
+			resolution = { x = 9, y = 5 },
 			maxlines = 2,
 			color = "#000",
 		},
@@ -149,7 +149,7 @@ local models = {
 		width = 26/32,
 		height = 30/32,
 		entity_fields = {
-			resolution = { x = 144, y = 64 },
+			resolution = { x = 11, y = 5 },
 			maxlines = 1,
 			color="#000",
 			valign="top",

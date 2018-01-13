@@ -1,9 +1,9 @@
 #!/bin/bash
 
-scriptname=$0
+scriptname=$(basename $0)
 identify="identify"
 
-font_name=default
+font_name=$1
 
 for f in textures/font_${font_name}_????.png
 do
@@ -45,4 +45,12 @@ font_lib.register_font(
 	{ $font_widths }
 );
 " > font_$font_name.lua
+
+if grep -q font_lib depends.txt &>/dev/null
+then
+	echo "font_lib already in depends.txt."
+else
+	echo "adding font_lib to depends.txt."
+	echo "font_lib" >> depends.txt
+fi
 
