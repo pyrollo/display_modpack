@@ -158,7 +158,7 @@ function signs.register_sign(mod, name, model)
 		display_entities = {
 			["signs:display_text"] = {
 					on_display_update = font_lib.on_display_update,
-					depth = 0.499 - model.depth,
+					depth = 0.5 - display_lib.entity_spacing - model.depth,
 					size = { x = model.width, y = model.height },
 					resolution = { x = 64, y = 64 },
 					maxlines = 1,
