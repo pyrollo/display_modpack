@@ -21,17 +21,6 @@
 local S = steles.intllib
 local F = function(...) return minetest.formspec_escape(S(...)) end
 
-function steles.on_receive_fields(pos, formname, fields, player)
-	if not minetest.is_protected(pos, player:get_player_name()) then
-		local meta = minetest.get_meta(pos)
-		if fields and fields.ok then
-			meta:set_string("display_text", fields.display_text)
-			meta:set_string("infotext", "\""..fields.display_text.."\"")
-			display_lib.update_entities(pos)
-		end
-	end
-end
-
 display_lib.register_display_entity("steles:text")
 
 for i, material in ipairs(steles.materials) do
@@ -65,29 +54,33 @@ for i, material in ipairs(steles.materials) do
 						maxlines = 3,
 				},
 			},
-			on_place = display_lib.on_place,
+			on_place = function(itemstack, placer, pointed_thing)
+					minetest.rotate_node(itemstack, placer, pointed_thing)
+					display_lib.on_place(itemstack, placer, pointed_thing)
+				end,
 			on_construct = 	function(pos)
-								local meta = minetest.get_meta(pos)
-								meta:set_string("formspec", "size[6,4]"
-									.."textarea[0.5,0.7;5.5,2;display_text;"
-									..F("Displayed text (3 lines max)")
-									..";${display_text}]"
-									.."button_exit[2,3;2,1;ok;"..F("Write").."]")
-								display_lib.on_construct(pos)
-							end,
+					local meta = minetest.get_meta(pos)
+					meta:set_string("formspec", "size[6,4]"
+						.."textarea[0.5,0.7;5.5,2;display_text;"
+						..F("Displayed text (3 lines max)")
+						..";${display_text}]"
+						.."button_exit[2,3;2,1;ok;"..F("Write").."]")
+					display_lib.on_construct(pos)
+				end,
 			on_destruct = display_lib.on_destruct,
 			on_rotate = display_lib.on_rotate,
 			on_receive_fields = function(pos, formname, fields, player)
-									if not minetest.is_protected(pos, player:get_player_name()) then
-										local meta = minetest.get_meta(pos)
-										if fields and fields.ok then
-											meta:set_string("display_text", fields.display_text)
-											meta:set_string("infotext", "\""..fields.display_text.."\"")
-											display_lib.update_entities(pos)
-										end
-									end
-								end,
-			on_punch = function(pos, node, player, pointed_thing) display_lib.update_entities(pos) end,
+					if not minetest.is_protected(pos, player:get_player_name()) then
+						local meta = minetest.get_meta(pos)
+						if fields and fields.ok then
+							meta:set_string("display_text", fields.display_text)
+							meta:set_string("infotext", "\""..fields.display_text.."\"")
+							display_lib.update_entities(pos)
+						end
+					end
+				end,
+			on_punch = display_lib.update_entities,
 		})
 	end
 end
+
