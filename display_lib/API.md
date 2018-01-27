@@ -80,4 +80,6 @@ This is a helper to register entities used for display.
 		})
 
 
+**Note:** Nodes in the `display_lib_node` group will have their entities updated as soon as the mapblock is loaded (Useful after /clearobjects).
+
 

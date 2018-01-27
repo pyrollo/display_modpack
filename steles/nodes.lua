@@ -26,6 +26,8 @@ display_lib.register_display_entity("steles:text")
 for i, material in ipairs(steles.materials) do
 
 	local ndef = minetest.registered_nodes[material]
+	local groups = table.copy(ndef.groups)
+	groups.display_lib_node = 1
 
 	if ndef then
 		local parts = material:split(":")
@@ -44,7 +46,7 @@ for i, material in ipairs(steles.materials) do
 					{-7/16, -0.5, -4/16, 7/16, -4/16, 4/16}
 				}
 			},
-			groups = ndef.groups,
+			groups = groups,
 			display_entities = {
 				["steles:text"] = {
 						on_display_update = font_lib.on_display_update,
