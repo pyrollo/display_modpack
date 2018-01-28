@@ -230,5 +230,11 @@ function display_lib.register_display_entity(entity_name)
 	end
 end
 
-
+minetest.register_lbm({
+	label = "Update display_lib entities",
+	name = "display_lib:update_entities",
+	run_at_every_load = true,
+	nodenames = {"group:display_lib_node"},
+	action = function(pos, node) display_lib.update_entities(pos) end,
+})
 

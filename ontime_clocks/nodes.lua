@@ -35,7 +35,7 @@ minetest.register_node("ontime_clocks:green_digital", {
 		wall_top = { -0.5, -0.5, -0.5, 0.5, 0.5, 0.5 } 
 	},
 	tiles = {"ontime_clocks_digital.png"},
-	groups = {oddly_breakable_by_hand=1,not_blocking_trains=1},
+	groups = {oddly_breakable_by_hand = 1, not_blocking_trains = 1, display_lib_node = 1},
 	display_entities = {
 		["ontime_clocks:display"] = {
 			depth = 13/32 - 0.01,
@@ -73,7 +73,7 @@ minetest.register_node("ontime_clocks:red_digital", {
 		wall_top = { -0.5, -0.5, -0.5, 0.5, 0.5, 0.5 } 
 	},
 	tiles = {"ontime_clocks_digital.png"},
-	groups = {oddly_breakable_by_hand=1,not_blocking_trains=1},
+	groups = {oddly_breakable_by_hand = 1, not_blocking_trains = 1, display_lib_node = 1},
 	display_entities = {
 		["ontime_clocks:display"] = {
 			depth = 13/32 - 0.01,
@@ -111,7 +111,7 @@ minetest.register_node("ontime_clocks:white", {
 		wall_top = { -7/16, 0.5, -7/16, 7/16, 7/16, 7/16},    
 	},
 	tiles = {"ontime_clocks_white.png"},
-	groups = {choppy=1,oddly_breakable_by_hand=1,not_blocking_trains=1},
+	groups = {choppy = 1, oddly_breakable_by_hand = 1, not_blocking_trains = 1, display_lib_node = 1},
 	display_entities = { 
 		["ontime_clocks:display"] = {
 			depth = 6/16 - 0.01,
@@ -148,7 +148,7 @@ minetest.register_node("ontime_clocks:frameless_black", {
 		wall_top = { -0.5, -0.5, -0.5, 0.5, 0.5, 0.5 } 
 	},
 	tiles = {"ontime_clocks_frameless.png"},
-	groups = {choppy=1,oddly_breakable_by_hand=1,not_blocking_trains=1},
+	groups = {choppy = 1, oddly_breakable_by_hand = 1, not_blocking_trains = 1, display_lib_node = 1},
 	display_entities = { 
 		["ontime_clocks:display"] = {
 			depth = 7/16,
@@ -185,7 +185,7 @@ minetest.register_node("ontime_clocks:frameless_gold", {
 		wall_top = { -0.5, -0.5, -0.5, 0.5, 0.5, 0.5 } 
 	},
 	tiles = {"ontime_clocks_frameless.png^[colorize:#FF0"},
-	groups = {choppy=1,oddly_breakable_by_hand=1,not_blocking_trains=1},
+	groups = {choppy = 1, oddly_breakable_by_hand = 1, not_blocking_trains = 1, display_lib_node = 1},
 	display_entities = { 
 		["ontime_clocks:display"] = {
 			depth = 7/16,
@@ -222,7 +222,7 @@ minetest.register_node("ontime_clocks:frameless_white", {
 		wall_top = { -0.5, -0.5, -0.5, 0.5, 0.5, 0.5 } 
 	},
 	tiles = {"ontime_clocks_frameless.png^[colorize:#FFF"},
-	groups = {choppy=1,oddly_breakable_by_hand=1,not_blocking_trains=1},
+	groups = {choppy = 1, oddly_breakable_by_hand = 1, not_blocking_trains = 1, display_lib_node = 1},
 	display_entities = { 
 		["ontime_clocks:display"] = {
 			depth = 7/16,
