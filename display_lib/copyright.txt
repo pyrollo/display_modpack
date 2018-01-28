@@ -1,2 +1,4 @@
 Code by Pierre-Yves Rollo (pyrollo)
-
+Contributors:
+(gpcf): Compatibility with signs lib
+(Thomas--S): Fix /clearobjects bug
