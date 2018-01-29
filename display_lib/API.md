@@ -5,7 +5,7 @@ This document describes Display Lib API. Display Lib allows to add a dynamic dis
 ### update\_entities
 **display\_lib.update\_entities(pos)**
 
-This method triggers entities update for the display node at pos. Actual entity update is made by `on\_display\_update` callback associated to the entity.
+This method triggers entities update for the display node at pos. Actual entity update is made by `on_display_update` callback associated to the entity.
 
 `pos`: Position of the node
 ### register\_display\_entity
@@ -13,36 +13,36 @@ This method triggers entities update for the display node at pos. Actual entity 
 
 This is a helper to register entities used for display. 
 
-**entity_name**: Name of the entity to register.
+`entity_name`: Name of the entity to register.
 ## Provided callback implementations
 ### on_place
 **display\_lib.on\_place(itemstack, placer, pointed\_thing)**
 
-`On_place` node callback implementation. Display nodes should have this callback (avoid placement of horizontal display node).
+`on_place` node callback implementation. Display nodes should have this callback (avoid placement of horizontal display node).
 ### on_construct
 **display\_lib.on\_construct(pos)**
 
-`On_construct` node callback implementation. Display nodes should have this callback (creates, places and updates display entities on node construction).
+`on_construct` node callback implementation. Display nodes should have this callback (creates, places and updates display entities on node construction).
 ### on_destruct
 **display\_lib.on_destruct(pos)**
 
-`On_destruct` node callback implementation. Display nodes should have this callback (removes display entities on node destruction). 
+`on_destruct` node callback implementation. Display nodes should have this callback (removes display entities on node destruction). 
 ### on_rotate
 **display\_lib.on\_rotate(pos, node, user, mode, new_param2)**
 
-`On_rotate` node callback implementation. Display nodes should have this callback (restricts rotations and rotates display entities associated with node).
+`on_rotate` node callback implementation. Display nodes should have this callback (restricts rotations and rotates display entities associated with node).
 ### on_activate
 **display\_lib.on_activate(entity, staticdata)**
 
-`On_activate` entity callback implementation for display entities. No need of this method if display entities have been registered using `register\_display\_entity` (callback is already set). 
+`On_activate` entity callback implementation for display entities. No need of this method if display entities have been registered using `register_display_entity` (callback is already set). 
 
 ## Howto register a display node
-* Register display entities with `register\_display\_entity`
+* Register display entities with `register_display_entity`
 
 * Register node with :
- - `on\_place`, `on\_construc`, `on\_destruc` and `on\_rotat` callbacks using display\_lib callbacks.
+ - `on_place`, `on_construct`, `on_destruct` and `on_rotate` callbacks using display_lib callbacks.
  - `display_lib_node` group. This will make this node have their entities updated as soon as the mapblock is loaded (Useful after /clearobjects).
- - a `display\_entities` field in node definition containing a entity name indexed table. See below for description of each display\_entities fields.
+ - a `display_entities` field in node definition containing a entity name indexed table. See below for description of each display_entities fields.
 
 ### Display_entities fields
 `on_display_update` is a callback in charge of setting up entity texture. If not set, entity will have no texture and will be displayed as unknown item.
