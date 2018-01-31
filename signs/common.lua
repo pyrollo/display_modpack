@@ -37,6 +37,7 @@ function signs.set_formspec(pos)
 
 		if maxlines == 1 then
 			formspec = "size[6,3]"..
+				default.gui_bg .. default.gui_bg_img .. default.gui_slots ..
 				"field[0.5,0.7;5.5,1;display_text;"..F("Text")..";${display_text}]"..
 				"button_exit[2,2;2,1;ok;"..F("Write").."]"
 		else
@@ -46,6 +47,7 @@ function signs.set_formspec(pos)
 			end
 
 			formspec = "size[6,4]"..
+				default.gui_bg .. default.gui_bg_img .. default.gui_slots ..
 				"textarea[0.5,0.7;5.5,2;display_text;"..F("Text")..""..extralabel..";${display_text}]"..
 				"button_exit[2,3;2,1;ok;"..F("Write").."]"
 		end

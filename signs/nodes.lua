@@ -59,6 +59,7 @@ local function edit_poster(pos, node, player)
 	if not minetest.is_protected(pos, player:get_player_name()) then
 		formspec =
 			"size[6.5,7.5]"..
+			default.gui_bg .. default.gui_bg_img .. default.gui_slots ..
 			"field[0.5,0.7;6,1;display_text;"..F("Title")..";"..
             minetest.formspec_escape(meta:get_string("display_text")).."]"..
 			"textarea[0.5,1.7;6,6;text;"..F("Text")..";"..
