@@ -45,9 +45,9 @@ local function compatibility_check(pos, node)
     node.name = convert_nodes[node.name]
     if node.name then
 	  node.param2 = wallmounted_to_facedir[node.param2]
-      display_lib.on_destruct(pos)
+      display_api.on_destruct(pos)
       minetest.swap_node(pos, node)
-      display_lib.on_construct(pos)
+      display_api.on_construct(pos)
     end
 end
 
@@ -69,7 +69,7 @@ local function compatibility_check_2(pos, node)
 		end
 	end
 	-- Create new entity
-	display_lib.update_entities(pos)
+	display_api.update_entities(pos)
 end
 
 minetest.register_lbm({ name = "signs_road:conpatibility_2",

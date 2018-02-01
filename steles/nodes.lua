@@ -21,7 +21,7 @@
 local S = steles.intllib
 local F = function(...) return minetest.formspec_escape(S(...)) end
 
-display_lib.register_display_entity("steles:text")
+display_api.register_display_entity("steles:text")
 
 for i, material in ipairs(steles.materials) do
 
@@ -30,7 +30,7 @@ for i, material in ipairs(steles.materials) do
 	if ndef then
 		local groups = table.copy(ndef.groups)
 		local parts = material:split(":")
-		groups.display_lib_node = 1
+		groups.display_modpack_node = 1
 
 		minetest.register_node("steles:"..parts[2].."_stele", {
 			description = steles.materials_desc[i],
@@ -49,8 +49,8 @@ for i, material in ipairs(steles.materials) do
 			groups = groups,
 			display_entities = {
 				["steles:text"] = {
-						on_display_update = font_lib.on_display_update,
-						depth = -2/16 - display_lib.entity_spacing, height = 2/16,
+						on_display_update = font_api.on_display_update,
+						depth = -2/16 - display_api.entity_spacing, height = 2/16,
 						size = { x = 14/16, y = 12/16 },
 						resolution = { x = 11, y = 5 },
 						maxlines = 3,
@@ -58,7 +58,7 @@ for i, material in ipairs(steles.materials) do
 			},
 			on_place = function(itemstack, placer, pointed_thing)
 					minetest.rotate_node(itemstack, placer, pointed_thing)
-					display_lib.on_place(itemstack, placer, pointed_thing)
+					display_api.on_place(itemstack, placer, pointed_thing)
 				end,
 			on_construct = 	function(pos)
 					local meta = minetest.get_meta(pos)
@@ -68,21 +68,21 @@ for i, material in ipairs(steles.materials) do
 						..F("Displayed text (3 lines max)")
 						..";${display_text}]"
 						.."button_exit[2,3;2,1;ok;"..F("Write").."]")
-					display_lib.on_construct(pos)
+					display_api.on_construct(pos)
 				end,
-			on_destruct = display_lib.on_destruct,
-			on_rotate = display_lib.on_rotate,
+			on_destruct = display_api.on_destruct,
+			on_rotate = display_api.on_rotate,
 			on_receive_fields = function(pos, formname, fields, player)
 					if not minetest.is_protected(pos, player:get_player_name()) then
 						local meta = minetest.get_meta(pos)
 						if fields and fields.ok then
 							meta:set_string("display_text", fields.display_text)
 							meta:set_string("infotext", "\""..fields.display_text.."\"")
-							display_lib.update_entities(pos)
+							display_api.update_entities(pos)
 						end
 					end
 				end,
-			on_punch = display_lib.update_entities,
+			on_punch = display_api.update_entities,
 		})
 	end
 end

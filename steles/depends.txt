@@ -1,5 +1,5 @@
 default
 intllib?
-display_lib
-font_lib
+display_api
+font_api
 technic?

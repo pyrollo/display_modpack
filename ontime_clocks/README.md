@@ -4,7 +4,7 @@ This mod provides clocks that display real ingame time.
 
 For more information, see the [forum topic](https://forum.minetest.net/viewtopic.php?t=19365) at the Minetest forums.
 
-**Dependancies**: display_lib, default
+**Dependancies**: display_api, default
 
 **License**: Code under LGPL, textures under CC-BY-SA
 

@@ -1,5 +1,5 @@
 --[[
-    display_lib mod for Minetest - Library to add dynamic display 
+    display_api mod for Minetest - Library to add dynamic display
     capabilities to nodes
     (c) Pierre-Yves Rollo
 
@@ -17,12 +17,12 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 --]]
 
-display_lib = {}
+display_api = {}
 
 -- Prefered gap between node and entity
 -- Entity positionment is up to mods but it is a good practice to use this
 -- variable as spacing between entity and node
-display_lib.entity_spacing = 0.002
+display_api.entity_spacing = 0.002
 
 -- Miscelaneous values depending on wallmounted param2
 local wallmounted_values = {
@@ -144,25 +144,25 @@ local function call_node_on_display_update(pos, objref)
 end
 
 --- Force entity update
-function display_lib.update_entities(pos)
+function display_api.update_entities(pos)
 	local objrefs = place_entities(pos)
 	for _, objref in pairs(objrefs) do
 		call_node_on_display_update(pos, objref)
     end
 end
 
---- On_activate callback for display_lib entities. Calls on_display_update callbacks 
+--- On_activate callback for display_api entities. Calls on_display_update callbacks
 --- of corresponding node for each entity.
-function display_lib.on_activate(entity, staticdata)
+function display_api.on_activate(entity, staticdata)
    if entity then
       entity.object:set_armor_groups({immortal=1})
       call_node_on_display_update(entity.object:getpos(), entity.object)
    end
 end
 
---- On_place callback for display_lib items. Does nothing more than preventing item
+--- On_place callback for display_api items. Does nothing more than preventing item
 --- from being placed on ceiling or ground 
-function display_lib.on_place(itemstack, placer, pointed_thing)
+function display_api.on_place(itemstack, placer, pointed_thing)
 	local ndef = itemstack:get_definition()
 	local above = pointed_thing.above
 	local under = pointed_thing.under
@@ -189,13 +189,13 @@ function display_lib.on_place(itemstack, placer, pointed_thing)
 
 end
 
---- On_construct callback for display_lib items. Creates entities and update them.
-function display_lib.on_construct(pos)
-	display_lib.update_entities(pos)
+--- On_construct callback for display_api items. Creates entities and update them.
+function display_api.on_construct(pos)
+	display_api.update_entities(pos)
 end
 
---- On_destruct callback for display_lib items. Removes entities.
-function display_lib.on_destruct(pos)
+--- On_destruct callback for display_api items. Removes entities.
+function display_api.on_destruct(pos)
 	local objrefs = get_entities(pos)
 	
 	for _, objref in pairs(objrefs) do 
@@ -203,8 +203,8 @@ function display_lib.on_destruct(pos)
 	end
 end
 
--- On_rotate (screwdriver) callback for display_lib items. Prevents axis rotation and reorients entities.
-function display_lib.on_rotate(pos, node, user, mode, new_param2)
+-- On_rotate (screwdriver) callback for display_api items. Prevents axis rotation and reorients entities.
+function display_api.on_rotate(pos, node, user, mode, new_param2)
 	if mode ~= 1 then return false end
 
 	local values = get_values(node)
@@ -219,22 +219,24 @@ function display_lib.on_rotate(pos, node, user, mode, new_param2)
 end
 
 --- Creates display entity with some fields and the on_activate callback
-function display_lib.register_display_entity(entity_name)
+function display_api.register_display_entity(entity_name)
 	if not minetest.registered_entity then
 		minetest.register_entity(':'..entity_name, {
 			collisionbox = { 0, 0, 0, 0, 0, 0 },
 			visual = "upright_sprite",
 			textures = {},
-			on_activate = display_lib.on_activate,
+			on_activate = display_api.on_activate,
 		})
 	end
 end
 
 minetest.register_lbm({
-	label = "Update display_lib entities",
-	name = "display_lib:update_entities",
+	label = "Update display_api entities",
+	name = "display_api:update_entities",
 	run_at_every_load = true,
-	nodenames = {"group:display_lib_node"},
-	action = function(pos, node) display_lib.update_entities(pos) end,
+	nodenames = {"group:display_modpack_node", "group:display_lib_node"},
+	action = function(pos, node) display_api.update_entities(pos) end,
 })
 
+-- Compatibility
+display_lib = display_api

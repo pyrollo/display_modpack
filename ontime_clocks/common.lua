@@ -19,7 +19,7 @@
 --]]
 
 -- Entity for time display
-display_lib.register_display_entity("ontime_clocks:display")
+display_api.register_display_entity("ontime_clocks:display")
 
 function ontime_clocks.get_h24()
 	return math.floor(minetest.get_timeofday()*24)%24

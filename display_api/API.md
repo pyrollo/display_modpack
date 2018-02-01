@@ -40,9 +40,9 @@ This is a helper to register entities used for display.
 * Register display entities with `register_display_entity`
 
 * Register node with :
-  - `on_place`, `on_construct`, `on_destruct` and `on_rotate` callbacks using display_lib callbacks.
+  - `on_place`, `on_construct`, `on_destruct` and `on_rotate` callbacks using display_api callbacks.
   
-  - `display_lib_node` group. This will make this node have their entities updated as soon as the mapblock is loaded (Useful after /clearobjects).
+  - `display_modpack_node` group. This will make this node have their entities updated as soon as the mapblock is loaded (Useful after /clearobjects).
   
   - a `display_entities` field in node definition containing a entity name indexed table. See below for description of each display_entities fields.
 
@@ -51,12 +51,12 @@ This is a helper to register entities used for display.
 
 `depth`, `right` and `heigh` : Entity position regarding to node facedir/wallmounted main axis. Values for these fields can be any number between -0.5 and 0.5 (default value is 0). Position 0,0,0 is the center of the node. `depth` goes from front (-0.5) to rear (0.5), `height` goes from bottom (-0.5) to top (0.5) and `right` goes from left (-0.5) to right (0.5).
 
-In order to avoid flickering text, it's better to have text a little behind node surface. A good spacing value is given by `display_lib.entity_spacing` variable.
+In order to avoid flickering text, it's better to have text a little behind node surface. A good spacing value is given by `display_api.entity_spacing` variable.
 
 ### Example
 
-	display_lib.register_display_entity("mymod:entity1")
-	display_lib.register_display_entity("mymod:entity2")
+	display_api.register_display_entity("mymod:entity1")
+	display_api.register_display_entity("mymod:entity2")
 
 	function my_display_update1(pos, objref) 
 		objref:set_properties({ textures= {"mytexture1.png"},
@@ -72,7 +72,7 @@ In order to avoid flickering text, it's better to have text a little behind node
 		...
 		paramtype2 = "facedir",
 		...
-		groups = { display_lib_node = 1, ... },
+		groups = { display_modpack_node = 1, ... },
 		...
 		display_entities = {
 			["mymod:entity1"] = { 
@@ -83,9 +83,9 @@ In order to avoid flickering text, it's better to have text a little behind node
 				on_display_update = my_display_update2 },
 			},
 		...
-		on_place = display_lib.on_place,
-		on_construct = display_lib.on_construct,
-		on_destruct = display_lib.on_destruct,
-		on_rotate = display_lib.on_rotate,
+		on_place = display_api.on_place,
+		on_construct = display_api.on_construct,
+		on_destruct = display_api.on_destruct,
+		on_rotate = display_api.on_rotate,
 		...
 	})

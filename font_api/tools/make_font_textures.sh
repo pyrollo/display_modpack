@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# This program generates a bitmap font for font_lib mod for Minetest game.
+# This program generates a bitmap font for font_api mod for Minetest game.
 # (c) Andrzej Pieńkowski <pienkowski.andrzej@gmail.com>
 # (c) Pierre-Yves Rollo <dev@pyrollo.com>
 # License: GPL
@@ -8,7 +8,7 @@
 usage() {
 	echo "Usage: $0 fontfile fontname fontsize"
 	echo "fontfile: A TTF font file to use to create textures."
-	echo "fontname: The font name to be used in font_lib (should be simple, with no spaces)."
+	echo "fontname: The font name to be used in font_api (should be simple, with no spaces)."
 	echo "fontsize: Font height to be rendered."
 }
 

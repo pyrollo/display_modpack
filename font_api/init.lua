@@ -1,6 +1,6 @@
 --[[
-    font_lib mod for Minetest - Library to add font display capability 
-    to display_lib mod. 
+    font_api mod for Minetest - Library to add font display capability
+    to display_api mod.
     (c) Pierre-Yves Rollo
 
     This program is free software: you can redistribute it and/or modify
@@ -20,10 +20,10 @@
 -- Global variables
 -------------------
 
-font_lib = {}
-font_lib.name = minetest.get_current_modname()
-font_lib.path = minetest.get_modpath(font_lib.name)
-font_lib.registered_fonts = {}
+font_api = {}
+font_api.name = minetest.get_current_modname()
+font_api.path = minetest.get_modpath(font_api.name)
+font_api.registered_fonts = {}
 
 -- Local variables
 ------------------
@@ -59,7 +59,7 @@ local function get_default_font()
 		local settings_font = minetest.settings:get("default_font")
 
 		if settings_font ~= nil and settings_font ~= "" then
-			default_font = font_lib.registered_fonts[settings_font]
+			default_font = font_api.registered_fonts[settings_font]
 
 			if default_font == nil then
 				minetest.log("warning", "Default font in settings (\""..
@@ -69,7 +69,7 @@ local function get_default_font()
 
 		-- If failed, choose first font
 		if default_font == nil then
-			for _, font in pairs(font_lib.registered_fonts) do
+			for _, font in pairs(font_api.registered_fonts) do
 				default_font = font
 				break
 			end
@@ -88,7 +88,7 @@ end
 -- Returns font properties to be used according to font_name
 
 local function get_font(font_name)
-	local font = font_lib.registered_fonts[font_name]
+	local font = font_api.registered_fonts[font_name]
 
 	if font == nil then
 		local message
@@ -150,7 +150,7 @@ end
 -- @param text Text to be rendered
 -- @return Rendered text (width, height)
 
-function font_lib.get_text_size(font_name, text)
+function font_api.get_text_size(font_name, text)
 	local char
 	local width = 0
     local pos = 1
@@ -181,7 +181,7 @@ end
 -- @param y Vertical position of the line in texture
 -- @return Texture string
 
-function font_lib.make_line_texture(font_name, text, width, x, y)
+function font_api.make_line_texture(font_name, text, width, x, y)
 	local texture = ""
 	local char
 	local pos = 1
@@ -193,7 +193,7 @@ function font_lib.make_line_texture(font_name, text, width, x, y)
 
 			-- Replace chars with no texture by the NULL(0) char
 			if font.widths[char] == nil then
-                print(string.format("["..font_lib.name
+                print(string.format("["..font_api.name
                                     .."] Missing char %d (%04x)",char,char))
                 char = 0
 			end
@@ -222,7 +222,7 @@ end
 -- @param color Color of the text (optional)
 -- @return Texture string
 
-function font_lib.make_multiline_texture(font_name, text, width, height, 
+function font_api.make_multiline_texture(font_name, text, width, height,
                                          maxlines, halign, valign, color)
 	local texture = ""
 	local lines = {}
@@ -230,7 +230,7 @@ function font_lib.make_multiline_texture(font_name, text, width, height,
 	local y, w, h
 
     for num, line in pairs(split_lines(text, maxlines)) do
-        w, h = font_lib.get_text_size(font_name, line)
+        w, h = font_api.get_text_size(font_name, line)
         lines[num] = { text = line, width = w, height = h, }
         textheight = textheight + h
     end
@@ -248,15 +248,15 @@ function font_lib.make_multiline_texture(font_name, text, width, height,
 	for _, line in pairs(lines) do
 		if halign == "left" then
 			texture = texture..
-				font_lib.make_line_texture(font_name, line.text, width,
+				font_api.make_line_texture(font_name, line.text, width,
 				0, y)
 		elseif halign == "right" then
 			texture = texture..
-				font_lib.make_line_texture(font_name, line.text, width,
+				font_api.make_line_texture(font_name, line.text, width,
 				width - line.width, y)
 		else
 			texture = texture..
-				font_lib.make_line_texture(font_name, line.text, width,
+				font_api.make_line_texture(font_name, line.text, width,
 				(width - line.width) / 2, y)
 		end
 		y = y + line.height
@@ -278,9 +278,9 @@ end
 -- @param height Font height in pixels
 -- @param widths Array of character widths in pixels, indexed by UTF codepoints
 
-function font_lib.register_font(font_name, height, widths)
+function font_api.register_font(font_name, height, widths)
 
-	if font_lib.registered_fonts[font_name] ~= nil then
+	if font_api.registered_fonts[font_name] ~= nil then
 		minetest.log("error", "Font \""..font_name.."\" already registered.")
 		return
 	end
@@ -303,7 +303,7 @@ function font_lib.register_font(font_name, height, widths)
 		return
 	end
 
-	font_lib.registered_fonts[font_name] =
+	font_api.registered_fonts[font_name] =
 		{ name = font_name, height = height, widths = widths }
 
 	-- Force to choose again default font
@@ -317,7 +317,7 @@ end
 -- @param pos Node position
 -- @param objref Object reference of entity
 
-function font_lib.on_display_update(pos, objref)
+function font_api.on_display_update(pos, objref)
 	local meta = minetest.get_meta(pos)
 	local text = meta:get_string("display_text")
 	local ndef = minetest.registered_nodes[minetest.get_node(pos).name]
@@ -328,7 +328,7 @@ function font_lib.on_display_update(pos, objref)
 		local font = get_font(def.font_name)
 
 		objref:set_properties({ 
-			textures={font_lib.make_multiline_texture(
+			textures={font_api.make_multiline_texture(
 				def.font_name, text,
 				def.size.x * def.resolution.x * font.height,
 				def.size.y * def.resolution.y * font.height,
@@ -337,4 +337,7 @@ function font_lib.on_display_update(pos, objref)
 		})
 	end
 end
+
+-- Compatibility
+font_lib = font_api
 
