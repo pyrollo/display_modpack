@@ -40,14 +40,16 @@ This is a helper to register entities used for display.
 * Register display entities with `register_display_entity`
 
 * Register node with :
- - `on_place`, `on_construct`, `on_destruct` and `on_rotate` callbacks using display_lib callbacks.
- - `display_lib_node` group. This will make this node have their entities updated as soon as the mapblock is loaded (Useful after /clearobjects).
- - a `display_entities` field in node definition containing a entity name indexed table. See below for description of each display_entities fields.
+  - `on_place`, `on_construct`, `on_destruct` and `on_rotate` callbacks using display_lib callbacks.
+  
+  - `display_lib_node` group. This will make this node have their entities updated as soon as the mapblock is loaded (Useful after /clearobjects).
+  
+  - a `display_entities` field in node definition containing a entity name indexed table. See below for description of each display_entities fields.
 
 ### Display_entities fields
 `on_display_update` is a callback in charge of setting up entity texture. If not set, entity will have no texture and will be displayed as unknown item.
 
-`depth`, `right` and `heigh` : Entity position regarding to node facedir/wallmounted main axis. Values for these fields can be any number between -0.5 and 0.5 (default value is 0). Position 0,0,0 is the center of the node. `depth` goes from front (-0.5) to rear (0.5), `height` goes from bottom (-0.5) to top (0.5) and `height` goes from left (-0.5) to right (0.5).
+`depth`, `right` and `heigh` : Entity position regarding to node facedir/wallmounted main axis. Values for these fields can be any number between -0.5 and 0.5 (default value is 0). Position 0,0,0 is the center of the node. `depth` goes from front (-0.5) to rear (0.5), `height` goes from bottom (-0.5) to top (0.5) and `right` goes from left (-0.5) to right (0.5).
 
 In order to avoid flickering text, it's better to have text a little behind node surface. A good spacing value is given by `display_lib.entity_spacing` variable.
 
