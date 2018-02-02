@@ -63,6 +63,7 @@ for i, material in ipairs(steles.materials) do
 			on_construct = 	function(pos)
 					local meta = minetest.get_meta(pos)
 					meta:set_string("formspec", "size[6,4]"
+						..default.gui_bg .. default.gui_bg_img .. default.gui_slots
 						.."textarea[0.5,0.7;5.5,2;display_text;"
 						..F("Displayed text (3 lines max)")
 						..";${display_text}]"
