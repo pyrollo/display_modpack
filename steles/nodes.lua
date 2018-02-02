@@ -26,11 +26,11 @@ display_lib.register_display_entity("steles:text")
 for i, material in ipairs(steles.materials) do
 
 	local ndef = minetest.registered_nodes[material]
-	local groups = table.copy(ndef.groups)
-	groups.display_lib_node = 1
 
 	if ndef then
+		local groups = table.copy(ndef.groups)
 		local parts = material:split(":")
+		groups.display_lib_node = 1
 
 		minetest.register_node("steles:"..parts[2].."_stele", {
 			description = steles.materials_desc[i],
