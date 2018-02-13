@@ -46,7 +46,7 @@ Builds texture for a multiline colored text
 ### register\_font
 **font\_lib.register_font(font\_name, height, widths)**
 
-Registers a new font in font_lib.
+Registers a new font in font_api.
 
 **font\_name**: Name of the font to register (this name will be used to address the font later)
 If registering different sizes of the same font, add size in the font name (e.g. times\_10,  times\_12...).
@@ -81,7 +81,7 @@ __Syntax__
 **make\_font\_texture.sh <fontfile> <fontname> <fontsize>**
 
 **<fontfile>**: A TTF font file to use to create textures.
-**<fontname>**: The font name to be used in font_lib (should be simple, with no spaces).
+**<fontname>**: The font name to be used in font_api (should be simple, with no spaces).
 **<fontsize>**: Font height to be rendered.
 
 ### make_font_lua.sh
@@ -94,14 +94,14 @@ __Syntax__
 
 **make\_font_lua.sh <fontname>**
 
-**<fontname>**: The font name to be used in font_lib (same as given to make\_font\_texture.sh)
+**<fontname>**: The font name to be used in font_api (same as given to make\_font\_texture.sh)
 
 ### An exemple generating a font mod
 
     mkdir font_myfont
     cd font_myfont
-    /<path_to_font_lib>/tools/make_font_texture.sh myfont.ttf myfont 12
-    /<path_to_font_lib>/tools/make_font_lua.sh myfont
+    /<path_to_font_api>/tools/make_font_texture.sh myfont.ttf myfont 12
+    /<path_to_font_api>/tools/make_font_lua.sh myfont
     mv font_myfont.lua init.lua
 
 

@@ -131,7 +131,7 @@ local models = {
 		width = 1,
 		height = 0.5,
 		entity_fields = {
-            resolution = { x = 7, y = 5 },
+			resolution = { x = 7, y = 5 },
 			maxlines = 1,
 			color = "#000",
 		},
@@ -142,8 +142,8 @@ local models = {
 			          "signs_road_sides.png", "signs_road_black_dir_right.png" },
 			inventory_image = "signs_road_black_dir_inventory.png",
 			signs_other_dir = "signs_road:black_left_sign",
-			on_place = signs.on_place_direction,
-			on_rightclick = signs.on_right_click_direction,
+			on_place = signs_api.on_place_direction,
+			on_rightclick = signs_api.on_right_click_direction,
 		},
 	},
 	black_left_sign = {
@@ -164,8 +164,8 @@ local models = {
 			signs_other_dir = "signs_road:black_right_sign",
 			groups = { not_in_creative_inventory = 1 },
 			drop = "signs_road:black_right_sign",
-			on_place = signs.on_place_direction,
-			on_rightclick = signs.on_right_click_direction,
+			on_place = signs_api.on_place_direction,
+			on_rightclick = signs_api.on_right_click_direction,
 		},
 	},
 
@@ -174,7 +174,7 @@ local models = {
 		width = 14/16,
 		height = 7/16,
 		entity_fields = {
-            right = -3/32,
+			right = -3/32,
 			size = { x = 12/16, y = 6/16 },
 			resolution =  { x = 9, y = 5.5 },
 			maxlines = 2,
@@ -185,8 +185,8 @@ local models = {
 			tiles = { "signs_road_green_direction.png" },
 			inventory_image = "signs_road_green_dir_inventory.png",
 			signs_other_dir = "signs_road:green_left_sign",
-			on_place = signs.on_place_direction,
-            on_rightclick = signs.on_right_click_direction,
+			on_place = signs_api.on_place_direction,
+			on_rightclick = signs_api.on_right_click_direction,
 			drawtype = "mesh",
 			mesh = "signs_dir_right.obj",
 			selection_box = { type = "fixed", fixed = { -0.5, -7/32, 0.5, 7/16, 7/32, 7/16 } },
@@ -198,7 +198,7 @@ local models = {
 		width = 14/16,
 		height = 7/16,
 		entity_fields = {
-            right = 3/32,
+			right = 3/32,
 			size = { x = 12/16, y = 6/16 },
 			resolution = { x = 9, y = 5.5 },
 			maxlines = 2,
@@ -209,8 +209,8 @@ local models = {
 			tiles = { "signs_road_green_direction.png" },
 			inventory_image = "signs_road_green_dir_inventory.png",
 			signs_other_dir = "signs_road:green_right_sign",
-			on_place = signs.on_place_direction,
-            on_rightclick = signs.on_right_click_direction,
+			on_place = signs_api.on_place_direction,
+			on_rightclick = signs_api.on_right_click_direction,
 			drawtype = "mesh",
 			mesh = "signs_dir_left.obj",
 			selection_box = { type = "fixed", fixed = { -7/16, -7/32, 0.5, 0.5, 7/32, 7/16 } },
@@ -224,7 +224,7 @@ local models = {
 		width = 14/16,
 		height = 7/16,
 		entity_fields = {
-            right = -3/32,
+			right = -3/32,
 			size = { x = 12/16, y = 6/16 },
 			resolution = { x = 9, y = 5.5 },
 			maxlines = 2,
@@ -235,8 +235,8 @@ local models = {
 			tiles = { "signs_road_yellow_direction.png" },
 			inventory_image = "signs_road_yellow_dir_inventory.png",
 			signs_other_dir = "signs_road:yellow_left_sign",
-			on_place = signs.on_place_direction,
-            on_rightclick = signs.on_right_click_direction,
+			on_place = signs_api.on_place_direction,
+			on_rightclick = signs_api.on_right_click_direction,
 			drawtype = "mesh",
 			mesh = "signs_dir_right.obj",
 			selection_box = { type = "fixed", fixed = { -0.5, -7/32, 0.5, 7/16, 7/32, 7/16 } },
@@ -248,7 +248,7 @@ local models = {
 		width = 14/16,
 		height = 7/16,
 		entity_fields = {
-            right = 3/32,
+			right = 3/32,
 			size = { x = 12/16, y = 6/16 },
 			resolution = { x = 9, y = 5.5 },
 			maxlines = 2,
@@ -259,8 +259,8 @@ local models = {
 			tiles = { "signs_road_yellow_direction.png" },
 			inventory_image = "signs_road_yellow_dir_inventory.png",
 			signs_other_dir = "signs_road:yellow_right_sign",
-			on_place = signs.on_place_direction,
-            on_rightclick = signs.on_right_click_direction,
+			on_place = signs_api.on_place_direction,
+			on_rightclick = signs_api.on_right_click_direction,
 			drawtype = "mesh",
 			mesh = "signs_dir_left.obj",
 			selection_box = { type = "fixed", fixed = { -7/16, -7/32, 0.5, 0.5, 7/32, 7/16 } },
@@ -274,7 +274,7 @@ local models = {
 		width = 14/16,
 		height = 7/16,
 		entity_fields = {
-            right = -3/32,
+			right = -3/32,
 			size = { x = 12/16, y = 6/16 },
 			resolution = { x = 9, y = 5.5 },
 			maxlines = 2,
@@ -285,8 +285,8 @@ local models = {
 			tiles = { "signs_road_white_direction.png" },
 			inventory_image = "signs_road_white_dir_inventory.png",
 			signs_other_dir = "signs_road:white_left_sign",
-			on_place = signs.on_place_direction,
-            on_rightclick = signs.on_right_click_direction,
+			on_place = signs_api.on_place_direction,
+			on_rightclick = signs_api.on_right_click_direction,
 			drawtype = "mesh",
 			mesh = "signs_dir_right.obj",
 			selection_box = { type = "fixed", fixed = { -0.5, -7/32, 0.5, 7/16, 7/32, 7/16 } },
@@ -298,7 +298,7 @@ local models = {
 		width = 14/16,
 		height = 7/16,
 		entity_fields = {
-            right = 3/32,
+			right = 3/32,
 			size = { x = 12/16, y = 6/16 },
 			resolution = { x = 9, y = 5.5 },
 			maxlines = 2,
@@ -309,8 +309,8 @@ local models = {
 			tiles = { "signs_road_white_direction.png" },
 			inventory_image = "signs_road_white_dir_inventory.png",
 			signs_other_dir = "signs_road:white_right_sign",
-			on_place=signs.on_place_direction,
-            on_rightclick = signs.on_right_click_direction,
+			on_place=signs_api.on_place_direction,
+			on_rightclick = signs_api.on_right_click_direction,
 			drawtype = "mesh",
 			mesh = "signs_dir_left.obj",
 			selection_box = { type = "fixed", fixed = { -7/16, -7/32, 0.5, 0.5, 7/32, 7/16 } },
@@ -324,7 +324,7 @@ local models = {
 -- Node registration
 for name, model in pairs(models)
 do
-	signs.register_sign("signs_road", name, model)
+	signs_api.register_sign("signs_road", name, model)
 end
 
 

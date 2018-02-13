@@ -1,6 +1,6 @@
 default
 intllib?
 dye
-display_lib
-font_lib
-signs
+display_api
+font_api
+signs_api

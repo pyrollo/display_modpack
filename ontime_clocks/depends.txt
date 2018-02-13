@@ -1,5 +1,5 @@
 default
 dye
-display_lib
+display_api
 
 intllib?
