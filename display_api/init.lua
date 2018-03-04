@@ -79,14 +79,25 @@ local function get_values(node)
 	end
 end
 
+--- Checks if the object is related to the given position
+local function check_entity_pos(pos, objref)
+	local real_pos = vector.round(objref:get_pos())
+	local pos_hash = objref:get_luaentity().pos
+	if pos_hash == nil then
+		return vector.equals(real_pos, vector.round(pos))
+	else
+		return vector.equals(minetest.get_position_from_hash(pos_hash), pos)
+	end
+end
+
 --- Gets the display entities attached with a node. Removes extra ones
 local function get_entities(pos)
 	local objrefs = {}
 	local ndef = minetest.registered_nodes[minetest.get_node(pos).name]
 	if ndef and ndef.display_entities then
-		for _, objref in ipairs(minetest.get_objects_inside_radius(pos, 0.5)) do
+		for _, objref in ipairs(minetest.get_objects_inside_radius(pos, 1.5)) do
 			local entity = objref:get_luaentity()
-		    if entity and ndef.display_entities[entity.name] then
+		    if entity and ndef.display_entities[entity.name] and check_entity_pos(pos, objref) then
 				if objrefs[entity.name] then
 				    objref:remove()
 				else
@@ -100,7 +111,7 @@ end
 
 local function clip_pos_prop(posprop)
 	if posprop then
-		return math.max(-0.5, math.min(0.5, posprop))
+		return math.max(-1.5, math.min(1.5, posprop))
 	else
 		return 0
 	end
@@ -147,6 +158,7 @@ end
 function display_api.update_entities(pos)
 	local objrefs = place_entities(pos)
 	for _, objref in pairs(objrefs) do
+		objref:get_luaentity().pos = minetest.hash_node_position(pos)
 		call_node_on_display_update(pos, objref)
     end
 end
@@ -154,10 +166,22 @@ end
 --- On_activate callback for display_api entities. Calls on_display_update callbacks
 --- of corresponding node for each entity.
 function display_api.on_activate(entity, staticdata)
-   if entity then
-      entity.object:set_armor_groups({immortal=1})
-      call_node_on_display_update(entity.object:getpos(), entity.object)
-   end
+	if entity then
+		if string.sub(staticdata, 1, string.len("return")) == "return" then
+			local data = core.deserialize(staticdata)
+			if data and type(data) == "table" then
+				entity.pos = data.pos
+			end
+		end
+		entity.object:set_armor_groups({immortal=1})
+		local pos
+		if entity.pos then
+			pos = minetest.get_position_from_hash(entity.pos)
+		else
+			pos = entity.object:getpos()
+		end
+		display_api.update_entities(pos)
+	end
 end
 
 --- On_place callback for display_api items. Does nothing more than preventing item
@@ -226,6 +250,11 @@ function display_api.register_display_entity(entity_name)
 			visual = "upright_sprite",
 			textures = {},
 			on_activate = display_api.on_activate,
+			get_staticdata = function(self)
+				return minetest.serialize({
+					pos = self.pos,
+				})
+			end,
 		})
 	end
 end
