@@ -16,6 +16,22 @@ For more information, see the [forum topic](https://forum.minetest.net/viewtopic
 
 ## Changelog
 
+### 2018-05-30 (Version 1.0.1)
+
+Mostly bug fixes :
+
+- Fix steles orientation when placing
+
+- Update entity on mapblock load
+
+- Use default formspec style
+
+- Fix ndef nill value in steles mod when technics not installed
+
+- Seperate signs API from signs définitions
+
+- Allow a greater offset between display and block
+
 ### 2018-01-13 (Version 1.0)
 
 - Switch to Epilepsy font by KREATIVE SOFTWARE
