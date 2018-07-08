@@ -187,12 +187,11 @@ function font_api.Font:make_line_texture(line, texturew, x, y)
 	local pos = 1
 
 	-- TODO: Use iterator
-	while pos <= #text do
+	while pos <= #line do
 		char, pos = get_next_char(line, pos)
 
 		-- Replace chars with no texture by the NULL(0) char
 		if self.widths[char] == nil 
-or char == 88 --DEBUG
 		then
             print(string.format("["..font_api.name
                                 .."] Missing char %d (%04x)",char,char))
