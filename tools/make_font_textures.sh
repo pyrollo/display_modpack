@@ -67,7 +67,7 @@ generate() {
 mkdir textures
 
 # Reads all available code points in the font.
-codepoints=$(ttx -o - $fontfile | grep "<map code=" | cut -d \" -f 2)
+codepoints=$(ttx -o - "$fontfile" | grep "<map code=" | cut -d \" -f 2)
 
 # Mandatory chars
 generate 0020 007f
