@@ -28,9 +28,8 @@ local function display_poster(pos, node, player)
 	local def = minetest.registered_nodes[node.name].display_entities["signs:display_text"]
 
 	-- Title texture
-	local titletexture = font_api.make_multiline_texture(
-	  def.font_name, meta:get_string("display_text"),
-	  116, 12, def.maxlines, def.valign, def.color)
+	local titletexture = font:make_text_texture(
+		meta:get_string("display_text"), 116, 12, 1, "center")
 
 	formspec =
 		"size[7,9]"..
