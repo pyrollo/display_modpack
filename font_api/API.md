@@ -12,12 +12,12 @@ If no default\_font given or if default\_font given but not registered, the firs
 ### font_api.get_default_font_name()
 Returns de default font name.
 
-###font_api.register_font(font_name, font_def)
+### font_api.register_font(font_name, font_def)
 Register a new font.
 **font_name**: Name of the font to register. If registering different sizes of the same font, add size in the font name (e.g. times_10, times_12...).
 **font_def**: Font definition table (see **Font definition table** below).
 
-###font_api.on_display_update(pos, objref)
+### font_api.on_display_update(pos, objref)
 Standard on_display_update entity callback.
 
 **pos**: Node position
@@ -26,7 +26,7 @@ Standard on_display_update entity callback.
 
 Node should have a corresponding display_entity with size, resolution and maxlines fields and optionally halign, valign and color fields.
 
-###Font definition table
+### Font definition table
 Font definition table used by **font_api.register_font** and **font\_api.Font:new** may/can contain following elements:
 
 * **height** (required): Font height in pixels (all font textures should have the same height) .
