@@ -26,7 +26,8 @@ local function display_poster(pos, node, player)
 	local formspec
 	local meta = minetest.get_meta(pos)
 	local def = minetest.registered_nodes[node.name].display_entities["signs:display_text"]
-
+	local font = font_api.get_font(meta:get_string("font") or def.font_name)
+	
 	-- Title texture
 	local titletexture = font:make_text_texture(
 		meta:get_string("display_text"), 116, 12, 1, "center")
