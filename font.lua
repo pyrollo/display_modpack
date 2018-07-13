@@ -17,11 +17,6 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 --]]
 
-
---[[
-	Margins, spacings, can be negative numbers
-]]--
-
 -- Local functions
 ------------------
 
@@ -146,10 +141,10 @@ function font_api.Font:get_height(nb_of_lines)
 		return 
 			(
 				(self.height or 0) + 
-				(self.margin_top or 0) +
-				(self.margin_bottom or 0)
+				(self.margintop or 0) +
+				(self.marginbottom or 0)
 			) * nb_of_lines +
-			(self.line_spacing or 0) * (nb_of_lines -1)
+			(self.linespacing or 0) * (nb_of_lines -1)
 	else
 		return nb_of_lines == 0 and 0 or nil
 	end
@@ -192,6 +187,7 @@ function font_api.Font:make_line_texture(line, texturew, x, y)
 
 		-- Replace chars with no texture by the NULL(0) char
 		if self.widths[char] == nil 
+or char == 88
 		then
             print(string.format("["..font_api.name
                                 .."] Missing char %d (%04x)",char,char))
@@ -243,6 +239,8 @@ function font_api.Font:make_text_texture(text, texturew, textureh, maxlines,
             y = (textureh - textheight) / 2
         end
     end
+    
+    y = y + (self.margintop or 0)
 
 	for _, line in pairs(lines) do
 		if halign == "left" then
@@ -259,7 +257,7 @@ function font_api.Font:make_text_texture(text, texturew, textureh, maxlines,
 				(texturew - line.width) / 2, y)
 		end
 
-		y = y + self:get_height() + (self.line_spacing or 0)
+		y = y + self:get_height() + (self.linespacing or 0)
 	end
 
 	texture = string.format("[combine:%dx%d", texturew, textureh)..texture

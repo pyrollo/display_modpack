@@ -45,10 +45,14 @@ function font_api.on_display_update(pos, objref)
 	if entity and ndef.display_entities[entity.name] then
 		local def = ndef.display_entities[entity.name]
 		local font = font_api.get_font(meta:get_string("font") or def.font_name)
-		objref:set_properties({ 
-			textures={font:make_text_texture(text,
-				def.size.x * def.resolution.x * font.height,
-				def.size.y * def.resolution.y * font.height,
+
+		local maxlines = def.maxlines or 1 -- TODO:How to do w/o maxlines ?
+
+		objref:set_properties({ 		 
+			textures={font:make_text_texture(text, 
+				font:get_height(maxlines) * def.size.x / def.size.y
+					/ (def.aspect_ratio or 1),
+				font:get_height(maxlines),
 				def.maxlines, def.halign, def.valign, def.color)},
 			visual_size = def.size
 		})
