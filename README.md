@@ -16,6 +16,16 @@ For more information, see the [forum topic](https://forum.minetest.net/viewtopic
 
 ## Changelog
 
+### 2018-07-13 (Version 1.1.0)
+
+- Font API rework introducing Font class.
+
+- Replaced default Epilepsy Font by Metro Font for licensing purposes,
+
+- Rework of all nodes displaying text accordingly to the Font API rework.
+
+As font_epilepsy mod has been replaced by font_metro mod, **don't forget to activate font_metro mod after updating** or you won't have any text displayed.
+
 ### 2018-05-30 (Version 1.0.1)
 
 Mostly bug fixes :
