@@ -128,15 +128,15 @@ local function place_entities(pos)
 
 		for entity_name, props in pairs(ndef.display_entities) do
 			local depth = clip_pos_prop(props.depth)
-			local height = clip_pos_prop(props.height)
 			local right = clip_pos_prop(props.right)
+			local top = clip_pos_prop(props.top)
 			if not objrefs[entity_name] then
 				objrefs[entity_name] = minetest.add_entity(pos, entity_name)
 			end
 
 			objrefs[entity_name]:setpos({
 				x = pos.x - values.dx * depth + values.rx * right,
-				y = pos.y + height,
+				y = pos.y - top,
 				z = pos.z - values.dz * depth + values.rz * right})
 
 			objrefs[entity_name]:setyaw(values.yaw)

@@ -30,12 +30,12 @@ local function display_poster(pos, node, player)
 	
 	-- Title texture
 	local titletexture = font:make_text_texture(
-		meta:get_string("display_text"), 116, 12, 1, "center")
+		meta:get_string("display_text"), font:get_height()*8.4, font:get_height(), 1, "center")
 
 	formspec =
 		"size[7,9]"..
 		"background[0,0;7,9;signs_poster_formspec.png]"..
-		"image[0,0;8.4,1.5;"..titletexture.."]"..
+		"image[0,-0.2;8.4,2;"..titletexture.."]"..
 		"textarea[0.3,1.5;7,8;;"..minetest.colorize("#111", minetest.formspec_escape(meta:get_string("text")))..";]"..
 		"bgcolor[#0000]"
 
@@ -105,7 +105,6 @@ local models = {
 		entity_fields = {
 			right = -3/32,
 			size = { x = 12/16, y = 6/16 },
-			resolution = { x = 9, y = 5 },
 			maxlines = 2,
 			color="#000",
 		},
@@ -128,7 +127,6 @@ local models = {
 		entity_fields = {
 			right = 3/32,
 			size = { x = 12/16, y = 6/16 },
-			resolution = { x = 9, y = 5 },
 			maxlines = 2,
 			color = "#000",
 		},
@@ -150,10 +148,10 @@ local models = {
 		width = 26/32,
 		height = 30/32,
 		entity_fields = {
-			resolution = { x = 11, y = 5 },
+			top = -11/32,
+			size = { x = 26/32, y = 6/32 },
 			maxlines = 1,
-			color="#000",
-			valign="top",
+			color = "#000",
 		},
 		node_fields = {
 			description = S("Poster"),

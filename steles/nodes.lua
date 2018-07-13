@@ -42,17 +42,18 @@ for i, material in ipairs(steles.materials) do
 			node_box = {
 				type = "fixed",
 				fixed = {
-					{-5/16, -4/16, -2/16, 5/16, 0.5, 2/16},
-					{-7/16, -0.5, -4/16, 7/16, -4/16, 4/16}
-				}
+					{-5/16, -5/16, -2/16, 5/16, 0.5, 2/16},
+					{-7/16, -0.5, -4/16, 7/16, -5/16, 4/16}
+				},
 			},
 			groups = groups,
 			display_entities = {
 				["steles:text"] = {
 						on_display_update = font_api.on_display_update,
-						depth = -2/16 - display_api.entity_spacing, height = 2/16,
-						size = { x = 14/16, y = 12/16 },
-						resolution = { x = 11, y = 5 },
+						depth = -2/16 - display_api.entity_spacing, 
+						top = -2/16,
+						aspect_ratio = 0.4,
+						size = { x = 10/16, y = 12/16 },
 						maxlines = 3,
 				},
 			},
