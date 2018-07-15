@@ -43,7 +43,7 @@ local function get_next_char(text, pos)
 	-- 1 byte char, ascii equivalent codepoints
 	if msb < 0x80 then
 	    return msb, pos + 1
-    end
+	end
 
 	-- 4 bytes char not managed (Only 16 bits codepoints are managed)
 	if msb >= 0xF0 then
@@ -64,7 +64,7 @@ local function get_next_char(text, pos)
 		       pos + 2
 	end
 
-    -- Not an UTF char
+	-- Not an UTF char
 	return 0, pos + 1
 end
 
@@ -158,7 +158,7 @@ function font_api.Font:get_width(line)
 
 	local char
 	local width = 0
-    local pos = 1
+	local pos = 1
 
 	-- TODO: Use iterator
 	while pos <= #line do
@@ -187,11 +187,10 @@ function font_api.Font:make_line_texture(line, texturew, x, y)
 
 		-- Replace chars with no texture by the NULL(0) char
 		if self.widths[char] == nil 
-or char == 88
 		then
-            print(string.format("["..font_api.name
+			print(string.format("["..font_api.name
                                 .."] Missing char %d (%04x)",char,char))
-            char = 0
+			char = 0
 		end
 
 		-- Add image only if it is visible (at least partly)
@@ -220,27 +219,27 @@ function font_api.Font:make_text_texture(text, texturew, textureh, maxlines,
                                          halign, valign, color)
 	local texture = ""
 	local lines = {}
-    local textheight = 0
-    local y
+	local textheight = 0
+	local y
     
 	-- Split text into lines (limited to maxlines fist lines)
-    for num, line in pairs(split_lines(text, maxlines)) do
-        lines[num] = { text = line, width = self:get_width(line) }
-    end
+	for num, line in pairs(split_lines(text, maxlines)) do
+		lines[num] = { text = line, width = self:get_width(line) }
+	end
 
 	textheight = self:get_height(#lines)
 
-    if #lines then
-        if valign == "top" then
-            y = 0
-        elseif valign == "bottom" then
-            y = textureh - textheight
-        else
-            y = (textureh - textheight) / 2
-        end
-    end
+	if #lines then
+		if valign == "top" then
+			y = 0
+		elseif valign == "bottom" then
+			y = textureh - textheight
+		else
+			y = (textureh - textheight) / 2
+		end
+	end
     
-    y = y + (self.margintop or 0)
+	y = y + (self.margintop or 0)
 
 	for _, line in pairs(lines) do
 		if halign == "left" then
