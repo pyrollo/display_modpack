@@ -49,7 +49,17 @@ local function get_default_font()
 			end
 		end
 
-		-- If failed, choose first font
+		-- If failed, choose first font without default = false
+		if default_font == nil then
+			for _, font in pairs(font_api.registered_fonts) do
+				if font.default then
+					default_font = font
+					break
+				end
+			end
+		end
+
+		-- If failed, chose first font
 		if default_font == nil then
 			for _, font in pairs(font_api.registered_fonts) do
 				default_font = font
@@ -112,6 +122,7 @@ end
 -- If registering different sizes of the same font, add size in the font name
 -- (e.g. times_10, times_12...).
 -- @param def font definition. A associative array with following keys :
+-- @key default True (by default) if this font may be used as default font
 -- @key height (mandatory) Height in pixels of all font textures
 -- @key widths (mandatory) Array of character widths in pixels, indexed by 
 -- UTF codepoints

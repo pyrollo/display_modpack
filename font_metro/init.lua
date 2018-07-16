@@ -14,6 +14,7 @@
 font_api.register_font(
 	'metro',
 	{
+		default = true,
 		margintop = 3,
 		linespacing = -2,
 		height = 15,
