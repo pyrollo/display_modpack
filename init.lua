@@ -44,7 +44,8 @@ function font_api.on_display_update(pos, objref)
 
 	if entity and ndef.display_entities[entity.name] then
 		local def = ndef.display_entities[entity.name]
-		local font = font_api.get_font(meta:get_string("font") or def.font_name)
+		local font = font_api.get_font(meta:get_string("font") ~= ""
+			and meta:get_string("font") or def.font_name)
 
 		local maxlines = def.maxlines or 1 -- TODO:How to do w/o maxlines ?
 
