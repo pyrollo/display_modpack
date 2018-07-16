@@ -1,11 +1,14 @@
-# Display Modpack
+# Display Modpack 
+Version 1.1.1
 
 This modpack provides mods with dynamic display. Mods are :
 
 - **display_api**: A library for adding display entities to nodes;
 - **font_api**: A library for displaying fonts on entities;
-- **ontime_clocks**: A mod providing clocks which display the ingame time;
 - **signs_api**: A library for the easy creation of signs;
+
+- **boards**: A mod providing school boards;
+- **ontime_clocks**: A mod providing clocks which display the ingame time;
 - **signs**: A mod providing signs and direction signs displaying text;
 - **signs_road**: A mod providing road signs displaying text;
 - **steles**: A mod providing stone steles with text;
@@ -15,6 +18,12 @@ For more information, see the [forum topic](https://forum.minetest.net/viewtopic
 ![Presentation image of Display_Modpack](screenshot.png)
 
 ## Changelog
+
+### 2018-07-16 (Version 1.1.1)
+
+- Boards mod added.
+
+- Bug fix in default font chosing when multiple font registered. 
 
 ### 2018-07-13 (Version 1.1.0)
 
