@@ -27,23 +27,15 @@ local S, NS = dofile(signs_api.path.."/intllib.lua")
 signs_api.intllib = S
 local F = function(...) return minetest.formspec_escape(S(...)) end
 
-local function update_font_index_meta(meta)
-	local font = meta:get_string("font")
-	local count = 0
-	for key, def in pairs(font_api.registered_fonts) do
-		count = count + 1
-		if font == key then
-			meta:set_string("font_idx", count)
-		end
-	end 
-end
-
-function signs_api.set_display_text(pos,text,font)
+function signs_api.set_display_text(pos, text, font)
 	local meta = minetest.get_meta(pos)
 	meta:set_string("display_text", text)
-	meta:set_string("infotext", "\""..text.."\"")
+	if text and text ~= "" then
+		meta:set_string("infotext", "\""..text.."\"")
+	else
+		meta:set_string("infotext", "")
+	end
 	meta:set_string("font", font)
-	update_font_index_meta(meta)
 	display_api.update_entities(pos)
 end
 
@@ -184,7 +176,6 @@ function signs_api.register_sign(mod, name, model)
 				local meta = minetest.get_meta(pos)
 				meta:set_string("font", ndef.display_entities.font_name or
 				                        font_api.get_default_font_name())
-				update_font_index_meta(meta)
 				signs_api.set_formspec(pos)
 				display_api.on_construct(pos)
 			end,
