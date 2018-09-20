@@ -27,7 +27,7 @@ local function display_poster(pos, node, player)
 	local meta = minetest.get_meta(pos)
 	local def = minetest.registered_nodes[node.name].display_entities["signs:display_text"]
 	local font = font_api.get_font(meta:get_string("font") or def.font_name)
-	
+
 	-- Title texture
 	local titletexture = font:make_text_texture(
 		meta:get_string("display_text"), font:get_height()*8.4, font:get_height(), 1, "center")
@@ -77,7 +77,7 @@ local function on_receive_fields_poster(pos, formname, fields, player)
 	local node = minetest.get_node(pos)
 
 	if not minetest.is_protected(pos, player:get_player_name()) and fields then
-		if formname == node.name.."@"..minetest.pos_to_string(pos)..":display" and 
+		if formname == node.name.."@"..minetest.pos_to_string(pos)..":display" and
 		  fields.edit then
 			edit_poster(pos, node, player)
 		end
@@ -98,6 +98,21 @@ display_api.register_display_entity("signs:display_text")
 
 -- Sign models and registration
 local models = {
+	wooden_sign = {
+		depth = 1/16,
+		width = 14/16,
+		height = 12/16,
+		entity_fields = {
+			size = { x = 12/16, y = 10/16 },
+			maxlines = 3,
+			color = "#000",
+		},
+		node_fields = {
+			description = S("Wooden sign"),
+			tiles = { "signs_wooden.png" },
+			inventory_image = "signs_wooden_inventory.png",
+		},
+	},
 	wooden_right_sign = {
 		depth = 1/16,
 		width = 14/16,
@@ -111,7 +126,7 @@ local models = {
 		node_fields = {
 			description = S("Wooden direction sign"),
 			tiles = { "signs_wooden_direction.png" },
-			inventory_image = "signs_wooden_inventory.png",
+			inventory_image = "signs_wooden_direction_inventory.png",
 			signs_other_dir = 'signs:wooden_left_sign',
 			on_place = signs_api.on_place_direction,
 			drawtype = "mesh",
@@ -133,7 +148,7 @@ local models = {
 		node_fields = {
 			description = S("Wooden direction sign"),
 			tiles = { "signs_wooden_direction.png" },
-			inventory_image = "signs_wooden_inventory.png",
+			inventory_image = "signs_wooden_direction_inventory.png",
 			signs_other_dir = 'signs:wooden_right_sign',
 			drawtype = "mesh",
 			mesh = "signs_dir_left.obj",
@@ -171,4 +186,3 @@ for name, model in pairs(models)
 do
 	signs_api.register_sign("signs", name, model)
 end
-
