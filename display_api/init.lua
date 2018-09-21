@@ -37,30 +37,30 @@ local wallmounted_values = {
 -- Miscelaneous values depending on facedir param2
 local facedir_values = {
 	[0]={dx=0,  dz=-1, rx=1,  rz=0,  yaw=0,          rotate=1},
-	    {dx=-1, dz=0,  rx=0,  rz=-1, yaw=-math.pi/2, rotate=2},
-	    {dx=0,  dz=1,  rx=-1, rz=0,  yaw=math.pi,    rotate=3},
+		{dx=-1, dz=0,  rx=0,  rz=-1, yaw=-math.pi/2, rotate=2},
+		{dx=0,  dz=1,  rx=-1, rz=0,  yaw=math.pi,    rotate=3},
 		{dx=1,  dz=0,  rx=0,  rz=1,  yaw=math.pi/2,  rotate=0},
-	    -- Forbiden values :
-	    {dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
-	    {dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
-	    {dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
-	    {dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
-	    {dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
-	    {dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
-	    {dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
-	    {dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
-	    {dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
-	    {dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
-	    {dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
-	    {dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
-	    {dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
-	    {dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
-	    {dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
-	    {dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
-	    {dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
-	    {dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
-	    {dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
-	    {dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
+		-- Forbiden values :
+		{dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
+		{dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
+		{dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
+		{dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
+		{dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
+		{dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
+		{dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
+		{dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
+		{dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
+		{dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
+		{dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
+		{dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
+		{dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
+		{dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
+		{dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
+		{dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
+		{dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
+		{dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
+		{dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
+		{dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
 	}
 
 -- dx/dy = depth vector, rx/ly = right vector, yaw = yaw of entity,
@@ -103,7 +103,7 @@ local function get_entities(pos)
 				else
 					objrefs[entity.name] = objref
 				end
-		    end
+			end
 		end
 	end
 	return objrefs
@@ -160,7 +160,7 @@ function display_api.update_entities(pos)
 	for _, objref in pairs(objrefs) do
 		objref:get_luaentity().pos = minetest.hash_node_position(pos)
 		call_node_on_display_update(pos, objref)
-    end
+	end
 end
 
 --- On_activate callback for display_api entities. Calls on_display_update callbacks
@@ -191,26 +191,24 @@ function display_api.on_place(itemstack, placer, pointed_thing)
 	local above = pointed_thing.above
 	local under = pointed_thing.under
 	local dir = {x = under.x - above.x,
-				 y = under.y - above.y,
-				 z = under.z - above.z}
-
+	             y = 0,
+	             z = under.z - above.z}
+	
+	-- If item is not placed on a wall, use the player's view direction instead
+	if dir.x == 0 and dir.z == 0 then
+		dir = placer:get_look_dir()
+		dir.y = 0
+	end
+	
+	local param2
 	if ndef then
 		if ndef.paramtype2 == "wallmounted" then
-
-			local wdir = minetest.dir_to_wallmounted(dir)
-
-			if wdir == 0 or wdir == 1 then
-				dir = placer:get_look_dir()
-				dir.y = 0
-				wdir = minetest.dir_to_wallmounted(dir)
-			end
-
-			return minetest.item_place(itemstack, placer, pointed_thing, wdir)
-		else
-			return minetest.item_place(itemstack, placer, pointed_thing, minetest.dir_to_facedir(dir))
+			param2 = minetest.dir_to_wallmounted(dir)
+		elseif ndef.paramtype2 == "facedir" then
+			param2 = minetest.dir_to_facedir(dir)
 		end
 	end
-
+	return minetest.item_place(itemstack, placer, pointed_thing, param2)
 end
 
 --- On_construct callback for display_api items. Creates entities and update them.
