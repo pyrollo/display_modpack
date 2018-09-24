@@ -135,15 +135,17 @@ end
 function signs_api.on_rotate(pos, node, player, mode, new_param2)
 	if mode == 2 then
 		local ndef = minetest.registered_nodes[node.name]
-	    if ndef.signs_other_dir then
-		    minetest.swap_node(pos, {name = ndef.signs_other_dir,
-                param1 = node.param1, param2 = node.param2})
+		if ndef.signs_other_dir then
+			minetest.swap_node(pos, {name = ndef.signs_other_dir,
+				param1 = node.param1, param2 = node.param2})
 			display_api.update_entities(pos)
-	    end
+			return true
+		else
+			return false
+		end
 	else
-        display_api.on_rotate(pos, node, user, mode, new_param2)
+		return display_api.on_rotate(pos, node, user, mode, new_param2)
 	end
-    return false;
 end
 
 function signs_api.register_sign(mod, name, model)
