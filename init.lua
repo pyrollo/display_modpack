@@ -132,18 +132,19 @@ function signs_api.on_place_direction(itemstack, placer, pointed_thing)
 end
 
 -- Handles screwdriver rotation. Direction is affected for direction signs
+-- If rotation mode is 2 and sign is directional, swap direction.
+-- Otherwise use display_api's on_rotate function.
 function signs_api.on_rotate(pos, node, player, mode, new_param2)
 	if mode == 2 then
 		local ndef = minetest.registered_nodes[node.name]
-	    if ndef.signs_other_dir then
-		    minetest.swap_node(pos, {name = ndef.signs_other_dir,
-                param1 = node.param1, param2 = node.param2})
+		if ndef.signs_other_dir then
+			minetest.swap_node(pos, {name = ndef.signs_other_dir,
+				param1 = node.param1, param2 = node.param2})
 			display_api.update_entities(pos)
-	    end
-	else
-        display_api.on_rotate(pos, node, user, mode, new_param2)
+			return true
+		end
 	end
-    return false;
+	return display_api.on_rotate(pos, node, user, mode, new_param2)
 end
 
 function signs_api.register_sign(mod, name, model)
