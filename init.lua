@@ -26,55 +26,30 @@ display_api.entity_spacing = 0.002
 
 -- Miscelaneous values depending on wallmounted param2
 local wallmounted_values = {
-	[0]={dx=0,  dz=0,  rx=0,  rz=0,  yaw=0,          rotate=0}, -- Should never be used
-		{dx=0,  dz=0,  rx=0,  rz=0,  yaw=0,          rotate=1}, -- Should never be used
-		{dx=-1, dz=0,  rx=0,  rz=-1, yaw=-math.pi/2, rotate=5},
-		{dx=1,  dz=0,  rx=0,  rz=1,  yaw=math.pi/2,  rotate=4},
-		{dx=0,  dz=-1, rx=1,  rz=0,  yaw=0,          rotate=2},
-		{dx=0,  dz=1,  rx=-1, rz=0,  yaw=math.pi,    rotate=3}
+	[2]={dx=-1, dz=0,  rx=0,  rz=-1, yaw=-math.pi/2},
+	[3]={dx=1,  dz=0,  rx=0,  rz=1,  yaw=math.pi/2 },
+	[4]={dx=0,  dz=-1, rx=1,  rz=0,  yaw=0         },
+	[5]={dx=0,  dz=1,  rx=-1, rz=0,  yaw=math.pi   }
 }
 
 -- Miscelaneous values depending on facedir param2
 local facedir_values = {
-	[0]={dx=0,  dz=-1, rx=1,  rz=0,  yaw=0,          rotate=1},
-		{dx=-1, dz=0,  rx=0,  rz=-1, yaw=-math.pi/2, rotate=2},
-		{dx=0,  dz=1,  rx=-1, rz=0,  yaw=math.pi,    rotate=3},
-		{dx=1,  dz=0,  rx=0,  rz=1,  yaw=math.pi/2,  rotate=0},
-		-- Forbiden values :
-		{dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
-		{dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
-		{dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
-		{dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
-		{dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
-		{dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
-		{dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
-		{dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
-		{dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
-		{dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
-		{dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
-		{dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
-		{dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
-		{dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
-		{dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
-		{dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
-		{dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
-		{dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
-		{dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
-		{dx=0, dz=0, rx=0, rz=0, yaw=0, rotate=0},
-	}
+	[0]={dx=0,  dz=-1, rx=1,  rz=0,  yaw=0         },
+	[1]={dx=-1, dz=0,  rx=0,  rz=-1, yaw=-math.pi/2},
+	[2]={dx=0,  dz=1,  rx=-1, rz=0,  yaw=math.pi   },
+	[3]={dx=1,  dz=0,  rx=0,  rz=1,  yaw=math.pi/2 }
+}
 
 -- dx/dy = depth vector, rx/ly = right vector, yaw = yaw of entity,
--- rotate = next facedir/wallmount on rotate
-
 local function get_values(node)
 	local ndef = minetest.registered_nodes[node.name]
-
+	
 	if ndef then
-		if ndef.paramtype2 == "wallmounted" then
-			return wallmounted_values[node.param2]
-		end
-		if ndef.paramtype2 == "facedir" then
-			return facedir_values[node.param2]
+		local paramtype2 = ndef.paramtype2
+		if paramtype2 == "wallmounted" or paramtype2 == "colorwallmounted" then
+			return wallmounted_values[node.param2 % 8]
+		elseif paramtype2 == "facedir" or paramtype2 == "colorfacedir"  then
+			return facedir_values[node.param2 % 32]
 		end
 	end
 end
@@ -97,9 +72,9 @@ local function get_entities(pos)
 	if ndef and ndef.display_entities then
 		for _, objref in ipairs(minetest.get_objects_inside_radius(pos, 1.5)) do
 			local entity = objref:get_luaentity()
-		    if entity and ndef.display_entities[entity.name] and check_entity_pos(pos, objref) then
+			if entity and ndef.display_entities[entity.name] and check_entity_pos(pos, objref) then
 				if objrefs[entity.name] then
-				    objref:remove()
+					objref:remove()
 				else
 					objrefs[entity.name] = objref
 				end
@@ -123,9 +98,9 @@ local function place_entities(pos)
 	local ndef = minetest.registered_nodes[node.name]
 	local values = get_values(node)
 	local objrefs = get_entities(pos)
-
+	
 	if values and ndef and ndef.display_entities then
-
+		
 		for entity_name, props in pairs(ndef.display_entities) do
 			local depth = clip_pos_prop(props.depth)
 			local right = clip_pos_prop(props.right)
@@ -133,12 +108,12 @@ local function place_entities(pos)
 			if not objrefs[entity_name] then
 				objrefs[entity_name] = minetest.add_entity(pos, entity_name)
 			end
-
+			
 			objrefs[entity_name]:setpos({
 				x = pos.x - values.dx * depth + values.rx * right,
 				y = pos.y - top,
 				z = pos.z - values.dz * depth + values.rz * right})
-
+			
 			objrefs[entity_name]:setyaw(values.yaw)
 		end
 	end
@@ -151,7 +126,7 @@ local function call_node_on_display_update(pos, objref)
 	local entity = objref:get_luaentity()
 	if ndef and ndef.display_entities and entity and ndef.display_entities[entity.name] then
 		ndef.display_entities[entity.name].on_display_update(pos, objref)
-	end	
+	end
 end
 
 --- Force entity update
@@ -186,7 +161,7 @@ end
 
 --- On_place callback for display_api items. Does nothing more than preventing item
 --- from being placed on ceiling or ground 
-function display_api.on_place(itemstack, placer, pointed_thing)
+function display_api.on_place(itemstack, placer, pointed_thing, override_param2)
 	local ndef = itemstack:get_definition()
 	local above = pointed_thing.above
 	local under = pointed_thing.under
@@ -200,15 +175,16 @@ function display_api.on_place(itemstack, placer, pointed_thing)
 		dir.y = 0
 	end
 	
-	local param2
+	local param2 = 0
 	if ndef then
-		if ndef.paramtype2 == "wallmounted" then
+		local paramtype2 = ndef.paramtype2
+		if paramtype2 == "wallmounted" or paramtype2 == "colorwallmounted" then
 			param2 = minetest.dir_to_wallmounted(dir)
-		elseif ndef.paramtype2 == "facedir" then
+		elseif paramtype2 == "facedir" or paramtype2 == "colorfacedir"  then
 			param2 = minetest.dir_to_facedir(dir)
 		end
 	end
-	return minetest.item_place(itemstack, placer, pointed_thing, param2)
+	return minetest.item_place(itemstack, placer, pointed_thing, param2 + (override_param2 or 0))
 end
 
 --- On_construct callback for display_api items. Creates entities and update them.
@@ -225,14 +201,11 @@ function display_api.on_destruct(pos)
 	end
 end
 
--- On_rotate (screwdriver) callback for display_api items. Prevents axis rotation and reorients entities.
-function display_api.on_rotate(pos, node, user, mode, new_param2)
-	if mode ~= 1 then return false end
-
-	local values = get_values(node)
-
-	if values then
-		minetest.swap_node(pos, {name = node.name, param1 = node.param1, param2 = values.rotate})
+-- On_rotate (screwdriver) callback for display_api items. Prevents invalid rotations and reorients entities.
+function display_api.on_rotate(pos, node, user, _, new_param2)
+	node.param2 = new_param2
+	if get_values(node) then
+		minetest.swap_node(pos, node)
 		place_entities(pos)
 		return true
 	else
