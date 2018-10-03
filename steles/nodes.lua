@@ -59,7 +59,7 @@ for i, material in ipairs(steles.materials) do
 			},
 			on_place = function(itemstack, placer, pointed_thing)
 					minetest.rotate_node(itemstack, placer, pointed_thing)
-					display_api.on_place(itemstack, placer, pointed_thing)
+					return display_api.on_place(itemstack, placer, pointed_thing)
 				end,
 			on_construct = 	function(pos)
 					local meta = minetest.get_meta(pos)
