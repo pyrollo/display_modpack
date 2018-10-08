@@ -189,7 +189,7 @@ local models = {
 			drawtype = "mesh",
 			mesh = "signs_dir_right.obj",
 			selection_box = { type = "fixed", fixed = { -0.5, -7/32, 0.5, 7/16, 7/32, 7/16 } },
-			collision_box = { type = "fixed", fixed = { -0,5, -7/32, 0.5, 7/16, 7/32, 7/16 } },
+			collision_box = { type = "fixed", fixed = { -0.5, -7/32, 0.5, 7/16, 7/32, 7/16 } },
 		},
 	},
 	green_left_sign = {
@@ -237,7 +237,7 @@ local models = {
 			drawtype = "mesh",
 			mesh = "signs_dir_right.obj",
 			selection_box = { type = "fixed", fixed = { -0.5, -7/32, 0.5, 7/16, 7/32, 7/16 } },
-			collision_box = { type = "fixed", fixed = { -0,5, -7/32, 0.5, 7/16, 7/32, 7/16 } },
+			collision_box = { type = "fixed", fixed = { -0.5, -7/32, 0.5, 7/16, 7/32, 7/16 } },
 		},
 	},
 	yellow_left_sign = {
@@ -285,7 +285,7 @@ local models = {
 			drawtype = "mesh",
 			mesh = "signs_dir_right.obj",
 			selection_box = { type = "fixed", fixed = { -0.5, -7/32, 0.5, 7/16, 7/32, 7/16 } },
-			collision_box = { type = "fixed", fixed = { -0,5, -7/32, 0.5, 7/16, 7/32, 7/16 } },
+			collision_box = { type = "fixed", fixed = { -0.5, -7/32, 0.5, 7/16, 7/32, 7/16 } },
 		},
 	},
 	white_left_sign = {
