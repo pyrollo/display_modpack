@@ -17,59 +17,44 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 --]]
 
+-- Fallback table
+local fallbacks = dofile(font_api.path.."/fallbacks.lua")
+
 -- Local functions
 ------------------
 
--- Table deep copy
-
-local function deep_copy(input)
-	local output = {}
-	local key, value
-	for key, value in pairs(input) do
-		if type(value) == 'table' then
-			output[key] = deep_copy(value)
-		else
-			output[key] = value
-		end
+-- Returns number of UTF8 bytes of the first char of the string
+local function get_char_bytes(str)
+	local msb = str:byte(1)
+	if msb ~= nil then
+		if msb <  0x80 then return 1 end
+		if msb >= 0xF0 then return 4 end
+		if msb >= 0xE0 then	return 3 end
+		if msb >= 0xC2 then	return 2 end
 	end
-	return output
 end
 
--- Returns next char, managing ascii and unicode plane 0 (0000-FFFF).
-
-local function get_next_char(text, pos)
-
-	local msb = text:byte(pos)
-	-- 1 byte char, ascii equivalent codepoints
-	if msb < 0x80 then
-	    return msb, pos + 1
+-- Returns the unicode codepoint of the first char of the string
+local function char_to_codepoint(str)
+	local bytes = get_char_bytes(str)
+	if bytes == 1 then
+	    return str:byte(1)
+	elseif bytes == 2 then
+		return (str:byte(1) - 0xC2) * 0x40
+			+ str:byte(2)
+	elseif bytes == 3 then
+		return (str:byte(1) - 0xE0) * 0x1000
+			+ str:byte(2) % 0x40 * 0x40
+			+ str:byte(3) % 0x40
+	elseif bytes == 4 then -- Not tested
+		return (str:byte(1) - 0xF0) * 0x40000
+			+ str:byte(2) % 0x40 * 0x1000
+			+ str:byte(3) % 0x40 * 0x40
+			+ str:byte(4) % 0x40
 	end
-
-	-- 4 bytes char not managed (Only 16 bits codepoints are managed)
-	if msb >= 0xF0 then
-		return 0, pos + 4
-	end
-
-	-- 3 bytes char
-	if msb >= 0xE0 then
-		return (msb - 0xE0) * 0x1000
-		       + text:byte(pos + 1) % 0x40 * 0x40
-		       + text:byte(pos + 2) % 0x40,
-		       pos + 3
-	end
-
-	-- 2 bytes char (little endian)
-	if msb >= 0xC2 then
-		return (msb - 0xC2) * 0x40 + text:byte(pos + 1),
-		       pos + 2
-	end
-
-	-- Not an UTF char
-	return 0, pos + 1
 end
 
 -- Split multiline text into array of lines, with <maxlines> maximum lines.
-
 local function split_lines(text, maxlines)
 	local splits = text:split("\n")
 	if maxlines then
@@ -86,42 +71,75 @@ end
 --------------------------------------------------------------------------------
 --- Font class
 
-font_api.Font = {}
+local Font = {}
+font_api.Font = Font
 
-function font_api.Font:new(def)
+function Font:new(def)
 
 	if type(def) ~= "table" then
-		minetest.log("error", "Font definition must be a table.")
+		minetest.log("error",
+			"[font_api] Font definition must be a table.")
 		return nil
 	end
-	
+
 	if def.height == nil or def.height <= 0 then
-		minetest.log("error", "Font definition must have a positive height.")
+		minetest.log("error",
+			"[font_api] Font definition must have a positive height.")
 		return nil
 	end
 
 	if type(def.widths) ~= "table" then
-		minetest.log("error", "Font definition must have a widths array.")
+		minetest.log("error",
+			"[font_api] Font definition must have a widths array.")
 		return nil
 	end
 
 	if def.widths[0] == nil then
-		minetest.log("error", 
-			"Font must have a char with codepoint 0 (=unknown char).")
+		minetest.log("error",
+			"[font_api] Font must have a char with codepoint 0 (=unknown char).")
 		return nil
 	end
 
-	local font = deep_copy(def)
+	local font = table.copy(def)
 	setmetatable(font, self)
 	self.__index = self
 	return font
+end
+
+--- Gets the next char of a text
+-- @return Codepoint of first char,
+-- @return Remaining string without this first char
+
+function Font:get_next_char(text)
+	local bytes = get_char_bytes(text)
+
+	if bytes == nil then
+		minetest.log("warning",
+			"[font_api] Encountered a non UTF char, not displaying text.")
+		return nil, ''
+	end
+
+	local codepoint = char_to_codepoint(text)
+
+	-- Fallback mechanism
+	if self.widths[codepoint] == nil then
+		local char = text:sub(1, bytes)
+
+		if fallbacks[char] then
+			return self:get_next_char(fallbacks[char]..text:sub(bytes+1))
+		else
+			return 0, text:sub(bytes+1) -- Ultimate fallback
+		end
+	else
+		return codepoint, text:sub(bytes+1)
+	end
 end
 
 --- Returns the width of a given char
 -- @param char : codepoint of the char
 -- @return Char width
 
-function font_api.Font:get_char_width(char)
+function Font:get_char_width(char)
 	-- Replace chars with no texture by the NULL(0) char
 	if self.widths[char] ~= nil then
 		return self.widths[char]
@@ -134,13 +152,13 @@ end
 -- @param nb_of_lines : number of text lines (default 1)
 -- @return Text height
 
-function font_api.Font:get_height(nb_of_lines)
+function Font:get_height(nb_of_lines)
 	if nb_of_lines == nil then nb_of_lines = 1 end
-	
+
 	if nb_of_lines > 0 then
-		return 
+		return
 			(
-				(self.height or 0) + 
+				(self.height or 0) +
 				(self.margintop or 0) +
 				(self.marginbottom or 0)
 			) * nb_of_lines +
@@ -154,16 +172,14 @@ end
 -- @param line Line of text which the width will be computed.
 -- @return Text width
 
-function font_api.Font:get_width(line)
-
-	local char
+function Font:get_width(line)
+	local codepoint
 	local width = 0
-	local pos = 1
+	line = line or ''
 
-	-- TODO: Use iterator
-	while pos <= #line do
-		char, pos = get_next_char(line, pos)
-		width = width + self:get_char_width(char)
+	while line ~= "" do
+		codepoint, line = self:get_next_char(line)
+		width = width + self:get_char_width(codepoint)
 	end
 
 	return width
@@ -176,30 +192,21 @@ end
 -- @param y Vertical position of the line in texture
 -- @return Texture string
 
-function font_api.Font:make_line_texture(line, texturew, x, y)
+function Font:make_line_texture(line, texturew, x, y)
+	local codepoint
 	local texture = ""
-	local char
-	local pos = 1
+	line = line or ''
 
-	-- TODO: Use iterator
-	while pos <= #line do
-		char, pos = get_next_char(line, pos)
-
-		-- Replace chars with no texture by the NULL(0) char
-		if self.widths[char] == nil 
-		then
-			print(string.format("["..font_api.name
-                                .."] Missing char %d (%04x)",char,char))
-			char = 0
-		end
+	while line ~= '' do
+		codepoint, line = self:get_next_char(line)
 
 		-- Add image only if it is visible (at least partly)
-		if x + self.widths[char] >= 0 and x <= texturew then
+		if x + self.widths[codepoint] >= 0 and x <= texturew then
 			texture = texture..
 				string.format(":%d,%d=font_%s_%04x.png",
-				              x, y, self.name, char)
+				              x, y, self.name, codepoint)
 		end
-		x = x + self.widths[char]
+		x = x + self.widths[codepoint]
 	end
 
 	return texture
@@ -215,13 +222,13 @@ end
 -- @param color Color of the text (optional)
 -- @return Texture string
 
-function font_api.Font:make_text_texture(text, texturew, textureh, maxlines,
+function Font:make_text_texture(text, texturew, textureh, maxlines,
                                          halign, valign, color)
 	local texture = ""
 	local lines = {}
 	local textheight = 0
 	local y
-    
+
 	-- Split text into lines (limited to maxlines fist lines)
 	for num, line in pairs(split_lines(text, maxlines)) do
 		lines[num] = { text = line, width = self:get_width(line) }
@@ -238,7 +245,7 @@ function font_api.Font:make_text_texture(text, texturew, textureh, maxlines,
 			y = (textureh - textheight) / 2
 		end
 	end
-    
+
 	y = y + (self.margintop or 0)
 
 	for _, line in pairs(lines) do
@@ -263,4 +270,3 @@ function font_api.Font:make_text_texture(text, texturew, textureh, maxlines,
 	if color then texture = texture.."^[colorize:"..color end
 	return texture
 end
-
