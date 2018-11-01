@@ -55,17 +55,17 @@ local function char_to_codepoint(str)
 end
 
 -- Split multiline text into array of lines, with <maxlines> maximum lines.
+-- Can not use minetest string.split as it has bug if first line(s) empty
 local function split_lines(text, maxlines)
-	local splits = text:split("\n")
-	if maxlines then
-		local lines = {}
-		for num = 1,maxlines do
-			lines[num] = splits[num]
-		end
-		return lines
-	else
-		return splits
-	end
+	local lines = {}
+	local pos = 1
+	repeat
+		local found = string.find(text, "\n", pos)
+		found = found or #text + 1
+		lines[#lines + 1] = string.sub(text, pos, found - 1)
+		pos = found + 1
+	until (maxlines and (#lines >= maxlines)) or (pos > (#text + 1))
+	return lines
 end
 
 --------------------------------------------------------------------------------
