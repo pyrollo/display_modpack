@@ -8,7 +8,7 @@ This font includes uppercase, lowercase and many accentuated latin letters, gree
  
 **Dependancies**: font_api
 
-**License**: code under LGPL v2.1, font under CC-BY-SA
+**License**: code under LGPL v2.1, font under CC-BY-SA 3.0
 
 ## Original Font
 
