@@ -1,4 +1,4 @@
-# Display Lib
+# Display API
 
 This library's purpose is to ease creation of nodes with one or more displays on sides. For example, signs and clocks. Display can be dynamic and/or different for each node instance.
 
