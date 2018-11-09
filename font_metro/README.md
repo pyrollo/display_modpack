@@ -5,6 +5,8 @@ This mod adds Metro font to Font API mod (from [display_modpack](https://github.
 For more information, see the [forum topic](https://forum.minetest.net/viewtopic.php?t=13563) at the Minetest forums.
  
 This font includes uppercase, lowercase and many accentuated latin letters, greek and cyrillic letters.
+
+![Font Botic Preview](screenshot.png)
  
 **Dependancies**: font_api
 
