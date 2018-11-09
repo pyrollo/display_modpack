@@ -6,7 +6,7 @@ This library's purpose is to ease creation of nodes with one or more displays on
 
 **Dependancies**:default
 
-**License**: LPGL
+**License**: LGPLv2
 
 **API**: See [API.md](https://github.com/pyrollo/display_modpack/blob/master/display_api/API.md) document please.
 
