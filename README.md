@@ -1,5 +1,5 @@
 # Display Modpack 
-Version 1.1.1
+Version 1.2
 
 This modpack provides mods with dynamic display. Mods are :
 
@@ -18,6 +18,14 @@ For more information, see the [forum topic](https://forum.minetest.net/viewtopic
 ![Presentation image of Display_Modpack](screenshot.png)
 
 ## Changelog
+
+### 2018-11-01 (Version 1.2)
+
+- Labels and woodend signs added.
+
+- Fallback mechanism for missing chars (For example: "é" --> "e" --> "E").
+
+- Several bug fixes by 12Me21 and naturefreshmilk.
 
 ### 2018-07-16 (Version 1.1.1)
 
