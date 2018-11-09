@@ -1,4 +1,4 @@
-# Font Lib
+# Font API
 
 This library for font display on entities (to be used with display_api for sign creation).
 
