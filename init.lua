@@ -29,9 +29,10 @@ font_api.path = minetest.get_modpath(font_api.name)
 
 dofile(font_api.path.."/font.lua")
 dofile(font_api.path.."/registry.lua")
+dofile(font_api.path.."/fontform.lua")
 
 --- Standard on_display_update entity callback.
--- Node should have a corresponding display_entity with size, resolution and 
+-- Node should have a corresponding display_entity with size, resolution and
 -- maxlines fields and optionally halign, valign and color fields
 -- @param pos Node position
 -- @param objref Object reference of entity
@@ -49,8 +50,8 @@ function font_api.on_display_update(pos, objref)
 
 		local maxlines = def.maxlines or 1 -- TODO:How to do w/o maxlines ?
 
-		objref:set_properties({ 		 
-			textures={font:make_text_texture(text, 
+		objref:set_properties({
+			textures={font:make_text_texture(text,
 				font:get_height(maxlines) * def.size.x / def.size.y
 					/ (def.aspect_ratio or 1),
 				font:get_height(maxlines),
@@ -62,4 +63,3 @@ end
 
 -- Compatibility
 font_lib = font_api
-
