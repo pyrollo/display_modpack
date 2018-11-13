@@ -20,7 +20,7 @@ For more information, see the [forum topic](https://forum.minetest.net/viewtopic
 
 ## Extra fonts
 
-*Metro* and *Tiny Cursive* fonts are provided in **Display Modpack** (in **font_metro** and **boards** mods) but you can add more fonts by installing fonts mod. Be aware that each font comes with numerous textures. This can result in slowing media downloading and/or client display.
+*Metro* and *Tiny Cursive* fonts are provided in **Display Modpack** (in **font_metro** and **boards** mods) but you can add more fonts by installing font mods. Be aware that each font mod comes with numerous textures. This can result in slowing media downloading and/or client display.
 
 Extra font mods can be found here: 
  * [OldWizard](https://github.com/pyrollo/font_oldwizard): An old style gothic font.
