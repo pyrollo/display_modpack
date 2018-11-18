@@ -23,7 +23,7 @@
 ------------------------------------
 
 local wallmounted_to_facedir = {
-  [0]=1, -- Should not happend with signs 
+  [0]=1, -- Should not happend with signs
   [1]=1, -- Should not happend with signs
   [2]=1,
   [3]=3,
@@ -84,7 +84,34 @@ minetest.register_lbm({ name = "signs:conpatibility_2",
 	action = compatibility_check_2,
 })
 
+--Backwards compatibility API functions
 
+signs.set_display_text = function(...)
+	minetest.log("warning", "signs.set_display_text() is deprecated, please use signs_api.set_display_text() instead.")
+	return signs_api.set_display_text(...)
+end
 
+signs.set_formspec = function(...)
+	minetest.log("warning", "signs.set_formspec() is deprecated, please use signs_api.set_formspec() instead.")
+	return  signs_api.set_formspec(...)
+end
 
+signs.on_receive_fields = function(...)
+	minetest.log("warning", "signs.on_receive_fields() is deprecated, please use signs_api.on_receive_fields() instead.")
+	return  signs_api.on_receive_fields(...)
+end
 
+signs.on_place_direction = function(...)
+	minetest.log("warning", "signs.on_place_direction() is deprecated, please use signs_api.on_place_direction() instead.")
+	return  signs_api.on_place_direction(...)
+end
+
+signs.on_rotate = function(...)
+	minetest.log("warning", "signs.on_rotate() is deprecated, please use signs_api.on_rotate() instead.")
+	return  signs_api.on_rotate(...)
+end
+
+signs.register_sign = function(...)
+	minetest.log("warning", "signs.register_sign() is deprecated, please use signs_api.register_sign() instead.")
+	return  signs_api.register_sign(...)
+end
