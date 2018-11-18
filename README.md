@@ -3,19 +3,28 @@ Version 1.2
 
 This modpack provides mods with dynamic display. Mods are :
 
-- **display_api**: A library for adding display entities to nodes;
-- **font_api**: A library for displaying fonts on entities;
-- **signs_api**: A library for the easy creation of signs;
+- **[display_api](https://github.com/pyrollo/display_modpack/tree/master/display_api)**: A library for adding display entities to nodes;
+- **[font_api](https://github.com/pyrollo/display_modpack/tree/master/font_api)**: A library for displaying fonts on entities;
+- **[signs_api](https://github.com/pyrollo/display_modpack/tree/master/signs_api)**: A library for the easy creation of signs;
+- **[font_metro](https://github.com/pyrollo/display_modpack/tree/master/font_metro)**: A font mod used as default font (includes uppercase, lowercase and accentuated latin letters, usual signs, cyrillic and greek letters)
 
-- **boards**: A mod providing school boards;
-- **ontime_clocks**: A mod providing clocks which display the ingame time;
-- **signs**: A mod providing signs and direction signs displaying text;
-- **signs_road**: A mod providing road signs displaying text;
-- **steles**: A mod providing stone steles with text;
+- **[boards](https://github.com/pyrollo/display_modpack/tree/master/boards)**: A mod providing school boards (includes *tiny cursive font*, a handwriting style font);
+- **[ontime_clocks](https://github.com/pyrollo/display_modpack/tree/master/ontime_clocks)**: A mod providing clocks which display the ingame time;
+- **[signs](https://github.com/pyrollo/display_modpack/tree/master/signs)**: A mod providing signs and direction signs displaying text;
+- **[signs_road](https://github.com/pyrollo/display_modpack/tree/master/signs_road)**: A mod providing road signs displaying text;
+- **[steles](https://github.com/pyrollo/display_modpack/tree/master/steles)**: A mod providing stone steles with text;
 
 For more information, see the [forum topic](https://forum.minetest.net/viewtopic.php?t=19365) at the Minetest forums.
 
 ![Presentation image of Display_Modpack](screenshot.png)
+
+## Extra fonts
+
+*Metro* and *Tiny Cursive* fonts are provided in **Display Modpack** (in **font_metro** and **boards** mods) but you can add more fonts by installing font mods. Be aware that each font mod comes with numerous textures. This can result in slowing media downloading and/or client display.
+
+Extra font mods can be found here: 
+ * [OldWizard](https://github.com/pyrollo/font_oldwizard): An old style gothic font.
+ * [Botic](https://github.com/pyrollo/font_botic): A scifi style font.
 
 ## Changelog
 
