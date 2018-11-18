@@ -19,67 +19,37 @@
 
 local modname = minetest.get_current_modname()
 
--- Context management functions (surely many improvements to do)
-
 local contexts = {}
 
-local function get_player_name(player)
-	if type(player) == 'string' then return player end
-	if type(player) == 'userdata' and player.get_player_name then
-		return player:get_player_name()
-	end
-	minetest.log('warning',	'['..modname..'] get_player_name could not identify player.')
-end
-
 minetest.register_on_leaveplayer(function(player)
-	local playername = get_player_name(player)
-	if playername then contexts[playername] = nil end
+	if minetest.is_player(player) then
+		contexts[player:get_player_name()] = nil
+	end
 end)
 
-local function new_context(player, context)
-	local playername = get_player_name(player)
-	if playername then
-		contexts[playername] = context
-		contexts[playername].playername = playername
-		return contexts[playername]
-    end
-end
-
-local function get_context(player)
-	local playername = get_player_name(player)
-	if playername then
-		if contexts[playername] then
-			return contexts[playername]
-		else
-			minetest.log('warning', '['..modname..'] Context not found for player "'..playername..'"')
-		end
+local function get_context(playername)
+	if not contexts[playername] then
+		contexts[playername] = { playername = playername }
 	end
-end
-
-local function update_context(player, changes)
-	local playername = get_player_name(player)
-	if playername then
-		if not contexts[playername] then
-			contexts[playername] = { playername = playername }
-		end
-		for key, value in pairs(changes) do
-			contexts[playername][key] = value
-		end
-	end
+	return contexts[playername]
 end
 
 -- Show node formspec functions
-
-local function show_node_formspec(player, pos)
+local function show_node_formspec(playername, pos)
 	local meta = minetest.get_meta(pos)
-	local playername = get_player_name(player)
 
 	-- Decontextualize formspec
 	local fs = meta:get_string('formspec')
 
+	if not fs then
+		return
+	end
+
 	-- Change context and currrent_name references to nodemeta references
-	fs = fs:gsub("current_name", "nodemeta:"..pos.x..","..pos.y..","..pos.z)
-	fs = fs:gsub("context", "nodemeta:"..pos.x..","..pos.y..","..pos.z)
+	-- Change context and currrent_name references to nodemeta references
+	local nodemeta = string.format("nodemeta:%i,%i,%i", pos.x, pos.y ,pos.z)
+	fs = fs:gsub("current_name", nodemeta)
+	fs = fs:gsub("context", nodemeta)
 
 	-- Change all ${} to their corresponding metadata values
 	local s, e
@@ -92,44 +62,44 @@ local function show_node_formspec(player, pos)
 		end
 	until s == nil
 
+	local context = get_context(playername)
+	context.node_pos = pos
+
 	-- Find node on_receive_fields
 	local ndef = minetest.registered_nodes[minetest.get_node(pos).name]
-
 	if ndef and ndef.on_receive_fields then
-		update_context(player, { on_receive_fields = ndef.on_receive_fields } )
+		context.on_receive_fields = ndef.on_receive_fields
 	end
-	update_context(player, { node_pos = pos } )
 
 	-- Show formspec
 	minetest.show_formspec(playername, modname..':context_formspec', fs)
 end
 
 minetest.register_on_player_receive_fields(function(player, formname, fields)
-	if formname == modname..':context_formspec' then
-		local context = get_context(player)
-		if context == nil then return end
-
-		if context.on_receive_fields then
-			context.on_receive_fields(context.pos, '', fields, player)
-		end
+	if formname ~= modname..':context_formspec' then
+		return
 	end
+
+	if not minetest.is_player(player) then
+		return true
+	end
+
+	local context = get_context(player:get_player_name())
+	if context.on_receive_fields then
+		context.on_receive_fields(context.pos, '', fields, player)
+	end
+	return true
 end)
 
 -- Specific functions
 
-local function font_list_prepare()
-	local list = {}
+local function show_font_formspec(playername)
+	local context = get_context(playername)
+	local fonts = {}
 	for name, _ in pairs(font_api.registered_fonts) do
-		list[#list+1] = name
+		fonts[#fonts+1] = name
 	end
-	table.sort(list)
-	return list
-end
-
-local function show_fs(player)
-	local context = get_context(player)
-	if context == nil then return end
-	local fonts = font_list_prepare()
+	table.sort(fonts)
 
 	local fs = 'size[4,'..(#fonts + 0.8)..']'
 		..default.gui_bg..default.gui_bg_img..default.gui_slots
@@ -146,26 +116,39 @@ local function show_fs(player)
 end
 
 minetest.register_on_player_receive_fields(function(player, formname, fields)
-	if formname == modname..':font_list' then
-		local context = get_context(player)
-		if context == nil then return end
-
-		if fields.quit == 'true' then
-			for name, _ in pairs(font_api.registered_fonts) do
-				if fields['font_'..name] then
-					local meta = minetest.get_meta(context.pos)
-					meta:set_string("font", name)
-					display_api.update_entities(context.pos)
-				end
-			end
-
-			-- Using after to avoid the "double close" bug
-			minetest.after(0, show_node_formspec, player, context.pos)
-		end
+	if formname ~= modname..':font_list' then
+		return
 	end
+
+	if not minetest.is_player(player) then
+		return true
+	end
+
+	local playername = player:get_player_name()
+	local context = get_context(playername)
+
+	if minetest.is_protected(context.pos, playername) then
+		return true
+	end
+
+	if fields.quit == 'true' then
+		for name, _ in pairs(font_api.registered_fonts) do
+			if fields['font_'..name] then
+				local meta = minetest.get_meta(context.pos)
+				meta:set_string("font", name)
+				display_api.update_entities(context.pos)
+			end
+		end
+		-- Using after to avoid the "double close" bug
+		minetest.after(0, show_node_formspec, playername, context.pos)
+	end
+	return true
 end)
 
-function font_api.show_font_list(player, pos)
-	new_context(player, { pos = pos })
-	show_fs(player)
+function font_api.show_font_list_from_pos(player, pos)
+	if minetest.is_player(player) then
+		local context = get_context(player:get_player_name())
+		context.pos = pos
+		show_font_formspec(player:get_player_name())
+	end
 end
