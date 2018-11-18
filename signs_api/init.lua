@@ -47,7 +47,7 @@ function signs_api.set_formspec(pos)
 	if ndef and ndef.display_entities
 	   and ndef.display_entities["signs:display_text"] then
 		local maxlines = ndef.display_entities["signs:display_text"].maxlines
-		local fs, x, y
+		local fs, y
 
 		if maxlines == 1 then
 			fs = "field[0.5,0.7;5.5,1;display_text;"..F("Text")..
@@ -64,17 +64,8 @@ function signs_api.set_formspec(pos)
 			y = 2.4
 		end
 
-		x = 0.2
-		fs = fs.."image_button["..x..","..y..";0.5,0.5;font_api_font.png;font;]"
-		x = x + 0.4
-		fs = fs.."image_button["..x..","..y..";0.5,0.5;font_api_left.png;left;]"
-		x = x + 0.4
-		fs = fs.."image_button["..x..","..y..";0.5,0.5;font_api_center.png;center;]"
-		x = x + 0.4
-		fs = fs.."image_button["..x..","..y..";0.5,0.5;font_api_right.png;right;]"
-		y = y + 0.7
-		fs = fs.."button_exit[2,"..y..";2,1;ok;"..
-			F("Write").."]"
+		fs = fs.."button[1,"..y..";2,1;font;"..F("Font").."]"
+		fs = fs.."button_exit[3,"..y..";2,1;ok;"..F("Write").."]"
 		y = y + 0.8
 		fs = "size[6,"..y.."]"..default.gui_bg..
 			default.gui_bg_img..default.gui_slots..fs
