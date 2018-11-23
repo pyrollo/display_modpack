@@ -81,7 +81,7 @@ function signs_api.on_receive_fields(pos, formname, fields, player)
 		end
 		if fields and (fields.font) then
 			signs_api.set_display_text(pos, fields.display_text)
-			font_api.show_font_list_from_pos(player, pos)
+			font_api.show_font_list(player, pos)
 		end
 	end
 end
