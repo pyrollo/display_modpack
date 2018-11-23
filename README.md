@@ -1,5 +1,5 @@
 # Display Modpack 
-Version 1.2
+Version 1.2.1
 
 This modpack provides mods with dynamic display. Mods are :
 
@@ -27,6 +27,10 @@ Extra font mods can be found here:
  * [Botic](https://github.com/pyrollo/font_botic): A scifi style font.
 
 ## Changelog
+
+### 2018-11-01 (Version 1.2.1)
+
+- Now font can be chosen per sign / stele
 
 ### 2018-11-01 (Version 1.2)
 
