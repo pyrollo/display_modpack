@@ -35,49 +35,53 @@ function signs_api.set_display_text(pos, text, font)
 	else
 		meta:set_string("infotext", "")
 	end
-	meta:set_string("font", font)
+	if font then
+		meta:set_string("font", font)
+	end
 	display_api.update_entities(pos)
 end
 
 function signs_api.set_formspec(pos)
 	local meta = minetest.get_meta(pos)
 	local ndef = minetest.registered_nodes[minetest.get_node(pos).name]
-	if ndef and ndef.display_entities 
+	if ndef and ndef.display_entities
 	   and ndef.display_entities["signs:display_text"] then
 		local maxlines = ndef.display_entities["signs:display_text"].maxlines
-		local formspec, formheight
+		local fs, y
 
 		if maxlines == 1 then
-			formspec =
-				"field[0.5,0.7;5.5,1;display_text;"..F("Text")..
-					";${display_text}]"
-			formheight = 2	
+			fs = "field[0.5,0.7;5.5,1;display_text;"..F("Text")..
+				";${display_text}]"
+			y = 1.2
 		else
 			local extralabel = ""
 			if maxlines then
 				extralabel = F(" (first %s lines only)"):format(maxlines)
 			end
 
-			formspec = 
-				"textarea[0.5,0.7;5.5,2;display_text;"..F("Text")..""..
+			fs = "textarea[0.5,0.7;5.5,2;display_text;"..F("Text")..""..
 					extralabel..";${display_text}]"
-			formheight = 3
+			y = 2.4
 		end
 
-		formspec = formspec.."button_exit[2,"..formheight..";2,1;ok;"..
-			F("Write").."]"
-		formheight = formheight + 1
-		formspec = "size[6,"..formheight.."]"..default.gui_bg..
-			default.gui_bg_img..default.gui_slots..formspec
+		fs = fs.."button[1,"..y..";2,1;font;"..F("Font").."]"
+		fs = fs.."button_exit[3,"..y..";2,1;ok;"..F("Write").."]"
+		y = y + 0.8
+		fs = "size[6,"..y.."]"..default.gui_bg..
+			default.gui_bg_img..default.gui_slots..fs
 
-		meta:set_string("formspec", formspec)
+		meta:set_string("formspec", fs)
 	end
 end
 
 function signs_api.on_receive_fields(pos, formname, fields, player)
 	if not minetest.is_protected(pos, player:get_player_name()) then
 		if fields and (fields.ok or fields.key_enter) then
-			signs_api.set_display_text(pos, fields.display_text, fields.font)
+			signs_api.set_display_text(pos, fields.display_text)
+		end
+		if fields and (fields.font) then
+			signs_api.set_display_text(pos, fields.display_text)
+			font_api.show_font_list(player, pos)
 		end
 	end
 end
@@ -183,7 +187,8 @@ function signs_api.register_sign(mod, name, model)
 		on_destruct = display_api.on_destruct,
 		on_rotate = signs_api.on_rotate,
 		on_receive_fields =  signs_api.on_receive_fields,
-		on_punch = function(pos, node, player, pointed_thing) 
+		on_punch = function(pos, node, player, pointed_thing)
+				signs_api.set_formspec(pos)
 				display_api.update_entities(pos)
 			end,
 	}
@@ -211,7 +216,3 @@ end
 
 -- Text entity for all signs
 display_api.register_display_entity("signs:display_text")
-
-
-
-
