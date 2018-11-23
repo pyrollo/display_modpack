@@ -101,16 +101,18 @@ local function show_font_formspec(playername)
 	end
 	table.sort(fonts)
 
-	local fs = 'size[4,'..(#fonts + 0.8)..']'
-		..default.gui_bg..default.gui_bg_img..default.gui_slots
-		..'button_exit[0,'..(#fonts)..';4,1;cancel;Cancel]'
+	local fs = string.format(
+		"size[4,%s]%s%s%sbutton_exit[0,%s;4,1;cancel;Cancel]",
+		#fonts + 0.8, default.gui_bg, default.gui_bg_img, default.gui_slots,
+		#fonts)
 
 	for line = 1, #fonts do
 		local font = font_api.get_font(fonts[line])
-		fs = fs..'image[0.1,'..(line-0.9)..';4.5,0.8;'
-		..font:make_text_texture(font.name, font:get_height()*5,
+		local texture = font:make_text_texture(font.name, font:get_height()*5,
 			font:get_height()*1.2, 1, "center", "top", "#fff")
-		..']button_exit[0,'..(line-1)..';4,1;font_'..font.name..';]'
+		fs = string.format(
+			"%simage[0.1,%s;4.5,0.8;%s]button_exit[0,%s;4,1;font_%s;]",
+			fs, line-0.9, texture, line-1, font.name)
 	end
 	minetest.show_formspec(context.playername, modname..':font_list', fs)
 end
@@ -127,7 +129,8 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 	local playername = player:get_player_name()
 	local context = get_context(playername)
 
-	if minetest.is_protected(context.pos, playername) then
+	if not context.pos
+	or minetest.is_protected(context.pos, playername) then
 		return true
 	end
 
@@ -139,16 +142,26 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 				display_api.update_entities(context.pos)
 			end
 		end
-		-- Using after to avoid the "double close" bug
-		minetest.after(0, show_node_formspec, playername, context.pos)
+
+		if context.callback and type(context.callback) == "function" then
+			-- Using after to avoid the "double close" bug
+			minetest.after(0, context.callback, playername, context.pos)
+		else
+			-- Using after to avoid the "double close" bug
+			minetest.after(0, show_node_formspec, playername, context.pos)
+		end
 	end
 	return true
 end)
 
-function font_api.show_font_list_from_pos(player, pos)
+-- @param player Player viewing the form
+-- @param pos Node pos
+-- @param callback function(playername, pos) to be called on form close
+function font_api.show_font_list(player, pos, callback)
 	if minetest.is_player(player) then
 		local context = get_context(player:get_player_name())
 		context.pos = pos
+		context.callback = callback
 		show_font_formspec(player:get_player_name())
 	end
 end
