@@ -22,7 +22,7 @@
 ------------------------------------
 
 local wallmounted_to_facedir = {
-  [0]=1, -- Should not happend with signs 
+  [0]=1, -- Should not happend with signs
   [1]=1, -- Should not happend with signs
   [2]=1,
   [3]=3,
@@ -82,4 +82,9 @@ minetest.register_lbm({ name = "signs_road:conpatibility_2",
 	action = compatibility_check_2,
 })
 
+-- Node name tidy up
+--------------------
 
+minetest.register_alias("signs_road:green_street_sign", "signs_road:green_sign")
+minetest.register_alias("signs_road:yellow_street_sign", "signs_road:yellow_sign")
+minetest.register_alias("signs_road:white_street_sign", "signs_road:white_sign")
