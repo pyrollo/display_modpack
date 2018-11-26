@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="32px"
+   height="32px"
+   id="svg2985"
+   version="1.1"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   sodipodi:docname="signs_road_rectangle.svg"
+   inkscape:export-filename="/home/pyrollo/dev/minetest-mods/display_modpack/signs_road/textures/signs_road_red.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96">
+  <defs
+     id="defs2987" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#d2d038"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="15.836083"
+     inkscape:cx="0.23789952"
+     inkscape:cy="17.483424"
+     inkscape:current-layer="layer5"
+     showgrid="true"
+     inkscape:grid-bbox="true"
+     inkscape:document-units="px"
+     inkscape:window-width="1323"
+     inkscape:window-height="713"
+     inkscape:window-x="43"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid2993"
+       empspacing="2"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true"
+       spacingx="0.5"
+       spacingy="0.5"
+       color="#ff0000"
+       opacity="0.1254902"
+       originx="0"
+       originy="0" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata2990">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:groupmode="layer"
+     id="layer5"
+     inkscape:label="Black Border"
+     style="display:inline">
+    <rect
+       style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.30000001;marker:none;enable-background:accumulate"
+       id="rect3110"
+       width="32"
+       height="14"
+       x="0"
+       y="9"
+       rx="0"
+       ry="0" />
+  </g>
+  <g
+     style="display:inline"
+     inkscape:label="White Border"
+     id="g901"
+     inkscape:groupmode="layer">
+    <rect
+       ry="0"
+       rx="0"
+       y="9"
+       x="0"
+       height="14"
+       width="32"
+       id="rect899"
+       style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.30000001;marker:none;enable-background:accumulate" />
+  </g>
+  <g
+     style="display:inline"
+     inkscape:label="Blue Background"
+     id="g897"
+     inkscape:groupmode="layer">
+    <rect
+       rx="2"
+       ry="2.4000001"
+       y="10"
+       x="1"
+       height="12"
+       width="30"
+       id="rect895"
+       style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#0040c0;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.30000001;marker:none;enable-background:accumulate" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="g917"
+     inkscape:label="Green Background"
+     style="display:inline">
+    <rect
+       style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#008040;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.30000001;marker:none;enable-background:accumulate"
+       id="rect915"
+       width="30"
+       height="12"
+       x="1"
+       y="10"
+       ry="2.4000001"
+       rx="2" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="g905"
+     inkscape:label="Yellow Background"
+     style="display:none">
+    <rect
+       style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#fbdf00;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.30000001;stroke-miterlimit:4;stroke-dasharray:none;marker:none;enable-background:accumulate"
+       id="rect903"
+       width="30"
+       height="12"
+       x="1"
+       y="10"
+       ry="2.4000001"
+       rx="2" />
+  </g>
+  <g
+     style="display:none"
+     inkscape:label="Red Background"
+     id="g909"
+     inkscape:groupmode="layer">
+    <rect
+       rx="2"
+       ry="2.4000001"
+       y="10"
+       x="1"
+       height="12"
+       width="30"
+       id="rect907"
+       style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.30000001;marker:none;enable-background:accumulate" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="g913"
+     inkscape:label="White Background"
+     style="display:none">
+    <rect
+       style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.30000001;marker:none;enable-background:accumulate"
+       id="rect911"
+       width="30"
+       height="12"
+       x="1"
+       y="10"
+       ry="2.4000001"
+       rx="2" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer1"
+     inkscape:label="Red Frame"
+     style="display:none">
+    <rect
+       style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#ff0000;stroke-width:1.02928686;stroke-miterlimit:4;stroke-dasharray:none;marker:none;enable-background:accumulate"
+       id="rect3767-5"
+       width="28.970713"
+       height="10.970714"
+       x="1.5146437"
+       y="10.514643"
+       ry="2.1941426"
+       rx="1.9313809" />
+  </g>
+</svg>
