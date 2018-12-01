@@ -146,7 +146,7 @@ end
 function display_api.on_activate(entity, staticdata)
 	if entity then
 		if string.sub(staticdata, 1, string.len("return")) == "return" then
-			local data = core.deserialize(staticdata)
+			local data = minetest.deserialize(staticdata)
 			if data and type(data) == "table" then
 				entity.nodepos = data.nodepos
 			end
