@@ -213,7 +213,7 @@ end
 
 --- Creates display entity with some fields and the on_activate callback
 function display_api.register_display_entity(entity_name)
-	if not minetest.registered_entity then
+	if not minetest.registered_entities[entity_name] then
 		minetest.register_entity(':'..entity_name, {
 			collisionbox = { 0, 0, 0, 0, 0, 0 },
 			visual = "upright_sprite",
