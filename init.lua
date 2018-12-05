@@ -120,7 +120,7 @@ function update_entity(entity)
 	if not entity then
 		return
 	end
-	
+
 	if not entity.nodepos then
 		entity.object:remove() -- Remove old/buggy entity
 		return
