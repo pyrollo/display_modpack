@@ -37,7 +37,7 @@ minetest.register_node("mymod:test_text_node", {
 })
 ```
 
-At this step, your node already displays text form "display_text" (hardcoded) node meta.
+At this step, your node already displays text form "display_text" (by default) node meta. If you want to store your text into another meta data field, add a `meta_text` field to display entity definition.
 
 But it uses defaults (default font, default size, default color). Likely you need something more.
 
@@ -59,6 +59,28 @@ Then specify the char width. Two methods available:
   * `halign`: Horizontal alignment: "left", "center" or "right" (default "center").
   * `valign`: Vertical alignement: "top", "middle" or "bottom" (default "middle").
 
+### Example
+Using blue //botic// font, three lines height, aligned top left. Text stored in "text" node meta.
+```
+minetest.register_node("mymod:test_text_node", {
+	...
+	...
+	display_entities = {
+		["mymod:text"] = {
+			depth = -0.5 - display_api.entity_spacing,
+			on_display_update = font_api.on_display_update
+			meta_text = "text",
+			font_name = "botic",
+			color = "#0000FF",
+			maxlines = 3,
+			aspect_ratio = 0.5,
+			halign = "left",
+			valign = "top",
+			},
+	}
+	...
+})
+```
 ## Provided methods
 ### font_api.get_default_font_name()
 Returns de default font name.
@@ -159,19 +181,13 @@ Returns line(s) height. Takes care of top and bottom margins and line spacing.
 Returns the width of a text line. Beware, if line contains any new line char, they are ignored.
   * `line`: Line of text which the width will be computed.
 
-### font:make_line_texture(line, texturew, x, y)
-Create a texture for a text line.
-  * `line`: Line of text to be rendered in texture.
-  * `texturew`: Width of the texture (extra text is not rendered).
-  * `x`: Starting x position in texture.
-	* `y`: Vertical position of the line in texture.
-
-### font:make_text_texture(text, texturew, textureh, maxlines, halign, valign, color)
+### font:renter(text, texturew, textureh, style)
 Builds texture for a multiline colored text.
   * `text`: Text to be rendered.
   * `texturew`: Width of the texture (extra text will be truncated).
-  * `textureh`: Height of the texture.
-  * `maxlines`: Maximum number of lines.
-  * `halign`: Horizontal text align ("left"/"center"/"right") (optional).
-  * `valign`: Vertical text align ("top"/"center"/"bottom") (optional).
-  * `color`: Color of the text (optional).
+  * `textureh`: Height of the texture (extra text will be truncated).
+  * `style`: A table with style indications:
+    - `lines` or `maxlines`: Maximum number of lines (default none).
+    - `halign`: Horizontal text align: "left"/"center"/"right" (default "center")
+    - `valign`: Vertical text align: "top"/"middle"/"bottom" (default "middle")
+    - `color`: Color of the text (default black)

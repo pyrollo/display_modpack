@@ -54,20 +54,6 @@ local function char_to_codepoint(str)
 	end
 end
 
--- Split multiline text into array of lines, with <maxlines> maximum lines.
--- Can not use minetest string.split as it has bug if first line(s) empty
-local function split_lines(text, maxlines)
-	local lines = {}
-	local pos = 1
-	repeat
-		local found = string.find(text, "\n", pos)
-		found = found or #text + 1
-		lines[#lines + 1] = string.sub(text, pos, found - 1)
-		pos = found + 1
-	until (maxlines and (#lines >= maxlines)) or (pos > (#text + 1))
-	return lines
-end
-
 --------------------------------------------------------------------------------
 --- Font class
 
@@ -195,88 +181,86 @@ function Font:get_width(line)
 	return width
 end
 
---- Builds texture part for a text line
--- @param line Text line to be rendered
--- @param texturew Width of the texture (extra text is not rendered)
--- @param x Starting x position in texture
--- @param y Vertical position of the line in texture
--- @return Texture string
-
-function Font:make_line_texture(line, texturew, x, y)
-	local codepoint
-	local texture = ""
-	line = line or ''
-
-	while line ~= '' do
-		codepoint, line = self:get_next_char(line)
-
-		-- Add image only if it is visible (at least partly)
-		if x + self:get_char_width(codepoint) >= 0 and x <= texturew then
-			texture = texture..
-				string.format(":%d,%d=font_%s_%04x.png",
-				              x, y, self.name, codepoint)
-		end
-		x = x + self:get_char_width(codepoint)
-	end
-
-	return texture
-end
-
---- Builds texture for a multiline colored text
--- @param text Text to be rendered
--- @param texturew Width of the texture (extra text will be truncated)
--- @param textureh Height of the texture
--- @param maxlines Maximum number of lines
--- @param halign Horizontal text align ("left"/"center"/"right") (optional)
--- @param valign Vertical text align ("top"/"center"/"bottom") (optional)
--- @param color Color of the text (optional)
--- @return Texture string
+--- Legacy make_text_texture method (replaced by "render" - Dec 2018)
 
 function Font:make_text_texture(text, texturew, textureh, maxlines,
 		halign, valign, color)
-	local texture = ""
-	local lines = {}
-	local textheight = 0
-	local y
+		return self:render(text, texturew, textureh, {
+			lines = maxlines,
+			valign = valign,
+			halign = halign,
+			color = color
+		})
+end
 
-	-- Split text into lines (limited to maxlines fist lines)
-	for num, line in pairs(split_lines(text, maxlines)) do
-		lines[num] = { text = line, width = self:get_width(line) }
+--- Render text with the font in a view
+-- @param text Text to be rendered
+-- @param texturew Width (in pixels) of the texture (extra text will be truncated)
+-- @param textureh Height (in pixels) of the texture (extra text will be truncated)
+-- @param style Style of the rendering:
+--		- lines: maximum number of text lines (if text is limited)
+--		- halign: horizontal align ("left"/"center"/"right")
+--		- valign: vertical align ("top"/"center"/"bottom")
+--		- color: color of the text ("#rrggbb")
+-- @return Texture string
+
+function Font:render(text, texturew, textureh, style)
+	local style = style or {}
+
+	-- Split text into lines (and limit to style.lines # of lines)
+	local lines = {}
+	local pos = 1
+	local found, line
+	repeat
+		found = string.find(text, "\n", pos) or (#text + 1)
+		line = string.sub(text, pos, found - 1)
+		lines[#lines + 1] = { text = line, width = self:get_width(line) }
+		pos = found + 1
+	until (style.lines and (#lines >= style.lines)) or (pos > (#text + 1))
+
+	if not #lines then
+		return ""
 	end
 
-	textheight = self:get_height(#lines)
+	local x, y, codepoint
+	local texture = ""
+	local textheight = self:get_height(#lines)
 
-	if #lines then
-		if valign == "top" then
-			y = 0
-		elseif valign == "bottom" then
-			y = textureh - textheight
-		else
-			y = (textureh - textheight) / 2
-		end
+	if style.valign == "top" then
+		y = 0
+	elseif style.valign == "bottom" then
+		y = textureh - textheight
+	else
+		y = (textureh - textheight) / 2
 	end
 
 	y = y + (self.margintop or 0)
 
 	for _, line in pairs(lines) do
-		if halign == "left" then
-			texture = texture..
-				self:make_line_texture(line.text, texturew,
-				0, y)
-		elseif halign == "right" then
-			texture = texture..
-				self:make_line_texture(line.text, texturew,
-				texturew - line.width, y)
+		if style.halign == "left" then
+			x = 0
+		elseif style.halign == "right" then
+			x = texturew - line.width
 		else
-			texture = texture..
-				self:make_line_texture(line.text, texturew,
-				(texturew - line.width) / 2, y)
+			x = (texturew - line.width) / 2
+		end
+
+		while line.text ~= '' do
+			codepoint, line.text = self:get_next_char(line.text)
+
+			-- Add image only if it is visible (at least partly)
+			if x + self.widths[codepoint] >= 0 and x <= texturew then
+				texture = texture..
+					string.format(":%d,%d=font_%s_%04x.png", x, y, self.name, codepoint)
+			end
+			x = x + self.widths[codepoint]
 		end
 
 		y = y + self:get_height() + (self.linespacing or 0)
 	end
-
 	texture = string.format("[combine:%dx%d", texturew, textureh)..texture
-	if color then texture = texture.."^[colorize:"..color end
+	if style.color then
+		texture = texture.."^[colorize:"..style.color
+	end
 	return texture
 end
