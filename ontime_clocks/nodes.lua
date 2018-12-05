@@ -1,5 +1,5 @@
 --[[
-    ontime_clocks mod for Minetest - Clock nodes displaying ingame time 
+    ontime_clocks mod for Minetest - Clock nodes displaying ingame time
     (c) Pierre-Yves Rollo
 
     This file is part of ontime_clocks.
@@ -31,11 +31,11 @@ minetest.register_node("ontime_clocks:green_digital", {
 	node_box = {
 		type = "wallmounted",
 		wall_side = { -0.5, -3/16, -7/16, -13/32, 7/32, 7/16 },
-		wall_bottom = { -0.5, -0.5, -0.5, 0.5, 0.5, 0.5 },    
-		wall_top = { -0.5, -0.5, -0.5, 0.5, 0.5, 0.5 } 
+		wall_bottom = { -0.5, -0.5, -0.5, 0.5, 0.5, 0.5 },
+		wall_top = { -0.5, -0.5, -0.5, 0.5, 0.5, 0.5 }
 	},
 	tiles = {"ontime_clocks_digital.png"},
-	groups = {oddly_breakable_by_hand = 1, not_blocking_trains = 1, display_modpack_node = 1},
+	groups = {oddly_breakable_by_hand=1, not_blocking_trains=1, display_api=1},
 	display_entities = {
 		["ontime_clocks:display"] = {
 			depth = 13/32 - 0.01,
@@ -69,11 +69,11 @@ minetest.register_node("ontime_clocks:red_digital", {
 	node_box = {
 		type = "wallmounted",
 		wall_side = { -0.5, -3/16, -7/16, -13/32, 7/32, 7/16 },
-		wall_bottom = { -0.5, -0.5, -0.5, 0.5, 0.5, 0.5 },    
-		wall_top = { -0.5, -0.5, -0.5, 0.5, 0.5, 0.5 } 
+		wall_bottom = { -0.5, -0.5, -0.5, 0.5, 0.5, 0.5 },
+		wall_top = { -0.5, -0.5, -0.5, 0.5, 0.5, 0.5 }
 	},
 	tiles = {"ontime_clocks_digital.png"},
-	groups = {oddly_breakable_by_hand = 1, not_blocking_trains = 1, display_modpack_node = 1},
+	groups = {oddly_breakable_by_hand=1, not_blocking_trains=1, display_api=1},
 	display_entities = {
 		["ontime_clocks:display"] = {
 			depth = 13/32 - 0.01,
@@ -107,12 +107,12 @@ minetest.register_node("ontime_clocks:white", {
 	node_box = {
 		type = "wallmounted",
 		wall_side = { -0.5, -7/16, -7/16, -6/16, 7/16, 7/16},
-		wall_bottom = { -7/16, -0.5, -7/16, 7/16, -7/16, 7/16},    
-		wall_top = { -7/16, 0.5, -7/16, 7/16, 7/16, 7/16},    
+		wall_bottom = { -7/16, -0.5, -7/16, 7/16, -7/16, 7/16},
+		wall_top = { -7/16, 0.5, -7/16, 7/16, 7/16, 7/16},
 	},
 	tiles = {"ontime_clocks_white.png"},
-	groups = {choppy = 1, oddly_breakable_by_hand = 1, not_blocking_trains = 1, display_modpack_node = 1},
-	display_entities = { 
+	groups = {oddly_breakable_by_hand=1, not_blocking_trains=1, display_api=1},
+	display_entities = {
 		["ontime_clocks:display"] = {
 			depth = 6/16 - 0.01,
 			on_display_update = function(pos, objref)
@@ -144,12 +144,12 @@ minetest.register_node("ontime_clocks:frameless_black", {
 	node_box = {
 		type = "wallmounted",
 		wall_side = { -0.5, -7/16, -7/16, -0.45, 7/16, 7/16 },
-		wall_bottom = { -0.5, -0.5, -0.5, 0.5, 0.5, 0.5 },    
-		wall_top = { -0.5, -0.5, -0.5, 0.5, 0.5, 0.5 } 
+		wall_bottom = { -0.5, -0.5, -0.5, 0.5, 0.5, 0.5 },
+		wall_top = { -0.5, -0.5, -0.5, 0.5, 0.5, 0.5 }
 	},
 	tiles = {"ontime_clocks_frameless.png"},
-	groups = {choppy = 1, oddly_breakable_by_hand = 1, not_blocking_trains = 1, display_modpack_node = 1},
-	display_entities = { 
+	groups = {oddly_breakable_by_hand=1, not_blocking_trains=1, display_api=1},
+	display_entities = {
 		["ontime_clocks:display"] = {
 			depth = 7/16,
 			on_display_update = function(pos, objref)
@@ -181,12 +181,12 @@ minetest.register_node("ontime_clocks:frameless_gold", {
 	node_box = {
 		type = "wallmounted",
 		wall_side = { -0.5, -7/16, -7/16, -0.45, 7/16, 7/16 },
-		wall_bottom = { -0.5, -0.5, -0.5, 0.5, 0.5, 0.5 },    
-		wall_top = { -0.5, -0.5, -0.5, 0.5, 0.5, 0.5 } 
+		wall_bottom = { -0.5, -0.5, -0.5, 0.5, 0.5, 0.5 },
+		wall_top = { -0.5, -0.5, -0.5, 0.5, 0.5, 0.5 }
 	},
 	tiles = {"ontime_clocks_frameless.png^[colorize:#FF0"},
-	groups = {choppy = 1, oddly_breakable_by_hand = 1, not_blocking_trains = 1, display_modpack_node = 1},
-	display_entities = { 
+	groups = {oddly_breakable_by_hand=1, not_blocking_trains=1, display_api=1},
+	display_entities = {
 		["ontime_clocks:display"] = {
 			depth = 7/16,
 			on_display_update = function(pos, objref)
@@ -218,12 +218,12 @@ minetest.register_node("ontime_clocks:frameless_white", {
 	node_box = {
 		type = "wallmounted",
 		wall_side = { -0.5, -7/16, -7/16, -0.45, 7/16, 7/16 },
-		wall_bottom = { -0.5, -0.5, -0.5, 0.5, 0.5, 0.5 },    
-		wall_top = { -0.5, -0.5, -0.5, 0.5, 0.5, 0.5 } 
+		wall_bottom = { -0.5, -0.5, -0.5, 0.5, 0.5, 0.5 },
+		wall_top = { -0.5, -0.5, -0.5, 0.5, 0.5, 0.5 }
 	},
 	tiles = {"ontime_clocks_frameless.png^[colorize:#FFF"},
-	groups = {choppy = 1, oddly_breakable_by_hand = 1, not_blocking_trains = 1, display_modpack_node = 1},
-	display_entities = { 
+	groups = {oddly_breakable_by_hand=1, not_blocking_trains=1, display_api=1},
+	display_entities = {
 		["ontime_clocks:display"] = {
 			depth = 7/16,
 			on_display_update = function(pos, objref)

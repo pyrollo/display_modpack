@@ -30,7 +30,7 @@ for i, material in ipairs(steles.materials) do
 	if ndef then
 		local groups = table.copy(ndef.groups)
 		local parts = material:split(":")
-		groups.display_modpack_node = 1
+		groups.display_api = 1
 
 		minetest.register_node("steles:"..parts[2].."_stele", {
 			description = steles.materials_desc[i],
