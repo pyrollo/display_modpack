@@ -7,35 +7,84 @@ Name of the font to be used when no font is given. The font should be registered
 
 If no default\_font given or if default\_font given but not registered, the first registered font will be used as default.
 
-## Provided methods
+## Use font_api with display_api (to display text on nodes)
+### Base setup
+Font_api offers a direct integration with display_api to display text on nodes.
 
+First of all, create a display node with an entity.
+To do this, refer to API.md in display_api mod, in particular "Howto register a display node".
+
+The only requirement then is to connect the `on_display_update` callback of the display entity to `font_api.on_display_update`:
+
+```
+minetest.register_node("mymod:test_text_node", {
+	...
+	paramtype2 = "facedir",
+	...
+	groups = { display_api = 1, ... },
+	...
+	display_entities = {
+		["mymod:text"] = {
+			depth = -0.5 - display_api.entity_spacing,
+			on_display_update = font_api.on_display_update },
+	}
+	...
+	on_place = display_api.on_place,
+	on_construct = display_api.on_construct,
+	on_destruct = display_api.on_destruct,
+	on_rotate = display_api.on_rotate,
+	...
+})
+```
+
+At this step, your node already displays text form "display_text" (hardcoded) node meta.
+
+But it uses defaults (default font, default size, default color). Likely you need something more.
+
+### Style your text
+Font style and size can be chosen by adding some more entries to the display_entities definition table.
+
+#### Font size
+Font size can be defined in various ways (maybe more in the future).
+Start with a number of lines, and font_api will make it fit to the entity size.
+  * `maxlines` or `lines`: Number of maximum lines of text to be displayed. The font height will be adjusted accordingly.
+
+Then specify the char width. Two methods available:
+  * `aspect_ratio`: Defines the aspect ratio of chars. Works with all fonts. Should not be used if `columns` is specified.
+	* `columns`: Only if using a fixed width font, specifies the number of columns to display.
+
+#### Font style
+  * `font_name`: name of the font to use. Should correspond to a registered font (from a font mod). If not specified or font not found, default font is used.
+  * `color`: color to be used (default black).
+  * `halign`: Horizontal alignment: "left", "center" or "right" (default "center").
+  * `valign`: Vertical alignement: "top", "middle" or "bottom" (default "middle").
+
+## Provided methods
 ### font_api.get_default_font_name()
 Returns de default font name.
 
 ### font_api.register_font(font_name, font_def)
 Register a new font.
-**font_name**: Name of the font to register. If registering different sizes of the same font, add size in the font name (e.g. times_10, times_12...).
-**font_def**: Font definition table (see **Font definition table** below).
+  * `font_name`: Name of the font to register. If registering different sizes of the same font, add size in the font name (e.g. times_10, times_12...).
+  * `font_def`: Font definition table (see **Font definition table** below).
 
 ### font_api.on_display_update(pos, objref)
 Standard on_display_update entity callback.
-
-**pos**: Node position
-
-**objref**: Object reference of entity
+  * `pos`: Node position
+  * `objref`: Object reference of entity
 
 Node should have a corresponding display_entity with size, resolution and maxlines fields and optionally halign, valign and color fields.
 
 ### Font definition table
 Font definition table used by **font_api.register_font** and **font\_api.Font:new** may/can contain following elements:
 
-* **height** (required): Font height in pixels (all font textures should have the same height) .
-* **widths** (required): Array of character widths in pixels, indexed by UTF codepoints.
-* **margintop** (optional): Margin (in texture pixels) added on top of each char texture.
-* **marginbottom** (optional): Margin (in texture pixels) added at bottom of each char texture.
-* **linespacing** (optional): Spacing (in texture pixels) between each lines.
+* `height` (required): Font height in pixels (all font textures should have the same height) .
+* `widths` (required): Array of character widths in pixels, indexed by UTF codepoints.
+* `margintop` (optional): Margin (in texture pixels) added on top of each char texture.
+* `marginbottom` (optional): Margin (in texture pixels) added at bottom of each char texture.
+* `linespacing` (optional): Spacing (in texture pixels) between each lines.
 
-**margintop**, **marginbottom** and **linespacing** can be negative numbers (default 0) and are to be used to adjust various font styles to each other.
+`margintop`, `marginbottom` and `linespacing` can be negative numbers (default 0) and are to be used to adjust various font styles to each other.
 
 Font must have a char 0 which will be used to display any unknown char.
 
@@ -57,7 +106,7 @@ Still in early stage of development, these tools are helpers to create font mods
 
 ### make_font_texture.sh
 
-This scripts takes a .ttf file as input and create one .png file per char, that can be used as font texture. Launch it from your future font mod directory. 
+This scripts takes a .ttf file as input and create one .png file per char, that can be used as font texture. Launch it from your future font mod directory.
 
 __Advice__
 
@@ -95,51 +144,34 @@ __Syntax__
 A font usable with font API. This class is supposed to be for internal use but who knows.
 
 ### font\_api.Font:new(def)
-Create a new font object. 
+Create a new font object.
+  * `def` is a table containing font definition. See **Font definition table** above.
 
-**def** is a table containing font definition. See **Font definition table** above.
-
-### font:get_char_width(char)
-Returns the width of char **char** in texture pixels.
-
-**char**: Unicode codepoint of char.
+### font:get_char_width(codepoint)
+Returns the width of char `codepoint` in texture pixels.
+  * `codepoint`: Unicode codepoint of char.
 
 ### font:get_height(nb_of_lines)
 Returns line(s) height. Takes care of top and bottom margins and line spacing.
-
-**nb_of_lines**: Number of lines in the text.
+  * `nb_of_lines`: Number of lines in the text.
 
 ### font:get_width(line)
-
 Returns the width of a text line. Beware, if line contains any new line char, they are ignored.
-
-**line**: Line of text which the width will be computed.
+  * `line`: Line of text which the width will be computed.
 
 ### font:make_line_texture(line, texturew, x, y)
 Create a texture for a text line.
-
-**line**: Line of text to be rendered in texture.
-
-**texturew**: Width of the texture (extra text is not rendered).
-
-**x**: Starting x position in texture.
-
-**y**: Vertical position of the line in texture.
+  * `line`: Line of text to be rendered in texture.
+  * `texturew`: Width of the texture (extra text is not rendered).
+  * `x`: Starting x position in texture.
+	* `y`: Vertical position of the line in texture.
 
 ### font:make_text_texture(text, texturew, textureh, maxlines, halign, valign, color)
 Builds texture for a multiline colored text.
-
-**text**: Text to be rendered.
-
-**texturew**: Width of the texture (extra text will be truncated).
-
-**textureh**: Height of the texture.
-
-**maxlines**: Maximum number of lines.
-
-**halign**: Horizontal text align ("left"/"center"/"right") (optional).
-
-**valign**: Vertical text align ("top"/"center"/"bottom") (optional).
-
-**color**: Color of the text (optional).
-
+  * `text`: Text to be rendered.
+  * `texturew`: Width of the texture (extra text will be truncated).
+  * `textureh`: Height of the texture.
+  * `maxlines`: Maximum number of lines.
+  * `halign`: Horizontal text align ("left"/"center"/"right") (optional).
+  * `valign`: Vertical text align ("top"/"center"/"bottom") (optional).
+  * `color`: Color of the text (optional).

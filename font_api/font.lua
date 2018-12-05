@@ -103,6 +103,16 @@ function Font:new(def)
 	local font = table.copy(def)
 	setmetatable(font, self)
 	self.__index = self
+
+	-- Check if fixedwidth
+	for codepoint, width in pairs(font.widths) do
+		font.fixedwidth = font.fixedwidth or width
+		if width ~= font.fixedwidth then
+			font.fixedwidth = nil
+			break
+		end
+	end
+
 	return font
 end
 
@@ -138,11 +148,11 @@ end
 --- Returns the width of a given char
 -- @param char : codepoint of the char
 -- @return Char width
-
-function Font:get_char_width(char)
-	-- Replace chars with no texture by the NULL(0) char
-	if self.widths[char] ~= nil then
-		return self.widths[char]
+function Font:get_char_width(codepoint)
+	if self.fixedwidth then
+		return self.fixedwidth
+	elseif self.widths[codepoint] then
+		return self.widths[codepoint]
 	else
 		return self.widths[0]
 	end
@@ -201,12 +211,12 @@ function Font:make_line_texture(line, texturew, x, y)
 		codepoint, line = self:get_next_char(line)
 
 		-- Add image only if it is visible (at least partly)
-		if x + self.widths[codepoint] >= 0 and x <= texturew then
+		if x + self:get_char_width(codepoint) >= 0 and x <= texturew then
 			texture = texture..
 				string.format(":%d,%d=font_%s_%04x.png",
 				              x, y, self.name, codepoint)
 		end
-		x = x + self.widths[codepoint]
+		x = x + self:get_char_width(codepoint)
 	end
 
 	return texture
@@ -223,7 +233,7 @@ end
 -- @return Texture string
 
 function Font:make_text_texture(text, texturew, textureh, maxlines,
-                                         halign, valign, color)
+		halign, valign, color)
 	local texture = ""
 	local lines = {}
 	local textheight = 0
