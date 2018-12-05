@@ -48,13 +48,30 @@ function font_api.on_display_update(pos, objref)
 		local font = font_api.get_font(meta:get_string("font") ~= ""
 			and meta:get_string("font") or def.font_name)
 
-		local maxlines = def.maxlines or 1 -- TODO:How to do w/o maxlines ?
+		-- Compute entity resolution accroding to given attributes
+		local texturew, textureh
+		textureh = font:get_height(def.lines or def.maxlines or 1)
+
+		if def.columns then
+			if font.fixedwidth then
+				texturew = def.columns * font.fixedwidth
+				if def.aspect_ratio then
+					minetest.log('warning', "[font_api] 'aspect_ratio' ignored because 'columns' is specified")
+				end
+			else
+				minetest.log('warning', "[font_api] 'columns' ignored because '"..font.name.."' is not a fixed width font.")
+			end
+		end
+
+		if not texturew then
+			if not def.aspect_ratio then
+				minetest.log('warning', "[font_api] No 'aspect_ratio' specified, using default 1.")
+			end
+			texturew = textureh * def.size.x / def.size.y	/ (def.aspect_ratio or 1)
+		end
 
 		objref:set_properties({
-			textures={font:make_text_texture(text,
-				font:get_height(maxlines) * def.size.x / def.size.y
-					/ (def.aspect_ratio or 1),
-				font:get_height(maxlines),
+			textures={font:make_text_texture(text, texturew, textureh,
 				def.maxlines, def.halign, def.valign, def.color)},
 			visual_size = def.size
 		})
