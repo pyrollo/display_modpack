@@ -133,6 +133,9 @@ function update_entity(entity)
 		-- Call on_display_update callback of a node for one of its display entities
 		ndef.display_entities[entity.name].on_display_update(entity.nodepos,
 			entity.object)
+  else
+		-- Display node has been removed, remove entity also
+		entity.object:remove()
 	end
 end
 
