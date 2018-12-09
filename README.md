@@ -1,4 +1,4 @@
-# Display Modpack 
+# Display Modpack
 Version 1.2.2
 
 This modpack provides mods with dynamic display. Mods are :
@@ -22,9 +22,20 @@ For more information, see the [forum topic](https://forum.minetest.net/viewtopic
 
 *Metro* and *Tiny Cursive* fonts are provided in **Display Modpack** (in **font_metro** and **boards** mods) but you can add more fonts by installing font mods. Be aware that each font mod comes with numerous textures. This can result in slowing media downloading and/or client display.
 
-Extra font mods can be found here: 
+Extra font mods can be found here:
  * [OldWizard](https://github.com/pyrollo/font_oldwizard): An old style gothic font.
  * [Botic](https://github.com/pyrollo/font_botic): A scifi style font.
+
+## Deprecation notice (for modders)
+
+### December 2018
+Following objects are deprecated, shows a warning in log when used:
+
+* `display_modpack_node` group (use `display_api` group instead);
+* `display_lib_node` group (use `display_api` group instead);
+* `display_lib` global table (use `display_api` global table instead);
+
+These objects will be removed in the future.
 
 ## Changelog
 
@@ -48,7 +59,7 @@ Extra font mods can be found here:
 
 - Boards mod added.
 
-- Bug fix in default font chosing when multiple font registered. 
+- Bug fix in default font chosing when multiple font registered.
 
 ### 2018-07-13 (Version 1.1.0)
 
@@ -86,7 +97,7 @@ Mostly bug fixes :
 
 - Add tool for creating font textures from .ttf font files
 
-- Fix UTF 8 to Unicode decoding 
+- Fix UTF 8 to Unicode decoding
 
 - Updated forum thread link in README.md
 
@@ -96,7 +107,7 @@ This change is a preparation to merge Andrzej Pieńkowski fork (apienk) : new fo
 
 - Font\_lib support for multiple fonts (nothing yet visible in mods) ;
 
-- Font\_lib support for Unicode characters (limited to Unicode Plane 0: 0000-FFFF, see [Wikipedia](https://en.wikipedia.org/wiki/Unicode)) ; 
+- Font\_lib support for Unicode characters (limited to Unicode Plane 0: 0000-FFFF, see [Wikipedia](https://en.wikipedia.org/wiki/Unicode)) ;
 
 - New "default" font with original textures from Vanessa Ezekowitz (VanessaE) ;
 
@@ -108,7 +119,7 @@ This change is a preparation to merge Andrzej Pieńkowski fork (apienk) : new fo
 
 ### 2017-08-26
 
-- Changed signs from wallmounted to facedir to improve textures and make it possible to use screwdriver. 
+- Changed signs from wallmounted to facedir to improve textures and make it possible to use screwdriver.
 **IMPORTANT** : Map will be updated to change to new nodes but inventory items will turn into "Unknown items" and have to be re-crafted.
 
 - Intllib support added with french translation (whole modpack, thanks to fat115) ;
@@ -120,6 +131,3 @@ This change is a preparation to merge Andrzej Pieńkowski fork (apienk) : new fo
 - Added back and side textures to all signs (road_signs) ;
 
 - Added more sign types : White/yellow/green signs and direction signs (signs_road) ;
-
-
-
