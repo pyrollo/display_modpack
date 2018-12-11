@@ -12,3 +12,12 @@ This library's purpose is to ease creation of nodes with one or more displays on
 
 For more information, see the [forum topic](https://forum.minetest.net/viewtopic.php?t=19365) at the Minetest forums.
 
+## Deprecation notice (for modders)
+
+### December 2018
+Following objects are deprecated, shows a warning in log when used:
+* `display_modpack_node` group (use `display_api` group instead);
+* `display_lib_node` group (use `display_api` group instead);
+* `display_lib` global table (use `display_api` global table instead);
+
+These objects will be removed in the future.
