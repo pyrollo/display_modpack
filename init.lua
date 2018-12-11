@@ -33,6 +33,4 @@ dofile(font_api.path.."/fontform.lua")
 if minetest.get_modpath("display_api") then
 	dofile(font_api.path.."/display_api.lua")
 end
-
--- Compatibility
-font_lib = font_api
+dofile(font_api.path.."/deprecation.lua")
