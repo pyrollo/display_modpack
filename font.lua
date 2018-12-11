@@ -39,14 +39,15 @@ local function char_to_codepoint(str)
 	local bytes = get_char_bytes(str)
 	if bytes == 1 then
 	    return str:byte(1)
-	elseif bytes == 2 then
+	elseif bytes == 2 and str:byte(2) ~= nil then
 		return (str:byte(1) - 0xC2) * 0x40
 			+ str:byte(2)
-	elseif bytes == 3 then
+	elseif bytes == 3 and str:byte(2) ~= nil and str:byte(3) ~= nil then
 		return (str:byte(1) - 0xE0) * 0x1000
 			+ str:byte(2) % 0x40 * 0x40
 			+ str:byte(3) % 0x40
-	elseif bytes == 4 then -- Not tested
+	elseif bytes == 4 and str:byte(2) ~= nil and str:byte(3) ~= nil
+		and str:byte(4) ~= nil then -- Not tested
 		return (str:byte(1) - 0xF0) * 0x40000
 			+ str:byte(2) % 0x40 * 0x1000
 			+ str:byte(3) % 0x40 * 0x40
@@ -117,6 +118,12 @@ function Font:get_next_char(text)
 
 	local codepoint = char_to_codepoint(text)
 
+	if codepoint == nil then
+		minetest.log("warning",
+			"[font_api] Encountered a non UTF char, not displaying text.")
+		return nil, ''
+	end
+
 	-- Fallback mechanism
 	if self.widths[codepoint] == nil then
 		local char = text:sub(1, bytes)
@@ -175,6 +182,7 @@ function Font:get_width(line)
 
 	while line ~= "" do
 		codepoint, line = self:get_next_char(line)
+		if codepoint == nil then return 0 end -- UTF Error
 		width = width + self:get_char_width(codepoint)
 	end
 
@@ -247,6 +255,7 @@ function Font:render(text, texturew, textureh, style)
 
 		while line.text ~= '' do
 			codepoint, line.text = self:get_next_char(line.text)
+			if codepoint == nil then return '' end -- UTF Error
 
 			-- Add image only if it is visible (at least partly)
 			if x + self.widths[codepoint] >= 0 and x <= texturew then
