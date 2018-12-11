@@ -1,5 +1,5 @@
 --[[
-	font_api mod for Minetest - Library to create textures with fonts and text
+	font_api mod for Minetest - Library creating textures with fonts and text
 	(c) Pierre-Yves Rollo
 
 	This program is free software: you can redistribute it and/or modify

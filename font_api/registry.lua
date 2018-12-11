@@ -1,20 +1,19 @@
 --[[
-    font_api mod for Minetest - Library to add font display capability
-    to display_api mod.
-    (c) Pierre-Yves Rollo
+	font_api mod for Minetest - Library creating textures with fonts and text
+	(c) Pierre-Yves Rollo
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+	This program is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 3 of the License, or
+	(at your option) any later version.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+	You should have received a copy of the GNU General Public License
+	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 --]]
 
 -- Global variables
@@ -124,9 +123,9 @@ end
 -- @param def font definition. A associative array with following keys :
 -- @key default True (by default) if this font may be used as default font
 -- @key height (mandatory) Height in pixels of all font textures
--- @key widths (mandatory) Array of character widths in pixels, indexed by 
+-- @key widths (mandatory) Array of character widths in pixels, indexed by
 -- UTF codepoints
--- @key margintop (optional) Margin (in texture pixels) added on top of each 
+-- @key margintop (optional) Margin (in texture pixels) added on top of each
 -- char texture.
 -- @key marginbottom (optional) dded at bottom of each char texture.
 -- @key linespacing (optional) Spacing (in texture pixels) between each lines.
@@ -144,19 +143,18 @@ function font_api.register_font(font_name, font_def)
 
 	local font = font_api.Font:new(font_def)
 
-	if font == nil then	
+	if font == nil then
 		minetest.log("error", "Unable to register font \""..font_name.."\".")
 		return
 	end
-	
+
 	font.name = font_name
 	font_api.registered_fonts[font_name] = font
 	font_api.registered_fonts_number = font_api.registered_fonts_number + 1
-	
+
 	-- Force to choose again default font
 	-- (allows use of fonts registered after start)
 	default_font = false
-	
+
 	minetest.log("action", "New font registered in font_api: "..font_name..".")
 end
-
