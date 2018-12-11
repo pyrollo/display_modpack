@@ -106,12 +106,11 @@ local function place_entities(pos)
 				y = pos.y - top,
 				z = pos.z - values.dz * depth + values.rz * right})
 
-			objrefs[entity_name]:setyaw(values.yaw)
+			objrefs[entity_name]:setyaw(values.yaw + (props.yaw or 0))
 		end
 	end
 	return objrefs
 end
-
 
 --- Entity update
 function update_entity(entity)
