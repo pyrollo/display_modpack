@@ -30,10 +30,10 @@ Extra font mods can be found here:
 
 ### December 2018
 Following objects are deprecated, shows a warning in log when used:
-
 * `display_modpack_node` group (use `display_api` group instead);
 * `display_lib_node` group (use `display_api` group instead);
 * `display_lib` global table (use `display_api` global table instead);
+* `font_lib` global table (use `font_api` global table instead);
 
 These objects will be removed in the future.
 
