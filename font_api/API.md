@@ -1,5 +1,5 @@
-# Font Lib API
-This document describes Font Lib API. Font Lib creates textures for font display on entities.
+# Font API
+This document describes Font API. Font API creates textures for font display on entities.
 
 ## Settings
 ### default_font
@@ -97,7 +97,7 @@ Standard on_display_update entity callback.
 
 Node should have a corresponding display_entity with size, resolution and maxlines fields and optionally halign, valign and color fields.
 
-### Font definition table
+## Font definition table
 Font definition table used by **font_api.register_font** and **font\_api.Font:new** may/can contain following elements:
 
 * `height` (required): Font height in pixels (all font textures should have the same height) .
@@ -107,6 +107,14 @@ Font definition table used by **font_api.register_font** and **font\_api.Font:ne
 * `linespacing` (optional): Spacing (in texture pixels) between each lines.
 
 `margintop`, `marginbottom` and `linespacing` can be negative numbers (default 0) and are to be used to adjust various font styles to each other.
+
+Font attributes around a single char:\
+![Font attributes on a char](doc/font.svg)
+
+Font attributes effects on several lines:\
+![Font attributes on lines](doc/lines.svg)
+
+#### Additional requirements
 
 Font must have a char 0 which will be used to display any unknown char.
 
