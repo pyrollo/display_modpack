@@ -54,7 +54,7 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = 'signs:label_small',
+	output = 'signs:label_medium',
 	recipe = {
 		{'default:paper', 'default:paper', 'dye:black'},
 	}
