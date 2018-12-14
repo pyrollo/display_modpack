@@ -1,5 +1,5 @@
 # Display Modpack
-Version 1.2.2
+Version 1.2.3
 
 This modpack provides mods with dynamic display. Mods are :
 
