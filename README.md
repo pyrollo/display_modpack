@@ -30,104 +30,78 @@ Extra font mods can be found here:
 
 ### December 2018
 Following objects are deprecated, shows a warning in log when used:
-
 * `display_modpack_node` group (use `display_api` group instead);
 * `display_lib_node` group (use `display_api` group instead);
 * `display_lib` global table (use `display_api` global table instead);
+* `font_lib` global table (use `font_api` global table instead);
 
 These objects will be removed in the future.
 
 ## Changelog
 
-### 2018-12-02 (Version 1.2.2)
+### 2018-12-14 (Version 1.2.3)
+- __display_api__: New `yaw` attributes, entities can now have different angles with node.
+- __font_api__: New `Font:render` method for texture creation
+- __font_api__: Specific management for fixed width font. Allows number of columns based texture width.
+- __font_api__: Improve `display_api` integration into `font_api`. Display API fully optional. `font_api.on_display_update` defined only if `display_api` enabled.
+- __font_api__: Improve management of invalid UTF strings (should not crash anymore)
+- __font_api__: Deprecation of `font_lib`
+- __signs__: Fixed craft recipe for labels
 
+### 2018-12-02 (Version 1.2.2)
 - Fixed a bug that prevented Display API from working on some systems (Raspberry Pi)
 
 ### 2018-11-01 (Version 1.2.1)
-
 - Now font can be chosen per sign / stele
 
 ### 2018-11-01 (Version 1.2)
-
 - Labels and woodend signs added.
-
 - Fallback mechanism for missing chars (For example: "é" --> "e" --> "E").
-
 - Several bug fixes by 12Me21 and naturefreshmilk.
 
 ### 2018-07-16 (Version 1.1.1)
-
 - Boards mod added.
-
 - Bug fix in default font chosing when multiple font registered.
 
 ### 2018-07-13 (Version 1.1.0)
-
 - Font API rework introducing Font class.
-
 - Replaced default Epilepsy Font by Metro Font for licensing purposes,
-
 - Rework of all nodes displaying text accordingly to the Font API rework.
 
 As font_epilepsy mod has been replaced by font_metro mod, **don't forget to activate font_metro mod after updating** or you won't have any text displayed.
 
 ### 2018-05-30 (Version 1.0.1)
-
 Mostly bug fixes :
-
 - Fix steles orientation when placing
-
 - Update entity on mapblock load
-
 - Use default formspec style
-
 - Fix ndef nill value in steles mod when technics not installed
-
 - Seperate signs API from signs définitions
-
 - Allow a greater offset between display and block
 
 ### 2018-01-13 (Version 1.0)
-
 - Switch to Epilepsy font by KREATIVE SOFTWARE
-
 - Add settings "default_font"
-
 - Add horizontal alignment
-
 - Add tool for creating font textures from .ttf font files
-
 - Fix UTF 8 to Unicode decoding
-
 - Updated forum thread link in README.md
 
 ### 2017-12-19
-
 This change is a preparation to merge Andrzej Pieńkowski fork (apienk) : new font and support of UTF chars.
-
 - Font\_lib support for multiple fonts (nothing yet visible in mods) ;
-
 - Font\_lib support for Unicode characters (limited to Unicode Plane 0: 0000-FFFF, see [Wikipedia](https://en.wikipedia.org/wiki/Unicode)) ;
-
 - New "default" font with original textures from Vanessa Ezekowitz (VanessaE) ;
 
 ### 2017-12-10
-
 - Compatibility of signs mod with signs_lib (thanks to gpcf) ;
-
 - Added large banner in road signs (thanks to gpcf) ;
 
 ### 2017-08-26
-
 - Changed signs from wallmounted to facedir to improve textures and make it possible to use screwdriver.
 **IMPORTANT** : Map will be updated to change to new nodes but inventory items will turn into "Unknown items" and have to be re-crafted.
-
 - Intllib support added with french translation (whole modpack, thanks to fat115) ;
-
 - Punch on nodes to update entity (signs, signs_road and steles). Usefull in case of /clearobjects ;
-
 - Changed wooden direction sign textures (signs) ;
-
 - Added back and side textures to all signs (road_signs) ;
-
 - Added more sign types : White/yellow/green signs and direction signs (signs_road) ;

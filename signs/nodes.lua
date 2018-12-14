@@ -33,9 +33,8 @@ local function display_poster(pos, node, player)
 		node.name, minetest.pos_to_string(pos))
 
 	-- Title texture
-	local titletexture = font:make_text_texture(
-		meta:get_string("display_text"), font:get_height()*8.4,
-		font:get_height(), 1, "center")
+	local titletexture = font:render(meta:get_string("display_text"),
+		font:get_height()*8.4, font:get_height(), { lines = 1 })
 
 	fs = string.format([=[
 		size[7,9]bgcolor[#0000]
