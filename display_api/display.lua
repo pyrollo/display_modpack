@@ -101,12 +101,12 @@ local function place_entities(pos)
 					minetest.serialize({ nodepos = pos }))
 			end
 
-			objrefs[entity_name]:setpos({
+			objrefs[entity_name]:set_pos({
 				x = pos.x - values.dx * depth + values.rx * right,
 				y = pos.y - top,
 				z = pos.z - values.dz * depth + values.rz * right})
 
-			objrefs[entity_name]:setyaw(values.yaw + (props.yaw or 0))
+			objrefs[entity_name]:set_yaw(values.yaw + (props.yaw or 0))
 		end
 	end
 	return objrefs
