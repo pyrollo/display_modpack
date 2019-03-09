@@ -1,6 +1,6 @@
 # Font API
 
-This library for font display on entities (to be used with display_api for sign creation).
+A library for rendernig text on textures (to be used with display_api for sign creation).
 
 **Dependancies**: default
 
