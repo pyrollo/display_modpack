@@ -1,5 +1,5 @@
 # Display Modpack
-Version 1.2.3
+Version 1.3
 
 This modpack provides mods with dynamic display. Mods are :
 
@@ -38,6 +38,11 @@ Following objects are deprecated, shows a warning in log when used:
 These objects will be removed in the future.
 
 ## Changelog
+
+### 2019-03-09 (Version 1.3)
+- __display_api__: Display nodes can be rotated in every directions (if running Minetest 5 or above).
+- __display_api__: New setting to restrict rotations to Minetest 0.4 abilities (**restriction enabled by default**).
+- __sign_api__: Changed behavior of screwdriver if no rotation restriction.
 
 ### 2018-12-14 (Version 1.2.3)
 - __display_api__: New `yaw` attributes, entities can now have different angles with node.
