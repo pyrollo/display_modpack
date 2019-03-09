@@ -226,30 +226,32 @@ end
 
 --- On_place callback for display_api items.
 -- Does nothing more than preventing node from being placed on ceiling or ground
--- TODO:When MT<5 is not in use anymore, this should be deprecated
+-- TODO:When MT<5 is not in use anymore, simplify this
 function display_api.on_place(itemstack, placer, pointed_thing, override_param2)
-	if not display_api.rotation_restriction then
-		return minetest.item_place(itemstack, placer, pointed_thing, override_param2)
-	end
-
 	local ndef = itemstack:get_definition()
-	local above = pointed_thing.above
-	local under = pointed_thing.under
-	local dir = {x = under.x - above.x, y = 0, z = under.z - above.z}
+	local dir = {
+		x = pointed_thing.under.x - pointed_thing.above.x,
+		y = pointed_thing.under.y - pointed_thing.above.y,
+		z = pointed_thing.under.z - pointed_thing.above.z,
+	}
 
-	-- If item is not placed on a wall, use the player's view direction instead
-	if dir.x == 0 and dir.z == 0 then
-		dir = placer:get_look_dir()
+	if display_api.rotation_restriction then
+		-- If item is not placed on a wall, use the player's view direction instead
+		if dir.x == 0 and dir.z == 0 then
+			dir = placer:get_look_dir()
+		end
 		dir.y = 0
 	end
 
 	local param2 = 0
 	if ndef then
-		local paramtype2 = ndef.paramtype2
-		if paramtype2 == "wallmounted" or paramtype2 == "colorwallmounted" then
+		if ndef.paramtype2 == "wallmounted" or
+			ndef.paramtype2 == "colorwallmounted" then
 			param2 = minetest.dir_to_wallmounted(dir)
-		elseif paramtype2 == "facedir" or paramtype2 == "colorfacedir"  then
-			param2 = minetest.dir_to_facedir(dir)
+
+		elseif ndef.paramtype2 == "facedir" or
+			ndef.paramtype2 == "colorfacedir"  then
+			param2 = minetest.dir_to_facedir(dir, not display_api.rotation_restriction)
 		end
 	end
 	return minetest.item_place(itemstack, placer, pointed_thing,
