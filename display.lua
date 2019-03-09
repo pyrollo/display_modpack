@@ -22,26 +22,81 @@
 -- variable as spacing between entity and node
 display_api.entity_spacing = 0.002
 
+-- Settings
+display_api.rotation_restriction =
+	minetest.settings:get_bool("display_rotation_restriction", true)
+
+if display_api.rotation_restriction then
+	minetest.log("action", "[display_api] Legacy rotation restriction in effect")
+end
+
 -- Maximum entity position relative to the node pos
 local max_entity_pos = 1.5
 
--- Miscelaneous values depending on wallmounted param2
-local wallmounted_values = {
-	[2]={dx=-1, dz=0,  rx=0,  rz=-1, yaw=-math.pi/2},
-	[3]={dx=1,  dz=0,  rx=0,  rz=1,  yaw=math.pi/2 },
-	[4]={dx=0,  dz=-1, rx=1,  rz=0,  yaw=0         },
-	[5]={dx=0,  dz=1,  rx=-1, rz=0,  yaw=math.pi   }
-}
+local wallmounted_rotations, facedir_rotations
 
--- Miscelaneous values depending on facedir param2
-local facedir_values = {
-	[0]={dx=0,  dz=-1, rx=1,  rz=0,  yaw=0         },
-	[1]={dx=-1, dz=0,  rx=0,  rz=-1, yaw=-math.pi/2},
-	[2]={dx=0,  dz=1,  rx=-1, rz=0,  yaw=math.pi   },
-	[3]={dx=1,  dz=0,  rx=0,  rz=1,  yaw=math.pi/2 }
-}
+if display_api.rotation_restriction then
+	-- Legacy rotations (MT<5.0)
+	wallmounted_rotations = {
+		[2]={x=0, y=3, z=0}, [3]={x=0, y=1, z=0},
+		[4]={x=0, y=0, z=0}, [5]={x=0, y=2, z=0},
+	}
+	facedir_rotations = {
+		[0]={x=0, y=0, z=0}, [1]={x=0, y=3, z=0},
+		[2]={x=0, y=2, z=0}, [3]={x=0, y=1, z=0},
+	}
+else
+	-- Full rotations (MT>=5.0)
+	wallmounted_rotations = {
+		[0]={x=1, y=0, z=0}, [1]={x=3, y=0, z=0},
+		[2]={x=0, y=3, z=0}, [3]={x=0, y=1, z=0},
+		[4]={x=0, y=0, z=0}, [5]={x=0, y=2, z=0},
+	}
+	facedir_rotations = {
+		[ 0]={x=0, y=0, z=0}, [ 1]={x=0, y=3, z=0},
+		[ 2]={x=0, y=2, z=0}, [ 3]={x=0, y=1, z=0},
+		[ 4]={x=3, y=0, z=0}, [ 5]={x=0, y=3, z=3},
+		[ 6]={x=1, y=0, z=2}, [ 7]={x=0, y=1, z=1},
+		[ 8]={x=1, y=0, z=0}, [ 9]={x=0, y=3, z=1},
+		[10]={x=3, y=0, z=2}, [11]={x=0, y=1, z=3},
+		[12]={x=0, y=0, z=1}, [13]={x=3, y=0, z=1},
+		[14]={x=2, y=0, z=1}, [15]={x=1, y=0, z=1},
+		[16]={x=0, y=0, z=3}, [17]={x=1, y=0, z=3},
+		[18]={x=2, y=0, z=3}, [19]={x=3, y=0, z=3},
+		[20]={x=0, y=0, z=2}, [21]={x=0, y=1, z=2},
+		[22]={x=0, y=2, z=2}, [23]={x=0, y=3, z=2},
+	}
+end
 
--- dx/dy = depth vector, rx/ly = right vector, yaw = yaw of entity,
+-- Compute other useful values depending on wallmounted and facedir param
+local wallmounted_values = {}
+local facedir_values = {}
+
+local function compute_values(r)
+	local function rx(v) return { x=v.x, y=v.z, z=-v.y} end
+	local function ry(v) return { x=-v.z, y=v.y, z=v.x} end
+	local function rz(v) return { x=v.y, y=-v.x, z=v.z} end
+
+	local d = { x = 0, y = 0, z = 1 }
+	local w = { x = 1, y = 0, z = 0 }
+	local h = { x = 0, y = 1, z = 0 }
+
+	-- Important to keep z rotation first (not same results)
+	for _ = 1, r.z do d, w, h = rz(d), rz(w), rz(h) end
+	for _ = 1, r.x do d, w, h = rx(d), rx(w), rx(h) end
+	for _ = 1, r.y do d, w, h = ry(d), ry(w), ry(h) end
+
+	return {rotation=r, depth=d, width=w, height=h}
+end
+
+for i, r in pairs(facedir_rotations) do
+	facedir_values[i] = compute_values(r)
+end
+
+for i, r in pairs(wallmounted_rotations) do
+	wallmounted_values[i] = compute_values(r)
+end
+
 local function get_values(node)
 	local ndef = minetest.registered_nodes[node.name]
 
@@ -88,10 +143,10 @@ end
 local function place_entities(pos)
 	local node = minetest.get_node(pos)
 	local ndef = minetest.registered_nodes[node.name]
-	local values = get_values(node)
+	local v = get_values(node)
 	local objrefs = get_entities(pos)
 
-	if values and ndef and ndef.display_entities then
+	if v and ndef and ndef.display_entities then
 		for entity_name, props in pairs(ndef.display_entities) do
 			local depth = clip_pos_prop(props.depth)
 			local right = clip_pos_prop(props.right)
@@ -102,11 +157,20 @@ local function place_entities(pos)
 			end
 
 			objrefs[entity_name]:set_pos({
-				x = pos.x - values.dx * depth + values.rx * right,
-				y = pos.y - top,
-				z = pos.z - values.dz * depth + values.rz * right})
+				x = pos.x + v.depth.x*depth + v.width.x*right - v.height.x*top,
+				y = pos.y + v.depth.y*depth + v.width.y*right - v.height.y*top,
+				z = pos.z + v.depth.z*depth + v.width.z*right - v.height.z*top,
+			})
 
-			objrefs[entity_name]:set_yaw(values.yaw + (props.yaw or 0))
+			if objrefs[entity_name].set_rotation then
+				objrefs[entity_name]:set_rotation({
+					x = v.rotation.x*math.pi/2,
+					y = v.rotation.y*math.pi/2 + (props.yaw or 0),
+					z = v.rotation.z*math.pi/2,
+				})
+			else -- For minetest < 5.0 -- TODO: To be removed in the future
+				objrefs[entity_name]:set_yaw(values.rotation.y + (props.yaw or 0))
+			end
 		end
 	end
 	return objrefs
@@ -162,7 +226,12 @@ end
 
 --- On_place callback for display_api items.
 -- Does nothing more than preventing node from being placed on ceiling or ground
+-- TODO:When MT<5 is not in use anymore, this should be deprecated
 function display_api.on_place(itemstack, placer, pointed_thing, override_param2)
+	if not display_api.rotation_restriction then
+		return minetest.item_place(itemstack, placer, pointed_thing, override_param2)
+	end
+
 	local ndef = itemstack:get_definition()
 	local above = pointed_thing.above
 	local under = pointed_thing.under

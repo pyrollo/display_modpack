@@ -1,0 +1,1 @@
+display_rotation_restriction(Legacy nodes rotation restriction MT<5.0) bool true
