@@ -1,6 +1,8 @@
 # Display Modpack
 Version 1.3
 
+**Important**: If using Minetest 5 and above, disable `display_rotation_restriction` in settings and enjoy rotation of display nodes in every direction!
+
 This modpack provides mods with dynamic display. Mods are :
 
 - **[display_api](https://github.com/pyrollo/display_modpack/tree/master/display_api)**: A library for adding display entities to nodes;
