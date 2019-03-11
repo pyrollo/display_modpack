@@ -169,7 +169,7 @@ local function place_entities(pos)
 					z = v.rotation.z*math.pi/2,
 				})
 			else -- For minetest < 5.0 -- TODO: To be removed in the future
-				objrefs[entity_name]:set_yaw(values.rotation.y + (props.yaw or 0))
+				objrefs[entity_name]:set_yaw(v.rotation.y*math.pi/2 + (props.yaw or 0))
 			end
 		end
 	end
