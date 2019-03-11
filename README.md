@@ -1,7 +1,5 @@
 # Display Modpack
-Version 1.3
-
-**Important**: If using Minetest 5 and above, disable `display_rotation_restriction` in settings and enjoy rotation of display nodes in every direction!
+Version 1.3.1
 
 This modpack provides mods with dynamic display. Mods are :
 
