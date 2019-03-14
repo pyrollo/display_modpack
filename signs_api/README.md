@@ -27,3 +27,7 @@ Handles screwdriver rotation. Direction is affected for direction signs.
 
 ### `signs_api.register_sign(mod, name, model)`
 A method to quickly register signs.
+
+## Changelog
+### 2019-03-14
+- __sign_api__: Screwdriver behavior changed. Now, left click rotates and changes direction.
