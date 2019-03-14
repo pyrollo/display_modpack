@@ -23,9 +23,10 @@ function deprecated_global_table(deprecated_global_name, replacement_global_name
 	assert(type(replacement_global_name) == 'string', "replacement_global_name should be a string.")
 	assert(deprecated_global_name ~= '', "deprecated_global_name should not be empty.")
 	assert(replacement_global_name ~= '', "replacement_global_name should not be empty.")
-	assert(rawget(_G, deprecated_global_name) == nil, "replacement global already exists.")
+	assert(rawget(_G, deprecated_global_name) == nil, "deprecated global does not exist.")
 	if _G[replacement_global_name] == nil then
-		print('warn_deprecated_functions: Warning, replacement global "'..replacement_global_name..'" does not exists.')
+		minetest.log('warning', string.format(
+			'Replacement global "%s" does not exists.', replacement_global_name))
 		return
 	end
 	local meta = {
@@ -34,15 +35,19 @@ function deprecated_global_table(deprecated_global_name, replacement_global_name
 		__index = function(table, key)
 			local meta = getmetatable(table)
 			local dbg = debug.getinfo(2, "lS")
-			minetest.log("warning", string.format('Warning: Accessing deprecated "%s" table, "%s" should be used instead (%s:%d).',
-				meta.deprecated, meta.replacement, (dbg.short_src or 'unknown'), (dbg.currentline or 0)))
+			minetest.log("warning", string.format(
+				'Accessing deprecated "%s" table, "%s" should be used instead (%s:%d).',
+				meta.deprecated, meta.replacement, (dbg.short_src or 'unknown'),
+				(dbg.currentline or 0)))
 			return _G[meta.replacement][key]
 		end,
 		__newindex = function(table, key, value)
 			local meta = getmetatable(table)
 			local dbg = debug.getinfo(2, "lS")
-			minetest.log("warning", string.format('Warning: Accessing deprecated "%s" table, "%s" should be used instead (%s:%d).',
-				meta.deprecated, meta.replacement, (dbg.short_src or 'unknown'), (dbg.currentline or 0)))
+			minetest.log("warning", string.format(
+				'Accessing deprecated "%s" table, "%s" should be used instead (%s:%d).',
+				meta.deprecated, meta.replacement, (dbg.short_src or 'unknown'),
+				(dbg.currentline or 0)))
 			_G[meta.replacement][key]=value
 		end,
 	}
