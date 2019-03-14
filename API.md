@@ -47,9 +47,9 @@ This is a helper to register entities used for display.
 
 ### Display_entities fields
 `on_display_update` is a callback in charge of setting up entity texture. If not set, entity will have no texture and will be displayed as unknown item.\
-`depth`, `right` and `height`: Entity position regarding to node facedir/wallmounted main axis.\
+`depth`, `right` and `top`: Entity position regarding to node facedir/wallmounted main axis.\
 Values for these fields can be any number between -1.5 and 1.5 (default value is 0). Position 0,0,0 is the center of the node.\
-`depth` goes from front (-0.5) to rear (0.5), `height` goes from bottom (-0.5) to top (0.5) and `right` goes from left (-0.5) to right (0.5).\
+`depth` goes from front (-0.5) to rear (0.5), `top` goes from bottom (-0.5) to top (0.5) and `right` goes from left (-0.5) to right (0.5).\
 `yaw`: Entity yaw in radians, regarding to main axis. Default is 0, aligned to node face.
 
 In order to avoid flickering text, it's better to have text a little behind node surface. A good spacing value is given by `display_api.entity_spacing` variable.
@@ -80,7 +80,7 @@ In order to avoid flickering text, it's better to have text a little behind node
 				depth = 0.3,
 				on_display_update = my_display_update1 },
 			["mymod:entity1"] = {
-				depth = 0.2, height = 0.1,
+				depth = 0.2, top = 0.1,
 				on_display_update = my_display_update2 },
 			},
 		...
