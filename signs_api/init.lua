@@ -91,6 +91,7 @@ end
 function signs_api.on_place_direction(itemstack, placer, pointed_thing)
 	local name = itemstack:get_name()
 	local ndef = minetest.registered_nodes[name]
+	local restriction = display_api.is_rotation_restricted()
 
 	local bdir = {
 		x = pointed_thing.under.x - pointed_thing.above.x,
@@ -103,12 +104,12 @@ function signs_api.on_place_direction(itemstack, placer, pointed_thing)
 
 	if ndef.paramtype2 == "facedir" then
 		-- If legacy mode, only accept upright nodes
-		if display_api.rotation_restriction and bdir.x == 0 and bdir.z == 0 then
+		if restriction and bdir.x == 0 and bdir.z == 0 then
 			-- Ceiling or floor pointed (facedir chosen from player dir)
 			ndir = minetest.dir_to_facedir({x=pdir.x, y=0, z=pdir.z})
 		else
 			-- Wall pointed or no rotation restriction
-			ndir = minetest.dir_to_facedir(bdir, not display_api.rotation_restriction)
+			ndir = minetest.dir_to_facedir(bdir, not restriction)
 		end
 
 		test = { [0]=-pdir.x, pdir.z, pdir.x, -pdir.z, -pdir.x, [8]=pdir.x }
@@ -117,7 +118,7 @@ function signs_api.on_place_direction(itemstack, placer, pointed_thing)
 	if ndef.paramtype2 == "wallmounted" then
 		ndir = minetest.dir_to_wallmounted(bdir)
 		-- If legacy mode, only accept upright nodes
-		if display_api.rotation_restriction and (ndir == 0 or ndir == 1) then
+		if restriction and (ndir == 0 or ndir == 1) then
 			ndir = minetest.dir_to_wallmounted({x=pdir.x, y=0, z=pdir.z})
 		end
 
@@ -166,7 +167,7 @@ end
 
 -- Legacy mode with rotation restriction
 -- TODO:When MT < 5.0 no more in use, to be removed
-if display_api.rotation_restriction then
+if display_api.is_rotation_restricted() then
 	signs_api.on_rotate = function(pos, node, player, mode, new_param2)
 		-- If rotation mode is 2 and sign is directional, swap direction.
 		-- Otherwise use display_api's on_rotate function.

@@ -22,51 +22,29 @@
 -- variable as spacing between entity and node
 display_api.entity_spacing = 0.002
 
--- Settings
-display_api.rotation_restriction =
-	minetest.settings:get_bool("display_rotation_restriction", true)
-
-if display_api.rotation_restriction then
-	minetest.log("action", "[display_api] Legacy rotation restriction in effect")
-end
-
 -- Maximum entity position relative to the node pos
 local max_entity_pos = 1.5
 
-local wallmounted_rotations, facedir_rotations
+local wallmounted_rotations = {
+	[0]={x=1, y=0, z=0}, [1]={x=3, y=0, z=0},
+	[2]={x=0, y=3, z=0}, [3]={x=0, y=1, z=0},
+	[4]={x=0, y=0, z=0}, [5]={x=0, y=2, z=0},
+}
 
-if display_api.rotation_restriction then
-	-- Legacy rotations (MT<5.0)
-	wallmounted_rotations = {
-		[2]={x=0, y=3, z=0}, [3]={x=0, y=1, z=0},
-		[4]={x=0, y=0, z=0}, [5]={x=0, y=2, z=0},
-	}
-	facedir_rotations = {
-		[0]={x=0, y=0, z=0}, [1]={x=0, y=3, z=0},
-		[2]={x=0, y=2, z=0}, [3]={x=0, y=1, z=0},
-	}
-else
-	-- Full rotations (MT>=5.0)
-	wallmounted_rotations = {
-		[0]={x=1, y=0, z=0}, [1]={x=3, y=0, z=0},
-		[2]={x=0, y=3, z=0}, [3]={x=0, y=1, z=0},
-		[4]={x=0, y=0, z=0}, [5]={x=0, y=2, z=0},
-	}
-	facedir_rotations = {
-		[ 0]={x=0, y=0, z=0}, [ 1]={x=0, y=3, z=0},
-		[ 2]={x=0, y=2, z=0}, [ 3]={x=0, y=1, z=0},
-		[ 4]={x=3, y=0, z=0}, [ 5]={x=0, y=3, z=3},
-		[ 6]={x=1, y=0, z=2}, [ 7]={x=0, y=1, z=1},
-		[ 8]={x=1, y=0, z=0}, [ 9]={x=0, y=3, z=1},
-		[10]={x=3, y=0, z=2}, [11]={x=0, y=1, z=3},
-		[12]={x=0, y=0, z=1}, [13]={x=3, y=0, z=1},
-		[14]={x=2, y=0, z=1}, [15]={x=1, y=0, z=1},
-		[16]={x=0, y=0, z=3}, [17]={x=1, y=0, z=3},
-		[18]={x=2, y=0, z=3}, [19]={x=3, y=0, z=3},
-		[20]={x=0, y=0, z=2}, [21]={x=0, y=1, z=2},
-		[22]={x=0, y=2, z=2}, [23]={x=0, y=3, z=2},
-	}
-end
+local facedir_rotations = {
+	[ 0]={x=0, y=0, z=0}, [ 1]={x=0, y=3, z=0},
+	[ 2]={x=0, y=2, z=0}, [ 3]={x=0, y=1, z=0},
+	[ 4]={x=3, y=0, z=0}, [ 5]={x=0, y=3, z=3},
+	[ 6]={x=1, y=0, z=2}, [ 7]={x=0, y=1, z=1},
+	[ 8]={x=1, y=0, z=0}, [ 9]={x=0, y=3, z=1},
+	[10]={x=3, y=0, z=2}, [11]={x=0, y=1, z=3},
+	[12]={x=0, y=0, z=1}, [13]={x=3, y=0, z=1},
+	[14]={x=2, y=0, z=1}, [15]={x=1, y=0, z=1},
+	[16]={x=0, y=0, z=3}, [17]={x=1, y=0, z=3},
+	[18]={x=2, y=0, z=3}, [19]={x=3, y=0, z=3},
+	[20]={x=0, y=0, z=2}, [21]={x=0, y=1, z=2},
+	[22]={x=0, y=2, z=2}, [23]={x=0, y=3, z=2},
+}
 
 -- Compute other useful values depending on wallmounted and facedir param
 local wallmounted_values = {}
@@ -86,7 +64,9 @@ local function compute_values(r)
 	for _ = 1, r.x do d, w, h = rx(d), rx(w), rx(h) end
 	for _ = 1, r.y do d, w, h = ry(d), ry(w), ry(h) end
 
-	return {rotation=r, depth=d, width=w, height=h}
+	return {
+		rotation=r, depth=d, width=w, height=h,
+		restricted=(r.x==0 and r.z==0) }
 end
 
 for i, r in pairs(facedir_rotations) do
@@ -97,7 +77,38 @@ for i, r in pairs(wallmounted_rotations) do
 	wallmounted_values[i] = compute_values(r)
 end
 
-local function get_values(node)
+-- Detect rotation restriction
+local rotation_restricted = nil
+minetest.register_entity('display_api:dummy_entity', {
+	collisionbox = { 0, 0, 0, 0, 0, 0 },
+	visual = "upright_sprite",
+	textures = {} })
+
+function display_api.is_rotation_restricted()
+	if rotation_restricted == nil then
+		local objref = minetest.add_entity(
+			{x=0, y=0, z=0}, 'display_api:dummy_entity')
+		if objref then
+			rotation_restricted = objref.set_rotation == nil
+			objref:remove()
+		end
+	end
+	return rotation_restricted
+end
+
+-- Clip position property to maximum entity position
+
+local function clip_pos_prop(posprop)
+	if posprop then
+		return math.max(-max_entity_pos, math.min(max_entity_pos, posprop))
+	else
+		return 0
+	end
+end
+
+-- Get values needed for orientation computation of node
+
+local function get_orientation_values(node)
 	local ndef = minetest.registered_nodes[node.name]
 
 	if ndef then
@@ -106,12 +117,17 @@ local function get_values(node)
 			return wallmounted_values[node.param2 % 8]
 		elseif paramtype2 == "facedir" or paramtype2 == "colorfacedir"  then
 			return facedir_values[node.param2 % 32]
+		else
+			-- No orientation or unknown orientation type
+			return facedir_values[0]
 		end
 	end
 end
 
---- Gets the display entities attached with a node. Removes extra ones
-local function get_entities(pos)
+-- Gets the display entities attached with a node.
+-- Add missing and remove duplicates
+
+local function get_display_objrefs(pos, create)
 	local objrefs = {}
 	local ndef = minetest.registered_nodes[minetest.get_node(pos).name]
 	if ndef and ndef.display_entities then
@@ -127,85 +143,57 @@ local function get_entities(pos)
 				end
 			end
 		end
-	end
-	return objrefs
-end
-
-local function clip_pos_prop(posprop)
-	if posprop then
-		return math.max(-max_entity_pos, math.min(max_entity_pos, posprop))
-	else
-		return 0
-	end
-end
-
---- (Create and) place display entities according to the node orientation
-local function place_entities(pos)
-	local node = minetest.get_node(pos)
-	local ndef = minetest.registered_nodes[node.name]
-	local v = get_values(node)
-	local objrefs = get_entities(pos)
-
-	if v and ndef and ndef.display_entities then
-		for entity_name, props in pairs(ndef.display_entities) do
-			local depth = clip_pos_prop(props.depth)
-			local right = clip_pos_prop(props.right)
-			local top = clip_pos_prop(props.top)
-			if not objrefs[entity_name] then
-				objrefs[entity_name] = minetest.add_entity(pos, entity_name,
-					minetest.serialize({ nodepos = pos }))
-			end
-
-			objrefs[entity_name]:set_pos({
-				x = pos.x + v.depth.x*depth + v.width.x*right - v.height.x*top,
-				y = pos.y + v.depth.y*depth + v.width.y*right - v.height.y*top,
-				z = pos.z + v.depth.z*depth + v.width.z*right - v.height.z*top,
-			})
-
-			if objrefs[entity_name].set_rotation then
-				objrefs[entity_name]:set_rotation({
-					x = v.rotation.x*math.pi/2,
-					y = v.rotation.y*math.pi/2 + (props.yaw or 0),
-					z = v.rotation.z*math.pi/2,
-				})
-			else -- For minetest < 5.0 -- TODO: To be removed in the future
-				objrefs[entity_name]:set_yaw(v.rotation.y*math.pi/2 + (props.yaw or 0))
+		if create then
+			-- Add missing
+			for name, _ in pairs(ndef.display_entities) do
+				if not objrefs[name] then
+					objrefs[name] = minetest.add_entity(pos, name,
+						minetest.serialize({ nodepos = pos }))
+				end
 			end
 		end
 	end
 	return objrefs
 end
 
---- Entity update
-function update_entity(entity)
-	if not entity then
-		return
-	end
-
-	if not entity.nodepos then
-		entity.object:remove() -- Remove old/buggy entity
-		return
-	end
-
-	local node = minetest.get_node(entity.nodepos)
-	local ndef = minetest.registered_nodes[node.name]
-	if ndef and ndef.display_entities and
-		 ndef.display_entities[entity.name] and
-		 ndef.display_entities[entity.name].on_display_update
-	then
-		-- Call on_display_update callback of a node for one of its display entities
-		ndef.display_entities[entity.name].on_display_update(entity.nodepos,
-			entity.object)
-  else
-		-- Display node has been removed, remove entity also
-		entity.object:remove()
-	end
-end
-
---- Force entity update
+--- Force entity update : position and texture
 function display_api.update_entities(pos)
-	for _, objref in pairs(place_entities(pos)) do
-		update_entity(objref:get_luaentity())
+
+	local node = minetest.get_node(pos)
+	local ndef = minetest.registered_nodes[node.name]
+	local ov = get_orientation_values(node)
+
+	for _, objref in pairs(get_display_objrefs(pos, true)) do
+		local edef = ndef.display_entities[objref:get_luaentity().name]
+		local depth = clip_pos_prop(edef.depth)
+		local right = clip_pos_prop(edef.right)
+		local top = clip_pos_prop(edef.top)
+
+		objref:set_pos({
+			x = pos.x + ov.depth.x*depth + ov.width.x*right - ov.height.x*top,
+			y = pos.y + ov.depth.y*depth + ov.width.y*right - ov.height.y*top,
+			z = pos.z + ov.depth.z*depth + ov.width.z*right - ov.height.z*top,
+		})
+
+		if objref.set_rotation then
+			objref:set_rotation({
+				x = ov.rotation.x*math.pi/2,
+				y = ov.rotation.y*math.pi/2 + (edef.yaw or 0),
+				z = ov.rotation.z*math.pi/2,
+			})
+		else
+			if ov.rotation.x ~=0 or ov.rotation.y ~= 0 then
+				minetest.log("warning", string.format(
+					"[display_api] unable to rotate correctly entity for node at %s without set_rotation method.",
+					minetest.pos_to_string(pos)))
+			end
+			objref:set_yaw(ov.rotation.y*math.pi/2 + (edef.yaw or 0))
+		end
+
+		-- Call on_display_update callback of a node for one of its display entities
+		if edef.on_display_update then
+			edef.on_display_update(pos, objref)
+		end
 	end
 end
 
@@ -220,7 +208,23 @@ function display_api.on_activate(entity, staticdata)
 			end
 			entity.object:set_armor_groups({immortal=1})
 		end
-		update_entity(entity)
+
+		if entity.nodepos then
+			local node = minetest.get_node(entity.nodepos)
+			local ndef = minetest.registered_nodes[node.name]
+			if ndef and ndef.display_entities then
+				local edef = ndef.display_entities[entity.name]
+				if edef then
+					-- Call on_display_update callback of the entity to build texture
+					if edef.on_display_update then
+						edef.on_display_update(entity.nodepos, entity.object)
+					end
+					return
+				end
+			end
+		end
+		-- If we got here, this display entity is buggy and should be removed
+		entity.object:remove()
 	end
 end
 
@@ -235,7 +239,9 @@ function display_api.on_place(itemstack, placer, pointed_thing, override_param2)
 		z = pointed_thing.under.z - pointed_thing.above.z,
 	}
 
-	if display_api.rotation_restriction then
+	local rotation_restriction = display_api.is_rotation_restricted()
+
+	if rotation_restriction then
 		-- If item is not placed on a wall, use the player's view direction instead
 		if dir.x == 0 and dir.z == 0 then
 			dir = placer:get_look_dir()
@@ -251,7 +257,7 @@ function display_api.on_place(itemstack, placer, pointed_thing, override_param2)
 
 		elseif ndef.paramtype2 == "facedir" or
 			ndef.paramtype2 == "colorfacedir"  then
-			param2 = minetest.dir_to_facedir(dir, not display_api.rotation_restriction)
+			param2 = minetest.dir_to_facedir(dir, not rotation_restriction)
 		end
 	end
 	return minetest.item_place(itemstack, placer, pointed_thing,
@@ -267,17 +273,20 @@ end
 --- On_destruct callback for display_api items.
 -- Removes entities.
 function display_api.on_destruct(pos)
-	for _, objref in pairs(get_entities(pos)) do
+	for _, objref in pairs(get_display_objrefs(pos)) do
 		objref:remove()
 	end
 end
 
--- On_rotate (screwdriver) callback for display_api items. Prevents invalid rotations and reorients entities.
+-- On_rotate (screwdriver) callback for display_api items. Prevents invalid
+-- rotations and reorients entities.
 function display_api.on_rotate(pos, node, user, _, new_param2)
 	node.param2 = new_param2
-	if get_values(node) then
+	local ov = get_orientation_values(node)
+
+	if ov.restricted or not display_api.is_rotation_restricted() then
 		minetest.swap_node(pos, node)
-		place_entities(pos)
+		display_api.update_entities(pos)
 		return true
 	else
 		return false

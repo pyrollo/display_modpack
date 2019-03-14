@@ -14,6 +14,7 @@ This method triggers entities update for the display node at pos. Actual entity 
 This is a helper to register entities used for display.
 
 `entity_name`: Name of the entity to register.
+
 ## Provided callback implementations
 ### on_place
 **display\_api.on\_place(itemstack, placer, pointed\_thing)**
