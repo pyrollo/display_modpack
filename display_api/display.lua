@@ -281,8 +281,8 @@ end
 -- On_rotate (screwdriver) callback for display_api items. Prevents invalid
 -- rotations and reorients entities.
 function display_api.on_rotate(pos, node, user, _, new_param2)
-	local ov = get_orientation_values(node)
 	node.param2 = new_param2
+	local ov = get_orientation_values(node)
 
 	if ov.restricted or not display_api.is_rotation_restricted() then
 		minetest.swap_node(pos, node)
