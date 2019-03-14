@@ -14,10 +14,6 @@ This method triggers entities update for the display node at pos. Actual entity 
 This is a helper to register entities used for display.
 
 `entity_name`: Name of the entity to register.
-### is\_rotation\_restricted
-**display\_api.is\_rotation\_restricted()**
-
-When using Minetest before version 5.0, only upright entities were allowed. Not all node rotations where possible. This functions indicates if the rotation is restricted (true) or not.
 
 ## Provided callback implementations
 ### on_place
