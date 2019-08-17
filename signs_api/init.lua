@@ -27,8 +27,44 @@ local S, NS = dofile(signs_api.path.."/intllib.lua")
 signs_api.intllib = S
 local F = function(...) return minetest.formspec_escape(S(...)) end
 
+-- Parses the \u<nnnn> and the \0x<nnnn> notation. Unfortunately we can't parse a mix of such characs
+-- and regular ascii. We assume all is in \u notation if a single thing is
+function encode_to_utf8(texts, prefix)
+	local characs = {}
+	for charac in string.gmatch(texts, prefix..'([01234567890abcdef]+)') do
+	    table.insert(characs, utf8(tonumber("0x"..charac)))
+	end
+	return table.concat(characs)
+end
+
+-- convert the strings back to original unicode
+-- taken from https://github.com/MuhdNurHidayat/unicodeparser
+-- credit to Muhammad Nur Hidayat Yasuyoshi translation@mnh48.moe
+function utf8(codep)
+    if codep < 128 then
+        return string.char(codep)
+    end
+    local s = ""
+    local max_pf = 32
+    while true do
+        local suffix = codep % 64
+        s = string.char(128 + suffix)..s
+        codep = (codep - suffix) / 64
+        if codep < max_pf then
+            return string.char((256 - (2 * max_pf)) + codep)..s
+        end
+        max_pf = max_pf / 2
+    end
+end
+
 function signs_api.set_display_text(pos, text, font)
 	local meta = minetest.get_meta(pos)
+	if string.find(text, "\\u") then
+		text=encode_to_utf8(text, "\\u")
+	elseif string.find(text, "\\0x") then
+		text=encode_to_utf8(text, "\\0x")
+	end	
+	
 	meta:set_string("display_text", text)
 	if text and text ~= "" then
 		meta:set_string("infotext", "\""..text.."\"")
