@@ -26,6 +26,15 @@ signs.path = minetest.get_modpath(signs.name)
 local S, NS = dofile(signs.path.."/intllib.lua")
 signs.intllib = S
 
+-- Load support for utfparse
+local UParse
+if minetest.global_exists("utfparse") then
+	UParse = function(...) return utfparse.parse(...) end
+else
+	UParse = function(...) return ... end
+end
+signs.utfparse = UParse
+
 dofile(signs.path.."/common.lua")
 dofile(signs.path.."/nodes.lua")
 dofile(signs.path.."/crafts.lua")

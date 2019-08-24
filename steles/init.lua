@@ -25,6 +25,14 @@ steles.path = minetest.get_modpath(steles.name)
 -- Load support for intllib.
 local S, NS = dofile(steles.path.."/intllib.lua")
 steles.intllib = S
+-- Load support for utfparse
+local UParse
+if minetest.global_exists("utfparse") then
+	UParse = function(...) return utfparse.parse(...) end
+else
+	UParse = function(...) return ... end
+end
+steles.utfparse = UParse
 
 dofile(steles.path.."/config.lua")
 dofile(steles.path.."/nodes.lua")

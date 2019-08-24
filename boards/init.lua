@@ -22,6 +22,14 @@ boards = {}
 boards.name = minetest.get_current_modname()
 boards.path = minetest.get_modpath(boards.name)
 
+-- Load support for utfparse
+local UParse
+if minetest.global_exists("utfparse") then
+	UParse = function(...) return utfparse.parse(...) end
+else
+	UParse = function(...) return ... end
+end
+
 -- Load support for intllib.
 local S, NS = dofile(boards.path.."/intllib.lua")
 boards.intllib = S
@@ -43,7 +51,7 @@ end
 local function on_receive_fields(pos, formname, fields, player)
 	if fields then
 		if fields.ok or fields.key_enter then
-			signs_api.set_display_text(pos, fields.display_text, fields.font)
+			signs_api.set_display_text(pos, UParse(fields.display_text), fields.font)
 		end
 		if fields.wipe then
 			signs_api.set_display_text(pos, "", fields.font)

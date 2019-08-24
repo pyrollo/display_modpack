@@ -18,6 +18,7 @@
     along with steles.  If not, see <http://www.gnu.org/licenses/>.
 --]]
 
+local UParse = steles.utfparse
 local S = steles.intllib
 local F = function(...) return minetest.formspec_escape(S(...)) end
 
@@ -79,8 +80,8 @@ for i, material in ipairs(steles.materials) do
 					if not minetest.is_protected(pos, player:get_player_name()) then
 						local meta = minetest.get_meta(pos)
 						if fields.ok or fields.font then
-							meta:set_string("display_text", fields.display_text)
-							meta:set_string("infotext", "\""..fields.display_text.."\"")
+							meta:set_string("display_text", UParse(fields.display_text))
+							meta:set_string("infotext", "\""..UParse(fields.display_text).."\"")
 							display_api.update_entities(pos)
 						end
 						if fields.font then

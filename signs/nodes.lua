@@ -18,6 +18,7 @@
     along with signs.  If not, see <http://www.gnu.org/licenses/>.
 --]]
 
+local UParse = signs.utfparse
 local S = signs.intllib
 local F = function(...) return minetest.formspec_escape(S(...)) end
 
@@ -91,9 +92,9 @@ local function on_receive_fields_poster(pos, formname, fields, player)
 		if formname == node.name.."@"..minetest.pos_to_string(pos)..":edit"
 		then
 			if (fields.write or fields.font or fields.key_enter) then
-				meta:set_string("display_text", fields.display_text)
-				meta:set_string("text", fields.text)
-				meta:set_string("infotext", "\""..fields.display_text
+				meta:set_string("display_text", UParse(fields.display_text))
+				meta:set_string("text", UParse(fields.text))
+				meta:set_string("infotext", "\""..UParse(fields.display_text)
 						.."\"\n"..S("(right-click to read more text)"))
 				display_api.update_entities(pos)
 			end
