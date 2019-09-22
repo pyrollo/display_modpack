@@ -39,7 +39,24 @@ local models = {
 			inventory_image = "signs_road_blue_street.png",
 		},
 	},
-	large_street_sign = {
+	large_street_sign3 = {
+		depth = 1/16,
+		width = 48/16,
+		height = 12/16,
+		entity_fields = {
+			maxlines = 1,
+			color = "#000",
+		},
+		node_fields = {
+		   visual_scale = 1,
+			description = S("Large Banner 3"),
+			tiles = { "signs_road_sides.png", "signs_road_sides.png",
+			          "signs_road_sides.png", "signs_road_sides.png",
+			          "signs_road_sides.png", "signs_road_large_white.png" },
+			inventory_image = "signs_road_white.png",
+		},
+	},
+	large_street_sign4 = {
 		depth = 1/16,
 		width = 64/16,
 		height = 12/16,
@@ -49,7 +66,75 @@ local models = {
 		},
 		node_fields = {
 		   visual_scale = 1,
-			description = S("Large banner"),
+			description = S("Large Banner 4"),
+			tiles = { "signs_road_sides.png", "signs_road_sides.png",
+			          "signs_road_sides.png", "signs_road_sides.png",
+			          "signs_road_sides.png", "signs_road_large_white.png" },
+			inventory_image = "signs_road_white.png",
+		},
+	},
+	large_street_sign5 = {
+		depth = 1/16,
+		width = 80/16,
+		height = 12/16,
+		entity_fields = {
+			maxlines = 1,
+			color = "#000",
+		},
+		node_fields = {
+		   visual_scale = 1,
+			description = S("Large Banner 5"),
+			tiles = { "signs_road_sides.png", "signs_road_sides.png",
+			          "signs_road_sides.png", "signs_road_sides.png",
+			          "signs_road_sides.png", "signs_road_large_white.png" },
+			inventory_image = "signs_road_white.png",
+		},
+	},
+	large_street_sign6 = {
+		depth = 1/16,
+		width = 96/16,
+		height = 12/16,
+		entity_fields = {
+			maxlines = 1,
+			color = "#000",
+		},
+		node_fields = {
+		   visual_scale = 1,
+			description = S("Large Banner 6"),
+			tiles = { "signs_road_sides.png", "signs_road_sides.png",
+			          "signs_road_sides.png", "signs_road_sides.png",
+			          "signs_road_sides.png", "signs_road_large_white.png" },
+			inventory_image = "signs_road_white.png",
+		},
+	},
+	large_street_sign7 = {
+		depth = 1/16,
+		width = 112/16,
+		height = 12/16,
+		entity_fields = {
+			maxlines = 1,
+			color = "#000",
+		},
+		node_fields = {
+		   visual_scale = 1,
+			description = S("Large Banner 7"),
+			tiles = { "signs_road_sides.png", "signs_road_sides.png",
+			          "signs_road_sides.png", "signs_road_sides.png",
+			          "signs_road_sides.png", "signs_road_large_white.png" },
+			inventory_image = "signs_road_white.png",
+		},
+	},
+	large_street_sign8 = {
+		depth = 1/16,
+		width = 128/16,
+		height = 12/16,
+		entity_fields = {
+			maxlines = 1,
+			color = "#000",
+		},
+		node_fields = {
+		   visual_scale = 1,
+			description = S("Large Banner 8"),
 			tiles = { "signs_road_sides.png", "signs_road_sides.png",
 			          "signs_road_sides.png", "signs_road_sides.png",
 			          "signs_road_sides.png", "signs_road_large_white.png" },

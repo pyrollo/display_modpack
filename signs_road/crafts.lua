@@ -195,7 +195,37 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-      type = "shapeless",
-      output = 'signs_road:large_street_sign',
-      recipe = {'signs_road:white_street_sign', 'signs_road:white_street_sign', 'signs_road:white_street_sign', 'signs_road:white_street_sign'},
+    type = "shapeless",
+    output = 'signs_road:large_street_sign3',
+    recipe = {'signs_road:white_street_sign', 'signs_road:white_street_sign', 'signs_road:white_street_sign'},
+})
+
+minetest.register_craft({
+    type = "shapeless",
+    output = 'signs_road:large_street_sign4',
+	recipe = {'signs_road:white_street_sign', 'signs_road:white_street_sign', 'signs_road:white_street_sign', 'signs_road:white_street_sign'},
+})
+
+minetest.register_craft({
+    type = "shapeless",
+    output = 'signs_road:large_street_sign5',
+	recipe = {'signs_road:white_street_sign', 'signs_road:white_street_sign', 'signs_road:white_street_sign', 'signs_road:white_street_sign', 'signs_road:white_street_sign'},
+})
+
+minetest.register_craft({
+    type = "shapeless",
+    output = 'signs_road:large_street_sign6',
+    recipe = {'signs_road:large_street_sign3', 'signs_road:large_street_sign3'},
+})
+
+minetest.register_craft({
+    type = "shapeless",
+    output = 'signs_road:large_street_sign7',
+    recipe = {'signs_road:large_street_sign4', 'signs_road:large_street_sign3'},
+})
+	
+minetest.register_craft({
+    type = "shapeless",
+    output = 'signs_road:large_street_sign8',
+    recipe = {'signs_road:large_street_sign4', 'signs_road:large_street_sign4'},
 })
