@@ -162,6 +162,9 @@ function display_api.update_entities(pos)
 	local node = minetest.get_node(pos)
 	local ndef = minetest.registered_nodes[node.name]
 	local ov = get_orientation_values(node)
+	if not ndef or not ov then
+		return
+	end
 
 	for _, objref in pairs(get_display_objrefs(pos, true)) do
 		local edef = ndef.display_entities[objref:get_luaentity().name]
@@ -283,6 +286,9 @@ end
 function display_api.on_rotate(pos, node, user, _, new_param2)
 	node.param2 = new_param2
 	local ov = get_orientation_values(node)
+	if not ov then
+		return
+	end
 
 	if ov.restricted or not display_api.is_rotation_restricted() then
 		minetest.swap_node(pos, node)
