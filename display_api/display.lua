@@ -114,6 +114,9 @@ local function get_orientation_values(node)
 	if ndef then
 		local paramtype2 = ndef.paramtype2
 		if paramtype2 == "wallmounted" or paramtype2 == "colorwallmounted" then
+			if (wallmounted_values[node.param2 % 8] == nil) then
+				return facedir_values[0]
+			end
 			return wallmounted_values[node.param2 % 8]
 		elseif paramtype2 == "facedir" or paramtype2 == "colorfacedir"  then
 			return facedir_values[node.param2 % 32]
