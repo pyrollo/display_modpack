@@ -210,6 +210,9 @@ local models = {
 			on_construct = display_api.on_construct,
 			on_rightclick = display_poster,
 			on_receive_fields = on_receive_fields_poster,
+			on_punch = function(pos, node, player, pointed_thing)
+				display_api.update_entities(pos)
+			end,
 		},
 	},
 	label_small = {
