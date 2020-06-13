@@ -40,6 +40,7 @@ local function display_poster(pos, node, player)
 		size[7,9]bgcolor[#0000]
 		background[0,0;7,9;signs_poster_formspec.png]
 		image[0,-0.2;8.4,2;%s]
+		style_type[textarea;textcolor=#111]
 		textarea[0.3,1.5;7,8;;%s;]]=],
 		titletexture,
 		minetest.colorize("#111",
