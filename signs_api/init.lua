@@ -22,6 +22,15 @@ signs_api = {}
 signs_api.name = minetest.get_current_modname()
 signs_api.path = minetest.get_modpath(signs_api.name)
 
+-- Load support for utfparse
+local UParse
+if minetest.global_exists("utfparse") then
+	UParse = function(...) return utfparse.parse(...) end
+else
+	UParse = function(...) return ... end
+end
+signs_api.utfparse = UParse
+
 -- Load support for intllib.
 local S, NS = dofile(signs_api.path.."/intllib.lua")
 signs_api.intllib = S
@@ -77,10 +86,10 @@ end
 function signs_api.on_receive_fields(pos, formname, fields, player)
 	if not minetest.is_protected(pos, player:get_player_name()) then
 		if fields and (fields.ok or fields.key_enter) then
-			signs_api.set_display_text(pos, fields.display_text)
+			signs_api.set_display_text(pos, UParse(fields.display_text))
 		end
 		if fields and (fields.font) then
-			signs_api.set_display_text(pos, fields.display_text)
+			signs_api.set_display_text(pos, UParse(fields.display_text))
 			font_api.show_font_list(player, pos)
 		end
 	end
