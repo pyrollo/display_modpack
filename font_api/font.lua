@@ -229,7 +229,7 @@ function Font:render(text, texturew, textureh, style)
 		return ""
 	end
 
-	local x, y, codepoint
+	local x, y, codepoint, glyph
 	local texture = ""
 	local textheight = self:get_height(#lines)
 
@@ -258,8 +258,13 @@ function Font:render(text, texturew, textureh, style)
 
 			-- Add image only if it is visible (at least partly)
 			if x + self.widths[codepoint] >= 0 and x <= texturew then
+				if self.get_glyph == nil then
+					glyph = string.format("font_%s_%04x.png", self.name, codepoint)
+				else
+					glyph = self.get_glyph(codepoint):gsub("[\\^:]", "\\%0")
+				end
 				texture = texture..
-					string.format(":%d,%d=font_%s_%04x.png", x, y, self.name, codepoint)
+					string.format(":%d,%d=%s", x, y, glyph)
 			end
 			x = x + self.widths[codepoint]
 		end
