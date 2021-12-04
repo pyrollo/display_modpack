@@ -30,6 +30,6 @@ font_api.register_font(
 		linespacing = -3,
 		height = 16,
 		widths = widths,
-		get_glyph = get_glyph,
+		getglyph = get_glyph,
 	}
 )

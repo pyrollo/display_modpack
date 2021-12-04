@@ -258,10 +258,10 @@ function Font:render(text, texturew, textureh, style)
 
 			-- Add image only if it is visible (at least partly)
 			if x + self.widths[codepoint] >= 0 and x <= texturew then
-				if self.get_glyph == nil then
+				if self.getglyph == nil then
 					glyph = string.format("font_%s_%04x.png", self.name, codepoint)
 				else
-					glyph = self.get_glyph(codepoint):gsub("[\\^:]", "\\%0")
+					glyph = self.getglyph(codepoint):gsub("[\\^:]", "\\%0")
 				end
 				texture = texture..
 					string.format(":%d,%d=%s", x, y, glyph)
