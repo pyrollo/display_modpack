@@ -1,8 +1,8 @@
-# Unifont for Minetest: Full Unicode Plane 0 charset
+# Unifont for Minetest: Full Unicode Plane 0 charset (60000+ characters!)
 
 ![Screenshot](screenshot.png)
 
-GNU Unifont for Font API mod (from [display_modpack](https://github.com/pyrollo/display_modpack)).
+GNU Unifont (v14.0.01) for Font API mod (from [display_modpack](https://github.com/pyrollo/display_modpack)).
 
 - Full Unicode Basic Multilingual Plane (BMP) with 63485 characters
 - Lightweight, only 1MB in size
