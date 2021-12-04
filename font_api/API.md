@@ -105,6 +105,7 @@ Font definition table used by **font_api.register_font** and **font\_api.Font:ne
 * `margintop` (optional): Margin (in texture pixels) added on top of each char texture.
 * `marginbottom` (optional): Margin (in texture pixels) added at bottom of each char texture.
 * `linespacing` (optional): Spacing (in texture pixels) between each lines.
+* `getglyph` (optional, advanced usage): Function that takes a Unicode codepoint (number) and returns a custom texture string for the glyph instead of the default `font_{name}_{codepoint}.png` (see *Additional Requirements* below). The texture string can contain filters like `^[sheet` and will be properly escaped when combined.
 
 `margintop`, `marginbottom` and `linespacing` can be negative numbers (default 0) and are to be used to adjust various font styles to each other.
 
@@ -118,7 +119,7 @@ Font attributes effects on several lines:\
 
 Font must have a char 0 which will be used to display any unknown char.
 
-All textures corresponding to the indexes in widths array should be present in textures directory with a name matching the pattern :
+All textures corresponding to the indexes in widths array should be present in textures directory with a name matching the pattern (unless using a custom `getglyph` function):
 
 > font\_**{font_name}**_**{utf_code}**.png
 
@@ -189,7 +190,7 @@ Returns line(s) height. Takes care of top and bottom margins and line spacing.
 Returns the width of a text line. Beware, if line contains any new line char, they are ignored.
   * `line`: Line of text which the width will be computed.
 
-### font:renter(text, texturew, textureh, style)
+### font:render(text, texturew, textureh, style)
 Builds texture for a multiline colored text.
   * `text`: Text to be rendered.
   * `texturew`: Width of the texture (extra text will be truncated).
@@ -199,3 +200,5 @@ Builds texture for a multiline colored text.
     - `halign`: Horizontal text align: "left"/"center"/"right" (default "center")
     - `valign`: Vertical text align: "top"/"middle"/"bottom" (default "middle")
     - `color`: Color of the text (default black)
+    
+Note: When used in formspec, be sure to **escape** the texture string with `minetest.formspec_escape`.

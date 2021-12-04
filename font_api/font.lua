@@ -201,6 +201,9 @@ function Font:make_text_texture(text, texturew, textureh, maxlines,
 end
 
 --- Render text with the font in a view
+-- Note: When used in formspec, be sure to escape the texture string with
+-- `minetest.formspec_escape`.
+--
 -- @param text Text to be rendered
 -- @param texturew Width (in pixels) of the texture (extra text will be truncated)
 -- @param textureh Height (in pixels) of the texture (extra text will be truncated)
