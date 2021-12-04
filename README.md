@@ -7,7 +7,7 @@ This modpack provides mods with dynamic display. Mods are :
 - **[font_api](https://github.com/pyrollo/display_modpack/tree/master/font_api)**: A library for displaying fonts on entities;
 - **[signs_api](https://github.com/pyrollo/display_modpack/tree/master/signs_api)**: A library for the easy creation of signs;
 - **[font_metro](https://github.com/pyrollo/display_modpack/tree/master/font_metro)**: A font mod used as default font (includes uppercase, lowercase and accentuated latin letters, usual signs, cyrillic and greek letters)
-- **[unifont](https://github.com/pyrollo/display_modpack/tree/master/unifont)**: A lightweight (~1MB) font mod with full Unicode Plane 0 charset (63000+ chars)
+- **[unifont](https://github.com/pyrollo/display_modpack/tree/master/unifont)**: A lightweight (~2MB) font mod with full Unicode Plane 0 charset (63000+ chars)
 
 - **[boards](https://github.com/pyrollo/display_modpack/tree/master/boards)**: A mod providing school boards (includes *tiny cursive font*, a handwriting style font);
 - **[ontime_clocks](https://github.com/pyrollo/display_modpack/tree/master/ontime_clocks)**: A mod providing clocks which display the ingame time;

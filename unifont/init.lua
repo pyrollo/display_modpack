@@ -34,9 +34,11 @@ local function get_glyph(codepoint)
 	if codepoint == 0 or codepoint > 0xffff or widths[codepoint] == nil then
 		codepoint = 0xfffd
 	end
-	local x = codepoint % 256
-	local y = math.floor(codepoint / 256)
-	return string.format("unifont_sheet.png^[sheet:256x256:%d,%d", x, y)
+	local page = math.floor(codepoint) / 256
+	local off = codepoint % 256
+	local x = off % 16
+	local y = math.floor(off / 16)
+	return string.format("unif_%02x.png^[sheet:16x16:%d,%d", page, x, y)
 end
 
 font_api.register_font(
