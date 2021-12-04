@@ -36,7 +36,7 @@ local function get_glyph(codepoint)
 	end
 	local x = codepoint % 256
 	local y = math.floor(codepoint / 256)
-	return string.format("font_unifont_sheet.png^[sheet:256x256:%d,%d", x, y)
+	return string.format("unifont_sheet.png^[sheet:256x256:%d,%d", x, y)
 end
 
 font_api.register_font(
