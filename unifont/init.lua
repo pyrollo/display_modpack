@@ -1,13 +1,19 @@
 local widths = {}
-for i = 0,65535 do
+
+for i = 0,0xd7ff do
 	widths[i] = 16
 end
-for i = 32,126 do
-	widths[i] = 8
+for i = 0xe000,0xfffd do
+	widths[i] = 16
+end
+
+local halfwidth = dofile(minetest.get_modpath(minetest.get_current_modname()) .. "/halfwidth.lua")
+for i, codepoint in ipairs(halfwidth) do
+	widths[codepoint] = 8
 end
 
 local function get_glyph(codepoint)
-	if codepoint == 0 or codepoint > 0xffff then
+	if codepoint == 0 or codepoint > 0xffff or widths[codepoint] == nil then
 		codepoint = 0xfffd
 	end
 	local x = codepoint % 256
@@ -20,7 +26,8 @@ font_api.register_font(
 	{
 		default = true,
 		margintop = 2,
-		linespacing = -1,
+		marginbottom = 2,
+		linespacing = -3,
 		height = 16,
 		widths = widths,
 		get_glyph = get_glyph,
