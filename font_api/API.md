@@ -200,5 +200,5 @@ Builds texture for a multiline colored text.
     - `halign`: Horizontal text align: "left"/"center"/"right" (default "center")
     - `valign`: Vertical text align: "top"/"middle"/"bottom" (default "middle")
     - `color`: Color of the text (default black)
-    
+
 Note: When used in formspec, be sure to **escape** the texture string with `minetest.formspec_escape`.
