@@ -19,6 +19,7 @@ You can add fonts by installing fonts mod. Be aware that each font comes with nu
 Font mods can be found here:
 
  * [Metro](https://github.com/pyrollo/display_modpack/tree/master/font_metro): A multipurpose font with many chars (uppercase, lowercase and accentuated latin letters, usual signs, cyrillic and greek letters).
+ * [unifont](https://github.com/pyrollo/display_modpack/tree/master/unifont): A lightweight duospaced font with full Unicode Plane 0 charset (63000+ characters).
  * [OldWizard](https://github.com/pyrollo/font_oldwizard): An old style gothic font.
  * [Botic](https://github.com/pyrollo/font_botic): A scifi style font.
 
