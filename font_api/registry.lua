@@ -127,8 +127,14 @@ end
 -- UTF codepoints
 -- @key margintop (optional) Margin (in texture pixels) added on top of each
 -- char texture.
--- @key marginbottom (optional) dded at bottom of each char texture.
+-- @key marginbottom (optional) Margin (in texture pixels) added at bottom of
+-- each char texture.
 -- @key linespacing (optional) Spacing (in texture pixels) between each lines.
+-- @key getglyph (optional, advanced usage) Function that takes a Unicode
+-- codepoint (number) and returns a custom texture string for the glyph instead
+-- of the default `font_{name}_{codepoint}.png`. The texture string can contain
+-- filters like `^[sheet` and will be properly escaped when combined.
+--
 -- margintop, marginbottom and linespacing can be negative numbers (default 0)
 -- and are to be used to adjust various font styles to each other.
 

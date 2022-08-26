@@ -42,7 +42,7 @@ local function display_poster(pos, node, player)
 		image[0,-0.2;8.4,2;%s]
 		style_type[textarea;textcolor=#111]
 		textarea[0.3,1.5;7,8;;%s;]]=],
-		titletexture,
+		minetest.formspec_escape(titletexture),
 		minetest.colorize("#111",
 			minetest.formspec_escape(meta:get_string("text"))))
 

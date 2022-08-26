@@ -201,6 +201,9 @@ function Font:make_text_texture(text, texturew, textureh, maxlines,
 end
 
 --- Render text with the font in a view
+-- Note: When used in formspec, be sure to escape the texture string with
+-- `minetest.formspec_escape`.
+--
 -- @param text Text to be rendered
 -- @param texturew Width (in pixels) of the texture (extra text will be truncated)
 -- @param textureh Height (in pixels) of the texture (extra text will be truncated)
@@ -229,7 +232,7 @@ function Font:render(text, texturew, textureh, style)
 		return ""
 	end
 
-	local x, y, codepoint
+	local x, y, codepoint, glyph
 	local texture = ""
 	local textheight = self:get_height(#lines)
 
@@ -258,8 +261,13 @@ function Font:render(text, texturew, textureh, style)
 
 			-- Add image only if it is visible (at least partly)
 			if x + self.widths[codepoint] >= 0 and x <= texturew then
+				if self.getglyph == nil then
+					glyph = string.format("font_%s_%04x.png", self.name, codepoint)
+				else
+					glyph = self.getglyph(codepoint):gsub("[\\^:]", "\\%0")
+				end
 				texture = texture..
-					string.format(":%d,%d=font_%s_%04x.png", x, y, self.name, codepoint)
+					string.format(":%d,%d=%s", x, y, glyph)
 			end
 			x = x + self.widths[codepoint]
 		end
