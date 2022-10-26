@@ -294,7 +294,6 @@ function display_api.on_blast(pos, intensity)
 		local node = minetest.get_node(pos)
 		local drops = minetest.get_node_drops(node, "tnt:blast")
 		minetest.remove_node(pos)
-		display_api.on_destruct(pos)
 		return drops
 	end
 end
