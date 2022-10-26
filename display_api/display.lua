@@ -81,9 +81,16 @@ end
 -- Detect rotation restriction
 local rotation_restricted = nil
 minetest.register_entity('display_api:dummy_entity', {
-	collisionbox = { 0, 0, 0, 0, 0, 0 },
-	visual = "upright_sprite",
-	textures = {} })
+	initial_properties = {
+		collisionbox = {0, 0, 0, 0, 0, 0},
+		visual = "upright_sprite",
+		is_visible = false,
+		textures = {"blank.png"}
+	},
+	on_blast = function(self, damage)
+		return false, false, {}
+	end,
+})
 
 function display_api.is_rotation_restricted()
 	if rotation_restricted == nil then
@@ -282,6 +289,15 @@ function display_api.on_destruct(pos)
 	end
 end
 
+function display_api.on_blast(pos, intensity)
+	if not minetest.is_protected(pos, "tnt:blast") then
+		local node = minetest.get_node(pos)
+		local drops = minetest.get_node_drops(node, "tnt:blast")
+		minetest.remove_node(pos)
+		return drops
+	end
+end
+
 -- On_rotate (screwdriver) callback for display_api items. Prevents invalid
 -- rotations and reorients entities.
 function display_api.on_rotate(pos, node, user, _, new_param2)
@@ -304,12 +320,17 @@ end
 function display_api.register_display_entity(entity_name)
 	if not minetest.registered_entities[entity_name] then
 		minetest.register_entity(':'..entity_name, {
-			collisionbox = { 0, 0, 0, 0, 0, 0 },
-			visual = "upright_sprite",
-			textures = {},
+			initial_properties = {
+				collisionbox = {0, 0, 0, 0, 0, 0},
+				visual = "upright_sprite",
+				textures = {},
+			},
 			on_activate = display_api.on_activate,
 			get_staticdata = function(self)
 				return minetest.serialize({ nodepos = self.nodepos })
+			end,
+			on_blast = function(self, damage)
+				return false, false, {}
 			end,
 		})
 	end
