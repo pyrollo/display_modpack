@@ -289,6 +289,16 @@ function display_api.on_destruct(pos)
 	end
 end
 
+function display_api.on_blast(pos, intensity)
+	if not minetest.is_protected(pos, "tnt:blast") then
+		local node = minetest.get_node(pos)
+		local drops = minetest.get_node_drops(node, "tnt:blast")
+		minetest.remove_node(pos)
+		display_api.on_destruct(pos)
+		return drops
+	end
+end
+
 -- On_rotate (screwdriver) callback for display_api items. Prevents invalid
 -- rotations and reorients entities.
 function display_api.on_rotate(pos, node, user, _, new_param2)

@@ -218,6 +218,7 @@ function signs_api.register_sign(mod, name, model)
 				display_api.on_construct(pos)
 			end,
 		on_destruct = display_api.on_destruct,
+		on_blast = display_api.on_blast,
 		on_rotate = signs_api.on_rotate,
 		on_receive_fields =  signs_api.on_receive_fields,
 		on_punch = function(pos, node, player, pointed_thing)
