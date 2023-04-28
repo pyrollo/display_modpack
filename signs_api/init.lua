@@ -212,7 +212,7 @@ function signs_api.register_sign(mod, name, model)
 		on_construct = 	function(pos)
 				local ndef = minetest.registered_nodes[minetest.get_node(pos).name]
 				local meta = minetest.get_meta(pos)
-				meta:set_string("font", ndef.display_entities.font_name or
+				meta:set_string("font", ndef and ndef.display_entities.font_name or
 				                        font_api.get_default_font_name())
 				signs_api.set_formspec(pos)
 				display_api.on_construct(pos)
