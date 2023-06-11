@@ -20,6 +20,17 @@
 
 local S = ontime_clocks.intllib
 
+local function clock_on_construct(pos)
+	local timer = minetest.get_node_timer(pos)
+	timer:start(5)
+	display_api.on_construct(pos)
+end
+
+local function clock_on_timer(pos)
+	display_api.update_entities(pos)
+	return true
+end
+
 -- Green digital clock
 minetest.register_node("ontime_clocks:green_digital", {
 	description = S("Green digital clock"),
@@ -46,17 +57,12 @@ minetest.register_node("ontime_clocks:green_digital", {
 			end },
 	},
 	on_place = display_api.on_place,
-	on_construct = display_api.on_construct,
+	on_construct = clock_on_construct,
 	on_destruct = display_api.on_destruct,
 	on_rotate = display_api.on_rotate,
+	on_timer = clock_on_timer,
 })
 
-minetest.register_abm({
-	nodenames = {"ontime_clocks:green_digital"},
-	interval = 5,
-	chance = 1,
-	action = display_api.update_entities,
-})
 
 -- Red digital clock
 minetest.register_node("ontime_clocks:red_digital", {
@@ -84,16 +90,10 @@ minetest.register_node("ontime_clocks:red_digital", {
 			end },
 	},
 	on_place = display_api.on_place,
-	on_construct = display_api.on_construct,
+	on_construct = clock_on_construct,
 	on_destruct = display_api.on_destruct,
 	on_rotate = display_api.on_rotate,
-})
-
-minetest.register_abm({
-	nodenames = {"ontime_clocks:red_digital"},
-	interval = 5,
-	chance = 1,
-	action = display_api.update_entities,
+	on_timer = clock_on_timer,
 })
 
 
@@ -122,17 +122,12 @@ minetest.register_node("ontime_clocks:white", {
 			end },
 	},
 	on_place = display_api.on_place,
-	on_construct = display_api.on_construct,
+	on_construct = clock_on_construct,
 	on_destruct = display_api.on_destruct,
 	on_rotate = display_api.on_rotate,
+	on_timer = clock_on_timer,
 })
 
-minetest.register_abm({
-	nodenames = {"ontime_clocks:white"},
-	interval = 5,
-	chance = 1,
-	action = display_api.update_entities,
-})
 
 minetest.register_node("ontime_clocks:frameless_black", {
 	description = S("Frameless clock"),
@@ -159,17 +154,12 @@ minetest.register_node("ontime_clocks:frameless_black", {
 			end },
 	},
 	on_place = display_api.on_place,
-	on_construct = display_api.on_construct,
+	on_construct = clock_on_construct,
 	on_destruct = display_api.on_destruct,
 	on_rotate = display_api.on_rotate,
+	on_timer = clock_on_timer,
 })
 
-minetest.register_abm({
-	nodenames = {"ontime_clocks:frameless_black"},
-	interval = 5,
-	chance = 1,
-	action = display_api.update_entities,
-})
 
 minetest.register_node("ontime_clocks:frameless_gold", {
 	description = S("Frameless gold clock"),
@@ -196,17 +186,12 @@ minetest.register_node("ontime_clocks:frameless_gold", {
 			end },
 	},
 	on_place = display_api.on_place,
-	on_construct = display_api.on_construct,
+	on_construct = clock_on_construct,
 	on_destruct = display_api.on_destruct,
 	on_rotate = display_api.on_rotate,
+	on_timer = clock_on_timer,
 })
 
-minetest.register_abm({
-	nodenames = {"ontime_clocks:frameless_gold"},
-	interval = 5,
-	chance = 1,
-	action = display_api.update_entities,
-})
 
 minetest.register_node("ontime_clocks:frameless_white", {
 	description = S("Frameless white clock"),
@@ -233,14 +218,20 @@ minetest.register_node("ontime_clocks:frameless_white", {
 			end },
 	},
 	on_place = display_api.on_place,
-	on_construct = display_api.on_construct,
+	on_construct = clock_on_construct,
 	on_destruct = display_api.on_destruct,
 	on_rotate = display_api.on_rotate,
+	on_timer = clock_on_timer,
 })
 
-minetest.register_abm({
-	nodenames = {"ontime_clocks:frameless_white"},
-	interval = 5,
-	chance = 1,
-	action = display_api.update_entities,
+
+minetest.register_lbm({
+	name = "ontime_clocks:nodetimer_init",
+	nodenames = {"ontime_clocks:green_digital", "ontime_clocks:red_digital", "ontime_clocks:white", 
+		"ontime_clocks:frameless_black", "ontime_clocks:frameless_gold", "ontime_clocks:frameless_white"},
+	run_at_every_load = true,
+	action = function(pos)
+		local timer = minetest.get_node_timer(pos)
+		timer:start(5)
+	end
 })
