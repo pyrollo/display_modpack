@@ -1,0 +1,3 @@
+# textdomain: boards
+Black board=
+Green board=

@@ -1,0 +1,15 @@
+# textdomain: signs_road
+Blue street sign=
+Large banner=
+Red and white town sign=
+White street sign=
+Blue road sign=
+Green road sign=
+Yellow road sign=
+Red road sign=
+Black direction sign=
+White direction sign=
+Blue direction sign=
+Green direction sign=
+Yellow direction sign=
+Red direction sign=

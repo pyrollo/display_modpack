@@ -1,0 +1,7 @@
+# textdomain: ontime_clocks
+Green digital clock=
+Red digital clock=
+White clock=
+Frameless clock=
+Frameless gold clock=
+Frameless white clock=
