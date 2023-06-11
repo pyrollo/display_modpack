@@ -19,6 +19,7 @@
 --]]
 
 local S = steles.S
+local FS = function(...) return minetest.formspec_escape(S(...)) end
 
 display_api.register_display_entity("steles:text")
 
@@ -68,8 +69,8 @@ for i, material in ipairs(steles.materials) do
 						button[1,3;2,1;font;%s]
 						button_exit[3,3;2,1;ok;%s]]=],
 						default.gui_bg, default.gui_bg_img, default.gui_slots,
-						S("Displayed text (3 lines max)"),
-						S("Font"), S("Write")))
+						FS("Displayed text (3 lines max)"),
+						FS("Font"), FS("Write")))
 					display_api.on_construct(pos)
 				end,
 			on_destruct = display_api.on_destruct,

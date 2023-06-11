@@ -24,6 +24,7 @@ signs_api.path = minetest.get_modpath(signs_api.name)
 
 -- Translation support
 local S = minetest.get_translator(signs_api.name)
+local FS = function(...) return minetest.formspec_escape(S(...)) end
 
 function signs_api.set_display_text(pos, text, font)
 	local meta = minetest.get_meta(pos)
@@ -48,22 +49,22 @@ function signs_api.set_formspec(pos)
 		local fs, y
 
 		if maxlines == 1 then
-			fs = "field[0.5,0.7;5.5,1;display_text;"..S("Text")..
+			fs = "field[0.5,0.7;5.5,1;display_text;"..FS("Text")..
 				";${display_text}]"
 			y = 1.2
 		else
 			local extralabel = ""
 			if maxlines then
-				extralabel = S(" (first @1 lines only)", maxlines)
+				extralabel = FS(" (first @1 lines only)", maxlines)
 			end
 
-			fs = "textarea[0.5,0.7;5.5,2;display_text;"..S("Text")..""..
+			fs = "textarea[0.5,0.7;5.5,2;display_text;"..FS("Text")..""..
 					extralabel..";${display_text}]"
 			y = 2.4
 		end
 
-		fs = fs.."button[1,"..y..";2,1;font;"..S("Font").."]"
-		fs = fs.."button_exit[3,"..y..";2,1;ok;"..S("Write").."]"
+		fs = fs.."button[1,"..y..";2,1;font;"..FS("Font").."]"
+		fs = fs.."button_exit[3,"..y..";2,1;ok;"..FS("Write").."]"
 		y = y + 0.8
 		fs = "size[6,"..y.."]"..default.gui_bg..
 			default.gui_bg_img..default.gui_slots..fs

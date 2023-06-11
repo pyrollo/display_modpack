@@ -24,6 +24,7 @@ boards.path = minetest.get_modpath(boards.name)
 
 -- Translation support
 local S = minetest.get_translator(boards.name)
+local FS = function(...) return minetest.formspec_escape(S(...)) end
 
 -- Load font
 dofile(boards.path.."/font_tinycurs.lua")
@@ -32,9 +33,9 @@ local function set_formspec(pos)
 	local meta = minetest.get_meta(pos)
 	meta:set_string("formspec",
 		"size[6,4]"..default.gui_bg..default.gui_bg_img..default.gui_slots..
-		"textarea[0.5,0.7;5.5,3;display_text;"..S("Text")..";${display_text}]"..
-		"button_exit[3,3.5;2,1;ok;"..S("Write").."]"..
-		"button_exit[1,3.5;2,1;wipe;"..S("Wipe").."]")
+		"textarea[0.5,0.7;5.5,3;display_text;"..FS("Text")..";${display_text}]"..
+		"button_exit[3,3.5;2,1;ok;"..FS("Write").."]"..
+		"button_exit[1,3.5;2,1;wipe;"..FS("Wipe").."]")
 end
 
 -- On boards, everyone is allowed to write and wipe

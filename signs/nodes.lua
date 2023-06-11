@@ -19,6 +19,7 @@
 --]]
 
 local S = signs.S
+local FS = function(...) return minetest.formspec_escape(S(...)) end
 
 -- Poster specific formspec
 local function display_poster(pos, node, player)
@@ -46,11 +47,11 @@ local function display_poster(pos, node, player)
 			minetest.formspec_escape(meta:get_string("text"))))
 
 	if minetest.is_protected(pos, player:get_player_name()) then
-		fs = string.format("%sbutton_exit[2.5,8;2,1;ok;%s]", fs, S("Close"))
+		fs = string.format("%sbutton_exit[2.5,8;2,1;ok;%s]", fs, FS("Close"))
 	else
 		fs = string.format(
 			"%sbutton[1,8;2,1;edit;%s]button_exit[4,8;2,1;ok;%s]",
-			fs, S("Edit"), S("Close"))
+			fs, FS("Edit"), FS("Close"))
 	end
 	minetest.show_formspec(player:get_player_name(), fname, fs)
 end
@@ -69,10 +70,10 @@ local function edit_poster(pos, node, player)
 			textarea[0.5,1.7;6,6;text;%s;%s]
 			button[1.25,7;2,1;font;%s]
 			button_exit[3.25,7;2,1;write;%s]]=],
-			default.gui_bg, default.gui_bg_img, default.gui_slots, S("Title"),
+			default.gui_bg, default.gui_bg_img, default.gui_slots, FS("Title"),
 			minetest.formspec_escape(meta:get_string("display_text")),
-			S("Text"), minetest.formspec_escape(meta:get_string("text")),
-			S("Title font"), S("Write"))
+			FS("Text"), minetest.formspec_escape(meta:get_string("text")),
+			FS("Title font"), FS("Write"))
 		minetest.show_formspec(player:get_player_name(), fname, fs)
 	end
 end
@@ -94,7 +95,7 @@ local function on_receive_fields_poster(pos, formname, fields, player)
 				meta:set_string("display_text", fields.display_text)
 				meta:set_string("text", fields.text)
 				meta:set_string("infotext", "\""..fields.display_text
-						.."\"\n"..S("(right-click to read more text)"))
+						.."\"\n"..FS("(right-click to read more text)"))
 				display_api.update_entities(pos)
 			end
 			if (fields.write or fields.key_enter) then

@@ -1,4 +1,10 @@
 # textdomain: signs
+Wooden sign=
+Wooden long sign=
+Wooden direction sign=Papan tanda arah kayu
+Poster=Poster
+Small label=
+Label=
 Close=
 Edit=
 Title=
@@ -6,9 +12,3 @@ Text=
 Title font=
 Write=
 (right-click to read more text)=(klik-kanan untuk baca teks penuh)
-Wooden sign=
-Wooden long sign=
-Wooden direction sign=Papan tanda arah kayu
-Poster=Poster
-Small label=
-Label=

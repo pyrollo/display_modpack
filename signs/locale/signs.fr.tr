@@ -1,4 +1,10 @@
 # textdomain: signs
+Wooden sign=
+Wooden long sign=
+Wooden direction sign=Panneau de direction en bois
+Poster=Affiche
+Small label=
+Label=
 Close=
 Edit=
 Title=
@@ -6,9 +12,3 @@ Text=
 Title font=
 Write=
 (right-click to read more text)=(Clic-droit pour afficher le texte entier)
-Wooden sign=
-Wooden long sign=
-Wooden direction sign=Panneau de direction en bois
-Poster=Affiche
-Small label=
-Label=
