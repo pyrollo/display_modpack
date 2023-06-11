@@ -21,10 +21,10 @@
 local S = steles.S
 
 steles.materials = {
-	'default:stone', 
-	'default:sandstone', 
+	'default:stone',
+	'default:sandstone',
 	'default:desert_stone',
-	'technic:marble', 
+	'technic:marble',
 	'technic:granite',
 }
 

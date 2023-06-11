@@ -65,9 +65,7 @@ local function compute_values(r)
 	for _ = 1, r.x do d, w, h = rx(d), rx(w), rx(h) end
 	for _ = 1, r.y do d, w, h = ry(d), ry(w), ry(h) end
 
-	return {
-		rotation=r, depth=d, width=w, height=h,
-		restricted=(r.x==0 and r.z==0) }
+	return {rotation=r, depth=d, width=w, height=h}
 end
 
 for i, r in pairs(facedir_rotations) do
@@ -76,25 +74,6 @@ end
 
 for i, r in pairs(wallmounted_rotations) do
 	wallmounted_values[i] = compute_values(r)
-end
-
--- Detect rotation restriction
-local rotation_restricted = nil
-minetest.register_entity('display_api:dummy_entity', {
-	collisionbox = { 0, 0, 0, 0, 0, 0 },
-	visual = "upright_sprite",
-	textures = {} })
-
-function display_api.is_rotation_restricted()
-	if rotation_restricted == nil then
-		local objref = minetest.add_entity(
-			{x=0, y=0, z=0}, 'display_api:dummy_entity')
-		if objref then
-			rotation_restricted = objref.set_rotation == nil
-			objref:remove()
-		end
-	end
-	return rotation_restricted
 end
 
 -- Clip position property to maximum entity position
@@ -243,16 +222,6 @@ function display_api.on_place(itemstack, placer, pointed_thing, override_param2)
 		z = pointed_thing.under.z - pointed_thing.above.z,
 	}
 
-	local rotation_restriction = display_api.is_rotation_restricted()
-
-	if rotation_restriction then
-		-- If item is not placed on a wall, use the player's view direction instead
-		if dir.x == 0 and dir.z == 0 then
-			dir = placer:get_look_dir()
-		end
-		dir.y = 0
-	end
-
 	local param2 = 0
 	if ndef then
 		if ndef.paramtype2 == "wallmounted" or
@@ -261,7 +230,7 @@ function display_api.on_place(itemstack, placer, pointed_thing, override_param2)
 
 		elseif ndef.paramtype2 == "facedir" or
 			ndef.paramtype2 == "colorfacedir"  then
-			param2 = minetest.dir_to_facedir(dir, not rotation_restriction)
+			param2 = minetest.dir_to_facedir(dir, true)
 		end
 	end
 	return minetest.item_place(itemstack, placer, pointed_thing,
@@ -291,7 +260,7 @@ function display_api.on_rotate(pos, node, user, _, new_param2)
 		return
 	end
 
-	if ov.restricted or not display_api.is_rotation_restricted() then
+	if ov.restricted then
 		minetest.swap_node(pos, node)
 		display_api.update_entities(pos)
 		return true

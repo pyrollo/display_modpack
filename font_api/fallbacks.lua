@@ -19,6 +19,7 @@
 -- This is the unicode char fallback map. If a char is not present in
 -- font, this maps indicates which char to try to use instead next.
 
+-- luacheck: ignore
 return {
 	-- Lowercase chars
 	['a'] = 'A',	['b'] = 'B',	['c'] = 'C',	['d'] = 'D',

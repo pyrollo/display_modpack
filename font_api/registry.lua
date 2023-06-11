@@ -60,6 +60,7 @@ local function get_default_font()
 
 		-- If failed, chose first font
 		if default_font == nil then
+			-- luacheck: ignore 512
 			for _, font in pairs(font_api.registered_fonts) do
 				default_font = font
 				break

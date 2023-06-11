@@ -1,5 +1,5 @@
 --[[
-    ontime_clocks mod for Minetest - Clock nodes displaying ingame time 
+    ontime_clocks mod for Minetest - Clock nodes displaying ingame time
     (c) Pierre-Yves Rollo
 
     This file is part of ontime_clocks.

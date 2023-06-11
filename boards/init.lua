@@ -49,7 +49,7 @@ local function on_receive_fields(pos, formname, fields, player)
 	end
 end
 
-models = {
+local models = {
 	black_board = {
 		depth = 1/16, width = 1, height = 1,
 		entity_fields = {
@@ -132,7 +132,7 @@ minetest.register_craft(
 		output = "boards:black_board",
 		recipe = {
 			{"group:wood", "group:stone", "dye:black"},
-		}		
+		}
 	})
 
 minetest.register_craft(
@@ -140,6 +140,6 @@ minetest.register_craft(
 		output = "boards:green_board",
 		recipe = {
 			{"group:wood", "group:stone", "dye:dark_green"},
-		}		
+		}
 	})
 

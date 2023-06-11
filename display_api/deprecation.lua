@@ -19,17 +19,17 @@
 
 -- Deprecation
 
-function deprecated_group(deprecated_group, replacement_group)
+local function deprecated_group(old_group, replacement_group)
 	for name, ndef in pairs(minetest.registered_nodes) do
-		if ndef.groups and ndef.groups[deprecated_group] then
+		if ndef.groups and ndef.groups[old_group] then
 			minetest.log("warning", string.format(
 				'Node %s belongs to deprecated "%s" group which should be replaced with new "%s" group.',
-				name, deprecated_group, replacement_group))
+				name, old_group, replacement_group))
 		end
 	end
 end
 
-function deprecated_global_table(deprecated_global_name, replacement_global_name)
+local function deprecated_global_table(deprecated_global_name, replacement_global_name)
 	assert(type(deprecated_global_name) == 'string', "deprecated_global_name should be a string.")
 	assert(type(replacement_global_name) == 'string', "replacement_global_name should be a string.")
 	assert(deprecated_global_name ~= '', "deprecated_global_name should not be empty.")
