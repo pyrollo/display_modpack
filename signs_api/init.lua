@@ -100,7 +100,7 @@ function signs_api.on_place_direction(itemstack, placer, pointed_thing)
 
 	local ndir, test
 
-	if ndef.paramtype2 == "facedir" then
+	if ndef and ndef.paramtype2 == "facedir" then
 		-- If legacy mode, only accept upright nodes
 		if restriction and bdir.x == 0 and bdir.z == 0 then
 			-- Ceiling or floor pointed (facedir chosen from player dir)
@@ -113,7 +113,7 @@ function signs_api.on_place_direction(itemstack, placer, pointed_thing)
 		test = { [0]=-pdir.x, pdir.z, pdir.x, -pdir.z, -pdir.x, [8]=pdir.x }
 	end
 
-	if ndef.paramtype2 == "wallmounted" then
+	if ndef and ndef.paramtype2 == "wallmounted" then
 		ndir = minetest.dir_to_wallmounted(bdir)
 		-- If legacy mode, only accept upright nodes
 		if restriction and (ndir == 0 or ndir == 1) then
@@ -125,8 +125,10 @@ function signs_api.on_place_direction(itemstack, placer, pointed_thing)
 
 	-- Only for direction signs
 	-- TODO:Maybe improve ground and ceiling placement in every directions
-	if ndef.signs_other_dir then
-		if test[ndir] > 0 then
+	if ndef and ndef.signs_other_dir then
+		if not test[ndir] then -- https://github.com/pyrollo/display_modpack/issues/48
+			return itemstack
+		elseif test[ndir] > 0 then
 			itemstack:set_name(ndef.signs_other_dir)
 		end
 		itemstack = minetest.item_place(itemstack, placer, pointed_thing, ndir)
@@ -145,7 +147,7 @@ signs_api.on_rotate = function(pos, node, player, mode, new_param2)
 	-- each rotation.
 	if mode == 1 then
 		local ndef = minetest.registered_nodes[node.name]
-		if ndef.signs_other_dir then
+		if ndef and ndef.signs_other_dir then
 			-- Switch direction
 			node = {name = ndef.signs_other_dir,
 				param1 = node.param1, param2 = node.param2}
@@ -171,7 +173,7 @@ if display_api.is_rotation_restricted() then
 		-- Otherwise use display_api's on_rotate function.
 		if mode == 2 then
 			local ndef = minetest.registered_nodes[node.name]
-			if ndef.signs_other_dir then
+			if ndef and ndef.signs_other_dir then
 				minetest.swap_node(pos, {name = ndef.signs_other_dir,
 					param1 = node.param1, param2 = node.param2})
 				display_api.update_entities(pos)
@@ -210,7 +212,7 @@ function signs_api.register_sign(mod, name, model)
 		on_construct = 	function(pos)
 				local ndef = minetest.registered_nodes[minetest.get_node(pos).name]
 				local meta = minetest.get_meta(pos)
-				meta:set_string("font", ndef.display_entities.font_name or
+				meta:set_string("font", ndef and ndef.display_entities.font_name or
 				                        font_api.get_default_font_name())
 				signs_api.set_formspec(pos)
 				display_api.on_construct(pos)
