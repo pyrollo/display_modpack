@@ -77,6 +77,10 @@ models = {
 				set_formspec(pos)
 				display_api.on_construct(pos)
 			end,
+			on_punch = function(pos)
+				set_formspec(pos)
+				display_api.update_entities(pos)
+			end,
 			on_receive_fields = on_receive_fields,
 		},
 	},
@@ -106,6 +110,10 @@ models = {
 			on_construct = function(pos)
 				set_formspec(pos)
 				display_api.on_construct(pos)
+			end,
+			on_punch = function(pos)
+				set_formspec(pos)
+				display_api.update_entities(pos)
 			end,
 			on_receive_fields = on_receive_fields,
 		},
