@@ -1,5 +1,5 @@
 # textdomain: signs_api
 Text=Teks
- (first %s lines only)= (%s baris pertama sahaja)
+ (first @1 lines only)= (@1 baris pertama sahaja)
 Font=
 Write=Tulis

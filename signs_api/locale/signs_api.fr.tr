@@ -1,5 +1,5 @@
 # textdomain: signs_api
 Text=Texte
- (first %s lines only)= (uniquement les %s premières lignes)
+ (first @1 lines only)= (uniquement les @1 premières lignes)
 Font=
 Write=Écrire

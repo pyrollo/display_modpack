@@ -54,7 +54,7 @@ function signs_api.set_formspec(pos)
 		else
 			local extralabel = ""
 			if maxlines then
-				extralabel = S(" (first %s lines only)"):format(maxlines)
+				extralabel = S(" (first @1 lines only)", maxlines)
 			end
 
 			fs = "textarea[0.5,0.7;5.5,2;display_text;"..S("Text")..""..
