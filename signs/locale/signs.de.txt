@@ -1,0 +1,14 @@
+# textdomain: signs
+Close=Schließen
+Edit=Bearbeiten
+Title=Titel
+Text=Text
+Title font=Titel Schriftart
+Write=Schreiben
+(right-click to read more text)=(Rechtsklick für mehr Text)
+Wooden sign=Hölzernes Schild
+Wooden long sign=Langes hölzernes Schild
+Wooden direction sign=Hölzerner Wegweiser
+Poster=Poster
+Small label=Kleines Etikett
+Label=Etikett

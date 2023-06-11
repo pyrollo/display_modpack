@@ -18,7 +18,7 @@
     along with steles.  If not, see <http://www.gnu.org/licenses/>.
 --]]
 
-local S = steles.intllib
+local S = steles.S
 
 steles.materials = {
 	'default:stone', 

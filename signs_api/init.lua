@@ -22,10 +22,8 @@ signs_api = {}
 signs_api.name = minetest.get_current_modname()
 signs_api.path = minetest.get_modpath(signs_api.name)
 
--- Load support for intllib.
-local S, NS = dofile(signs_api.path.."/intllib.lua")
-signs_api.intllib = S
-local F = function(...) return minetest.formspec_escape(S(...)) end
+-- Translation support
+local S = minetest.get_translator(signs_api.name)
 
 function signs_api.set_display_text(pos, text, font)
 	local meta = minetest.get_meta(pos)
@@ -50,22 +48,22 @@ function signs_api.set_formspec(pos)
 		local fs, y
 
 		if maxlines == 1 then
-			fs = "field[0.5,0.7;5.5,1;display_text;"..F("Text")..
+			fs = "field[0.5,0.7;5.5,1;display_text;"..S("Text")..
 				";${display_text}]"
 			y = 1.2
 		else
 			local extralabel = ""
 			if maxlines then
-				extralabel = F(" (first %s lines only)"):format(maxlines)
+				extralabel = S(" (first %s lines only)"):format(maxlines)
 			end
 
-			fs = "textarea[0.5,0.7;5.5,2;display_text;"..F("Text")..""..
+			fs = "textarea[0.5,0.7;5.5,2;display_text;"..S("Text")..""..
 					extralabel..";${display_text}]"
 			y = 2.4
 		end
 
-		fs = fs.."button[1,"..y..";2,1;font;"..F("Font").."]"
-		fs = fs.."button_exit[3,"..y..";2,1;ok;"..F("Write").."]"
+		fs = fs.."button[1,"..y..";2,1;font;"..S("Font").."]"
+		fs = fs.."button_exit[3,"..y..";2,1;ok;"..S("Write").."]"
 		y = y + 0.8
 		fs = "size[6,"..y.."]"..default.gui_bg..
 			default.gui_bg_img..default.gui_slots..fs

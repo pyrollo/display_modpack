@@ -18,7 +18,7 @@
     along with ontime_clocks.  If not, see <http://www.gnu.org/licenses/>.
 --]]
 
-local S = ontime_clocks.intllib
+local S = ontime_clocks.S
 
 local function clock_on_construct(pos)
 	local timer = minetest.get_node_timer(pos)

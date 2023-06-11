@@ -4,3 +4,6 @@ Sandstone Stele=
 Desert Stone Stele=
 Marble Stele=
 Granite Stele=
+Displayed text (3 lines max)=
+Font=
+Write=

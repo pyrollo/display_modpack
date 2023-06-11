@@ -1,0 +1,5 @@
+# textdomain: signs_api
+Text=Text
+ (first %s lines only)= (nur die ersten %s-Zeilen)
+Font=Schriftart
+Write=Schreiben

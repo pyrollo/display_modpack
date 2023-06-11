@@ -18,8 +18,7 @@
     along with steles.  If not, see <http://www.gnu.org/licenses/>.
 --]]
 
-local S = steles.intllib
-local F = function(...) return minetest.formspec_escape(S(...)) end
+local S = steles.S
 
 display_api.register_display_entity("steles:text")
 
@@ -69,8 +68,8 @@ for i, material in ipairs(steles.materials) do
 						button[1,3;2,1;font;%s]
 						button_exit[3,3;2,1;ok;%s]]=],
 						default.gui_bg, default.gui_bg_img, default.gui_slots,
-						F("Displayed text (3 lines max)"),
-						F("Font"), F("Write")))
+						S("Displayed text (3 lines max)"),
+						S("Font"), S("Write")))
 					display_api.on_construct(pos)
 				end,
 			on_destruct = display_api.on_destruct,

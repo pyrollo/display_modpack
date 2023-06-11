@@ -18,9 +18,6 @@
     along with signs.  If not, see <http://www.gnu.org/licenses/>.
 --]]
 
-local S = signs.intllib
-local F = function(...) return minetest.formspec_escape(S(...)) end
-
 -- Generic callback for show_formspec displayed formspecs of "sign" mod
 
 minetest.register_on_player_receive_fields(function(player, formname, fields)
