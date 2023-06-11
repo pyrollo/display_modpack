@@ -1,10 +1,10 @@
 # textdomain: signs
-Wooden sign=
-Wooden long sign=
-Wooden direction sign=
-Poster=
-Small label=
-Label=
+Wooden sign=Hölzernes Schild
+Wooden long sign=Langes hölzernes Schild
+Wooden direction sign=Hölzerner Wegweiser
+Poster=Poster
+Small label=Kleines Etikett
+Label=Etikett
 Close=Schließen
 Edit=Bearbeiten
 Title=Titel
