@@ -66,6 +66,7 @@ local models = {
 			tiles = { "default_wood.png", "default_wood.png",
 				"default_wood.png", "default_wood.png",
 				"default_wood.png", "board_black_front.png" },
+			_itemframe_texture = "board_black_front.png",
 			drawtype = "nodebox",
 			node_box = {
 				type = "fixed",
@@ -101,6 +102,7 @@ local models = {
 				"default_wood.png", "default_wood.png",
 				"default_wood.png", "board_green_front.png" },
 			drawtype = "nodebox",
+			_itemframe_texture = "board_green_front.png",
 			node_box = {
 				type = "fixed",
 				fixed = {
