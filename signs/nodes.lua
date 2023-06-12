@@ -168,7 +168,7 @@ local models = {
 			drawtype = "mesh",
 			mesh = "signs_dir_right.obj",
 			selection_box = { type="fixed", fixed = {-0.5, -7/32, 0.5, 7/16, 7/32, 7/16}},
-			collision_box = { type="fixed", fixed = {-0,5, -7/32, 0.5, 7/16, 7/32, 7/16}},
+			collision_box = { type="fixed", fixed = {-7/16, -7/32, 0.5, 0.5, 7/32, 7/16}},
 			groups= { dig_immediate = 2 },
 		},
 	},
