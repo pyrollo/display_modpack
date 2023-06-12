@@ -23,6 +23,9 @@ font_api = {}
 font_api.name = minetest.get_current_modname()
 font_api.path = minetest.get_modpath(font_api.name)
 
+-- Translation support
+font_api.S = minetest.get_translator(font_api.name)
+
 -- Inclusions
 -------------
 
