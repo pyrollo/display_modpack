@@ -260,13 +260,9 @@ function display_api.on_rotate(pos, node, user, _, new_param2)
 		return
 	end
 
-	if ov.restricted then
-		minetest.swap_node(pos, node)
-		display_api.update_entities(pos)
-		return true
-	else
-		return false
-	end
+	minetest.swap_node(pos, node)
+	display_api.update_entities(pos)
+	return true
 end
 
 --- Creates display entity with some fields and the on_activate callback
