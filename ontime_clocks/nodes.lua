@@ -229,7 +229,7 @@ minetest.register_lbm({
 	name = "ontime_clocks:nodetimer_init",
 	nodenames = {"ontime_clocks:green_digital", "ontime_clocks:red_digital", "ontime_clocks:white",
 		"ontime_clocks:frameless_black", "ontime_clocks:frameless_gold", "ontime_clocks:frameless_white"},
-	run_at_every_load = true,
+	run_at_every_load = false,
 	action = function(pos)
 		local timer = minetest.get_node_timer(pos)
 		timer:start(5)
