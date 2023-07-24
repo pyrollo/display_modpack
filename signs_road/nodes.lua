@@ -19,7 +19,7 @@
     along with signs_road.  If not, see <http://www.gnu.org/licenses/>.
 --]]
 
-local S = signs_road.intllib
+local S = signs_road.S
 
 local models = {
 	blue_street_sign = {

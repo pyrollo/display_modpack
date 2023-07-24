@@ -1,5 +1,5 @@
 --[[
-    ontime_clocks mod for Minetest - Clock nodes displaying ingame time 
+    ontime_clocks mod for Minetest - Clock nodes displaying ingame time
     (c) Pierre-Yves Rollo
 
     This file is part of ontime_clocks.
@@ -34,7 +34,7 @@ function ontime_clocks.get_m12()
 end
 
 function ontime_clocks.get_digital_properties(color_off, color_on, hour, minute)
-	return 
+	return
 	{
 		textures={"ontime_clocks_digital_background.png^[colorize:"..color_off
 			.."^([combine:21x7"
@@ -51,7 +51,7 @@ end
 function ontime_clocks.get_needles_properties(color, size, hour, minute)
 	return
 	{
-		textures={"[combine:"..size.."x"..size	
+		textures={"[combine:"..size.."x"..size
 			..":0,"..(-size*hour).."=ontime_clocks_needle_h"..size..".png"
 			..":0,"..(-size*minute).."=ontime_clocks_needle_m"..size..".png"
 			.."^[colorize:"..color},

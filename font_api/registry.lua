@@ -58,12 +58,9 @@ local function get_default_font()
 			end
 		end
 
-		-- If failed, chose first font
+		-- If failed, choose the first registered font
 		if default_font == nil then
-			for _, font in pairs(font_api.registered_fonts) do
-				default_font = font
-				break
-			end
+			default_font = next(font_api.registered_fonts)
 		end
 
 		-- Error, no font registered

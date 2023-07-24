@@ -22,9 +22,8 @@ signs = {}
 signs.name = minetest.get_current_modname()
 signs.path = minetest.get_modpath(signs.name)
 
--- Load support for intllib.
-local S, NS = dofile(signs.path.."/intllib.lua")
-signs.intllib = S
+-- Translation support
+signs.S = minetest.get_translator(signs.name)
 
 dofile(signs.path.."/common.lua")
 dofile(signs.path.."/nodes.lua")

@@ -18,7 +18,7 @@
 
 -- Deprecation
 
-function deprecated_global_table(deprecated_global_name, replacement_global_name)
+local function deprecated_global_table(deprecated_global_name, replacement_global_name)
 	assert(type(deprecated_global_name) == 'string', "deprecated_global_name should be a string.")
 	assert(type(replacement_global_name) == 'string', "replacement_global_name should be a string.")
 	assert(deprecated_global_name ~= '', "deprecated_global_name should not be empty.")

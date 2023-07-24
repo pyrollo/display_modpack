@@ -16,6 +16,9 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 --]]
 
+local S = font_api.S
+local FS = function(...) return minetest.formspec_escape(S(...)) end
+
 local modname = minetest.get_current_modname()
 
 local contexts = {}
@@ -101,9 +104,9 @@ local function show_font_formspec(playername)
 	table.sort(fonts)
 
 	local fs = string.format(
-		"size[4,%s]%s%s%sbutton_exit[0,%s;4,1;cancel;Cancel]",
+		"size[4,%s]%s%s%sbutton_exit[0,%s;4,1;cancel;%s]",
 		#fonts + 0.8, default.gui_bg, default.gui_bg_img, default.gui_slots,
-		#fonts)
+		#fonts, FS("Cancel"))
 
 	for line = 1, #fonts do
 		local font = font_api.get_font(fonts[line])

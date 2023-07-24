@@ -1,5 +1,5 @@
 --[[
-    ontime_clocks mod for Minetest - Clock nodes displaying ingame time 
+    ontime_clocks mod for Minetest - Clock nodes displaying ingame time
     (c) Pierre-Yves Rollo
 
     This file is part of ontime_clocks.
@@ -22,9 +22,8 @@ ontime_clocks = {}
 ontime_clocks.name = minetest.get_current_modname()
 ontime_clocks.path = minetest.get_modpath(ontime_clocks.name)
 
--- Load support for intllib.
-local S, NS = dofile(ontime_clocks.path.."/intllib.lua")
-ontime_clocks.intllib = S
+-- Translation support
+ontime_clocks.S = minetest.get_translator(ontime_clocks.name)
 
 dofile(ontime_clocks.path.."/common.lua")
 dofile(ontime_clocks.path.."/nodes.lua")

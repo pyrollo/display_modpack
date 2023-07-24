@@ -22,9 +22,8 @@ steles = {}
 steles.name = minetest.get_current_modname()
 steles.path = minetest.get_modpath(steles.name)
 
--- Load support for intllib.
-local S, NS = dofile(steles.path.."/intllib.lua")
-steles.intllib = S
+-- Translation support
+steles.S = minetest.get_translator(steles.name)
 
 dofile(steles.path.."/config.lua")
 dofile(steles.path.."/nodes.lua")

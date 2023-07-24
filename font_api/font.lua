@@ -212,7 +212,7 @@ end
 -- @return Texture string
 
 function Font:render(text, texturew, textureh, style)
-	local style = style or {}
+	style = style or {}
 
 	-- Split text into lines (and limit to style.lines # of lines)
 	local lines = {}
@@ -243,17 +243,17 @@ function Font:render(text, texturew, textureh, style)
 
 	y = y + (self.margintop or 0)
 
-	for _, line in pairs(lines) do
+	for _, l in pairs(lines) do
 		if style.halign == "left" then
 			x = 0
 		elseif style.halign == "right" then
-			x = texturew - line.width
+			x = texturew - l.width
 		else
-			x = (texturew - line.width) / 2
+			x = (texturew - l.width) / 2
 		end
 
-		while line.text ~= '' do
-			codepoint, line.text = self:get_next_char(line.text)
+		while l.text ~= '' do
+			codepoint, l.text = self:get_next_char(l.text)
 			if codepoint == nil then return '' end -- UTF Error
 
 			-- Add image only if it is visible (at least partly)

@@ -22,10 +22,9 @@ signs_api = {}
 signs_api.name = minetest.get_current_modname()
 signs_api.path = minetest.get_modpath(signs_api.name)
 
--- Load support for intllib.
-local S, NS = dofile(signs_api.path.."/intllib.lua")
-signs_api.intllib = S
-local F = function(...) return minetest.formspec_escape(S(...)) end
+-- Translation support
+local S = minetest.get_translator(signs_api.name)
+local FS = function(...) return minetest.formspec_escape(S(...)) end
 
 function signs_api.set_display_text(pos, text, font)
 	local meta = minetest.get_meta(pos)
@@ -50,22 +49,22 @@ function signs_api.set_formspec(pos)
 		local fs, y
 
 		if maxlines == 1 then
-			fs = "field[0.5,0.7;5.5,1;display_text;"..F("Text")..
+			fs = "field[0.5,0.7;5.5,1;display_text;"..FS("Text")..
 				";${display_text}]"
 			y = 1.2
 		else
 			local extralabel = ""
 			if maxlines then
-				extralabel = F(" (first %s lines only)"):format(maxlines)
+				extralabel = FS(" (first @1 lines only)", maxlines)
 			end
 
-			fs = "textarea[0.5,0.7;5.5,2;display_text;"..F("Text")..""..
+			fs = "textarea[0.5,0.7;5.5,2;display_text;"..FS("Text")..""..
 					extralabel..";${display_text}]"
 			y = 2.4
 		end
 
-		fs = fs.."button[1,"..y..";2,1;font;"..F("Font").."]"
-		fs = fs.."button_exit[3,"..y..";2,1;ok;"..F("Write").."]"
+		fs = fs.."button[1,"..y..";2,1;font;"..FS("Font").."]"
+		fs = fs.."button_exit[3,"..y..";2,1;ok;"..FS("Write").."]"
 		y = y + 0.8
 		fs = "size[6,"..y.."]"..default.gui_bg..
 			default.gui_bg_img..default.gui_slots..fs
@@ -91,7 +90,6 @@ end
 function signs_api.on_place_direction(itemstack, placer, pointed_thing)
 	local name = itemstack:get_name()
 	local ndef = minetest.registered_nodes[name]
-	local restriction = display_api.is_rotation_restricted()
 
 	local bdir = {
 		x = pointed_thing.under.x - pointed_thing.above.x,
@@ -102,33 +100,25 @@ function signs_api.on_place_direction(itemstack, placer, pointed_thing)
 
 	local ndir, test
 
-	if ndef.paramtype2 == "facedir" then
-		-- If legacy mode, only accept upright nodes
-		if restriction and bdir.x == 0 and bdir.z == 0 then
-			-- Ceiling or floor pointed (facedir chosen from player dir)
-			ndir = minetest.dir_to_facedir({x=pdir.x, y=0, z=pdir.z})
-		else
-			-- Wall pointed or no rotation restriction
-			ndir = minetest.dir_to_facedir(bdir, not restriction)
-		end
+	if ndef and ndef.paramtype2 == "facedir" then
+		-- Wall pointed
+		ndir = minetest.dir_to_facedir(bdir, true)
 
 		test = { [0]=-pdir.x, pdir.z, pdir.x, -pdir.z, -pdir.x, [8]=pdir.x }
 	end
 
-	if ndef.paramtype2 == "wallmounted" then
+	if ndef and ndef.paramtype2 == "wallmounted" then
 		ndir = minetest.dir_to_wallmounted(bdir)
-		-- If legacy mode, only accept upright nodes
-		if restriction and (ndir == 0 or ndir == 1) then
-			ndir = minetest.dir_to_wallmounted({x=pdir.x, y=0, z=pdir.z})
-		end
 
 		test = { [0]=-pdir.x, -pdir.x, pdir.z, -pdir.z, -pdir.x, pdir.x}
 	end
 
 	-- Only for direction signs
 	-- TODO:Maybe improve ground and ceiling placement in every directions
-	if ndef.signs_other_dir then
-		if test[ndir] > 0 then
+	if ndef and ndef.signs_other_dir then
+		if not test[ndir] then -- https://github.com/pyrollo/display_modpack/issues/48
+			return itemstack
+		elseif test[ndir] > 0 then
 			itemstack:set_name(ndef.signs_other_dir)
 		end
 		itemstack = minetest.item_place(itemstack, placer, pointed_thing, ndir)
@@ -141,13 +131,12 @@ function signs_api.on_place_direction(itemstack, placer, pointed_thing)
 end
 
 -- Handles screwdriver rotation
--- (see "if" block below for rotation restriction mode).
 signs_api.on_rotate = function(pos, node, player, mode, new_param2)
 	-- If rotation mode is 1 and sign is directional, swap direction between
 	-- each rotation.
 	if mode == 1 then
 		local ndef = minetest.registered_nodes[node.name]
-		if ndef.signs_other_dir then
+		if ndef and ndef.signs_other_dir then
 			-- Switch direction
 			node = {name = ndef.signs_other_dir,
 				param1 = node.param1, param2 = node.param2}
@@ -163,25 +152,6 @@ signs_api.on_rotate = function(pos, node, player, mode, new_param2)
 		end
 	end
 	return display_api.on_rotate(pos, node, player, mode, new_param2)
-end
-
--- Legacy mode with rotation restriction
--- TODO:When MT < 5.0 no more in use, to be removed
-if display_api.is_rotation_restricted() then
-	signs_api.on_rotate = function(pos, node, player, mode, new_param2)
-		-- If rotation mode is 2 and sign is directional, swap direction.
-		-- Otherwise use display_api's on_rotate function.
-		if mode == 2 then
-			local ndef = minetest.registered_nodes[node.name]
-			if ndef.signs_other_dir then
-				minetest.swap_node(pos, {name = ndef.signs_other_dir,
-					param1 = node.param1, param2 = node.param2})
-				display_api.update_entities(pos)
-				return true
-			end
-		end
-		return display_api.on_rotate(pos, node, player, mode, new_param2)
-	end
 end
 
 function signs_api.register_sign(mod, name, model)
@@ -212,7 +182,7 @@ function signs_api.register_sign(mod, name, model)
 		on_construct = 	function(pos)
 				local ndef = minetest.registered_nodes[minetest.get_node(pos).name]
 				local meta = minetest.get_meta(pos)
-				meta:set_string("font", ndef.display_entities.font_name or
+				meta:set_string("font", ndef and ndef.display_entities.font_name or
 				                        font_api.get_default_font_name())
 				signs_api.set_formspec(pos)
 				display_api.on_construct(pos)

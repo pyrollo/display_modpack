@@ -1,7 +1,9 @@
 # Display Modpack
 Version 1.3.1
 
-This modpack provides mods with dynamic display. Mods are :
+Requires Minetest 5.0+
+
+This modpack provides mods with dynamic display. Mods are:
 
 - **[display_api](https://github.com/pyrollo/display_modpack/tree/master/display_api)**: A library for adding display entities to nodes;
 - **[font_api](https://github.com/pyrollo/display_modpack/tree/master/font_api)**: A library for displaying fonts on entities;
