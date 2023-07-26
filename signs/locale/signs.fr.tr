@@ -1,14 +1,14 @@
 # textdomain: signs
-Wooden sign=
-Wooden long sign=
+Wooden sign=Signe en bois
+Wooden long sign=Long signe en bois
 Wooden direction sign=Panneau de direction en bois
 Poster=Affiche
-Small label=
-Label=
-Close=
-Edit=
-Title=
-Text=
-Title font=
-Write=
+Small label=Petite étiquette
+Label=Étiquette
+Close=Fermer
+Edit=Éditer
+Title=Titre
+Text=Texte
+Title font=Police de titre
+Write=Écrire
 (right-click to read more text)=(Clic-droit pour afficher le texte entier)
