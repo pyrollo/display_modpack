@@ -47,10 +47,11 @@ function signs_api.set_formspec(pos)
 	   and ndef.display_entities["signs:display_text"] then
 		local maxlines = ndef.display_entities["signs:display_text"].maxlines
 		local fs, y
+		local display_text = minetest.formspec_escape(meta:get_string("display_text"))
 
 		if maxlines == 1 then
 			fs = "field[0.5,0.7;5.5,1;display_text;"..FS("Text")..
-				";${display_text}]"
+				";" .. display_text .. "]"
 			y = 1.2
 		else
 			local extralabel = ""
@@ -59,7 +60,7 @@ function signs_api.set_formspec(pos)
 			end
 
 			fs = "textarea[0.5,0.7;5.5,2;display_text;"..FS("Text")..""..
-					extralabel..";${display_text}]"
+					extralabel..";" .. display_text .. "]"
 			y = 2.4
 		end
 
@@ -179,6 +180,9 @@ function signs_api.register_sign(mod, name, model)
 
 		},
 		on_place = display_api.on_place,
+		on_rightclick = function(pos)
+				signs_api.set_formspec(pos)
+			end,
 		on_construct = 	function(pos)
 				local ndef = minetest.registered_nodes[minetest.get_node(pos).name]
 				local meta = minetest.get_meta(pos)
