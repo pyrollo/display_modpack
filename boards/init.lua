@@ -122,6 +122,9 @@ local models = {
 				set_formspec(pos)
 				display_api.update_entities(pos)
 			end,
+			on_rightclick = function(pos)
+				set_formspec(pos)
+			end,
 			on_receive_fields = on_receive_fields,
 		},
 	},
