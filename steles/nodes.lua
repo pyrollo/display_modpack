@@ -32,6 +32,20 @@ for i, material in ipairs(steles.materials) do
 		local parts = material:split(":")
 		groups.display_api = 1
 
+		local function set_formspec(pos)
+			local meta = minetest.get_meta(pos)
+			local display_text = minetest.formspec_escape(meta:get_string("display_text"))
+			meta:set_string("formspec", string.format([=[
+				size[6,4]%s%s%s
+				textarea[0.5,0.7;5.5,2;display_text;%s;%s]
+				button[1,3;2,1;font;%s]
+				button_exit[3,3;2,1;ok;%s]]=],
+				default.gui_bg, default.gui_bg_img, default.gui_slots,
+				FS("Displayed text (3 lines max)"),
+				display_text,
+				FS("Font"), FS("Write")))
+		end
+
 		minetest.register_node("steles:"..parts[2].."_stele", {
 			description = steles.materials_desc[i],
 			sunlight_propagates = true,
@@ -62,16 +76,11 @@ for i, material in ipairs(steles.materials) do
 					return display_api.on_place(itemstack, placer, pointed_thing)
 				end,
 			on_construct = 	function(pos)
-					local meta = minetest.get_meta(pos)
-					meta:set_string("formspec", string.format([=[
-						size[6,4]%s%s%s
-						textarea[0.5,0.7;5.5,2;display_text;%s;${display_text}]
-						button[1,3;2,1;font;%s]
-						button_exit[3,3;2,1;ok;%s]]=],
-						default.gui_bg, default.gui_bg_img, default.gui_slots,
-						FS("Displayed text (3 lines max)"),
-						FS("Font"), FS("Write")))
+					set_formspec(pos)
 					display_api.on_construct(pos)
+				end,
+			on_rightclick = function(pos)
+					set_formspec(pos)
 				end,
 			on_destruct = display_api.on_destruct,
 			on_rotate = display_api.on_rotate,

@@ -31,9 +31,10 @@ dofile(boards.path.."/font_tinycurs.lua")
 
 local function set_formspec(pos)
 	local meta = minetest.get_meta(pos)
+	local display_text = minetest.formspec_escape(meta:get_string("display_text"))
 	meta:set_string("formspec",
 		"size[6,4]"..default.gui_bg..default.gui_bg_img..default.gui_slots..
-		"textarea[0.5,0.7;5.5,3;display_text;"..FS("Text")..";${display_text}]"..
+		"textarea[0.5,0.7;5.5,3;display_text;"..FS("Text")..";" .. display_text .. "]"..
 		"button_exit[3,3.5;2,1;ok;"..FS("Write").."]"..
 		"button_exit[1,3.5;2,1;wipe;"..FS("Wipe").."]")
 end
@@ -82,6 +83,9 @@ local models = {
 			on_punch = function(pos)
 				set_formspec(pos)
 				display_api.update_entities(pos)
+			end,
+			on_rightclick = function(pos)
+				set_formspec(pos)
 			end,
 			on_receive_fields = on_receive_fields,
 		},
