@@ -1,6 +1,6 @@
 # textdomain: boards
-Black board=Tableau noir
-Green board=Tableau vert
 Text=Texte
 Write=Écrire
-Wipe=Effacer
+Font=Police
+Black board=Tableau noir
+Green board=Tableau vert
