@@ -61,9 +61,11 @@ minetest.register_lbm({ name = "signs:conpatibility_1",
 -- We need to have this entity registered to be able to remove it.
 if minetest.registered_entities["signs:text"] == nil then
 	minetest.register_entity("signs:text", {
-		collisionbox = { 0, 0, 0, 0, 0, 0 },
-		visual = "upright_sprite",
-		textures = {},
+		initial_properties = {
+			collisionbox = {0, 0, 0, 0, 0, 0},
+			visual = "upright_sprite",
+			textures = {}
+		}
 	})
 end
 

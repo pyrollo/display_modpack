@@ -1,0 +1,9 @@
+display_modpack (all mods):
+- Original author: Pierre-Yves Rollo (pyrollo) License: LGPL v3, font_metro LGPL v2.1
+- Many other contributors, see `git log`
+
+boards:
+- Font author: cyfry77 License: CC-BY-SA 3.0
+
+font_metro:
+- Font author: Christian Munk (CMunk) License: CC-BY-SA 3.0
