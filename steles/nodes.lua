@@ -83,6 +83,7 @@ for i, material in ipairs(steles.materials) do
 					set_formspec(pos)
 				end,
 			on_destruct = display_api.on_destruct,
+			on_blast = display_api.on_blast,
 			on_rotate = display_api.on_rotate,
 			on_receive_fields = function(pos, formname, fields, player)
 					if not minetest.is_protected(pos, player:get_player_name()) then

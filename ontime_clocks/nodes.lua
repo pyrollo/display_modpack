@@ -59,6 +59,7 @@ minetest.register_node("ontime_clocks:green_digital", {
 	on_place = display_api.on_place,
 	on_construct = clock_on_construct,
 	on_destruct = display_api.on_destruct,
+	on_blast = display_api.on_blast,
 	on_rotate = display_api.on_rotate,
 	on_timer = clock_on_timer,
 })
@@ -92,6 +93,7 @@ minetest.register_node("ontime_clocks:red_digital", {
 	on_place = display_api.on_place,
 	on_construct = clock_on_construct,
 	on_destruct = display_api.on_destruct,
+	on_blast = display_api.on_blast,
 	on_rotate = display_api.on_rotate,
 	on_timer = clock_on_timer,
 })
@@ -124,6 +126,7 @@ minetest.register_node("ontime_clocks:white", {
 	on_place = display_api.on_place,
 	on_construct = clock_on_construct,
 	on_destruct = display_api.on_destruct,
+	on_blast = display_api.on_blast,
 	on_rotate = display_api.on_rotate,
 	on_timer = clock_on_timer,
 })
@@ -156,6 +159,7 @@ minetest.register_node("ontime_clocks:frameless_black", {
 	on_place = display_api.on_place,
 	on_construct = clock_on_construct,
 	on_destruct = display_api.on_destruct,
+	on_blast = display_api.on_blast,
 	on_rotate = display_api.on_rotate,
 	on_timer = clock_on_timer,
 })
@@ -188,6 +192,7 @@ minetest.register_node("ontime_clocks:frameless_gold", {
 	on_place = display_api.on_place,
 	on_construct = clock_on_construct,
 	on_destruct = display_api.on_destruct,
+	on_blast = display_api.on_blast,
 	on_rotate = display_api.on_rotate,
 	on_timer = clock_on_timer,
 })
@@ -220,6 +225,7 @@ minetest.register_node("ontime_clocks:frameless_white", {
 	on_place = display_api.on_place,
 	on_construct = clock_on_construct,
 	on_destruct = display_api.on_destruct,
+	on_blast = display_api.on_blast,
 	on_rotate = display_api.on_rotate,
 	on_timer = clock_on_timer,
 })

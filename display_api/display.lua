@@ -251,6 +251,15 @@ function display_api.on_destruct(pos)
 	end
 end
 
+function display_api.on_blast(pos, intensity)
+	if not minetest.is_protected(pos, "") then
+		local node = minetest.get_node(pos)
+		local drops = minetest.get_node_drops(node, "tnt:blast")
+		minetest.remove_node(pos)
+		return drops
+	end
+end
+
 -- On_rotate (screwdriver) callback for display_api items. Prevents invalid
 -- rotations and reorients entities.
 function display_api.on_rotate(pos, node, user, _, new_param2)
@@ -272,11 +281,16 @@ function display_api.register_display_entity(entity_name)
 			initial_properties = {
 				collisionbox = {0, 0, 0, 0, 0, 0},
 				visual = "upright_sprite",
-				textures = {}
+				textures = {},
+				collide_with_objects = false,
+				pointable = false
 			},
 			on_activate = display_api.on_activate,
 			get_staticdata = function(self)
 				return minetest.serialize({ nodepos = self.nodepos })
+			end,
+			on_blast = function(self, damage)
+				return false, false, {}
 			end,
 		})
 	end
