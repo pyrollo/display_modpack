@@ -1,5 +1,7 @@
 # Display Modpack
-Version 1.3.1
+
+![](https://github.com/mt-mods/display_modpack/workflows/luacheck/badge.svg)
+[![ContentDB](https://content.minetest.net/packages/mt-mods/display_modpack/shields/downloads/)](https://content.minetest.net/packages/mt-mods/display_modpack/)
 
 Requires Minetest 5.0+
 
@@ -18,7 +20,7 @@ This modpack provides mods with dynamic display. Mods are:
 
 For more information, see the [forum topic](https://forum.minetest.net/viewtopic.php?t=19365) at the Minetest forums.
 
-![Presentation image of Display_Modpack](screenshot.png)
+![Presentation image of Display_Modpack](https://raw.githubusercontent.com/mt-mods/display_modpack/master/screenshot.png)
 
 ## Extra fonts
 
