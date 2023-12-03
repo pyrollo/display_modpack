@@ -28,6 +28,11 @@ local FS = function(...) return minetest.formspec_escape(S(...)) end
 
 function signs_api.set_display_text(pos, text, font)
 	local meta = minetest.get_meta(pos)
+	-- Horrible workaround to prevent the engine from trying to resolve
+	-- metadata keys
+	if text:sub(1, 2) == "${" and text:sub(-1) == "}" then
+		text = text .. " "
+	end
 	meta:set_string("display_text", text)
 	if text and text ~= "" then
 		meta:set_string("infotext", "\""..text.."\"")

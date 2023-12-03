@@ -54,15 +54,15 @@ local function show_node_formspec(playername, pos)
 	fs = fs:gsub("context", nodemeta)
 
 	-- Change all ${} to their corresponding metadata values
-	local s, e
-	repeat
-		s, e = fs:find('%${.*}')
-		if s and e then
-			fs = fs:sub(1, s-1)..
-				minetest.formspec_escape(meta:get_string(fs:sub(s+2,e-1)))..
-				fs:sub(e+1)
+	fs = fs:gsub("(.)${(.*)}", function(prefix, key)
+		-- Don't alter escaped keys
+		if prefix == "\\" then
+			return prefix .. "${" .. key .. "}"
 		end
-	until s == nil
+
+		-- Get the node meta value
+		return prefix .. minetest.formspec_escape(meta:get_string(key))
+	end)
 
 	local context = get_context(playername)
 	context.node_pos = pos
