@@ -54,7 +54,7 @@ local function show_node_formspec(playername, pos)
 	fs = fs:gsub("context", nodemeta)
 
 	-- Change all ${} to their corresponding metadata values
-	fs = fs:gsub("(.)${(.*)}", function(prefix, key)
+	fs = fs:gsub("(.)${(.-)}", function(prefix, key)
 		-- Don't alter escaped keys
 		if prefix == "\\" then
 			return prefix .. "${" .. key .. "}"
