@@ -167,7 +167,7 @@ function signs_api.register_sign(mod, name, model)
 			fixed = {-model.width/2, -model.height/2, 0.5,
 					 model.width/2, model.height/2, 0.5 - model.depth},
 		},
-		groups = {choppy=2, dig_immediate=2, not_blocking_trains=1, display_api=1},
+		groups = {choppy=2, dig_immediate=2, not_blocking_trains=1, display_api=1,signs_api_formspec_lbm=1},
 		sounds = default.node_sound_defaults(),
 		display_entities = {
 			["signs:display_text"] = {
@@ -180,9 +180,6 @@ function signs_api.register_sign(mod, name, model)
 
 		},
 		on_place = display_api.on_place,
-		on_rightclick = function(pos)
-				signs_api.set_formspec(pos)
-			end,
 		on_construct = 	function(pos)
 				local ndef = minetest.registered_nodes[minetest.get_node(pos).name]
 				local meta = minetest.get_meta(pos)
@@ -224,3 +221,14 @@ end
 
 -- Text entity for all signs
 display_api.register_display_entity("signs:display_text")
+
+-- Update sign formspecs
+minetest.register_lbm({
+	label = "Update signs_api formspecs",
+	name = "signs_api:update_formspecs",
+	run_at_every_load = false,
+	nodenames = {"group:signs_api_formspec_lbm"},
+	action = function(pos)
+		signs_api.set_formspec(pos)
+	end,
+})
