@@ -78,9 +78,11 @@ function signs_api.on_receive_fields(pos, formname, fields, player)
 	if not minetest.is_protected(pos, player:get_player_name()) then
 		if fields and (fields.ok or fields.key_enter) then
 			signs_api.set_display_text(pos, fields.display_text)
+			signs_api.set_formspec(pos)
 		end
 		if fields and (fields.font) then
 			signs_api.set_display_text(pos, fields.display_text)
+			signs_api.set_formspec(pos)
 			font_api.show_font_list(player, pos)
 		end
 	end
