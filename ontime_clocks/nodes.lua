@@ -139,6 +139,7 @@ minetest.register_node("ontime_clocks:frameless_black", {
 	paramtype = "light",
 	paramtype2 = "wallmounted",
 	drawtype = "nodebox",
+	use_texture_alpha = "clip",
 	node_box = {
 		type = "wallmounted",
 		wall_side = { -0.5, -7/16, -7/16, -0.45, 7/16, 7/16 },
@@ -172,6 +173,7 @@ minetest.register_node("ontime_clocks:frameless_gold", {
 	paramtype = "light",
 	paramtype2 = "wallmounted",
 	drawtype = "nodebox",
+	use_texture_alpha = "clip",
 	node_box = {
 		type = "wallmounted",
 		wall_side = { -0.5, -7/16, -7/16, -0.45, 7/16, 7/16 },
@@ -205,6 +207,7 @@ minetest.register_node("ontime_clocks:frameless_white", {
 	paramtype = "light",
 	paramtype2 = "wallmounted",
 	drawtype = "nodebox",
+	use_texture_alpha = "clip",
 	node_box = {
 		type = "wallmounted",
 		wall_side = { -0.5, -7/16, -7/16, -0.45, 7/16, 7/16 },

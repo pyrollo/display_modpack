@@ -3,7 +3,7 @@
 ![](https://github.com/mt-mods/display_modpack/workflows/luacheck/badge.svg)
 [![ContentDB](https://content.minetest.net/packages/mt-mods/display_modpack/shields/downloads/)](https://content.minetest.net/packages/mt-mods/display_modpack/)
 
-Requires Minetest 5.0+
+Requires Minetest 5.4+
 
 This modpack provides mods with dynamic display. Mods are:
 

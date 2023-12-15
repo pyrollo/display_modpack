@@ -37,6 +37,7 @@ local models = {
 			          "signs_road_sides.png", "signs_road_sides.png",
 			          "signs_road_sides.png", "signs_road_blue_street.png" },
 			inventory_image = "signs_road_blue_street.png",
+			use_texture_alpha = "clip",
 		},
 	},
 	large_street_sign = {
@@ -54,6 +55,7 @@ local models = {
 			          "signs_road_sides.png", "signs_road_sides.png",
 			          "signs_road_sides.png", "signs_road_large_white.png" },
 			inventory_image = "signs_road_white.png",
+			use_texture_alpha = "clip",
 		},
 	},
 	red_street_sign = {
@@ -71,6 +73,7 @@ local models = {
 			          "signs_road_sides.png", "signs_road_sides.png",
 			          "signs_road_sides.png", "signs_road_red_white.png" },
 			inventory_image="signs_road_red_white.png",
+			use_texture_alpha = "clip",
 		},
 	},
 	white_sign = {
@@ -88,6 +91,7 @@ local models = {
 			          "signs_road_sides.png", "signs_road_sides.png",
 			          "signs_road_sides.png", "signs_road_white.png" },
 			inventory_image = "signs_road_white.png",
+			use_texture_alpha = "clip",
 		},
 	},
 	blue_sign = {
@@ -105,6 +109,7 @@ local models = {
 			          "signs_road_sides.png", "signs_road_sides.png",
 			          "signs_road_sides.png", "signs_road_blue.png" },
 			inventory_image = "signs_road_blue.png",
+			use_texture_alpha = "clip",
 		},
 	},
 	green_sign = {
@@ -122,6 +127,7 @@ local models = {
 			          "signs_road_sides.png", "signs_road_sides.png",
 			          "signs_road_sides.png", "signs_road_green.png" },
 			inventory_image = "signs_road_green.png",
+			use_texture_alpha = "clip",
 		},
 	},
 	yellow_sign = {
@@ -139,6 +145,7 @@ local models = {
 			          "signs_road_sides.png", "signs_road_sides.png",
 			          "signs_road_sides.png", "signs_road_yellow.png" },
 			inventory_image="signs_road_yellow.png",
+			use_texture_alpha = "clip",
 		},
 	},
 	red_sign = {
@@ -156,6 +163,7 @@ local models = {
 			          "signs_road_sides.png", "signs_road_sides.png",
 			          "signs_road_sides.png", "signs_road_red.png" },
 			inventory_image = "signs_road_red.png",
+			use_texture_alpha = "clip",
 		},
 	},
 	black_right_sign = {
@@ -174,6 +182,7 @@ local models = {
 			          "signs_road_sides.png", "signs_road_sides.png",
 			          "signs_road_sides.png", "signs_road_black_dir_right.png" },
 			inventory_image = "signs_road_black_dir_inventory.png",
+			use_texture_alpha = "clip",
 			signs_other_dir = "signs_road:black_left_sign",
 			on_place = signs_api.on_place_direction,
 			on_rightclick = signs_api.on_right_click_direction,
@@ -195,6 +204,7 @@ local models = {
 			          "signs_road_sides.png", "signs_road_sides.png",
 			          "signs_road_sides.png", "signs_road_black_dir_left.png" },
 			inventory_image = "signs_road_black_dir_inventory.png",
+			use_texture_alpha = "clip",
 			signs_other_dir = "signs_road:black_right_sign",
 			groups = { not_in_creative_inventory = 1 },
 			drop = "signs_road:black_right_sign",
@@ -221,6 +231,7 @@ local models = {
 			on_rightclick = signs_api.on_right_click_direction,
 			drawtype = "mesh",
 			mesh = "signs_dir_right.obj",
+			use_texture_alpha = "clip",
 			selection_box = { type = "fixed", fixed = { -0.5, -7/32, 0.5, 7/16, 7/32, 7/16 } },
 			collision_box = { type = "fixed", fixed = { -0.5, -7/32, 0.5, 7/16, 7/32, 7/16 } },
 		},
@@ -244,6 +255,7 @@ local models = {
 			on_rightclick = signs_api.on_right_click_direction,
 			drawtype = "mesh",
 			mesh = "signs_dir_left.obj",
+			use_texture_alpha = "clip",
 			selection_box = { type = "fixed", fixed = { -7/16, -7/32, 0.5, 0.5, 7/32, 7/16 } },
 			collision_box = { type = "fixed", fixed = { -7/16, -7/32, 0.5, 0.5, 7/32, 7/16 } },
 			groups = { not_in_creative_inventory = 1 },
@@ -269,6 +281,7 @@ local models = {
 			on_rightclick = signs_api.on_right_click_direction,
 			drawtype = "mesh",
 			mesh = "signs_dir_right.obj",
+			use_texture_alpha = "clip",
 			selection_box = { type = "fixed", fixed = { -0.5, -7/32, 0.5, 7/16, 7/32, 7/16 } },
 			collision_box = { type = "fixed", fixed = { -0.5, -7/32, 0.5, 7/16, 7/32, 7/16 } },
 		},
@@ -292,6 +305,7 @@ local models = {
 			on_rightclick = signs_api.on_right_click_direction,
 			drawtype = "mesh",
 			mesh = "signs_dir_left.obj",
+			use_texture_alpha = "clip",
 			selection_box = { type = "fixed", fixed = { -7/16, -7/32, 0.5, 0.5, 7/32, 7/16 } },
 			collision_box = { type = "fixed", fixed = { -7/16, -7/32, 0.5, 0.5, 7/32, 7/16 } },
 			groups = { not_in_creative_inventory = 1 },
@@ -317,6 +331,7 @@ local models = {
 			on_rightclick = signs_api.on_right_click_direction,
 			drawtype = "mesh",
 			mesh = "signs_dir_right.obj",
+			use_texture_alpha = "clip",
 			selection_box = { type = "fixed", fixed = { -0.5, -7/32, 0.5, 7/16, 7/32, 7/16 } },
 			collision_box = { type = "fixed", fixed = { -0.5, -7/32, 0.5, 7/16, 7/32, 7/16 } },
 		},
@@ -340,6 +355,7 @@ local models = {
 			on_rightclick = signs_api.on_right_click_direction,
 			drawtype = "mesh",
 			mesh = "signs_dir_left.obj",
+			use_texture_alpha = "clip",
 			selection_box = { type = "fixed", fixed = { -7/16, -7/32, 0.5, 0.5, 7/32, 7/16 } },
 			collision_box = { type = "fixed", fixed = { -7/16, -7/32, 0.5, 0.5, 7/32, 7/16 } },
 			groups = { not_in_creative_inventory = 1 },
@@ -365,6 +381,7 @@ local models = {
 			on_rightclick = signs_api.on_right_click_direction,
 			drawtype = "mesh",
 			mesh = "signs_dir_right.obj",
+			use_texture_alpha = "clip",
 			selection_box = { type = "fixed", fixed = { -0.5, -7/32, 0.5, 7/16, 7/32, 7/16 } },
 			collision_box = { type = "fixed", fixed = { -0.5, -7/32, 0.5, 7/16, 7/32, 7/16 } },
 		},
@@ -388,6 +405,7 @@ local models = {
 			on_rightclick = signs_api.on_right_click_direction,
 			drawtype = "mesh",
 			mesh = "signs_dir_left.obj",
+			use_texture_alpha = "clip",
 			selection_box = { type = "fixed", fixed = { -7/16, -7/32, 0.5, 0.5, 7/32, 7/16 } },
 			collision_box = { type = "fixed", fixed = { -7/16, -7/32, 0.5, 0.5, 7/32, 7/16 } },
 			groups = { not_in_creative_inventory = 1 },
@@ -413,6 +431,7 @@ local models = {
 			on_rightclick = signs_api.on_right_click_direction,
 			drawtype = "mesh",
 			mesh = "signs_dir_right.obj",
+			use_texture_alpha = "clip",
 			selection_box = { type = "fixed", fixed = { -0.5, -7/32, 0.5, 7/16, 7/32, 7/16 } },
 			collision_box = { type = "fixed", fixed = { -0.5, -7/32, 0.5, 7/16, 7/32, 7/16 } },
 		},
@@ -436,6 +455,7 @@ local models = {
 			on_rightclick = signs_api.on_right_click_direction,
 			drawtype = "mesh",
 			mesh = "signs_dir_left.obj",
+			use_texture_alpha = "clip",
 			selection_box = { type = "fixed", fixed = { -7/16, -7/32, 0.5, 0.5, 7/32, 7/16 } },
 			collision_box = { type = "fixed", fixed = { -7/16, -7/32, 0.5, 0.5, 7/32, 7/16 } },
 			groups = { not_in_creative_inventory = 1 },
@@ -445,7 +465,6 @@ local models = {
 }
 
 -- Node registration
-for name, model in pairs(models)
-do
+for name, model in pairs(models) do
 	signs_api.register_sign("signs_road", name, model)
 end

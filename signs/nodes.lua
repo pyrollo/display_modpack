@@ -207,6 +207,7 @@ local models = {
 			          "signs_poster_sides.png", "signs_poster_sides.png",
 			          "signs_poster_sides.png", "signs_poster.png" },
 			inventory_image = "signs_poster_inventory.png",
+			use_texture_alpha = "clip",
 			groups= { dig_immediate = 3 },
 			on_construct = display_api.on_construct,
 			on_rightclick = display_poster,
