@@ -47,47 +47,48 @@ for i, material in ipairs(steles.materials) do
 				},
 			},
 			groups = groups,
+			is_ground_content = false,
 			display_entities = {
 				["steles:text"] = {
-						on_display_update = font_api.on_display_update,
-						depth = -2/16 - display_api.entity_spacing,
-						top = -2/16,
-						aspect_ratio = 0.4,
-						size = { x = 10/16, y = 12/16 },
-						maxlines = 3,
+					on_display_update = font_api.on_display_update,
+					depth = -2/16 - display_api.entity_spacing,
+					top = -2/16,
+					aspect_ratio = 0.4,
+					size = { x = 10/16, y = 12/16 },
+					maxlines = 3,
 				},
 			},
 			on_place = function(itemstack, placer, pointed_thing)
-					minetest.rotate_node(itemstack, placer, pointed_thing)
-					return display_api.on_place(itemstack, placer, pointed_thing)
-				end,
+				minetest.rotate_node(itemstack, placer, pointed_thing)
+				return display_api.on_place(itemstack, placer, pointed_thing)
+			end,
 			on_construct = 	function(pos)
-					local meta = minetest.get_meta(pos)
-					meta:set_string("formspec", string.format([=[
-						size[6,4]%s%s%s
-						textarea[0.5,0.7;5.5,2;display_text;%s;${display_text}]
-						button[1,3;2,1;font;%s]
-						button_exit[3,3;2,1;ok;%s]]=],
-						default.gui_bg, default.gui_bg_img, default.gui_slots,
-						F("Displayed text (3 lines max)"),
-						F("Font"), F("Write")))
-					display_api.on_construct(pos)
-				end,
+				local meta = minetest.get_meta(pos)
+				meta:set_string("formspec", string.format([=[
+					size[6,4]%s%s%s
+					textarea[0.5,0.7;5.5,2;display_text;%s;${display_text}]
+					button[1,3;2,1;font;%s]
+					button_exit[3,3;2,1;ok;%s]]=],
+					default.gui_bg, default.gui_bg_img, default.gui_slots,
+					F("Displayed text (3 lines max)"),
+					F("Font"), F("Write")))
+				display_api.on_construct(pos)
+			end,
 			on_destruct = display_api.on_destruct,
 			on_rotate = display_api.on_rotate,
 			on_receive_fields = function(pos, formname, fields, player)
-					if not minetest.is_protected(pos, player:get_player_name()) then
-						local meta = minetest.get_meta(pos)
-						if fields.ok or fields.font then
-							meta:set_string("display_text", fields.display_text)
-							meta:set_string("infotext", "\""..fields.display_text.."\"")
-							display_api.update_entities(pos)
-						end
-						if fields.font then
-							font_api.show_font_list(player, pos)
-						end
+				if not minetest.is_protected(pos, player:get_player_name()) then
+					local meta = minetest.get_meta(pos)
+					if fields.ok or fields.font then
+						meta:set_string("display_text", fields.display_text)
+						meta:set_string("infotext", "\""..fields.display_text.."\"")
+						display_api.update_entities(pos)
 					end
-				end,
+					if fields.font then
+						font_api.show_font_list(player, pos)
+					end
+				end
+			end,
 			on_punch = display_api.update_entities,
 		})
 	end
