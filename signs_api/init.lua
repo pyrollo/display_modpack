@@ -193,37 +193,39 @@ function signs_api.register_sign(mod, name, model)
 		drawtype = "nodebox",
 		node_box = {
 			type = "fixed",
-			fixed = {-model.width/2, -model.height/2, 0.5,
-					 model.width/2, model.height/2, 0.5 - model.depth},
+			fixed = {
+				-model.width/2, -model.height/2, 0.5,
+				model.width/2, model.height/2, 0.5 - model.depth
+			},
 		},
 		groups = {choppy=2, dig_immediate=2, not_blocking_trains=1, display_api=1},
+		is_ground_content = false,
 		sounds = default.node_sound_defaults(),
 		display_entities = {
 			["signs:display_text"] = {
-					on_display_update = font_api.on_display_update,
-					depth = 0.5 - display_api.entity_spacing - model.depth,
-					size = { x = model.width, y = model.height },
-					aspect_ratio = 1/2,
-					maxlines = 1,
+				on_display_update = font_api.on_display_update,
+				depth = 0.5 - display_api.entity_spacing - model.depth,
+				size = { x = model.width, y = model.height },
+				aspect_ratio = 1/2,
+				maxlines = 1,
 			},
-
 		},
 		on_place = display_api.on_place,
 		on_construct = 	function(pos)
-				local ndef = minetest.registered_nodes[minetest.get_node(pos).name]
-				local meta = minetest.get_meta(pos)
-				meta:set_string("font", ndef.display_entities.font_name or
-				                        font_api.get_default_font_name())
-				signs_api.set_formspec(pos)
-				display_api.on_construct(pos)
-			end,
+			local ndef = minetest.registered_nodes[minetest.get_node(pos).name]
+			local meta = minetest.get_meta(pos)
+			meta:set_string("font", ndef.display_entities.font_name or
+				font_api.get_default_font_name())
+			signs_api.set_formspec(pos)
+			display_api.on_construct(pos)
+		end,
 		on_destruct = display_api.on_destruct,
 		on_rotate = signs_api.on_rotate,
 		on_receive_fields =  signs_api.on_receive_fields,
 		on_punch = function(pos, node, player, pointed_thing)
-				signs_api.set_formspec(pos)
-				display_api.update_entities(pos)
-			end,
+			signs_api.set_formspec(pos)
+			display_api.update_entities(pos)
+		end,
 	}
 
 	-- Node fields override
