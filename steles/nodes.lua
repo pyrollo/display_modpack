@@ -61,6 +61,7 @@ for i, material in ipairs(steles.materials) do
 				},
 			},
 			groups = groups,
+			is_ground_content = false,
 			display_entities = {
 				["steles:text"] = {
 						on_display_update = font_api.on_display_update,
@@ -72,32 +73,32 @@ for i, material in ipairs(steles.materials) do
 				},
 			},
 			on_place = function(itemstack, placer, pointed_thing)
-					minetest.rotate_node(itemstack, placer, pointed_thing)
-					return display_api.on_place(itemstack, placer, pointed_thing)
-				end,
+				minetest.rotate_node(itemstack, placer, pointed_thing)
+				return display_api.on_place(itemstack, placer, pointed_thing)
+			end,
 			on_construct = 	function(pos)
-					set_formspec(pos)
-					display_api.on_construct(pos)
-				end,
+				set_formspec(pos)
+				display_api.on_construct(pos)
+			end,
 			on_rightclick = function(pos)
-					set_formspec(pos)
-				end,
+				set_formspec(pos)
+			end,
 			on_destruct = display_api.on_destruct,
 			on_blast = display_api.on_blast,
 			on_rotate = display_api.on_rotate,
 			on_receive_fields = function(pos, formname, fields, player)
-					if not minetest.is_protected(pos, player:get_player_name()) then
-						local meta = minetest.get_meta(pos)
-						if fields.ok or fields.font then
-							meta:set_string("display_text", fields.display_text)
-							meta:set_string("infotext", "\""..fields.display_text.."\"")
-							display_api.update_entities(pos)
-						end
-						if fields.font then
-							font_api.show_font_list(player, pos)
-						end
+				if not minetest.is_protected(pos, player:get_player_name()) then
+					local meta = minetest.get_meta(pos)
+					if fields.ok or fields.font then
+						meta:set_string("display_text", fields.display_text)
+						meta:set_string("infotext", "\""..fields.display_text.."\"")
+						display_api.update_entities(pos)
 					end
-				end,
+					if fields.font then
+						font_api.show_font_list(player, pos)
+					end
+				end
+			end,
 			on_punch = display_api.update_entities,
 		})
 	end

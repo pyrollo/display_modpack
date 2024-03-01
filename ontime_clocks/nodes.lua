@@ -47,6 +47,7 @@ minetest.register_node("ontime_clocks:green_digital", {
 	},
 	tiles = {"ontime_clocks_digital.png"},
 	groups = {oddly_breakable_by_hand=1, not_blocking_trains=1, display_api=1},
+	is_ground_content = false,
 	display_entities = {
 		["ontime_clocks:display"] = {
 			depth = 13/32 - 0.01,
@@ -81,6 +82,7 @@ minetest.register_node("ontime_clocks:red_digital", {
 	},
 	tiles = {"ontime_clocks_digital.png"},
 	groups = {oddly_breakable_by_hand=1, not_blocking_trains=1, display_api=1},
+	is_ground_content = false,
 	display_entities = {
 		["ontime_clocks:display"] = {
 			depth = 13/32 - 0.01,
@@ -114,6 +116,7 @@ minetest.register_node("ontime_clocks:white", {
 	},
 	tiles = {"ontime_clocks_white.png"},
 	groups = {oddly_breakable_by_hand=1, not_blocking_trains=1, display_api=1},
+	is_ground_content = false,
 	display_entities = {
 		["ontime_clocks:display"] = {
 			depth = 6/16 - 0.01,
@@ -148,6 +151,7 @@ minetest.register_node("ontime_clocks:frameless_black", {
 	},
 	tiles = {"ontime_clocks_frameless.png"},
 	groups = {oddly_breakable_by_hand=1, not_blocking_trains=1, display_api=1},
+	is_ground_content = false,
 	display_entities = {
 		["ontime_clocks:display"] = {
 			depth = 7/16,
@@ -182,6 +186,7 @@ minetest.register_node("ontime_clocks:frameless_gold", {
 	},
 	tiles = {"ontime_clocks_frameless.png^[colorize:#FF0"},
 	groups = {oddly_breakable_by_hand=1, not_blocking_trains=1, display_api=1},
+	is_ground_content = false,
 	display_entities = {
 		["ontime_clocks:display"] = {
 			depth = 7/16,
@@ -216,6 +221,7 @@ minetest.register_node("ontime_clocks:frameless_white", {
 	},
 	tiles = {"ontime_clocks_frameless.png^[colorize:#FFF"},
 	groups = {oddly_breakable_by_hand=1, not_blocking_trains=1, display_api=1},
+	is_ground_content = false,
 	display_entities = {
 		["ontime_clocks:display"] = {
 			depth = 7/16,
