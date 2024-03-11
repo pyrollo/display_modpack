@@ -36,13 +36,11 @@ for i, material in ipairs(steles.materials) do
 			local meta = minetest.get_meta(pos)
 			local display_text = minetest.formspec_escape(meta:get_string("display_text"))
 			meta:set_string("formspec", string.format([=[
-				size[6,4]%s%s%s
+				size[6,4]
 				textarea[0.5,0.7;5.5,2;display_text;%s;%s]
 				button[1,3;2,1;font;%s]
 				button_exit[3,3;2,1;ok;%s]]=],
-				default.gui_bg, default.gui_bg_img, default.gui_slots,
-				FS("Displayed text (3 lines max)"),
-				display_text,
+				FS("Displayed text (3 lines max)"), display_text,
 				FS("Font"), FS("Write")))
 		end
 

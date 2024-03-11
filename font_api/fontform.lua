@@ -98,9 +98,8 @@ local function show_font_formspec(playername)
 	table.sort(fonts)
 
 	local fs = string.format(
-		"size[4,%s]%s%s%sbutton_exit[0,%s;4,1;cancel;%s]",
-		#fonts + 0.8, default.gui_bg, default.gui_bg_img, default.gui_slots,
-		#fonts, FS("Cancel"))
+		"size[4,%s]button_exit[0,%s;4,1;cancel;%s]",
+		#fonts + 0.8, #fonts, FS("Cancel"))
 
 	for line = 1, #fonts do
 		local font = font_api.get_font(fonts[line])

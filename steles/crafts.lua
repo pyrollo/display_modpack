@@ -25,7 +25,7 @@ for _, material in ipairs(steles.materials) do
 		output = 'steles:'..parts[2]..'_stele 4',
 		recipe = {
 			{'', material, ''},
-			{'', 'dye:black', ''},
+			{'', xcompat.materials.dye_black, ''},
 			{material, material, material},
 		}
 	})

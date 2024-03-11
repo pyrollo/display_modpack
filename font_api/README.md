@@ -2,7 +2,7 @@
 
 A library for rendernig text on textures (to be used with display_api for sign creation).
 
-**Dependancies**: default
+**Dependencies**: xcompat
 
 **License**: LGPL
 

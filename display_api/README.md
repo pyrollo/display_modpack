@@ -4,7 +4,7 @@ This library's purpose is to ease creation of nodes with one or more displays on
 
 **Limitations**: This lib uses entities to draw display. This means display has to be vertical (and "upside up") on Minetest before version 5.0.
 
-**Dependancies**:default
+**Dependencies**: xcompat
 
 **License**: LGPLv2
 

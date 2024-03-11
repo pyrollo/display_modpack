@@ -4,7 +4,7 @@ This mod provides stone steles with text display. Text is locked if area is prot
 
 For more information, see the [forum topic](https://forum.minetest.net/viewtopic.php?t=19365) at the Minetest forums.
 
-**Dependancies**: default, display\_lib, font\_lib, technic?
+**Dependencies**: xcompat, display\_lib, font\_lib, technic?
 
 (Technic adds marble and granite steles)
 

@@ -5,7 +5,7 @@ No actual signs get registered by this mod, the signs are defined in the sign su
 
 For more information, see the [forum topic](https://forum.minetest.net/viewtopic.php?t=19365) at the Minetest forums.
 
-**Dependancies**: default, display\_lib, font\_lib
+**Dependencies**: xcompat, display\_lib, font\_lib
 
 **License**: Code under LGPL, Textures and models under CC-BY-SA
 

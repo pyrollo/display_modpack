@@ -4,7 +4,7 @@ read_globals = {
 	"minetest",
 	"table",
 	"vector",
-	"default"
+	"xcompat"
 }
 
 globals = {

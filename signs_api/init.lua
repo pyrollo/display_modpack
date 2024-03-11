@@ -67,8 +67,7 @@ function signs_api.set_formspec(pos)
 		fs = fs.."button[1,"..y..";2,1;font;"..FS("Font").."]"
 		fs = fs.."button_exit[3,"..y..";2,1;ok;"..FS("Write").."]"
 		y = y + 0.8
-		fs = "size[6,"..y.."]"..default.gui_bg..
-			default.gui_bg_img..default.gui_slots..fs
+		fs = "size[6,"..y.."]"..fs
 
 		meta:set_string("formspec", fs)
 	end
@@ -171,7 +170,7 @@ function signs_api.register_sign(mod, name, model)
 		},
 		groups = {choppy=2, dig_immediate=2, not_blocking_trains=1, display_api=1,signs_api_formspec_lbm=1},
 		is_ground_content = false,
-		sounds = default.node_sound_defaults(),
+		sounds = xcompat.sounds.node_sound_default(),
 		display_entities = {
 			["signs:display_text"] = {
 					on_display_update = font_api.on_display_update,

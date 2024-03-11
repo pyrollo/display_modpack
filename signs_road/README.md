@@ -4,7 +4,7 @@ This mod provides road signs with text display. Text is locked if area is protec
 
 For more information, see the [forum topic](https://forum.minetest.net/viewtopic.php?t=19365) at the Minetest forums.
 
-**Dependancies**: default, display\_lib, font\_lib, signs
+**Dependencies**: xcompat, display\_lib, font\_lib, signs
 
 **License**: Code under LGPL, texture under CC-BY-SA
 

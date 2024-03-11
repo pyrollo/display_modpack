@@ -65,12 +65,12 @@ local function edit_poster(pos, node, player)
 
 	if not minetest.is_protected(pos, player:get_player_name()) then
 		fs = string.format([=[
-			size[6.5,7.5]%s%s%s
+			size[6.5,7.5]
 			field[0.5,0.7;6,1;display_text;%s;%s]
 			textarea[0.5,1.7;6,6;text;%s;%s]
 			button[1.25,7;2,1;font;%s]
 			button_exit[3.25,7;2,1;write;%s]]=],
-			default.gui_bg, default.gui_bg_img, default.gui_slots, FS("Title"),
+			FS("Title"),
 			minetest.formspec_escape(meta:get_string("display_text")),
 			FS("Text"), minetest.formspec_escape(meta:get_string("text")),
 			FS("Title font"), FS("Write"))

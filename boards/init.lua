@@ -33,7 +33,7 @@ local function set_formspec(pos)
 	local meta = minetest.get_meta(pos)
 	local display_text = minetest.formspec_escape(meta:get_string("display_text"))
 	meta:set_string("formspec",
-		"size[6,3.5]"..default.gui_bg..default.gui_bg_img..default.gui_slots..
+		"size[6,3.5]"..
 		"textarea[0.55,0.25;5.5,3;display_text;"..FS("Text")..";" .. display_text .. "]"..
 		"button_exit[1,2.75;2,1;ok;"..FS("Write").."]"..
 		"button[3,2.75;2,1;font;"..FS("Font").."]")
@@ -52,6 +52,8 @@ local function on_receive_fields(pos, formname, fields, player)
 	end
 end
 
+local wood_texture = xcompat.textures.wood.planks
+
 local models = {
 	black_board = {
 		depth = 1/16, width = 1, height = 1,
@@ -65,9 +67,9 @@ local models = {
 		},
 		node_fields = {
 			description = S("Black board"),
-			tiles = { "default_wood.png", "default_wood.png",
-				"default_wood.png", "default_wood.png",
-				"default_wood.png", "board_black_front.png" },
+			tiles = {wood_texture, wood_texture,
+				wood_texture, wood_texture,
+				wood_texture, "board_black_front.png"},
 			_itemframe_texture = "board_black_front.png",
 			drawtype = "nodebox",
 			node_box = {
@@ -103,9 +105,9 @@ local models = {
 		},
 		node_fields = {
 			description = S("Green board"),
-			tiles = { "default_wood.png", "default_wood.png",
-				"default_wood.png", "default_wood.png",
-				"default_wood.png", "board_green_front.png" },
+			tiles = {wood_texture, wood_texture,
+				wood_texture, wood_texture,
+				wood_texture, "board_green_front.png"},
 			drawtype = "nodebox",
 			_itemframe_texture = "board_green_front.png",
 			node_box = {
@@ -138,11 +140,13 @@ do
 end
 
 -- Recipes
+local mat = xcompat.materials
+
 minetest.register_craft(
 	{
 		output = "boards:black_board",
 		recipe = {
-			{"group:wood", "group:stone", "dye:black"},
+			{"group:wood", "group:stone", mat.dye_black},
 		}
 	})
 
@@ -150,7 +154,7 @@ minetest.register_craft(
 	{
 		output = "boards:green_board",
 		recipe = {
-			{"group:wood", "group:stone", "dye:dark_green"},
+			{"group:wood", "group:stone", mat.dye_dark_green},
 		}
 	})
 

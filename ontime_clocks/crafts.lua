@@ -18,11 +18,13 @@
     along with ontime_clocks.  If not, see <http://www.gnu.org/licenses/>.
 --]]
 
+local mat = xcompat.materials
+
 minetest.register_craft({
 	output = 'ontime_clocks:green_digital',
 	recipe = {
-		{'', 'dye:green', ''},
-		{'default:glass', 'default:mese_crystal', 'default:glass'},
+		{'', mat.dye_green, ''},
+		{mat.glass, mat.mese_crystal, mat.glass},
 		{'', '', ''},
 	}
 })
@@ -30,8 +32,8 @@ minetest.register_craft({
 minetest.register_craft({
 	output = 'ontime_clocks:red_digital',
 	recipe = {
-		{'', 'dye:red', ''},
-		{'default:glass', 'default:mese_crystal', 'default:glass'},
+		{'', mat.dye_red, ''},
+		{mat.glass, mat.mese_crystal, mat.glass},
 		{'', '', ''},
 	}
 })
@@ -39,8 +41,8 @@ minetest.register_craft({
 minetest.register_craft({
 	output = 'ontime_clocks:white',
 	recipe = {
-		{'default:steel_ingot', 'default:paper', 'default:steel_ingot'},
-		{'', 'default:mese_crystal', ''},
+		{mat.steel_ingot, mat.paper, mat.steel_ingot},
+		{'', mat.mese_crystal, ''},
 		{'', '', ''},
 	}
 })
@@ -48,8 +50,8 @@ minetest.register_craft({
 minetest.register_craft({
 	output = 'ontime_clocks:frameless_black',
 	recipe = {
-		{'default:steel_ingot', 'dye:black', 'default:steel_ingot'},
-		{'', 'default:mese_crystal', ''},
+		{mat.steel_ingot, mat.dye_black, mat.steel_ingot},
+		{'', mat.mese_crystal, ''},
 		{'', '', ''},
 	}
 })
@@ -57,8 +59,8 @@ minetest.register_craft({
 minetest.register_craft({
 	output = 'ontime_clocks:frameless_gold',
 	recipe = {
-		{'default:gold_ingot', '', 'default:gold_ingot'},
-		{'', 'default:mese_crystal', ''},
+		{mat.gold_ingot, '', mat.gold_ingot},
+		{'', mat.mese_crystal, ''},
 		{'', '', ''},
 	}
 })
@@ -66,8 +68,8 @@ minetest.register_craft({
 minetest.register_craft({
 	output = 'ontime_clocks:frameless_white',
 	recipe = {
-		{'default:steel_ingot', 'dye:white', 'default:steel_ingot'},
-		{'', 'default:mese_crystal', ''},
+		{mat.steel_ingot, mat.dye_white, mat.steel_ingot},
+		{'', mat.mese_crystal, ''},
 		{'', '', ''},
 	}
 })

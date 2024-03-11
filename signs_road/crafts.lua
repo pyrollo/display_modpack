@@ -19,13 +19,15 @@
     along with signs_road.  If not, see <http://www.gnu.org/licenses/>.
 --]]
 
+local mat = xcompat.materials
+
 -- Standard rectangle signs
 
 minetest.register_craft({
 	output = 'signs_road:white_sign 2',
 	recipe = {
-		{'dye:white', 'dye:black', ''},
-		{'default:steel_ingot', 'default:steel_ingot', 'default:steel_ingot'},
+		{mat.dye_white, mat.dye_black, ''},
+		{mat.steel_ingot, mat.steel_ingot, mat.steel_ingot},
 		{'', '', ''},
 	}
 })
@@ -33,8 +35,8 @@ minetest.register_craft({
 minetest.register_craft({
 	output = 'signs_road:blue_sign 2',
 	recipe = {
-		{'dye:blue', 'dye:white', ''},
-		{'default:steel_ingot', 'default:steel_ingot', 'default:steel_ingot'},
+		{mat.dye_blue, mat.dye_white, ''},
+		{mat.steel_ingot, mat.steel_ingot, mat.steel_ingot},
 		{'', '', ''},
 	}
 })
@@ -42,8 +44,8 @@ minetest.register_craft({
 minetest.register_craft({
 	output = 'signs_road:green_sign 2',
 	recipe = {
-		{'dye:green', 'dye:white', ''},
-		{'default:steel_ingot', 'default:steel_ingot', 'default:steel_ingot'},
+		{mat.dye_green, mat.dye_white, ''},
+		{mat.steel_ingot, mat.steel_ingot, mat.steel_ingot},
 		{'', '', ''},
 	}
 })
@@ -51,8 +53,8 @@ minetest.register_craft({
 minetest.register_craft({
 	output = 'signs_road:yellow_sign 2',
 	recipe = {
-		{'dye:yellow', 'dye:black', ''},
-		{'default:steel_ingot', 'default:steel_ingot', 'default:steel_ingot'},
+		{mat.dye_yellow, mat.dye_black, ''},
+		{mat.steel_ingot, mat.steel_ingot, mat.steel_ingot},
 		{'', '', ''},
 	}
 })
@@ -60,8 +62,8 @@ minetest.register_craft({
 minetest.register_craft({
 	output = 'signs_road:red_sign 2',
 	recipe = {
-		{'dye:red', 'dye:white', ''},
-		{'default:steel_ingot', 'default:steel_ingot', 'default:steel_ingot'},
+		{mat.dye_red, mat.dye_white, ''},
+		{mat.steel_ingot, mat.steel_ingot, mat.steel_ingot},
 		{'', '', ''},
 	}
 })
@@ -71,8 +73,8 @@ minetest.register_craft({
 minetest.register_craft({
 	output = 'signs_road:black_right_sign 2',
 	recipe = {
-		{'dye:black', 'dye:white', 'default:steel_ingot'},
-		{'default:steel_ingot', 'default:steel_ingot', ''},
+		{mat.dye_black, mat.dye_white, mat.steel_ingot},
+		{mat.steel_ingot, mat.steel_ingot, ''},
 		{'', '', ''},
 	}
 })
@@ -80,8 +82,8 @@ minetest.register_craft({
 minetest.register_craft({
 	output = 'signs_road:white_right_sign 2',
 	recipe = {
-		{'dye:white', 'dye:black', 'default:steel_ingot'},
-		{'default:steel_ingot', 'default:steel_ingot', ''},
+		{mat.dye_white, mat.dye_black, mat.steel_ingot},
+		{mat.steel_ingot, mat.steel_ingot, ''},
 		{'', '', ''},
 	}
 })
@@ -89,8 +91,8 @@ minetest.register_craft({
 minetest.register_craft({
 	output = 'signs_road:blue_right_sign 2',
 	recipe = {
-		{'dye:blue', 'dye:white', 'default:steel_ingot'},
-		{'default:steel_ingot', 'default:steel_ingot', ''},
+		{mat.dye_blue, mat.dye_white, mat.steel_ingot},
+		{mat.steel_ingot, mat.steel_ingot, ''},
 		{'', '', ''},
 	}
 })
@@ -98,8 +100,8 @@ minetest.register_craft({
 minetest.register_craft({
 	output = 'signs_road:green_right_sign 2',
 	recipe = {
-		{'dye:green', 'dye:white', 'default:steel_ingot'},
-		{'default:steel_ingot', 'default:steel_ingot', ''},
+		{mat.dye_green, mat.dye_white, mat.steel_ingot},
+		{mat.steel_ingot, mat.steel_ingot, ''},
 		{'', '', ''},
 	}
 })
@@ -107,8 +109,8 @@ minetest.register_craft({
 minetest.register_craft({
 	output = 'signs_road:yellow_right_sign 2',
 	recipe = {
-		{'dye:yellow', 'dye:black', 'default:steel_ingot'},
-		{'default:steel_ingot', 'default:steel_ingot', ''},
+		{mat.dye_yellow, mat.dye_black, mat.steel_ingot},
+		{mat.steel_ingot, mat.steel_ingot, ''},
 		{'', '', ''},
 	}
 })
@@ -116,8 +118,8 @@ minetest.register_craft({
 minetest.register_craft({
 	output = 'signs_road:red_right_sign 2',
 	recipe = {
-		{'dye:red', 'dye:white', 'default:steel_ingot'},
-		{'default:steel_ingot', 'default:steel_ingot', ''},
+		{mat.dye_red, mat.dye_white, mat.steel_ingot},
+		{mat.steel_ingot, mat.steel_ingot, ''},
 		{'', '', ''},
 	}
 })
@@ -179,17 +181,17 @@ minetest.register_craft({
 minetest.register_craft({
 	output = 'signs_road:blue_street_sign 4',
 	recipe = {
-		{'dye:blue', 'dye:white', 'dye:blue'},
-		{'default:steel_ingot', 'default:steel_ingot', 'default:steel_ingot'},
-		{'default:steel_ingot', 'default:steel_ingot', 'default:steel_ingot'},
+		{mat.dye_blue, mat.dye_white, mat.dye_blue},
+		{mat.steel_ingot, mat.steel_ingot, mat.steel_ingot},
+		{mat.steel_ingot, mat.steel_ingot, mat.steel_ingot},
 	}
 })
 
 minetest.register_craft({
 	output = 'signs_road:red_street_sign 2',
 	recipe = {
-		{'dye:white', 'dye:red', 'dye:black'},
-		{'default:steel_ingot', 'default:steel_ingot', 'default:steel_ingot'},
+		{mat.dye_white, mat.dye_red, mat.dye_black},
+		{mat.steel_ingot, mat.steel_ingot, mat.steel_ingot},
 		{'', '', ''},
 	}
 })
