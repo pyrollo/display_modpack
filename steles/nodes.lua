@@ -59,6 +59,8 @@ for i, material in ipairs(steles.materials) do
 				},
 			},
 			groups = groups,
+			_mcl_hardness = 1,
+			_mcl_blast_resistance = 2,
 			is_ground_content = false,
 			display_entities = {
 				["steles:text"] = {

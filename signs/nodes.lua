@@ -131,6 +131,8 @@ local models = {
 			tiles = { "signs_wooden.png" },
 			inventory_image = "signs_wooden_inventory.png",
 			groups= { dig_immediate = 2 },
+			_mcl_hardness = 0.8,
+			_mcl_blast_resistance = 1,
 		},
 	},
 	wooden_long_sign = {
@@ -149,6 +151,8 @@ local models = {
 			},
 			inventory_image = "signs_wooden_long_inventory.png",
 			groups= { dig_immediate = 2 },
+			_mcl_hardness = 0.8,
+			_mcl_blast_resistance = 1,
 		},
 	},
 	wooden_right_sign = {
@@ -170,6 +174,8 @@ local models = {
 			selection_box = { type="fixed", fixed = {-0.5, -7/32, 0.5, 7/16, 7/32, 7/16}},
 			collision_box = { type="fixed", fixed = {-7/16, -7/32, 0.5, 0.5, 7/32, 7/16}},
 			groups= { dig_immediate = 2 },
+			_mcl_hardness = 0.8,
+			_mcl_blast_resistance = 1,
 		},
 	},
 	wooden_left_sign = {
@@ -190,6 +196,8 @@ local models = {
 			selection_box = { type="fixed", fixed = {-7/16, -7/32, 0.5, 0.5, 7/32, 7/16}},
 			collision_box = { type="fixed", fixed = {-7/16, -7/32, 0.5, 0.5, 7/32, 7/16}},
 			groups = { not_in_creative_inventory = 1, dig_immediate = 2 },
+			_mcl_hardness = 0.8,
+			_mcl_blast_resistance = 1,
 			drop = "signs:wooden_right_sign",
 		},
 	},
@@ -209,6 +217,8 @@ local models = {
 			inventory_image = "signs_poster_inventory.png",
 			use_texture_alpha = "clip",
 			groups= { dig_immediate = 3 },
+			_mcl_hardness = 0.8,
+			_mcl_blast_resistance = 1,
 			on_construct = display_api.on_construct,
 			on_rightclick = display_poster,
 			on_receive_fields = on_receive_fields_poster,
@@ -229,6 +239,8 @@ local models = {
 			tiles = { "signs_label.png" },
 			inventory_image = "signs_label_small_inventory.png",
 			groups= { dig_immediate = 3 },
+			_mcl_hardness = 0.8,
+			_mcl_blast_resistance = 1,
 		},
 	},
 	label_medium = {
@@ -243,6 +255,8 @@ local models = {
 			tiles = { "signs_label.png" },
 			inventory_image = "signs_label_medium_inventory.png",
 			groups= { dig_immediate = 3 },
+			_mcl_hardness = 0.8,
+			_mcl_blast_resistance = 1,
 		},
 	},
 }
