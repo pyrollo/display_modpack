@@ -43,8 +43,7 @@ local function display_poster(pos, node, player)
 		style_type[textarea;textcolor=#111]
 		textarea[0.3,1.5;7,8;;%s;]]=],
 		titletexture,
-		minetest.colorize("#111",
-			minetest.formspec_escape(meta:get_string("text"))))
+		minetest.formspec_escape(meta:get_string("text")))
 
 	if minetest.is_protected(pos, player:get_player_name()) then
 		fs = string.format("%sbutton_exit[2.5,8;2,1;ok;%s]", fs, FS("Close"))
