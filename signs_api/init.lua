@@ -28,6 +28,8 @@ local FS = function(...) return minetest.formspec_escape(S(...)) end
 
 function signs_api.set_display_text(pos, text, font)
 	local meta = minetest.get_meta(pos)
+	-- Fix pasting from Windows: CR instead of LF
+	text = string.gsub(text, "\r\n?", "\n")
 	meta:set_string("display_text", text)
 	if text and text ~= "" then
 		meta:set_string("infotext", "\""..text.."\"")
