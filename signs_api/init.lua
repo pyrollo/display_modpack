@@ -104,7 +104,7 @@ function signs_api.on_place_direction(itemstack, placer, pointed_thing)
 
 	local ndir, test
 
-	if ndef and ndef.paramtype2 == "facedir" then
+	if ndef and (ndef.paramtype2 == "facedir" or ndef.paramtype2 == "colorfacedir") then
 		-- Wall pointed
 		ndir = minetest.dir_to_facedir(bdir, true)
 

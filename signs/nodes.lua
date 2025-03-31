@@ -215,6 +215,8 @@ local models = {
 			          "signs_poster_sides.png", "signs_poster.png" },
 			inventory_image = "signs_poster_inventory.png",
 			use_texture_alpha = "clip",
+			paramtype2 = "colorfacedir",
+			palette = "signs_poster_palette.png",
 			groups= { dig_immediate = 2 },
 			_mcl_hardness = 0.8,
 			_mcl_blast_resistance = 1,
