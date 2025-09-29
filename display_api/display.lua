@@ -147,7 +147,9 @@ function display_api.update_entities(pos)
 	end
 
 	for _, objref in pairs(get_display_objrefs(pos, true)) do
-		local edef = ndef.display_entities[objref:get_luaentity().name]
+        local entity = objref:get_luaentity()
+		local edef = ndef.display_entities[entity.name]
+        local oprop = objref:get_properties()
 		local depth = clip_pos_prop(edef.depth)
 		local right = clip_pos_prop(edef.right)
 		local top = clip_pos_prop(edef.top)
@@ -160,9 +162,9 @@ function display_api.update_entities(pos)
 
 		if objref.set_rotation then
 			objref:set_rotation({
-				x = ov.rotation.x*math.pi/2,
-				y = ov.rotation.y*math.pi/2 + (edef.yaw or 0),
-				z = ov.rotation.z*math.pi/2,
+				x = ov.rotation.x * math.pi / 2 + (entity.rotation and entity.rotation.x or 0),
+				y = ov.rotation.y * math.pi / 2 + (entity.rotation and entity.rotation.y or 0) + (edef.yaw or 0),
+				z = ov.rotation.z * math.pi / 2 + (entity.rotation and entity.rotation.z or 0),
 			})
 		else
 			if ov.rotation.x ~=0 or ov.rotation.y ~= 0 then
@@ -276,24 +278,27 @@ end
 
 --- Creates display entity with some fields and the on_activate callback
 function display_api.register_display_entity(entity_name)
-	if not minetest.registered_entities[entity_name] then
-		minetest.register_entity(':'..entity_name, {
-			initial_properties = {
-				collisionbox = {0, 0, 0, 0, 0, 0},
-				visual = "upright_sprite",
-				textures = {},
-				collide_with_objects = false,
-				pointable = false
-			},
-			on_activate = display_api.on_activate,
-			get_staticdata = function(self)
-				return minetest.serialize({ nodepos = self.nodepos })
-			end,
-			on_blast = function(self, damage)
-				return false, false, {}
-			end,
-		})
+
+	if minetest.registered_entities[entity_name] then
+		return
 	end
+
+	minetest.register_entity(':'..entity_name, {
+			initial_properties = {
+			collisionbox = {0, 0, 0, 0, 0, 0},
+			visual = "upright_sprite",
+			textures = {},
+			collide_with_objects = false,
+			pointable = false,
+		},
+		on_activate = display_api.on_activate,
+		get_staticdata = function(self)
+			return minetest.serialize({ nodepos = self.nodepos })
+		end,
+		on_blast = function(self, damage)
+			return false, false, {}
+		end,
+	})
 end
 
 minetest.register_lbm({

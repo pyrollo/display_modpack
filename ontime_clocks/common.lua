@@ -18,8 +18,12 @@
     along with ontime_clocks.  If not, see <http://www.gnu.org/licenses/>.
 --]]
 
--- Entity for time display
+-- Entity for time display of most of clocks
 display_api.register_display_entity("ontime_clocks:display")
+
+-- Entities for two needles of large clocks
+display_api.register_display_entity("ontime_clocks:hours_needle")
+display_api.register_display_entity("ontime_clocks:minutes_needle")
 
 function ontime_clocks.get_h24()
 	return math.floor(minetest.get_timeofday()*24)%24
@@ -59,3 +63,11 @@ function ontime_clocks.get_needles_properties(color, size, hour, minute)
 	}
 end
 
+function ontime_clocks.get_roll_h12()
+	print(minetest.get_timeofday())
+	return  minetest.get_timeofday() * math.pi / 12
+end
+
+function ontime_clocks.get_roll_m()
+	return  0
+end

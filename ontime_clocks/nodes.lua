@@ -46,7 +46,7 @@ minetest.register_node("ontime_clocks:green_digital", {
 		wall_top = {-7/16, 0.5, -7/32, 7/16, 13/32, 3/16}
 	},
 	tiles = {"ontime_clocks_digital.png"},
-	groups = {oddly_breakable_by_hand=1, not_blocking_trains=1, display_api=1, handy = 1},
+	groups = {ontime_clocks_tick=1, oddly_breakable_by_hand=1, not_blocking_trains=1, display_api=1, handy = 1},
 	_mcl_hardness = 0.8,
 	_mcl_blast_resistance = 1,
 	is_ground_content = false,
@@ -83,7 +83,7 @@ minetest.register_node("ontime_clocks:red_digital", {
 		wall_top = {-7/16, 0.5, -7/32, 7/16, 13/32, 3/16}
 	},
 	tiles = {"ontime_clocks_digital.png"},
-	groups = {oddly_breakable_by_hand=1, not_blocking_trains=1, display_api=1, handy = 1},
+	groups = {ontime_clocks_tick=1, oddly_breakable_by_hand=1, not_blocking_trains=1, display_api=1, handy = 1},
 	_mcl_hardness = 0.8,
 	_mcl_blast_resistance = 1,
 	is_ground_content = false,
@@ -119,7 +119,7 @@ minetest.register_node("ontime_clocks:white", {
 		wall_top = { -7/16, 0.5, -7/16, 7/16, 7/16, 7/16},
 	},
 	tiles = {"ontime_clocks_white.png"},
-	groups = {oddly_breakable_by_hand=1, not_blocking_trains=1, display_api=1, handy = 1},
+	groups = {ontime_clocks_tick=1, oddly_breakable_by_hand=1, not_blocking_trains=1, display_api=1, handy = 1},
 	_mcl_hardness = 0.8,
 	_mcl_blast_resistance = 1,
 	is_ground_content = false,
@@ -156,7 +156,7 @@ minetest.register_node("ontime_clocks:frameless_black", {
 		wall_top = { -0.5, -0.5, -0.5, 0.5, 0.5, 0.5 }
 	},
 	tiles = {"ontime_clocks_frameless.png"},
-	groups = {oddly_breakable_by_hand=1, not_blocking_trains=1, display_api=1, handy = 1},
+	groups = {ontime_clocks_tick=1, oddly_breakable_by_hand=1, not_blocking_trains=1, display_api=1, handy = 1},
 	_mcl_hardness = 0.8,
 	_mcl_blast_resistance = 1,
 	is_ground_content = false,
@@ -193,7 +193,7 @@ minetest.register_node("ontime_clocks:frameless_gold", {
 		wall_top = { -0.5, -0.5, -0.5, 0.5, 0.5, 0.5 }
 	},
 	tiles = {"ontime_clocks_frameless.png^[colorize:#FF0"},
-	groups = {oddly_breakable_by_hand=1, not_blocking_trains=1, display_api=1, handy = 1},
+	groups = {ontime_clocks_tick=1, oddly_breakable_by_hand=1, not_blocking_trains=1, display_api=1, handy = 1},
 	_mcl_hardness = 0.8,
 	_mcl_blast_resistance = 1,
 	is_ground_content = false,
@@ -230,7 +230,7 @@ minetest.register_node("ontime_clocks:frameless_white", {
 		wall_top = { -0.5, -0.5, -0.5, 0.5, 0.5, 0.5 }
 	},
 	tiles = {"ontime_clocks_frameless.png^[colorize:#FFF"},
-	groups = {oddly_breakable_by_hand=1, not_blocking_trains=1, display_api=1, handy = 1},
+	groups = {ontime_clocks_tick=1, oddly_breakable_by_hand=1, not_blocking_trains=1, display_api=1, handy = 1},
 	_mcl_hardness = 0.8,
 	_mcl_blast_resistance = 1,
 	is_ground_content = false,
@@ -252,13 +252,81 @@ minetest.register_node("ontime_clocks:frameless_white", {
 })
 
 
+minetest.register_node("ontime_clocks:large_clock_black", {
+	description = S("Frameless large black clock"),
+	inventory_image = "ontime_clocks_frameless_inventory.png^[colorize:#FFF",
+	wield_image = "ontime_clocks_frameless_inventory.png^[colorize:#FFF",
+	paramtype = "light",
+	paramtype2 = "wallmounted",
+	drawtype = "nodebox",
+	use_texture_alpha = "clip",
+	node_box = {
+		type = "wallmounted",
+		wall_side = { -0.5, -7/16, -7/16, -0.45, 7/16, 7/16 },
+		wall_bottom = { -0.5, -0.5, -0.5, 0.5, 0.5, 0.5 },
+		wall_top = { -0.5, -0.5, -0.5, 0.5, 0.5, 0.5 }
+	},
+	tiles = {"ontime_clocks_frameless_inventory.png"},
+	groups = {ontime_clocks_tick = 1, oddly_breakable_by_hand = 1, not_blocking_trains = 1, display_api = 1, handy = 1},
+	_mcl_hardness = 0.8,
+	_mcl_blast_resistance = 1,
+	is_ground_content = false,
+	display_entities = {
+		["ontime_clocks:hours_needle"] = {
+			depth = 15/32,
+			on_display_update = function(pos, objref)
+				objref:set_properties({
+					textures={"ontime_clocks_needle_hours_5x5.png"},
+					visual_size = {x=1, y=5},
+				})
+				print( minetest.get_timeofday() )
+				objref:get_luaentity()["rotation"] = { z = math.floor(minetest.get_timeofday() * 24) / 6 * math.pi }
+			end
+	    },
+		["ontime_clocks:minutes_needle"] = {
+			depth = 14/32,
+			on_display_update = function(pos, objref)
+				objref:set_properties({
+					textures={"ontime_clocks_needle_minutes_5x5.png"},
+					visual_size = {x=1, y=5},
+				})
+				objref:get_luaentity()["rotation"] = { z = math.floor(minetest.get_timeofday() * 288) / 6 * math.pi }
+			end
+	    },		
+	},
+	on_place = display_api.on_place,
+	on_construct = clock_on_construct,
+	on_destruct = display_api.on_destruct,
+	on_blast = display_api.on_blast,
+	on_rotate = display_api.on_rotate,
+	on_timer = clock_on_timer,
+})
+
+function flatten(from, to)
+	local mt = getmetatable(from)
+	if mt ~= nil then
+		flatten(mt, to)
+	end
+	for k, v in pairs(from) do
+		to[k] = v
+	end
+end
+
+function dump(title, table)
+	print("=== " .. title .. " ===", table)
+	local t = {}
+	flatten(table, t)
+	for k,v in pairs(t) do
+		print(k, "=>", v)
+	end
+end
+
 minetest.register_lbm({
 	name = "ontime_clocks:nodetimer_init",
-	nodenames = {"ontime_clocks:green_digital", "ontime_clocks:red_digital", "ontime_clocks:white",
-		"ontime_clocks:frameless_black", "ontime_clocks:frameless_gold", "ontime_clocks:frameless_white"},
+	nodenames = {"group:ontime_clocks_tick"},
 	run_at_every_load = false,
 	action = function(pos)
 		local timer = minetest.get_node_timer(pos)
-		timer:start(5)
+		timer:start(1)
 	end
 })
