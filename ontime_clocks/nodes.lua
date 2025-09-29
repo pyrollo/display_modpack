@@ -266,7 +266,7 @@ minetest.register_node("ontime_clocks:large_clock_black", {
 		wall_bottom = { -0.5, -0.5, -0.5, 0.5, 0.5, 0.5 },
 		wall_top = { -0.5, -0.5, -0.5, 0.5, 0.5, 0.5 }
 	},
-	tiles = {"ontime_clocks_frameless_inventory.png"},
+	tiles = {"ontime_clocks_center.png^[colorize#FF0"},
 	groups = {ontime_clocks_tick = 1, oddly_breakable_by_hand = 1, not_blocking_trains = 1, display_api = 1, handy = 1},
 	_mcl_hardness = 0.8,
 	_mcl_blast_resistance = 1,
@@ -276,10 +276,9 @@ minetest.register_node("ontime_clocks:large_clock_black", {
 			depth = 15/32,
 			on_display_update = function(pos, objref)
 				objref:set_properties({
-					textures={"ontime_clocks_needle_hours_5x5.png"},
+					textures={"ontime_clocks_needle_hours_5x5.png^[colorize:#FF0"},
 					visual_size = {x=1, y=5},
 				})
-				print( minetest.get_timeofday() )
 				objref:get_luaentity()["rotation"] = { z = math.floor(minetest.get_timeofday() * 24) / 6 * math.pi }
 			end
 	    },
@@ -287,7 +286,7 @@ minetest.register_node("ontime_clocks:large_clock_black", {
 			depth = 14/32,
 			on_display_update = function(pos, objref)
 				objref:set_properties({
-					textures={"ontime_clocks_needle_minutes_5x5.png"},
+					textures={"ontime_clocks_needle_minutes_5x5.png^[colorize:#FF0"},
 					visual_size = {x=1, y=5},
 				})
 				objref:get_luaentity()["rotation"] = { z = math.floor(minetest.get_timeofday() * 288) / 6 * math.pi }
@@ -302,31 +301,12 @@ minetest.register_node("ontime_clocks:large_clock_black", {
 	on_timer = clock_on_timer,
 })
 
-function flatten(from, to)
-	local mt = getmetatable(from)
-	if mt ~= nil then
-		flatten(mt, to)
-	end
-	for k, v in pairs(from) do
-		to[k] = v
-	end
-end
-
-function dump(title, table)
-	print("=== " .. title .. " ===", table)
-	local t = {}
-	flatten(table, t)
-	for k,v in pairs(t) do
-		print(k, "=>", v)
-	end
-end
-
 minetest.register_lbm({
 	name = "ontime_clocks:nodetimer_init",
 	nodenames = {"group:ontime_clocks_tick"},
 	run_at_every_load = false,
 	action = function(pos)
 		local timer = minetest.get_node_timer(pos)
-		timer:start(1)
+		timer:start(5)
 	end
 })

@@ -62,12 +62,3 @@ function ontime_clocks.get_needles_properties(color, size, hour, minute)
 		visual_size = {x=size/64, y=size/64}
 	}
 end
-
-function ontime_clocks.get_roll_h12()
-	print(minetest.get_timeofday())
-	return  minetest.get_timeofday() * math.pi / 12
-end
-
-function ontime_clocks.get_roll_m()
-	return  0
-end
