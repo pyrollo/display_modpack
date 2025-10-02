@@ -31,14 +31,20 @@ fi
 # check imagemagick
 hash convert &>/dev/null
 if [ $? -eq 1 ]; then
-	echo -e "Error: This program requires convert from ImageMagick! Please install it by typing 'sudo apt-get install imagemagick' in terminal."
+	echo -e "Error: This program requires convert from ImageMagick!"
+	abort=1
+fi
+
+hash montage &>/dev/null
+if [ $? -eq 1 ]; then
+	echo -e "Error: This program requires montage from ImageMagick!"
 	abort=1
 fi
 
 # check ttx
 hash ttx &>/dev/null
 if [ $? -eq 1 ]; then
-	echo -e "Error: This program requires ttx from FontTools! Please install it by typing 'sudo apt-get install fonttools' in terminal."
+	echo -e "Error: This program requires ttx from FontTools!"
 	abort=1
 fi
 
