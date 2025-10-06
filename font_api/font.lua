@@ -68,36 +68,43 @@ function Font:new(def)
 		return nil
 	end
 
-	if def.height == nil or def.height <= 0 then
+	local font = table.copy(def)
+
+	if font.height == nil or font.height <= 0 then
 		minetest.log("error",
 			"[font_api] Font definition must have a positive height.")
 		return nil
 	end
 
-	if type(def.widths) ~= "table" then
+	if type(font.widths) == "table" then
+		if type(font.glyphs) == "table" then
+			minetest.log("warning",
+				"[font_api] Ingonring `widths` array in font definition as there is also a `glyphs` array.")
+		else
+			minetest.log("warning",
+				"[font_api] Use of `widths` array in font definition is deprecated, please upgrade to `glyphs`.")
+			font.glyphs = {}
+			for codepoint, width in pairs(font.widths) do
+				font.glyphs[codepoint] = { w = width, c = codepoint }
+			end
+			font.widths = nil
+		end
+	end
+
+	if type(font.glyphs) ~= "table" then
 		minetest.log("error",
-			"[font_api] Font definition must have a widths array.")
+			"[font_api] Font definition must have a `glyphs` array.")
 		return nil
 	end
 
-	if def.widths[0] == nil then
+	if font.glyphs[0] == nil then
 		minetest.log("error",
 			"[font_api] Font must have a char with codepoint 0 (=unknown char).")
 		return nil
 	end
 
-	local font = table.copy(def)
 	setmetatable(font, self)
 	self.__index = self
-
-	-- Check if fixedwidth
-	for codepoint, width in pairs(font.widths) do
-		font.fixedwidth = font.fixedwidth or width
-		if width ~= font.fixedwidth then
-			font.fixedwidth = nil
-			break
-		end
-	end
 
 	return font
 end
@@ -124,7 +131,7 @@ function Font:get_next_char(text)
 	end
 
 	-- Fallback mechanism
-	if self.widths[codepoint] == nil then
+	if self.glyphs[codepoint] == nil then
 		local char = text:sub(1, bytes)
 
 		if fallbacks[char] then
@@ -140,14 +147,32 @@ end
 --- Returns the width of a given char
 -- @param char : codepoint of the char
 -- @return Char width
+
 function Font:get_char_width(codepoint)
-	if self.fixedwidth then
-		return self.fixedwidth
-	elseif self.widths[codepoint] then
-		return self.widths[codepoint]
-	else
-		return self.widths[0]
+	return (self.glyphs[codepoint] or self.glyphs[0]).w
+end
+
+--- Returns texture for a given glyph
+-- @param glyph: table representing the glyph
+-- @return Texture
+
+function Font:get_glyph_texture(glyph)
+	if glyph.c then
+		-- Former version with one texture per glyph
+		return string.format("font_%s_%04x.png",
+			self.name, glyph.c)
+    end
+
+	if glyph.x == nil or glyph.y == nil then
+		-- Case of invisible chars like space (no need to add any texture)
+		return ""
 	end
+
+	--le 5x15 est le nombre de tuiles, pas la taille des tuiles.
+	return string.format("font_%s.png^[sheet:40x5:%d,%d",
+		self.name, glyph.x, glyph.y)
+--	return string.format("font_%s.png^[sheet:%dx%d:%d,%d",
+--		self.name, glyph.w, self.height, glyph.x,  glyph.y)
 end
 
 --- Text height for multiline text including margins and line spacing
@@ -256,19 +281,23 @@ function Font:render(text, texturew, textureh, style)
 			codepoint, l.text = self:get_next_char(l.text)
 			if codepoint == nil then return '' end -- UTF Error
 
+			local glyph = self.glyphs[codepoint]
+
 			-- Add image only if it is visible (at least partly)
-			if x + self.widths[codepoint] >= 0 and x <= texturew then
-				texture = texture..
-					string.format(":%d,%d=font_%s_%04x.png", x, y, self.name, codepoint)
+			if x + glyph.w >= 0 and x <= texturew then
+				texture = string.format("%s:%d,%d=%s", 
+					texture, x, y, self:get_glyph_texture(glyph):gsub("[\\^:]", "\\%0"))
 			end
-			x = x + self.widths[codepoint]
+			x = x + glyph.w
 		end
 
 		y = y + self:get_height() + (self.linespacing or 0)
 	end
-	texture = string.format("[combine:%dx%d", texturew, textureh)..texture
+
+	texture = string.format("[combine:%dx%d%s", texturew, textureh, texture)
 	if style.color then
 		texture = texture.."^[colorize:"..style.color
 	end
+	print(texture)
 	return texture
 end
