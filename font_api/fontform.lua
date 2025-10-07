@@ -103,11 +103,17 @@ local function show_font_formspec(playername)
 
 	for line = 1, #fonts do
 		local font = font_api.get_font(fonts[line])
-		local texture = font:make_text_texture(font.name, font:get_height()*5,
-			font:get_height()*1.2, 1, "center", "top", "#fff")
+		local texture = font:render(font.name,
+			font:get_height()*5, font:get_height()*1.2, {
+				lines = 1,
+				valign = "middle",
+				halign = "center",
+				color = "#fff"
+			}
+		)
 		fs = string.format(
 			"%simage[0.1,%s;4.5,0.8;%s]button_exit[0,%s;4,1;font_%s;]",
-			fs, line-0.9, texture, line-1, font.name)
+			fs, line - 0.9, texture, line - 1, font.name)
 	end
 	minetest.show_formspec(context.playername, modname..':font_list', fs)
 end

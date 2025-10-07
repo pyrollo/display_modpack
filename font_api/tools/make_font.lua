@@ -79,8 +79,8 @@ local function compute_tile_sizes(texture_size)
 	return results
 end
 
--- This will give enough combinations (720 is 2 * 2 * 2 * 2 * 3 * 3 * 5)
-tile_widths = compute_tile_sizes(720)
+-- This will give enough combinations (360 is 2 * 2 * 2 * 3 * 3 * 5)
+tile_widths = compute_tile_sizes(360)
 
 -- Table width has to be sorted
 table.sort(tile_widths)
@@ -177,9 +177,11 @@ local glyph_xs = {} -- x for each glyph
 local glyph_ys = {} -- y for each glyph
 local glyph_ns = {} -- n of tiles in sheet for each glyph (=texturewidth / tilewidth)
 
+local texture_height
+
 local function make_final_texture(filename)
 
-	local texture_height = font_height
+	texture_height = font_height
    
 	local x = 0 -- cursor x
 	local glyph_y = 0
@@ -209,7 +211,6 @@ local function make_final_texture(filename)
 		"convert -channel alpha -colorspace gray -size %dx%d xc:transparent %s",
 		texture_width, texture_height, filename
 	))
-			print(texture_width, texture_height)
 
 	for codepoint, n in pairs(glyph_ns) do
 		local w = texture_width // n
@@ -232,11 +233,10 @@ local function make_final_texture(filename)
 		end
 		-- Place subtexure in texture
 		cmd = string.format("convert %s \\( %s -repage +%d+%d \\) -flatten %s", filename, cmd, x, y, filename)
-		print (cmd)
 		command(cmd)
 	end
 
-    command(string.format("convert %s -threshold 50%% %s", filename, filename))
+    command(string.format("convert %s -channel alpha -threshold 50%% %s", filename, filename))
 
 end
 
@@ -307,22 +307,24 @@ file:write(string.format([[
 font_api.register_font(
 	'%s',
 	{
+		version = 2,
 		default = true,
 		margintop = 3,
 		linespacing = -2,
-		height = %d,
+		texture_height = %d,
+		glyphs_height = %d,
 		glyphs = {
 ]],
-    fontname, font_height)
+    fontname, texture_height, font_height)
 )
 for codepoint, w in pairs(glyph_widths) do
 	local x = glyph_xs[codepoint]
 	local y = glyph_ys[codepoint]
 	local n = glyph_ns[codepoint]
 	if x ~= nil and y ~=nil and n ~= nil then
-		file:write(string.format("			[%d] = { w = %d, n = %f, x = %d, y = %d },\n", codepoint, w, n, x, y))
+		file:write(string.format("			[%d] = { %d, %d, %d, %d },\n", codepoint, w, n, x, y))
 	else
-		file:write(string.format("			[%d] = { w = %d },\n", codepoint, w))
+		file:write(string.format("			[%d] = { %d },\n", codepoint, w))
 	end
 end
 file:write([[

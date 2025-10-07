@@ -58,6 +58,7 @@ end
 --- Font class
 
 local Font = {}
+Font.__index = Font
 font_api.Font = Font
 
 function Font:new(def)
@@ -70,31 +71,53 @@ function Font:new(def)
 
 	local font = table.copy(def)
 
-	if font.height == nil or font.height <= 0 then
-		minetest.log("error",
-			"[font_api] Font definition must have a positive height.")
-		return nil
-	end
-
-	if type(font.widths) == "table" then
-		if type(font.glyphs) == "table" then
-			minetest.log("warning",
-				"[font_api] Ingonring `widths` array in font definition as there is also a `glyphs` array.")
-		else
-			minetest.log("warning",
-				"[font_api] Use of `widths` array in font definition is deprecated, please upgrade to `glyphs`.")
-			font.glyphs = {}
-			for codepoint, width in pairs(font.widths) do
-				font.glyphs[codepoint] = { w = width, c = codepoint }
-			end
-			font.widths = nil
+	-- Version 1 is with one texture per glyph
+	if font.version == nil or font.version == 1 then
+		if font.height == nil or font.height <= 0 then
+			minetest.log("error",
+				"[font_api] Font definition must have a positive height.")
+			return nil
 		end
+
+		if type(font.widths) ~= "table" then
+			minetest.log("error",
+				"[font_api] Font definition must have a `widths` array.")
+			return nil
+		end
+
+		-- Kind of convert to version 2
+
+		font.glyphs = {}
+		for codepoint, width in pairs(font.widths) do
+			font.glyphs[codepoint] = { width, codepoint }
+		end
+		font.widths = nil
+
+		font.glyphs_height = font.height
+		font.height = nil
 	end
 
-	if type(font.glyphs) ~= "table" then
-		minetest.log("error",
-			"[font_api] Font definition must have a `glyphs` array.")
-		return nil
+	-- Version 2 is with one only texture for all glyphs, using `[sheet` textures
+	if font.version == 2 then
+		if type(font.glyphs) ~= "table" then
+			minetest.log("error",
+				"[font_api] Font definition must have a `glyphs` array.")
+			return nil
+		end
+
+		if font.texture_height == nil or font.texture_height <= 0 then
+			minetest.log("error",
+				"[font_api] Font definition must have a positive `texture_height`.")
+			return nil
+		end
+
+		if font.glyphs_height == nil or font.glyphs_height <= 0 then
+			minetest.log("error",
+				"[font_api] Font definition must have a positive `glyphs_height`.")
+			return nil
+		end
+
+		font.vertical_number_of_tiles = math.floor(font.texture_height / font.glyphs_height)
 	end
 
 	if font.glyphs[0] == nil then
@@ -103,8 +126,7 @@ function Font:new(def)
 		return nil
 	end
 
-	setmetatable(font, self)
-	self.__index = self
+    setmetatable(font, self)
 
 	return font
 end
@@ -149,7 +171,8 @@ end
 -- @return Char width
 
 function Font:get_char_width(codepoint)
-	return (self.glyphs[codepoint] or self.glyphs[0]).w
+	-- [1] is char width
+	return (self.glyphs[codepoint] or self.glyphs[0])[1]
 end
 
 --- Returns texture for a given glyph
@@ -157,22 +180,18 @@ end
 -- @return Texture
 
 function Font:get_glyph_texture(glyph)
-	if glyph.c then
+	if #glyph == 4 then
+		-- Actual version with one texture for all glyphs
+		return string.format("font_%s.png^[sheet:%dx%d:%d,%d",
+			self.name, glyph[2], self.vertical_number_of_tiles, glyph[3], glyph[4])
+	end
+	if #glyph == 2 then
 		-- Former version with one texture per glyph
 		return string.format("font_%s_%04x.png",
-			self.name, glyph.c)
-    end
-
-	if glyph.x == nil or glyph.y == nil then
-		-- Case of invisible chars like space (no need to add any texture)
-		return ""
+			self.name, glyph[2])		
 	end
-
-	--le 5x15 est le nombre de tuiles, pas la taille des tuiles.
-	return string.format("font_%s.png^[sheet:40x5:%d,%d",
-		self.name, glyph.x, glyph.y)
---	return string.format("font_%s.png^[sheet:%dx%d:%d,%d",
---		self.name, glyph.w, self.height, glyph.x,  glyph.y)
+	-- Case of invisible chars like space (no need to add any texture)
+	return ""
 end
 
 --- Text height for multiline text including margins and line spacing
@@ -185,7 +204,7 @@ function Font:get_height(nb_of_lines)
 	if nb_of_lines > 0 then
 		return
 			(
-				(self.height or 0) +
+				self.glyphs_height +
 				(self.margintop or 0) +
 				(self.marginbottom or 0)
 			) * nb_of_lines +
@@ -227,8 +246,8 @@ end
 
 --- Render text with the font in a view
 -- @param text Text to be rendered
--- @param texturew Width (in pixels) of the texture (extra text will be truncated)
--- @param textureh Height (in pixels) of the texture (extra text will be truncated)
+-- @param width Width (in pixels) of the texture (extra text will be truncated)
+-- @param height Height (in pixels) of the texture (extra text will be truncated)
 -- @param style Style of the rendering:
 --		- lines: maximum number of text lines (if text is limited)
 --		- halign: horizontal align ("left"/"center"/"right")
@@ -236,7 +255,7 @@ end
 --		- color: color of the text ("#rrggbb")
 -- @return Texture string
 
-function Font:render(text, texturew, textureh, style)
+function Font:render(text, width, height, style)
 	style = style or {}
 
 	-- Split text into lines (and limit to style.lines # of lines)
@@ -256,14 +275,14 @@ function Font:render(text, texturew, textureh, style)
 
 	local x, y, codepoint
 	local texture = ""
-	local textheight = self:get_height(#lines)
+	local text_height = self:get_height(#lines)
 
 	if style.valign == "top" then
 		y = 0
 	elseif style.valign == "bottom" then
-		y = textureh - textheight
+		y = height - text_height
 	else
-		y = (textureh - textheight) / 2
+		y = (height - text_height) / 2
 	end
 
 	y = y + (self.margintop or 0)
@@ -272,9 +291,9 @@ function Font:render(text, texturew, textureh, style)
 		if style.halign == "left" then
 			x = 0
 		elseif style.halign == "right" then
-			x = texturew - l.width
+			x = width - l.width
 		else
-			x = (texturew - l.width) / 2
+			x = (width - l.width) / 2
 		end
 
 		while l.text ~= '' do
@@ -284,17 +303,19 @@ function Font:render(text, texturew, textureh, style)
 			local glyph = self.glyphs[codepoint]
 
 			-- Add image only if it is visible (at least partly)
-			if x + glyph.w >= 0 and x <= texturew then
-				texture = string.format("%s:%d,%d=%s", 
-					texture, x, y, self:get_glyph_texture(glyph):gsub("[\\^:]", "\\%0"))
+			if x + glyph[1] >= 0 and x <= width then
+				local glyph_texture = self:get_glyph_texture(glyph):gsub("[\\^:]", "\\%0")
+				if glyph_texture ~= '' then
+					texture = string.format("%s:%d,%d=%s", texture, x, y, glyph_texture)
+				end
 			end
-			x = x + glyph.w
+			x = x + glyph[1]
 		end
 
 		y = y + self:get_height() + (self.linespacing or 0)
 	end
 
-	texture = string.format("[combine:%dx%d%s", texturew, textureh, texture)
+	texture = string.format("[combine:%dx%d%s", width, height, texture)
 	if style.color then
 		texture = texture.."^[colorize:"..style.color
 	end
