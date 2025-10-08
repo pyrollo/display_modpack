@@ -113,7 +113,7 @@ local function show_font_formspec(playername)
 		)
 		fs = string.format(
 			"%simage[0.1,%s;4.5,0.8;%s]button_exit[0,%s;4,1;font_%s;]",
-			fs, line - 0.9, texture, line - 1, font.name)
+			fs, line - 0.9, texture:gsub("[\\^]", "\\%0"), line - 1, font.name)
 	end
 	minetest.show_formspec(context.playername, modname..':font_list', fs)
 end

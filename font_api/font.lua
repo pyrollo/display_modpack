@@ -126,6 +126,10 @@ function Font:new(def)
 		return nil
 	end
 
+	if self.charspacing == nil then
+		self.charspacing = 0
+	end
+
     setmetatable(font, self)
 
 	return font
@@ -172,7 +176,7 @@ end
 
 function Font:get_char_width(codepoint)
 	-- [1] is char width
-	return (self.glyphs[codepoint] or self.glyphs[0])[1]
+	return (self.glyphs[codepoint] or self.glyphs[0])[1] + self.charspacing
 end
 
 --- Returns texture for a given glyph
@@ -303,13 +307,13 @@ function Font:render(text, width, height, style)
 			local glyph = self.glyphs[codepoint]
 
 			-- Add image only if it is visible (at least partly)
-			if x + glyph[1] >= 0 and x <= width then
+			if x + glyph[1] + self.charspacing >= 0 and x <= width then
 				local glyph_texture = self:get_glyph_texture(glyph):gsub("[\\^:]", "\\%0")
 				if glyph_texture ~= '' then
 					texture = string.format("%s:%d,%d=%s", texture, x, y, glyph_texture)
 				end
 			end
-			x = x + glyph[1]
+			x = x + glyph[1] + self.charspacing
 		end
 
 		y = y + self:get_height() + (self.linespacing or 0)

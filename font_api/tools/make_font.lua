@@ -6,6 +6,32 @@
 
 
 -- TODO : detect and manage fixed width fonts
+-- TODO: HAVE A PARAM FILE FOR EACH FONT WITH WANTED SETTINGS
+-- Par exemple:
+--   activation du trim
+--   valeur de linespacing / charspacing ..
+
+--
+-- Dependancies check
+--
+
+local function check(cmd, msg)
+	if os.execute(cmd .. " > /dev/null 2>&1") then
+		return true
+	else
+		print(msg)
+	end
+end
+
+if
+	not check("convert --version", "Error: This program requires convert from ImageMagick!") or
+	not check("identify --version", "Error: This program requires identify from ImageMagick!") or
+	not check("ttx --version", "Error: This program requires ttx from FontTools!")
+then
+	print("Please fix above problem and retry.")
+	os.exit(1)
+end
+
 
 --
 -- Argument management
@@ -28,27 +54,6 @@ local fontname=arg[2]
 local fontsize=arg[3]
 
 local modname = fontname
-
---
--- Dependancies check
---
-
-local function check(cmd, msg)
-	if os.execute(cmd .. " > /dev/null 2>&1") then
-		return true
-	else
-		print(msg)
-	end
-end
-
-if
-	not check("convert --version", "Error: This program requires convert from ImageMagick!") or
-	not check("identify --version", "Error: This program requires identify from ImageMagick!") or
-	not check("ttx --version", "Error: This program requires ttx from FontTools!")
-then
-	print("Please fix above problem and retry.")
-	os.exit(1)
-end
 
 --
 -- Prepare output directory
@@ -124,11 +129,12 @@ local function measure(codepoint)
 	local char = utf8.char(codepoint)
 
 	local cmd = string.format(
-			"convert -font \"%s\" -pointsize %d label:\"%s\" -identify NULL:",
-			fontfile, fontsize, escape(char)
-		)
+		"convert -font \"%s\" -pointsize %d label:\"%s\" -define trim:edges=east,west -trim info:",
+		fontfile, fontsize, escape(char)
+	)
 
-	_, _, w, h = string.find(command(cmd), "([0-9]+)x([0-9]+)" )
+	local _, _, w, h = string.find(command(cmd), "([0-9]+)x([0-9]+)" )
+
 	return tonumber(w), tonumber(h)
 end
 
@@ -191,7 +197,7 @@ local function make_final_texture(filename)
 	-- Compute positions
 	for _, tile_width in ipairs(tile_widths) do
 		for _, codepoint in ipairs(by_width[tile_width]) do
-			local glyph_x = x // tile_width
+			local glyph_x = math.ceil(x / tile_width)
 			x = glyph_x * tile_width
 			if x + tile_width > texture_width then -- no space left on current line
 				x = 0
@@ -201,7 +207,7 @@ local function make_final_texture(filename)
 			end
 			glyph_xs[codepoint] = glyph_x
 			glyph_ys[codepoint] = glyph_y
-			glyph_ns[codepoint] = texture_width // tile_width
+			glyph_ns[codepoint] = math.floor(texture_width / tile_width)
 			x = x + tile_width
 		end
 	end
@@ -213,7 +219,7 @@ local function make_final_texture(filename)
 	))
 
 	for codepoint, n in pairs(glyph_ns) do
-		local w = texture_width // n
+		local w = math.floor(texture_width / n)
 		local x = w * glyph_xs[codepoint]
 		local y = font_height * glyph_ys[codepoint]
 		
@@ -223,11 +229,11 @@ local function make_final_texture(filename)
 		if codepoint == 0 then
 			-- The "unknown" char
   			cmd = string.format("xc:transparent[%dx%d] -background none -colorspace gray -stroke black -fill transparent -strokewidth 1 -draw \"rectangle 0,0 %d,%d\"",
-				w, font_height, w - 1, font_height - 1
+				w, font_height - 1, w - 1, font_height - 2
 			)
 		else
 			-- Other glyhp chars
-			cmd = string.format("-channel alpha -background none -colorspace gray -fill black -font \"%s\" -pointsize %d label:\"%s\"",
+			cmd = string.format("-channel alpha -background none -colorspace gray -fill black -font \"%s\" -pointsize %d label:\"%s\" -define trim:edges=east,west -trim",
 				fontfile, fontsize, escape(utf8.char(codepoint))
 			)
 		end
@@ -264,22 +270,22 @@ add_codepoints(0x0021, 0x007f)
 add_codepoints(0x00a0, 0x00ff)
 
 -- 0100-017f Latin Extended-A (full)
---add_codepoints(0x0100, 0x017f)
+add_codepoints(0x0100, 0x017f)
 
 -- 0370-03ff Greek (full)
---add_codepoints(0x0370, 0x03ff)
+add_codepoints(0x0370, 0x03ff)
 
 -- 0400-04ff Cyrilic (full)
---add_codepoints(0x0400, 0x04ff)
+add_codepoints(0x0400, 0x04ff)
 
 -- 2000-206f General Punctuation (Limited to Dashes)
---add_codepoints(0x2010, 0x2015)
+add_codepoints(0x2010, 0x2015)
 
 -- 2000-206f General Punctuation (Limited to Quotes)
---add_codepoints(0x2018, 0x201F)
+add_codepoints(0x2018, 0x201F)
 
 -- 20a0-20cf Currency Symbols (Limited to Euro symbol)
---add_codepoints(0x20ac, 0x20ac)
+add_codepoints(0x20ac, 0x20ac)
 
 print("Prepare final texture")
 
@@ -311,6 +317,7 @@ font_api.register_font(
 		default = true,
 		margintop = 3,
 		linespacing = -2,
+		charspacing = 2,
 		texture_height = %d,
 		glyphs_height = %d,
 		glyphs = {
