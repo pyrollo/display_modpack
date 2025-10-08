@@ -10,6 +10,7 @@
 -- Par exemple:
 --   activation du trim
 --   valeur de linespacing / charspacing ..
+--   enabled codepoints
 
 --
 -- Dependancies check
@@ -38,7 +39,7 @@ end
 --
 
 local function usage()
-	print (arg[0].." takes tree arguments:")
+	print (arg[0] .. " takes tree arguments:")
 	print (" - font file name")
 	print (" - wanted font name")
 	print (" - wanted font height")
@@ -49,9 +50,9 @@ if #arg ~= 3 then
 	os.exit(1)
 end
 
-local fontfile=arg[1]
-local fontname=arg[2]
-local fontsize=arg[3]
+local fontfile = arg[1]
+local fontname = arg[2]
+local fontsize = arg[3]
 
 local modname = fontname
 
@@ -84,7 +85,7 @@ local function compute_tile_sizes(texture_size)
 	return results
 end
 
--- This will give enough combinations (360 is 2 * 2 * 2 * 3 * 3 * 5)
+-- This will give enough tile width combinations (360 is 2 * 2 * 2 * 3 * 3 * 5)
 tile_widths = compute_tile_sizes(360)
 
 -- Table width has to be sorted
@@ -214,7 +215,7 @@ local function make_final_texture(filename)
 
 	-- Compose texture
 	command(string.format(
-		"convert -channel alpha -colorspace gray -size %dx%d xc:transparent %s",
+		"convert -size %dx%d xc:transparent %s",
 		texture_width, texture_height, filename
 	))
 
@@ -224,21 +225,27 @@ local function make_final_texture(filename)
 		local y = font_height * glyph_ys[codepoint]
 		
 		local cmd
-
 		-- Subtexture subcommand
 		if codepoint == 0 then
 			-- The "unknown" char
-  			cmd = string.format("xc:transparent[%dx%d] -background none -colorspace gray -stroke black -fill transparent -strokewidth 1 -draw \"rectangle 0,0 %d,%d\"",
-				w, font_height - 1, w - 1, font_height - 2
+  			cmd = string.format(
+				"convert %s" ..
+				" -stroke black -fill transparent -strokewidth 1 " ..
+				" -draw \"rectangle %d,%d %d,%d\" %s",
+				filename, x, y, x + w, y + font_height, filename
 			)
 		else
 			-- Other glyhp chars
-			cmd = string.format("-channel alpha -background none -colorspace gray -fill black -font \"%s\" -pointsize %d label:\"%s\" -define trim:edges=east,west -trim",
-				fontfile, fontsize, escape(utf8.char(codepoint))
+			cmd = string.format(
+				"convert %s \\(" ..
+				" -background none -font \"%s\" -pointsize %d label:\"%s\"" .. 
+				" -define trim:edges=east,west -trim" ..
+				" -repage +%d+%d \\) -flatten %s",
+				filename, fontfile, fontsize, escape(utf8.char(codepoint)),
+				x, y, filename
 			)
+			
 		end
-		-- Place subtexure in texture
-		cmd = string.format("convert %s \\( %s -repage +%d+%d \\) -flatten %s", filename, cmd, x, y, filename)
 		command(cmd)
 	end
 
@@ -270,22 +277,22 @@ add_codepoints(0x0021, 0x007f)
 add_codepoints(0x00a0, 0x00ff)
 
 -- 0100-017f Latin Extended-A (full)
-add_codepoints(0x0100, 0x017f)
+--add_codepoints(0x0100, 0x017f)
 
 -- 0370-03ff Greek (full)
-add_codepoints(0x0370, 0x03ff)
+--add_codepoints(0x0370, 0x03ff)
 
 -- 0400-04ff Cyrilic (full)
-add_codepoints(0x0400, 0x04ff)
+--add_codepoints(0x0400, 0x04ff)
 
 -- 2000-206f General Punctuation (Limited to Dashes)
-add_codepoints(0x2010, 0x2015)
+--add_codepoints(0x2010, 0x2015)
 
 -- 2000-206f General Punctuation (Limited to Quotes)
-add_codepoints(0x2018, 0x201F)
+--add_codepoints(0x2018, 0x201F)
 
 -- 20a0-20cf Currency Symbols (Limited to Euro symbol)
-add_codepoints(0x20ac, 0x20ac)
+--add_codepoints(0x20ac, 0x20ac)
 
 print("Prepare final texture")
 
