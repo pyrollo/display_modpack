@@ -6,11 +6,6 @@
 
 
 -- TODO : detect and manage fixed width fonts
--- TODO: HAVE A PARAM FILE FOR EACH FONT WITH WANTED SETTINGS
--- Par exemple:
---   activation du trim
---   valeur de linespacing / charspacing ..
---   enabled codepoints
 
 --
 -- Dependancies check
@@ -35,44 +30,32 @@ end
 
 
 --
--- Argument management
+-- Argument & parameters management
 --
 
 local function usage()
-	print (arg[0] .. " takes tree arguments:")
-	print (" - font file name")
-	print (" - wanted font name")
-	print (" - wanted font height")
+	print (arg[0] .. " takes two arguments:")
+	print (" - parameter file")
+	print (" - destination path")
 end
 
-if #arg ~= 3 then
+if #arg ~= 2 then
 	usage()
 	os.exit(1)
 end
 
-local fontfile = arg[1]
-local fontname = arg[2]
-local fontsize = arg[3]
+print("Reading paramaters.")
+dofile(arg[1])
 
-local modname = fontname
-
---
--- Prepare output directory
---
-
--- TODO: we should be able to choose basedir
-local moddir = "font_" .. fontname
-
-if os.execute("[ -d " .. moddir .. " ]") then
-	print ("Directory " .. moddir .. " already exists!")
+local mod_dir = arg[2]
+if os.execute("[ -d " .. mod_dir .. " ]") then
+	print ("Directory " .. mod_dir .. " already exists!")
 --	os.exit(1)
 end
-
-os.execute("mkdir -p " .. moddir .. "/textures")
-
+os.execute("mkdir -p " .. mod_dir .. "/textures")
 
 --
--- Compute available tile sizes
+-- Available tile sizes management
 --
 
 local function compute_tile_sizes(texture_size)
@@ -86,11 +69,11 @@ local function compute_tile_sizes(texture_size)
 end
 
 -- This will give enough tile width combinations (360 is 2 * 2 * 2 * 3 * 3 * 5)
-tile_widths = compute_tile_sizes(360)
+local tile_widths = compute_tile_sizes(360)
 
 -- Table width has to be sorted
 table.sort(tile_widths)
-texture_width = tile_widths[#tile_widths]
+local texture_width = tile_widths[#tile_widths]
 
 -- Rounds glyph width up to available tile width (first width larger than given one)
 local function tile_width(width)
@@ -103,11 +86,10 @@ local function tile_width(width)
 end
 
 --
--- Things start here
+-- Helper functions
 --
 
 -- Issue an OS command and get its result
-
 local function command(cmd)
 	local f = assert(io.popen(cmd, 'r'))
 	local s = assert(f:read('*a'))
@@ -116,7 +98,6 @@ local function command(cmd)
 end
 
 -- Escape chars that could harm commands
-
 local function escape(char) 
 	if char == "\\" then return "\\\\\\\\" end
 	if char == "\"" then return "\\\"" end
@@ -124,14 +105,17 @@ local function escape(char)
 	return char
 end
 
--- Measures a glyph, returs its height and width in pixels
+--
+-- Things start here
+--
 
-local function measure(codepoint)
+-- Measures a glyph, returs its height and width in pixels
+local function measure(font, codepoint)
 	local char = utf8.char(codepoint)
 
 	local cmd = string.format(
 		"convert -font \"%s\" -pointsize %d label:\"%s\" -define trim:edges=east,west -trim info:",
-		fontfile, fontsize, escape(char)
+		font.file, font.height, escape(char)
 	)
 
 	local _, _, w, h = string.find(command(cmd), "([0-9]+)x([0-9]+)" )
@@ -139,76 +123,82 @@ local function measure(codepoint)
 	return tonumber(w), tonumber(h)
 end
 
--- Read all available codepoints
-local cmd, errmsg, status = io.popen("ttx -o - \"" .. fontfile .. "\" 2>/dev/null | grep \"<map code=\" | cut -d \\\" -f 2", 'r')
-if cmd == nil then
-	print("Could not open font file " .. fontfile .. ":\n" .. errmsg)
-	os.exit(status)
+-- Read all available codepoints from ttf file
+local function read_available_codepoints(file)
+	local cmd, errmsg, status = io.popen(string.format(
+		"ttx -o - \"%s\" 2>/dev/null | grep \"<map code=\" | cut -d \\\" -f 2",
+		file), 'r')
+	if cmd == nil then
+		print(string.format(
+			"Could not open font file %s:\n%s", file, errmsg))
+		os.exit(status)
+	end
+
+	local codepoints = {}
+	local codepoint = cmd:read("*line")
+	while codepoint do
+		codepoints[tonumber(codepoint)] = true
+		codepoint = cmd:read("*line")
+	end
+	cmd:close()
+
+	return codepoints
 end
 
-local codepoints = {}
-local codepoint = cmd:read("*line")
-while codepoint do
-	codepoints[tonumber(codepoint)] = true
-	codepoint = cmd:read("*line")
-end
-cmd:close()
-
-local by_width = {} -- Codepoints by tile width
-local tile_widths = {} -- Existing tile width
-local glyph_widths = {} -- Exact width of reach glyph
-local font_height = 0 -- Max height of all glyphs
-
-local function add_codepoints(from, to)
+-- Add codepoints to a font
+local function add_codepoints(font, from, to)
 	for codepoint = from, to do
-		if codepoints[codepoint] then
+		if font.cp[codepoint] then
 			-- Glyph size
-			local w, h = measure(codepoint)
-			if h > font_height then font_height = h end
-			glyph_widths[codepoint] = w
+			local w, h = measure(font, codepoint)
+			if h > font.glyphs_height then font.glyphs_height = h end
+			font.glyph_widths[codepoint] = w
 
 			-- Tile width
 		    local tile_w = tile_width(w)
-			if by_width[tile_w] == nil then
-				by_width[tile_w] = {}
-				table.insert(tile_widths, tile_w)
+			if font.by_width[tile_w] == nil then
+				font.by_width[tile_w] = {}
+				table.insert(font.tile_widths, tile_w)
 			end
-			table.insert(by_width[tile_w], codepoint)
+			table.insert(font.by_width[tile_w], codepoint)
 		end
 	end
 end
 
--- Characteristics of [sheet:NxM:x,y
--- M is always the same and depends on font and texture height.
-local glyph_xs = {} -- x for each glyph
-local glyph_ys = {} -- y for each glyph
-local glyph_ns = {} -- n of tiles in sheet for each glyph (=texturewidth / tilewidth)
+-- Make font texture
+-- Font must have all its codepoints added
+local function make_final_texture(font)
+	local texture_file = string.format("%/textures/font_%s.png",
+		mod_dir, font.name)
 
-local texture_height
+	-- We start with a single line
+	font.texture_height = font.glyphs_height
 
-local function make_final_texture(filename)
+	-- Characteristics of [sheet:NxM:x,y
+	-- M is always the same and depends on font and texture height.
+	font.glyph_xs = {} -- x for each glyph
+	font.glyph_ys = {} -- y for each glyph
+	font.glyph_ns = {} -- n of tiles in sheet for each glyph (=texturewidth / tilewidth)
 
-	texture_height = font_height
-   
 	local x = 0 -- cursor x
 	local glyph_y = 0
 
-	table.sort(tile_widths)
+	table.sort(font.tile_widths)
 
 	-- Compute positions
-	for _, tile_width in ipairs(tile_widths) do
-		for _, codepoint in ipairs(by_width[tile_width]) do
+	for _, tile_width in ipairs(font.tile_widths) do
+		for _, codepoint in ipairs(font.by_width[tile_width]) do
 			local glyph_x = math.ceil(x / tile_width)
 			x = glyph_x * tile_width
-			if x + tile_width > texture_width then -- no space left on current line
+			if x + tile_width > font.texture_width then -- no space left on current line
 				x = 0
 				glyph_x = 0
 				glyph_y = glyph_y + 1
-				texture_height = texture_height + font_height
+				font.texture_height = font.texture_height + font.glyphs_height
 			end
-			glyph_xs[codepoint] = glyph_x
-			glyph_ys[codepoint] = glyph_y
-			glyph_ns[codepoint] = math.floor(texture_width / tile_width)
+			font.glyph_xs[codepoint] = glyph_x
+			font.glyph_ys[codepoint] = glyph_y
+			font.glyph_ns[codepoint] = math.floor(texture_width / tile_width)
 			x = x + tile_width
 		end
 	end
@@ -216,13 +206,13 @@ local function make_final_texture(filename)
 	-- Compose texture
 	command(string.format(
 		"convert -size %dx%d xc:transparent %s",
-		texture_width, texture_height, filename
+		texture_width, texture_height, texture_file
 	))
 
 	for codepoint, n in pairs(glyph_ns) do
 		local w = math.floor(texture_width / n)
 		local x = w * glyph_xs[codepoint]
-		local y = font_height * glyph_ys[codepoint]
+		local y = font.glyphs_height * glyph_ys[codepoint]
 		
 		local cmd
 		-- Subtexture subcommand
@@ -232,7 +222,7 @@ local function make_final_texture(filename)
 				"convert %s" ..
 				" -stroke black -fill transparent -strokewidth 1 " ..
 				" -draw \"rectangle %d,%d %d,%d\" %s",
-				filename, x, y, x + w, y + font_height, filename
+				texture_file, x, y, x + w, y + font.glyphs_height, texture_file
 			)
 		else
 			-- Other glyhp chars
@@ -241,82 +231,91 @@ local function make_final_texture(filename)
 				" -background none -font \"%s\" -pointsize %d label:\"%s\"" .. 
 				" -define trim:edges=east,west -trim" ..
 				" -repage +%d+%d \\) -flatten %s",
-				filename, fontfile, fontsize, escape(utf8.char(codepoint)),
-				x, y, filename
+				texture_file, font.file, font.pointsize, escape(utf8.char(codepoint)),
+				x, y, texture_file
 			)
 			
 		end
 		command(cmd)
 	end
 
-    command(string.format("convert %s -channel alpha -threshold 50%% %s", filename, filename))
+    command(string.format("convert %s -channel alpha -threshold 50%% %s", texture_file, texture_file))
+end
+
+local function process_font(font)
+	print(string.format("Processing font \"%s\" (%s)", font.label, font.name)
+
+	font.by_width = {} -- Codepoints by tile width
+	font.tile_widths = {} -- Used tile widths
+	font.glyph_widths = {} -- Exact width of reach glyph
+	font.glyphs_height = 0 -- Max height of all glyphs
+
+	print("Read available glyphs")
+
+	-- Available codepoints from file
+	font.cp = read_available_codepoints(font.file)
+
+	print("Compute glyphs properties")
+
+	-- Special char: unknown char
+	-- We use size of glyph "0" (rounded) but it would be better to get size from ttx
+
+	-- TODO: We could get information from ttx:
+	--   <mtx> gives a width always divisible by 125 for metro font (check if its somehow proportional to what magick gives)
+
+	local w = tile_width(measure(font, 0x0030))
+	font.glyph_widths[0] = w
+	font.by_width[w] = { 0 }
+	font.tile_widths = { w }
+
+	-- Mandatory codepoints (ASCII)
+	add_codepoints(font, 0x0021, 0x007f)
+
+	-- Extra codepoints
+	if font.codepoints then
+		for _, range in ipairs(font.codepoints) do
+			add_codepoints(font, range.from, range.to)
+		end
+	end
+
+	print("Create final texture")
+
+	make_final_texture(font)
+
+	-- Add invisible chars : Spaces
+	-- TODO: Should be computed from ttx
+	-- TODO: manage half/quater spaces
+	glyph_widths[0x0020] = glyph_widths[0x0030]
 
 end
 
-print("Compute glyphs properties")
+local function get_font_registration_lua(font)
 
--- TODO: We could get information from ttx:
---   <mtx> gives a width always divisible by 125 for metro font (check if its somehow proportional to what magick gives)
--- 
+	local glyphs = ""
+	local curlinesize = 1000
 
--- Special char: unknown char
--- We use size of glyph "0" (rounded) but it would be better to get size from ttx
-local w = tile_width(measure(0x0030))
-glyph_widths[0] = w
-by_width[w] = { 0 }
-tile_widths = { w }
+	for codepoint, w in pairs(glyph_widths) do
+		local glyph
+		local x = glyph_xs[codepoint]
+		local y = glyph_ys[codepoint]
+		local n = glyph_ns[codepoint]
+		if x ~= nil and y ~=nil and n ~= nil then
+			glyph = string.format("[%d] = { %d, %d, %d, %d },", codepoint, w, n, x, y)
+		else
+			glyph = string.format("[%d] = { %d },", codepoint, w)
+		end
 
--- Mandatory chars
-add_codepoints(0x0021, 0x007f)
+		curlinesize = curlinesize + glyph:len() + 1
+		if curlinesize > 80 then
+			glyphs = glyphs + "\n\t\t\t" +  glyph
+			curlinesize = 12 + glyph:len()
+		else
+			glyphs = glyphs + " " + glyph
+		end
+	end
 
--- TODO: manage Space without texture! + half/quater spaces
-
--- Optional Unicode pages (see https://en.wikipedia.org/wiki/Unicode) :
-
--- 00a0-00ff Latin-1 Supplement (full)
-add_codepoints(0x00a0, 0x00ff)
-
--- 0100-017f Latin Extended-A (full)
---add_codepoints(0x0100, 0x017f)
-
--- 0370-03ff Greek (full)
---add_codepoints(0x0370, 0x03ff)
-
--- 0400-04ff Cyrilic (full)
---add_codepoints(0x0400, 0x04ff)
-
--- 2000-206f General Punctuation (Limited to Dashes)
---add_codepoints(0x2010, 0x2015)
-
--- 2000-206f General Punctuation (Limited to Quotes)
---add_codepoints(0x2018, 0x201F)
-
--- 20a0-20cf Currency Symbols (Limited to Euro symbol)
---add_codepoints(0x20ac, 0x20ac)
-
-print("Prepare final texture")
-
-make_final_texture(moddir .. "/textures/font_" .. modname .. ".png")
-
--- Invisible chars : Spaces -- Should be computed from ttx
-glyph_widths[0x0020] = glyph_widths[0x0030]
-
---
--- Write init.lua
---
-
-file = io.open(moddir .. "/init.lua", "w")
-file:write(string.format([[
---
--- %s: A '%s' font mod for font_api
---
--- This file was generated by `%s` on %s from file `%s` with size %d.
---
-
-]], modname, fontname, arg[0], os.date("%Y-%m-%d at %H:%M"), fontfile, fontsize
-))
-file:write(string.format([[
--- luacheck: ignore
+	return string.format([[
+-- Font generated from file %s with pointsize %d
 font_api.register_font(
 	'%s',
 	{
@@ -328,19 +327,41 @@ font_api.register_font(
 		texture_height = %d,
 		glyphs_height = %d,
 		glyphs = {
-]],
-    fontname, texture_height, font_height)
-)
-for codepoint, w in pairs(glyph_widths) do
-	local x = glyph_xs[codepoint]
-	local y = glyph_ys[codepoint]
-	local n = glyph_ns[codepoint]
-	if x ~= nil and y ~=nil and n ~= nil then
-		file:write(string.format("			[%d] = { %d, %d, %d, %d },\n", codepoint, w, n, x, y))
-	else
-		file:write(string.format("			[%d] = { %d },\n", codepoint, w))
-	end
+%s
+		}
+]],	font.file, font.pointsize, font.texture_height, font.glyphd_height, glyphs)
 end
+
+--
+-- Main code
+--
+
+-- Defaults (TODO)
+if not font.label then
+	font.label = font.name:gsub("^%l", string.upper)
+end
+
+for _, font in ipairs(font.fonts) do
+	process_font(font)
+end
+
+-- Write init.lua
+file = io.open(mod_dir .. "/init.lua", "w")
+
+file:write(string.format([[
+--
+-- %s: A font mod for font_api
+--
+-- This file was generated by `%s` on %s.
+--
+
+]], params.mod_name, arg[0], os.date("%Y-%m-%d at %H:%M")
+))
+
+for _, font in ipairs(font.fonts) do
+	file:write(get_font_registration_lua(font))
+end
+
 file:write([[
 		}
 	}
@@ -348,19 +369,17 @@ file:write([[
 ]])
 file:close()
 
-
 --
 -- Write mod.conf
 --
 
-local fontlabel = fontname:gsub("^%l", string.upper)
 
-file = io.open(moddir .. "/mod.conf", "w")
+file = io.open(mod_dir .. "/mod.conf", "w")
 file:write(string.format([[
-name = font_%s
-title = %s Font
-description = %s font for font_api
+name = %s
+title = %s
+description = %s
 depends = font_api
-]], fontname, fontlabel, fontlabel))
+]], params.mod_name, params.mod_title, params.mod_description))
 
 
