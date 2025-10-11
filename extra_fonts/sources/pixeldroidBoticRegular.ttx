@@ -1,0 +1,2354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ttFont sfntVersion="OTTO" ttLibVersion="4.57">
+
+  <GlyphOrder>
+    <!-- The 'id' attribute is only for humans; it is ignored when parsed. -->
+    <GlyphID id="0" name=".notdef"/>
+    <GlyphID id="1" name="space"/>
+    <GlyphID id="2" name="exclam"/>
+    <GlyphID id="3" name="quotedbl"/>
+    <GlyphID id="4" name="numbersign"/>
+    <GlyphID id="5" name="dollar"/>
+    <GlyphID id="6" name="percent"/>
+    <GlyphID id="7" name="ampersand"/>
+    <GlyphID id="8" name="quotesingle"/>
+    <GlyphID id="9" name="parenleft"/>
+    <GlyphID id="10" name="parenright"/>
+    <GlyphID id="11" name="asterisk"/>
+    <GlyphID id="12" name="plus"/>
+    <GlyphID id="13" name="comma"/>
+    <GlyphID id="14" name="hyphen"/>
+    <GlyphID id="15" name="period"/>
+    <GlyphID id="16" name="slash"/>
+    <GlyphID id="17" name="zero"/>
+    <GlyphID id="18" name="one"/>
+    <GlyphID id="19" name="two"/>
+    <GlyphID id="20" name="three"/>
+    <GlyphID id="21" name="four"/>
+    <GlyphID id="22" name="five"/>
+    <GlyphID id="23" name="six"/>
+    <GlyphID id="24" name="seven"/>
+    <GlyphID id="25" name="eight"/>
+    <GlyphID id="26" name="nine"/>
+    <GlyphID id="27" name="colon"/>
+    <GlyphID id="28" name="semicolon"/>
+    <GlyphID id="29" name="less"/>
+    <GlyphID id="30" name="equal"/>
+    <GlyphID id="31" name="greater"/>
+    <GlyphID id="32" name="question"/>
+    <GlyphID id="33" name="at"/>
+    <GlyphID id="34" name="A"/>
+    <GlyphID id="35" name="B"/>
+    <GlyphID id="36" name="C"/>
+    <GlyphID id="37" name="D"/>
+    <GlyphID id="38" name="E"/>
+    <GlyphID id="39" name="F"/>
+    <GlyphID id="40" name="G"/>
+    <GlyphID id="41" name="H"/>
+    <GlyphID id="42" name="I"/>
+    <GlyphID id="43" name="J"/>
+    <GlyphID id="44" name="K"/>
+    <GlyphID id="45" name="L"/>
+    <GlyphID id="46" name="M"/>
+    <GlyphID id="47" name="N"/>
+    <GlyphID id="48" name="O"/>
+    <GlyphID id="49" name="P"/>
+    <GlyphID id="50" name="Q"/>
+    <GlyphID id="51" name="R"/>
+    <GlyphID id="52" name="S"/>
+    <GlyphID id="53" name="T"/>
+    <GlyphID id="54" name="U"/>
+    <GlyphID id="55" name="V"/>
+    <GlyphID id="56" name="W"/>
+    <GlyphID id="57" name="X"/>
+    <GlyphID id="58" name="Y"/>
+    <GlyphID id="59" name="Z"/>
+    <GlyphID id="60" name="bracketleft"/>
+    <GlyphID id="61" name="backslash"/>
+    <GlyphID id="62" name="bracketright"/>
+    <GlyphID id="63" name="asciicircum"/>
+    <GlyphID id="64" name="underscore"/>
+    <GlyphID id="65" name="grave"/>
+    <GlyphID id="66" name="a"/>
+    <GlyphID id="67" name="b"/>
+    <GlyphID id="68" name="c"/>
+    <GlyphID id="69" name="d"/>
+    <GlyphID id="70" name="e"/>
+    <GlyphID id="71" name="f"/>
+    <GlyphID id="72" name="g"/>
+    <GlyphID id="73" name="h"/>
+    <GlyphID id="74" name="i"/>
+    <GlyphID id="75" name="j"/>
+    <GlyphID id="76" name="k"/>
+    <GlyphID id="77" name="l"/>
+    <GlyphID id="78" name="m"/>
+    <GlyphID id="79" name="n"/>
+    <GlyphID id="80" name="o"/>
+    <GlyphID id="81" name="p"/>
+    <GlyphID id="82" name="q"/>
+    <GlyphID id="83" name="r"/>
+    <GlyphID id="84" name="s"/>
+    <GlyphID id="85" name="t"/>
+    <GlyphID id="86" name="u"/>
+    <GlyphID id="87" name="v"/>
+    <GlyphID id="88" name="w"/>
+    <GlyphID id="89" name="x"/>
+    <GlyphID id="90" name="y"/>
+    <GlyphID id="91" name="z"/>
+    <GlyphID id="92" name="braceleft"/>
+    <GlyphID id="93" name="bar"/>
+    <GlyphID id="94" name="braceright"/>
+    <GlyphID id="95" name="asciitilde"/>
+    <GlyphID id="96" name="uni00A0"/>
+    <GlyphID id="97" name="exclamdown"/>
+    <GlyphID id="98" name="cent"/>
+    <GlyphID id="99" name="sterling"/>
+    <GlyphID id="100" name="currency"/>
+    <GlyphID id="101" name="yen"/>
+    <GlyphID id="102" name="brokenbar"/>
+    <GlyphID id="103" name="section"/>
+    <GlyphID id="104" name="dieresis"/>
+    <GlyphID id="105" name="copyright"/>
+    <GlyphID id="106" name="guillemotleft"/>
+    <GlyphID id="107" name="registered"/>
+    <GlyphID id="108" name="degree"/>
+    <GlyphID id="109" name="periodcentered"/>
+    <GlyphID id="110" name="guillemotright"/>
+    <GlyphID id="111" name="multiply"/>
+    <GlyphID id="112" name="Oslash"/>
+    <GlyphID id="113" name="divide"/>
+    <GlyphID id="114" name="oslash"/>
+    <GlyphID id="115" name="Euro"/>
+    <GlyphID id="116" name="uni3000"/>
+    <GlyphID id="117" name=".null"/>
+    <GlyphID id="118" name="nonmarkingreturn"/>
+  </GlyphOrder>
+
+  <head>
+    <!-- Most of this table will be recalculated by the compiler -->
+    <tableVersion value="1.0"/>
+    <fontRevision value="1.0"/>
+    <checkSumAdjustment value="0xc49f56bb"/>
+    <magicNumber value="0x5f0f3cf5"/>
+    <flags value="00000000 00001011"/>
+    <unitsPerEm value="1024"/>
+    <created value="Fri Jul 30 07:09:53 2010"/>
+    <modified value="Sun Oct 30 16:54:29 2016"/>
+    <xMin value="-64"/>
+    <yMin value="-192"/>
+    <xMax value="640"/>
+    <yMax value="704"/>
+    <macStyle value="00000000 00000000"/>
+    <lowestRecPPEM value="8"/>
+    <fontDirectionHint value="2"/>
+    <indexToLocFormat value="0"/>
+    <glyphDataFormat value="0"/>
+  </head>
+
+  <hhea>
+    <tableVersion value="0x00010000"/>
+    <ascent value="704"/>
+    <descent value="-192"/>
+    <lineGap value="92"/>
+    <advanceWidthMax value="1024"/>
+    <minLeftSideBearing value="-64"/>
+    <minRightSideBearing value="0"/>
+    <xMaxExtent value="640"/>
+    <caretSlopeRise value="1"/>
+    <caretSlopeRun value="0"/>
+    <caretOffset value="0"/>
+    <reserved0 value="0"/>
+    <reserved1 value="0"/>
+    <reserved2 value="0"/>
+    <reserved3 value="0"/>
+    <metricDataFormat value="0"/>
+    <numberOfHMetrics value="119"/>
+  </hhea>
+
+  <maxp>
+    <tableVersion value="0x5000"/>
+    <numGlyphs value="119"/>
+  </maxp>
+
+  <OS_2>
+    <!-- The fields 'usFirstCharIndex' and 'usLastCharIndex'
+         will be recalculated by the compiler -->
+    <version value="3"/>
+    <xAvgCharWidth value="514"/>
+    <usWeightClass value="500"/>
+    <usWidthClass value="5"/>
+    <fsType value="00000000 00000000"/>
+    <ySubscriptXSize value="665"/>
+    <ySubscriptYSize value="716"/>
+    <ySubscriptXOffset value="0"/>
+    <ySubscriptYOffset value="143"/>
+    <ySuperscriptXSize value="665"/>
+    <ySuperscriptYSize value="716"/>
+    <ySuperscriptXOffset value="0"/>
+    <ySuperscriptYOffset value="491"/>
+    <yStrikeoutSize value="51"/>
+    <yStrikeoutPosition value="265"/>
+    <sFamilyClass value="0"/>
+    <panose>
+      <bFamilyType value="2"/>
+      <bSerifStyle value="0"/>
+      <bWeight value="6"/>
+      <bProportion value="3"/>
+      <bContrast value="0"/>
+      <bStrokeVariation value="0"/>
+      <bArmStyle value="0"/>
+      <bLetterForm value="0"/>
+      <bMidline value="0"/>
+      <bXHeight value="0"/>
+    </panose>
+    <ulUnicodeRange1 value="00000000 00000000 00000000 00000011"/>
+    <ulUnicodeRange2 value="00000000 00000001 00000000 00000010"/>
+    <ulUnicodeRange3 value="00000000 00000000 00000000 00000000"/>
+    <ulUnicodeRange4 value="00000000 00000000 00000000 00000000"/>
+    <achVendID value="2ttf"/>
+    <fsSelection value="00000000 01000000"/>
+    <usFirstCharIndex value="32"/>
+    <usLastCharIndex value="12288"/>
+    <sTypoAscender value="768"/>
+    <sTypoDescender value="-256"/>
+    <sTypoLineGap value="92"/>
+    <usWinAscent value="704"/>
+    <usWinDescent value="192"/>
+    <ulCodePageRange1 value="00000000 00000000 00000000 00000001"/>
+    <ulCodePageRange2 value="00000000 00000000 00000000 00000000"/>
+    <sxHeight value="384"/>
+    <sCapHeight value="576"/>
+    <usDefaultChar value="32"/>
+    <usBreakChar value="32"/>
+    <usMaxContext value="1"/>
+  </OS_2>
+
+  <name>
+    <namerecord nameID="0" platformID="1" platEncID="0" langID="0x0" unicode="True">
+      Copyright (c) pixeldroid (https://github.com/pixeldroid/fonts/),
+with Reserved Font Name: "Botic".
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+This license is also available with a FAQ at: http://scripts.sil.org/OFL
+    </namerecord>
+    <namerecord nameID="1" platformID="1" platEncID="0" langID="0x0" unicode="True">
+      Botic
+    </namerecord>
+    <namerecord nameID="2" platformID="1" platEncID="0" langID="0x0" unicode="True">
+      Regular
+    </namerecord>
+    <namerecord nameID="3" platformID="1" platEncID="0" langID="0x0" unicode="True">
+      FontForge 2.0 : pixeldroid Botic Regular : 30-10-2016
+    </namerecord>
+    <namerecord nameID="4" platformID="1" platEncID="0" langID="0x0" unicode="True">
+      pixeldroid Botic Regular
+    </namerecord>
+    <namerecord nameID="5" platformID="1" platEncID="0" langID="0x0" unicode="True">
+      Version 1.0.0 
+    </namerecord>
+    <namerecord nameID="6" platformID="1" platEncID="0" langID="0x0" unicode="True">
+      pixeldroidBoticRegular
+    </namerecord>
+    <namerecord nameID="13" platformID="1" platEncID="0" langID="0x0" unicode="True">
+      Copyright (c) pixeldroid (https://github.com/pixeldroid/fonts/),
+with Reserved Font Name: "Botic".
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+This license is copied below, and is also available with a FAQ at:
+http://scripts.sil.org/OFL
+
+
+-----------------------------------------------------------
+SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007
+-----------------------------------------------------------
+
+PREAMBLE
+The goals of the Open Font License (OFL) are to stimulate worldwide
+development of collaborative font projects, to support the font creation
+efforts of academic and linguistic communities, and to provide a free and
+open framework in which fonts may be shared and improved in partnership
+with others.
+
+The OFL allows the licensed fonts to be used, studied, modified and
+redistributed freely as long as they are not sold by themselves. The
+fonts, including any derivative works, can be bundled, embedded, 
+redistributed and/or sold with any software provided that any reserved
+names are not used by derivative works. The fonts and derivatives,
+however, cannot be released under any other type of license. The
+requirement for fonts to remain under this license does not apply
+to any document created using the fonts or their derivatives.
+
+DEFINITIONS
+"Font Software" refers to the set of files released by the Copyright
+Holder(s) under this license and clearly marked as such. This may
+include source files, build scripts and documentation.
+
+"Reserved Font Name" refers to any names specified as such after the
+copyright statement(s).
+
+"Original Version" refers to the collection of Font Software components as
+distributed by the Copyright Holder(s).
+
+"Modified Version" refers to any derivative made by adding to, deleting,
+or substituting -- in part or in whole -- any of the components of the
+Original Version, by changing formats or by porting the Font Software to a
+new environment.
+
+"Author" refers to any designer, engineer, programmer, technical
+writer or other person who contributed to the Font Software.
+
+PERMISSION &amp; CONDITIONS
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of the Font Software, to use, study, copy, merge, embed, modify,
+redistribute, and sell modified and unmodified copies of the Font
+Software, subject to the following conditions:
+
+1) Neither the Font Software nor any of its individual components,
+in Original or Modified Versions, may be sold by itself.
+
+2) Original or Modified Versions of the Font Software may be bundled,
+redistributed and/or sold with any software, provided that each copy
+contains the above copyright notice and this license. These can be
+included either as stand-alone text files, human-readable headers or
+in the appropriate machine-readable metadata fields within text or
+binary files as long as those fields can be easily viewed by the user.
+
+3) No Modified Version of the Font Software may use the Reserved Font
+Name(s) unless explicit written permission is granted by the corresponding
+Copyright Holder. This restriction only applies to the primary font name as
+presented to the users.
+
+4) The name(s) of the Copyright Holder(s) or the Author(s) of the Font
+Software shall not be used to promote, endorse or advertise any
+Modified Version, except to acknowledge the contribution(s) of the
+Copyright Holder(s) and the Author(s) or with their explicit written
+permission.
+
+5) The Font Software, modified or unmodified, in part or in whole,
+must be distributed entirely under this license, and must not be
+distributed under any other license. The requirement for fonts to
+remain under this license does not apply to any document created
+using the Font Software.
+
+TERMINATION
+This license becomes null and void if any of the above conditions are
+not met.
+
+DISCLAIMER
+THE FONT SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT
+OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE
+COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL
+DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM
+OTHER DEALINGS IN THE FONT SOFTWARE.
+    </namerecord>
+    <namerecord nameID="14" platformID="1" platEncID="0" langID="0x0" unicode="True">
+      http://scripts.sil.org/OFL
+    </namerecord>
+    <namerecord nameID="0" platformID="3" platEncID="1" langID="0x409">
+      Copyright (c) pixeldroid (https://github.com/pixeldroid/fonts/),
+with Reserved Font Name: "Botic".
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+This license is also available with a FAQ at: http://scripts.sil.org/OFL
+    </namerecord>
+    <namerecord nameID="1" platformID="3" platEncID="1" langID="0x409">
+      Botic
+    </namerecord>
+    <namerecord nameID="2" platformID="3" platEncID="1" langID="0x409">
+      Regular
+    </namerecord>
+    <namerecord nameID="3" platformID="3" platEncID="1" langID="0x409">
+      FontForge 2.0 : pixeldroid Botic Regular : 30-10-2016
+    </namerecord>
+    <namerecord nameID="4" platformID="3" platEncID="1" langID="0x409">
+      pixeldroid Botic Regular
+    </namerecord>
+    <namerecord nameID="5" platformID="3" platEncID="1" langID="0x409">
+      Version 1.0.0 
+    </namerecord>
+    <namerecord nameID="6" platformID="3" platEncID="1" langID="0x409">
+      pixeldroidBoticRegular
+    </namerecord>
+    <namerecord nameID="13" platformID="3" platEncID="1" langID="0x409">
+      Copyright (c) pixeldroid (https://github.com/pixeldroid/fonts/),
+with Reserved Font Name: "Botic".
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+This license is copied below, and is also available with a FAQ at:
+http://scripts.sil.org/OFL
+
+
+-----------------------------------------------------------
+SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007
+-----------------------------------------------------------
+
+PREAMBLE
+The goals of the Open Font License (OFL) are to stimulate worldwide
+development of collaborative font projects, to support the font creation
+efforts of academic and linguistic communities, and to provide a free and
+open framework in which fonts may be shared and improved in partnership
+with others.
+
+The OFL allows the licensed fonts to be used, studied, modified and
+redistributed freely as long as they are not sold by themselves. The
+fonts, including any derivative works, can be bundled, embedded, 
+redistributed and/or sold with any software provided that any reserved
+names are not used by derivative works. The fonts and derivatives,
+however, cannot be released under any other type of license. The
+requirement for fonts to remain under this license does not apply
+to any document created using the fonts or their derivatives.
+
+DEFINITIONS
+"Font Software" refers to the set of files released by the Copyright
+Holder(s) under this license and clearly marked as such. This may
+include source files, build scripts and documentation.
+
+"Reserved Font Name" refers to any names specified as such after the
+copyright statement(s).
+
+"Original Version" refers to the collection of Font Software components as
+distributed by the Copyright Holder(s).
+
+"Modified Version" refers to any derivative made by adding to, deleting,
+or substituting -- in part or in whole -- any of the components of the
+Original Version, by changing formats or by porting the Font Software to a
+new environment.
+
+"Author" refers to any designer, engineer, programmer, technical
+writer or other person who contributed to the Font Software.
+
+PERMISSION &amp; CONDITIONS
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of the Font Software, to use, study, copy, merge, embed, modify,
+redistribute, and sell modified and unmodified copies of the Font
+Software, subject to the following conditions:
+
+1) Neither the Font Software nor any of its individual components,
+in Original or Modified Versions, may be sold by itself.
+
+2) Original or Modified Versions of the Font Software may be bundled,
+redistributed and/or sold with any software, provided that each copy
+contains the above copyright notice and this license. These can be
+included either as stand-alone text files, human-readable headers or
+in the appropriate machine-readable metadata fields within text or
+binary files as long as those fields can be easily viewed by the user.
+
+3) No Modified Version of the Font Software may use the Reserved Font
+Name(s) unless explicit written permission is granted by the corresponding
+Copyright Holder. This restriction only applies to the primary font name as
+presented to the users.
+
+4) The name(s) of the Copyright Holder(s) or the Author(s) of the Font
+Software shall not be used to promote, endorse or advertise any
+Modified Version, except to acknowledge the contribution(s) of the
+Copyright Holder(s) and the Author(s) or with their explicit written
+permission.
+
+5) The Font Software, modified or unmodified, in part or in whole,
+must be distributed entirely under this license, and must not be
+distributed under any other license. The requirement for fonts to
+remain under this license does not apply to any document created
+using the Font Software.
+
+TERMINATION
+This license becomes null and void if any of the above conditions are
+not met.
+
+DISCLAIMER
+THE FONT SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT
+OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE
+COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL
+DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM
+OTHER DEALINGS IN THE FONT SOFTWARE.
+    </namerecord>
+    <namerecord nameID="14" platformID="3" platEncID="1" langID="0x409">
+      http://scripts.sil.org/OFL
+    </namerecord>
+  </name>
+
+  <cmap>
+    <tableVersion version="0"/>
+    <cmap_format_4 platformID="0" platEncID="3" language="0">
+      <map code="0x20" name="space"/><!-- SPACE -->
+      <map code="0x21" name="exclam"/><!-- EXCLAMATION MARK -->
+      <map code="0x22" name="quotedbl"/><!-- QUOTATION MARK -->
+      <map code="0x23" name="numbersign"/><!-- NUMBER SIGN -->
+      <map code="0x24" name="dollar"/><!-- DOLLAR SIGN -->
+      <map code="0x25" name="percent"/><!-- PERCENT SIGN -->
+      <map code="0x26" name="ampersand"/><!-- AMPERSAND -->
+      <map code="0x27" name="quotesingle"/><!-- APOSTROPHE -->
+      <map code="0x28" name="parenleft"/><!-- LEFT PARENTHESIS -->
+      <map code="0x29" name="parenright"/><!-- RIGHT PARENTHESIS -->
+      <map code="0x2a" name="asterisk"/><!-- ASTERISK -->
+      <map code="0x2b" name="plus"/><!-- PLUS SIGN -->
+      <map code="0x2c" name="comma"/><!-- COMMA -->
+      <map code="0x2d" name="hyphen"/><!-- HYPHEN-MINUS -->
+      <map code="0x2e" name="period"/><!-- FULL STOP -->
+      <map code="0x2f" name="slash"/><!-- SOLIDUS -->
+      <map code="0x30" name="zero"/><!-- DIGIT ZERO -->
+      <map code="0x31" name="one"/><!-- DIGIT ONE -->
+      <map code="0x32" name="two"/><!-- DIGIT TWO -->
+      <map code="0x33" name="three"/><!-- DIGIT THREE -->
+      <map code="0x34" name="four"/><!-- DIGIT FOUR -->
+      <map code="0x35" name="five"/><!-- DIGIT FIVE -->
+      <map code="0x36" name="six"/><!-- DIGIT SIX -->
+      <map code="0x37" name="seven"/><!-- DIGIT SEVEN -->
+      <map code="0x38" name="eight"/><!-- DIGIT EIGHT -->
+      <map code="0x39" name="nine"/><!-- DIGIT NINE -->
+      <map code="0x3a" name="colon"/><!-- COLON -->
+      <map code="0x3b" name="semicolon"/><!-- SEMICOLON -->
+      <map code="0x3c" name="less"/><!-- LESS-THAN SIGN -->
+      <map code="0x3d" name="equal"/><!-- EQUALS SIGN -->
+      <map code="0x3e" name="greater"/><!-- GREATER-THAN SIGN -->
+      <map code="0x3f" name="question"/><!-- QUESTION MARK -->
+      <map code="0x40" name="at"/><!-- COMMERCIAL AT -->
+      <map code="0x41" name="A"/><!-- LATIN CAPITAL LETTER A -->
+      <map code="0x42" name="B"/><!-- LATIN CAPITAL LETTER B -->
+      <map code="0x43" name="C"/><!-- LATIN CAPITAL LETTER C -->
+      <map code="0x44" name="D"/><!-- LATIN CAPITAL LETTER D -->
+      <map code="0x45" name="E"/><!-- LATIN CAPITAL LETTER E -->
+      <map code="0x46" name="F"/><!-- LATIN CAPITAL LETTER F -->
+      <map code="0x47" name="G"/><!-- LATIN CAPITAL LETTER G -->
+      <map code="0x48" name="H"/><!-- LATIN CAPITAL LETTER H -->
+      <map code="0x49" name="I"/><!-- LATIN CAPITAL LETTER I -->
+      <map code="0x4a" name="J"/><!-- LATIN CAPITAL LETTER J -->
+      <map code="0x4b" name="K"/><!-- LATIN CAPITAL LETTER K -->
+      <map code="0x4c" name="L"/><!-- LATIN CAPITAL LETTER L -->
+      <map code="0x4d" name="M"/><!-- LATIN CAPITAL LETTER M -->
+      <map code="0x4e" name="N"/><!-- LATIN CAPITAL LETTER N -->
+      <map code="0x4f" name="O"/><!-- LATIN CAPITAL LETTER O -->
+      <map code="0x50" name="P"/><!-- LATIN CAPITAL LETTER P -->
+      <map code="0x51" name="Q"/><!-- LATIN CAPITAL LETTER Q -->
+      <map code="0x52" name="R"/><!-- LATIN CAPITAL LETTER R -->
+      <map code="0x53" name="S"/><!-- LATIN CAPITAL LETTER S -->
+      <map code="0x54" name="T"/><!-- LATIN CAPITAL LETTER T -->
+      <map code="0x55" name="U"/><!-- LATIN CAPITAL LETTER U -->
+      <map code="0x56" name="V"/><!-- LATIN CAPITAL LETTER V -->
+      <map code="0x57" name="W"/><!-- LATIN CAPITAL LETTER W -->
+      <map code="0x58" name="X"/><!-- LATIN CAPITAL LETTER X -->
+      <map code="0x59" name="Y"/><!-- LATIN CAPITAL LETTER Y -->
+      <map code="0x5a" name="Z"/><!-- LATIN CAPITAL LETTER Z -->
+      <map code="0x5b" name="bracketleft"/><!-- LEFT SQUARE BRACKET -->
+      <map code="0x5c" name="backslash"/><!-- REVERSE SOLIDUS -->
+      <map code="0x5d" name="bracketright"/><!-- RIGHT SQUARE BRACKET -->
+      <map code="0x5e" name="asciicircum"/><!-- CIRCUMFLEX ACCENT -->
+      <map code="0x5f" name="underscore"/><!-- LOW LINE -->
+      <map code="0x60" name="grave"/><!-- GRAVE ACCENT -->
+      <map code="0x61" name="a"/><!-- LATIN SMALL LETTER A -->
+      <map code="0x62" name="b"/><!-- LATIN SMALL LETTER B -->
+      <map code="0x63" name="c"/><!-- LATIN SMALL LETTER C -->
+      <map code="0x64" name="d"/><!-- LATIN SMALL LETTER D -->
+      <map code="0x65" name="e"/><!-- LATIN SMALL LETTER E -->
+      <map code="0x66" name="f"/><!-- LATIN SMALL LETTER F -->
+      <map code="0x67" name="g"/><!-- LATIN SMALL LETTER G -->
+      <map code="0x68" name="h"/><!-- LATIN SMALL LETTER H -->
+      <map code="0x69" name="i"/><!-- LATIN SMALL LETTER I -->
+      <map code="0x6a" name="j"/><!-- LATIN SMALL LETTER J -->
+      <map code="0x6b" name="k"/><!-- LATIN SMALL LETTER K -->
+      <map code="0x6c" name="l"/><!-- LATIN SMALL LETTER L -->
+      <map code="0x6d" name="m"/><!-- LATIN SMALL LETTER M -->
+      <map code="0x6e" name="n"/><!-- LATIN SMALL LETTER N -->
+      <map code="0x6f" name="o"/><!-- LATIN SMALL LETTER O -->
+      <map code="0x70" name="p"/><!-- LATIN SMALL LETTER P -->
+      <map code="0x71" name="q"/><!-- LATIN SMALL LETTER Q -->
+      <map code="0x72" name="r"/><!-- LATIN SMALL LETTER R -->
+      <map code="0x73" name="s"/><!-- LATIN SMALL LETTER S -->
+      <map code="0x74" name="t"/><!-- LATIN SMALL LETTER T -->
+      <map code="0x75" name="u"/><!-- LATIN SMALL LETTER U -->
+      <map code="0x76" name="v"/><!-- LATIN SMALL LETTER V -->
+      <map code="0x77" name="w"/><!-- LATIN SMALL LETTER W -->
+      <map code="0x78" name="x"/><!-- LATIN SMALL LETTER X -->
+      <map code="0x79" name="y"/><!-- LATIN SMALL LETTER Y -->
+      <map code="0x7a" name="z"/><!-- LATIN SMALL LETTER Z -->
+      <map code="0x7b" name="braceleft"/><!-- LEFT CURLY BRACKET -->
+      <map code="0x7c" name="bar"/><!-- VERTICAL LINE -->
+      <map code="0x7d" name="braceright"/><!-- RIGHT CURLY BRACKET -->
+      <map code="0x7e" name="asciitilde"/><!-- TILDE -->
+      <map code="0xa0" name="uni00A0"/><!-- NO-BREAK SPACE -->
+      <map code="0xa1" name="exclamdown"/><!-- INVERTED EXCLAMATION MARK -->
+      <map code="0xa2" name="cent"/><!-- CENT SIGN -->
+      <map code="0xa3" name="sterling"/><!-- POUND SIGN -->
+      <map code="0xa4" name="currency"/><!-- CURRENCY SIGN -->
+      <map code="0xa5" name="yen"/><!-- YEN SIGN -->
+      <map code="0xa6" name="brokenbar"/><!-- BROKEN BAR -->
+      <map code="0xa7" name="section"/><!-- SECTION SIGN -->
+      <map code="0xa8" name="dieresis"/><!-- DIAERESIS -->
+      <map code="0xa9" name="copyright"/><!-- COPYRIGHT SIGN -->
+      <map code="0xab" name="guillemotleft"/><!-- LEFT-POINTING DOUBLE ANGLE QUOTATION MARK -->
+      <map code="0xae" name="registered"/><!-- REGISTERED SIGN -->
+      <map code="0xb0" name="degree"/><!-- DEGREE SIGN -->
+      <map code="0xb7" name="periodcentered"/><!-- MIDDLE DOT -->
+      <map code="0xbb" name="guillemotright"/><!-- RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK -->
+      <map code="0xd7" name="multiply"/><!-- MULTIPLICATION SIGN -->
+      <map code="0xd8" name="Oslash"/><!-- LATIN CAPITAL LETTER O WITH STROKE -->
+      <map code="0xf7" name="divide"/><!-- DIVISION SIGN -->
+      <map code="0xf8" name="oslash"/><!-- LATIN SMALL LETTER O WITH STROKE -->
+      <map code="0x20ac" name="Euro"/><!-- EURO SIGN -->
+      <map code="0x3000" name="uni3000"/><!-- IDEOGRAPHIC SPACE -->
+    </cmap_format_4>
+    <cmap_format_0 platformID="1" platEncID="0" language="0">
+      <map code="0x0" name="space"/>
+      <map code="0x20" name="space"/>
+      <map code="0x21" name="exclam"/>
+      <map code="0x22" name="quotedbl"/>
+      <map code="0x23" name="numbersign"/>
+      <map code="0x24" name="dollar"/>
+      <map code="0x25" name="percent"/>
+      <map code="0x26" name="ampersand"/>
+      <map code="0x27" name="quotesingle"/>
+      <map code="0x28" name="parenleft"/>
+      <map code="0x29" name="parenright"/>
+      <map code="0x2a" name="asterisk"/>
+      <map code="0x2b" name="plus"/>
+      <map code="0x2c" name="comma"/>
+      <map code="0x2d" name="hyphen"/>
+      <map code="0x2e" name="period"/>
+      <map code="0x2f" name="slash"/>
+      <map code="0x30" name="zero"/>
+      <map code="0x31" name="one"/>
+      <map code="0x32" name="two"/>
+      <map code="0x33" name="three"/>
+      <map code="0x34" name="four"/>
+      <map code="0x35" name="five"/>
+      <map code="0x36" name="six"/>
+      <map code="0x37" name="seven"/>
+      <map code="0x38" name="eight"/>
+      <map code="0x39" name="nine"/>
+      <map code="0x3a" name="colon"/>
+      <map code="0x3b" name="semicolon"/>
+      <map code="0x3c" name="less"/>
+      <map code="0x3d" name="equal"/>
+      <map code="0x3e" name="greater"/>
+      <map code="0x3f" name="question"/>
+      <map code="0x40" name="at"/>
+      <map code="0x41" name="A"/>
+      <map code="0x42" name="B"/>
+      <map code="0x43" name="C"/>
+      <map code="0x44" name="D"/>
+      <map code="0x45" name="E"/>
+      <map code="0x46" name="F"/>
+      <map code="0x47" name="G"/>
+      <map code="0x48" name="H"/>
+      <map code="0x49" name="I"/>
+      <map code="0x4a" name="J"/>
+      <map code="0x4b" name="K"/>
+      <map code="0x4c" name="L"/>
+      <map code="0x4d" name="M"/>
+      <map code="0x4e" name="N"/>
+      <map code="0x4f" name="O"/>
+      <map code="0x50" name="P"/>
+      <map code="0x51" name="Q"/>
+      <map code="0x52" name="R"/>
+      <map code="0x53" name="S"/>
+      <map code="0x54" name="T"/>
+      <map code="0x55" name="U"/>
+      <map code="0x56" name="V"/>
+      <map code="0x57" name="W"/>
+      <map code="0x58" name="X"/>
+      <map code="0x59" name="Y"/>
+      <map code="0x5a" name="Z"/>
+      <map code="0x5b" name="bracketleft"/>
+      <map code="0x5c" name="backslash"/>
+      <map code="0x5d" name="bracketright"/>
+      <map code="0x5e" name="asciicircum"/>
+      <map code="0x5f" name="underscore"/>
+      <map code="0x60" name="grave"/>
+      <map code="0x61" name="a"/>
+      <map code="0x62" name="b"/>
+      <map code="0x63" name="c"/>
+      <map code="0x64" name="d"/>
+      <map code="0x65" name="e"/>
+      <map code="0x66" name="f"/>
+      <map code="0x67" name="g"/>
+      <map code="0x68" name="h"/>
+      <map code="0x69" name="i"/>
+      <map code="0x6a" name="j"/>
+      <map code="0x6b" name="k"/>
+      <map code="0x6c" name="l"/>
+      <map code="0x6d" name="m"/>
+      <map code="0x6e" name="n"/>
+      <map code="0x6f" name="o"/>
+      <map code="0x70" name="p"/>
+      <map code="0x71" name="q"/>
+      <map code="0x72" name="r"/>
+      <map code="0x73" name="s"/>
+      <map code="0x74" name="t"/>
+      <map code="0x75" name="u"/>
+      <map code="0x76" name="v"/>
+      <map code="0x77" name="w"/>
+      <map code="0x78" name="x"/>
+      <map code="0x79" name="y"/>
+      <map code="0x7a" name="z"/>
+      <map code="0x7b" name="braceleft"/>
+      <map code="0x7c" name="bar"/>
+      <map code="0x7d" name="braceright"/>
+      <map code="0x7e" name="asciitilde"/>
+      <map code="0xa1" name="degree"/>
+      <map code="0xa2" name="cent"/>
+      <map code="0xa3" name="sterling"/>
+      <map code="0xa4" name="section"/>
+      <map code="0xa8" name="registered"/>
+      <map code="0xa9" name="copyright"/>
+      <map code="0xac" name="dieresis"/>
+      <map code="0xaf" name="Oslash"/>
+      <map code="0xb4" name="yen"/>
+      <map code="0xbf" name="oslash"/>
+      <map code="0xc1" name="exclamdown"/>
+      <map code="0xc7" name="guillemotleft"/>
+      <map code="0xc8" name="guillemotright"/>
+      <map code="0xca" name="uni00A0"/>
+      <map code="0xd6" name="divide"/>
+      <map code="0xdb" name="Euro"/>
+      <map code="0xe1" name="periodcentered"/>
+    </cmap_format_0>
+    <cmap_format_4 platformID="3" platEncID="1" language="0">
+      <map code="0x20" name="space"/><!-- SPACE -->
+      <map code="0x21" name="exclam"/><!-- EXCLAMATION MARK -->
+      <map code="0x22" name="quotedbl"/><!-- QUOTATION MARK -->
+      <map code="0x23" name="numbersign"/><!-- NUMBER SIGN -->
+      <map code="0x24" name="dollar"/><!-- DOLLAR SIGN -->
+      <map code="0x25" name="percent"/><!-- PERCENT SIGN -->
+      <map code="0x26" name="ampersand"/><!-- AMPERSAND -->
+      <map code="0x27" name="quotesingle"/><!-- APOSTROPHE -->
+      <map code="0x28" name="parenleft"/><!-- LEFT PARENTHESIS -->
+      <map code="0x29" name="parenright"/><!-- RIGHT PARENTHESIS -->
+      <map code="0x2a" name="asterisk"/><!-- ASTERISK -->
+      <map code="0x2b" name="plus"/><!-- PLUS SIGN -->
+      <map code="0x2c" name="comma"/><!-- COMMA -->
+      <map code="0x2d" name="hyphen"/><!-- HYPHEN-MINUS -->
+      <map code="0x2e" name="period"/><!-- FULL STOP -->
+      <map code="0x2f" name="slash"/><!-- SOLIDUS -->
+      <map code="0x30" name="zero"/><!-- DIGIT ZERO -->
+      <map code="0x31" name="one"/><!-- DIGIT ONE -->
+      <map code="0x32" name="two"/><!-- DIGIT TWO -->
+      <map code="0x33" name="three"/><!-- DIGIT THREE -->
+      <map code="0x34" name="four"/><!-- DIGIT FOUR -->
+      <map code="0x35" name="five"/><!-- DIGIT FIVE -->
+      <map code="0x36" name="six"/><!-- DIGIT SIX -->
+      <map code="0x37" name="seven"/><!-- DIGIT SEVEN -->
+      <map code="0x38" name="eight"/><!-- DIGIT EIGHT -->
+      <map code="0x39" name="nine"/><!-- DIGIT NINE -->
+      <map code="0x3a" name="colon"/><!-- COLON -->
+      <map code="0x3b" name="semicolon"/><!-- SEMICOLON -->
+      <map code="0x3c" name="less"/><!-- LESS-THAN SIGN -->
+      <map code="0x3d" name="equal"/><!-- EQUALS SIGN -->
+      <map code="0x3e" name="greater"/><!-- GREATER-THAN SIGN -->
+      <map code="0x3f" name="question"/><!-- QUESTION MARK -->
+      <map code="0x40" name="at"/><!-- COMMERCIAL AT -->
+      <map code="0x41" name="A"/><!-- LATIN CAPITAL LETTER A -->
+      <map code="0x42" name="B"/><!-- LATIN CAPITAL LETTER B -->
+      <map code="0x43" name="C"/><!-- LATIN CAPITAL LETTER C -->
+      <map code="0x44" name="D"/><!-- LATIN CAPITAL LETTER D -->
+      <map code="0x45" name="E"/><!-- LATIN CAPITAL LETTER E -->
+      <map code="0x46" name="F"/><!-- LATIN CAPITAL LETTER F -->
+      <map code="0x47" name="G"/><!-- LATIN CAPITAL LETTER G -->
+      <map code="0x48" name="H"/><!-- LATIN CAPITAL LETTER H -->
+      <map code="0x49" name="I"/><!-- LATIN CAPITAL LETTER I -->
+      <map code="0x4a" name="J"/><!-- LATIN CAPITAL LETTER J -->
+      <map code="0x4b" name="K"/><!-- LATIN CAPITAL LETTER K -->
+      <map code="0x4c" name="L"/><!-- LATIN CAPITAL LETTER L -->
+      <map code="0x4d" name="M"/><!-- LATIN CAPITAL LETTER M -->
+      <map code="0x4e" name="N"/><!-- LATIN CAPITAL LETTER N -->
+      <map code="0x4f" name="O"/><!-- LATIN CAPITAL LETTER O -->
+      <map code="0x50" name="P"/><!-- LATIN CAPITAL LETTER P -->
+      <map code="0x51" name="Q"/><!-- LATIN CAPITAL LETTER Q -->
+      <map code="0x52" name="R"/><!-- LATIN CAPITAL LETTER R -->
+      <map code="0x53" name="S"/><!-- LATIN CAPITAL LETTER S -->
+      <map code="0x54" name="T"/><!-- LATIN CAPITAL LETTER T -->
+      <map code="0x55" name="U"/><!-- LATIN CAPITAL LETTER U -->
+      <map code="0x56" name="V"/><!-- LATIN CAPITAL LETTER V -->
+      <map code="0x57" name="W"/><!-- LATIN CAPITAL LETTER W -->
+      <map code="0x58" name="X"/><!-- LATIN CAPITAL LETTER X -->
+      <map code="0x59" name="Y"/><!-- LATIN CAPITAL LETTER Y -->
+      <map code="0x5a" name="Z"/><!-- LATIN CAPITAL LETTER Z -->
+      <map code="0x5b" name="bracketleft"/><!-- LEFT SQUARE BRACKET -->
+      <map code="0x5c" name="backslash"/><!-- REVERSE SOLIDUS -->
+      <map code="0x5d" name="bracketright"/><!-- RIGHT SQUARE BRACKET -->
+      <map code="0x5e" name="asciicircum"/><!-- CIRCUMFLEX ACCENT -->
+      <map code="0x5f" name="underscore"/><!-- LOW LINE -->
+      <map code="0x60" name="grave"/><!-- GRAVE ACCENT -->
+      <map code="0x61" name="a"/><!-- LATIN SMALL LETTER A -->
+      <map code="0x62" name="b"/><!-- LATIN SMALL LETTER B -->
+      <map code="0x63" name="c"/><!-- LATIN SMALL LETTER C -->
+      <map code="0x64" name="d"/><!-- LATIN SMALL LETTER D -->
+      <map code="0x65" name="e"/><!-- LATIN SMALL LETTER E -->
+      <map code="0x66" name="f"/><!-- LATIN SMALL LETTER F -->
+      <map code="0x67" name="g"/><!-- LATIN SMALL LETTER G -->
+      <map code="0x68" name="h"/><!-- LATIN SMALL LETTER H -->
+      <map code="0x69" name="i"/><!-- LATIN SMALL LETTER I -->
+      <map code="0x6a" name="j"/><!-- LATIN SMALL LETTER J -->
+      <map code="0x6b" name="k"/><!-- LATIN SMALL LETTER K -->
+      <map code="0x6c" name="l"/><!-- LATIN SMALL LETTER L -->
+      <map code="0x6d" name="m"/><!-- LATIN SMALL LETTER M -->
+      <map code="0x6e" name="n"/><!-- LATIN SMALL LETTER N -->
+      <map code="0x6f" name="o"/><!-- LATIN SMALL LETTER O -->
+      <map code="0x70" name="p"/><!-- LATIN SMALL LETTER P -->
+      <map code="0x71" name="q"/><!-- LATIN SMALL LETTER Q -->
+      <map code="0x72" name="r"/><!-- LATIN SMALL LETTER R -->
+      <map code="0x73" name="s"/><!-- LATIN SMALL LETTER S -->
+      <map code="0x74" name="t"/><!-- LATIN SMALL LETTER T -->
+      <map code="0x75" name="u"/><!-- LATIN SMALL LETTER U -->
+      <map code="0x76" name="v"/><!-- LATIN SMALL LETTER V -->
+      <map code="0x77" name="w"/><!-- LATIN SMALL LETTER W -->
+      <map code="0x78" name="x"/><!-- LATIN SMALL LETTER X -->
+      <map code="0x79" name="y"/><!-- LATIN SMALL LETTER Y -->
+      <map code="0x7a" name="z"/><!-- LATIN SMALL LETTER Z -->
+      <map code="0x7b" name="braceleft"/><!-- LEFT CURLY BRACKET -->
+      <map code="0x7c" name="bar"/><!-- VERTICAL LINE -->
+      <map code="0x7d" name="braceright"/><!-- RIGHT CURLY BRACKET -->
+      <map code="0x7e" name="asciitilde"/><!-- TILDE -->
+      <map code="0xa0" name="uni00A0"/><!-- NO-BREAK SPACE -->
+      <map code="0xa1" name="exclamdown"/><!-- INVERTED EXCLAMATION MARK -->
+      <map code="0xa2" name="cent"/><!-- CENT SIGN -->
+      <map code="0xa3" name="sterling"/><!-- POUND SIGN -->
+      <map code="0xa4" name="currency"/><!-- CURRENCY SIGN -->
+      <map code="0xa5" name="yen"/><!-- YEN SIGN -->
+      <map code="0xa6" name="brokenbar"/><!-- BROKEN BAR -->
+      <map code="0xa7" name="section"/><!-- SECTION SIGN -->
+      <map code="0xa8" name="dieresis"/><!-- DIAERESIS -->
+      <map code="0xa9" name="copyright"/><!-- COPYRIGHT SIGN -->
+      <map code="0xab" name="guillemotleft"/><!-- LEFT-POINTING DOUBLE ANGLE QUOTATION MARK -->
+      <map code="0xae" name="registered"/><!-- REGISTERED SIGN -->
+      <map code="0xb0" name="degree"/><!-- DEGREE SIGN -->
+      <map code="0xb7" name="periodcentered"/><!-- MIDDLE DOT -->
+      <map code="0xbb" name="guillemotright"/><!-- RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK -->
+      <map code="0xd7" name="multiply"/><!-- MULTIPLICATION SIGN -->
+      <map code="0xd8" name="Oslash"/><!-- LATIN CAPITAL LETTER O WITH STROKE -->
+      <map code="0xf7" name="divide"/><!-- DIVISION SIGN -->
+      <map code="0xf8" name="oslash"/><!-- LATIN SMALL LETTER O WITH STROKE -->
+      <map code="0x20ac" name="Euro"/><!-- EURO SIGN -->
+      <map code="0x3000" name="uni3000"/><!-- IDEOGRAPHIC SPACE -->
+    </cmap_format_4>
+  </cmap>
+
+  <post>
+    <formatType value="3.0"/>
+    <italicAngle value="0.0"/>
+    <underlinePosition value="-178"/>
+    <underlineThickness value="51"/>
+    <isFixedPitch value="0"/>
+    <minMemType42 value="0"/>
+    <maxMemType42 value="0"/>
+    <minMemType1 value="0"/>
+    <maxMemType1 value="0"/>
+  </post>
+
+  <CFF>
+    <major value="1"/>
+    <minor value="0"/>
+    <CFFFont name="pixeldroidBoticRegular">
+      <version value="1.0.0"/>
+      <Notice value="Copyright (c) pixeldroid (https://github.com/pixeldroid/fonts/),
+with Reserved Font Name: &quot;Botic&quot;. This Font Software is licensed under the SIL Open Font License, Version 1.1.
+This license is also available with a FAQ at: http://scripts.sil.org/OFL"/>
+      <FullName value="pixeldroid Botic Regular"/>
+      <FamilyName value="Botic"/>
+      <Weight value="Regular"/>
+      <isFixedPitch value="0"/>
+      <ItalicAngle value="0"/>
+      <UnderlinePosition value="-153"/>
+      <UnderlineThickness value="51"/>
+      <PaintType value="0"/>
+      <CharstringType value="2"/>
+      <FontMatrix value="0.000976562 0 0 0.000976562 0 0"/>
+      <FontBBox value="-64 -192 640 704"/>
+      <StrokeWidth value="0"/>
+      <!-- charset is dumped separately as the 'GlyphOrder' element -->
+      <Encoding name="StandardEncoding"/>
+      <Private>
+        <BlueValues value="0 0 384 384 576 576 640 640"/>
+        <OtherBlues value="-128 -128"/>
+        <BlueScale value="0.039625"/>
+        <BlueShift value="0"/>
+        <BlueFuzz value="1"/>
+        <ForceBold value="0"/>
+        <LanguageGroup value="0"/>
+        <ExpansionFactor value="0.06"/>
+        <initialRandomSeed value="0"/>
+        <defaultWidthX value="576"/>
+        <nominalWidthX value="405"/>
+        <Subrs>
+          <!-- The 'index' attribute is only for humans; it is ignored when parsed. -->
+          <CharString index="0">
+            64 64 hlineto
+            64 -64 vlineto
+            -64 -64 hlineto
+            -64 vlineto
+            return
+          </CharString>
+          <CharString index="1">
+            64 64 hlineto
+            0 64 0 64 -64 0 0 -64 0 -64 rlineto
+            return
+          </CharString>
+          <CharString index="2">
+            -64 64 hlineto
+            64 64 vlineto
+            64 -64 hlineto
+            -64 vlineto
+            return
+          </CharString>
+          <CharString index="3">
+            -64 64 hlineto
+            0 64 0 64 64 0 64 0 0 -64 0 -64 0 -64 rlineto
+            return
+          </CharString>
+          <CharString index="4">
+            -64 64 hlineto
+            0 64 0 64 64 0 0 -64 0 -64 rlineto
+            return
+          </CharString>
+          <CharString index="5">
+            64 64 hlineto
+            0 64 0 64 0 64 -64 0 0 -64 0 -64 0 -64 rlineto
+            return
+          </CharString>
+          <CharString index="6">
+            64 64 hlineto
+            0 64 0 64 -64 0 -64 0 -64 0 0 -64 0 -64 0 -64 64 0 rlineto
+            return
+          </CharString>
+          <CharString index="7">
+            64 64 hlineto
+            0 64 0 64 0 64 -64 0 -64 0 0 -64 0 -64 64 0 0 -64 rlineto
+            return
+          </CharString>
+          <CharString index="8">
+            -64 0 -64 0 -64 0 0 -64 64 0 64 0 64 0 64 0 0 64 rlineto
+            return
+          </CharString>
+          <CharString index="9">
+            64 64 hlineto
+            0 64 0 64 0 64 -64 0 -64 0 0 -64 0 -64 0 -64 0 -64 rlineto
+            return
+          </CharString>
+          <CharString index="10">
+            -64 0 -64 0 -64 0 0 64 0 64 0 64 0 64 64 0 64 0 64 0 64 0 0 -64 0 -64 0 -64 0 -64 rlineto
+            return
+          </CharString>
+          <CharString index="11">
+            64 64 -64 64 hlineto
+            64 -64 vlineto
+            -64 64 64 hlineto
+            64 64 hlineto
+            64 64 64 -64 vlineto
+            -64 -64 hlineto
+            -64 -64 vlineto
+            -64 -64 hlineto
+            0 -64 0 -64 64 0 64 0 0 -64 0 -64 rlineto
+            return
+          </CharString>
+          <CharString index="12">
+            64 64 hlineto
+            64 64 vlineto
+            64 64 hlineto
+            0 64 0 64 -64 0 -64 0 0 64 0 64 -64 0 -64 0 0 -64 64 0 0 -64 0 -64 64 0 64 0 0 -64 rlineto
+            -64 0 -64 0 0 -64 0 -64 -64 0 0 -64 rlineto
+            return
+          </CharString>
+          <CharString index="13">
+            -64 0 -64 0 -64 0 0 64 0 64 0 64 64 0 64 0 64 0 64 0 0 -64 0 -64 0 -64 rlineto
+            return
+          </CharString>
+          <CharString index="14">
+            -64 0 -64 0 -64 0 0 64 0 64 64 0 64 0 64 0 64 0 0 -64 0 -64 rlineto
+            return
+          </CharString>
+          <CharString index="15">
+            64 64 hlineto
+            0 64 0 64 0 64 0 64 -64 0 -64 0 0 -64 0 -64 0 -64 0 -64 0 -64 rlineto
+            return
+          </CharString>
+          <CharString index="16">
+            64 64 hlineto
+            0 64 0 64 0 64 0 64 0 64 0 64 0 64 0 64 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 rlineto
+            -64 0 -64 0 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 64 0 64 0 64 0 64 0 rlineto
+            64 0 64 0 64 0 rlineto
+            return
+          </CharString>
+          <CharString index="17">
+            -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 0 64 0 64 0 64 0 64 0 64 0 64 0 64 64 0 64 0 rlineto
+            64 0 64 0 64 0 64 0 64 0 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 rlineto
+            return
+          </CharString>
+          <CharString index="18">
+            64 64 hlineto
+            0 64 0 64 0 64 -64 0 -64 0 -64 0 -64 0 0 -64 0 -64 0 -64 0 -64 64 0 64 0 rlineto
+            return
+          </CharString>
+        </Subrs>
+      </Private>
+      <CharStrings>
+        <CharString name=".notdef">
+          -31 34 hmoveto
+          272 682 -272 hlineto
+          34 -648 rmoveto
+          614 204 -614 vlineto
+          endchar
+        </CharString>
+        <CharString name=".null">
+          -405 endchar
+        </CharString>
+        <CharString name="A">
+          448 hmoveto
+          64 64 hlineto
+          0 64 0 64 0 64 0 64 0 64 0 64 0 64 0 64 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 rlineto
+          0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 64 0 64 0 0 64 0 64 0 64 64 0 rlineto
+          64 0 64 0 64 0 0 -64 0 -64 rlineto
+          -64 256 rmoveto
+          -94 callsubr
+          endchar
+        </CharString>
+        <CharString name="B">
+          448 hmoveto
+          64 64 hlineto
+          0 64 0 64 0 64 0 64 0 64 -64 0 -64 0 0 64 0 64 0 64 -64 0 -64 0 -64 0 -64 0 -64 0 rlineto
+          0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 64 0 64 0 64 0 64 0 64 0 rlineto
+          128 vmoveto
+          -93 callsubr
+          -192 256 rmoveto
+          -105 callsubr
+          endchar
+        </CharString>
+        <CharString name="C">
+          448 hmoveto
+          64 64 hlineto
+          64 -64 vlineto
+          -64 0 -64 0 -64 0 -64 0 0 64 0 64 0 64 0 64 0 64 0 64 64 0 64 0 64 0 64 0 64 0 rlineto
+          64 -64 vlineto
+          -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 rlineto
+          64 0 64 0 64 0 64 0 64 0 rlineto
+          endchar
+        </CharString>
+        <CharString name="D">
+          384 hmoveto
+          64 64 hlineto
+          0 64 0 64 64 0 0 64 0 64 0 64 0 64 -64 0 -64 0 0 64 0 64 -64 0 -64 0 -64 0 -64 0 rlineto
+          -64 -64 hlineto
+          0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 64 0 64 0 64 0 64 0 rlineto
+          128 vmoveto
+          -64 0 -64 0 0 64 0 64 0 64 0 64 0 64 0 64 64 0 64 0 0 -64 0 -64 64 0 64 0 0 -64 rlineto
+          -64 -64 -64 vlineto
+          -64 vlineto
+          endchar
+        </CharString>
+        <CharString name="E">
+          448 hmoveto
+          64 64 hlineto
+          64 -64 vlineto
+          -64 0 -64 0 -64 0 -64 0 0 64 0 64 64 0 64 0 64 0 64 0 0 64 -64 0 -64 0 -64 0 -64 0 rlineto
+          0 64 0 64 0 64 64 0 64 0 64 0 64 0 64 0 0 64 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 rlineto
+          -64 -64 hlineto
+          0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 64 0 64 0 64 0 64 0 64 0 rlineto
+          endchar
+        </CharString>
+        <CharString name="Euro">
+          448 64 rmoveto
+          -64 0 -64 0 -64 0 0 64 0 64 64 0 64 0 64 0 0 64 -64 0 -64 0 -64 0 0 64 64 0 64 0 rlineto
+          64 64 -64 hlineto
+          -64 0 -64 0 0 64 0 64 64 0 64 0 64 0 64 0 0 64 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 rlineto
+          0 -64 0 -64 0 -64 -64 0 0 -64 64 0 0 -64 -64 0 0 -64 64 0 0 -64 0 -64 0 -64 64 0 64 0 rlineto
+          64 0 64 0 64 0 64 0 0 64 rlineto
+          endchar
+        </CharString>
+        <CharString name="F">
+          107 128 hmoveto
+          64 64 hlineto
+          0 64 0 64 0 64 64 0 64 0 64 0 0 64 -64 0 -64 0 -64 0 0 64 0 64 0 64 64 0 64 0 rlineto
+          64 0 64 0 0 64 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 rlineto
+          0 -64 0 -64 0 -64 rlineto
+          endchar
+        </CharString>
+        <CharString name="G">
+          384 448 rmoveto
+          64 64 hlineto
+          64 -64 vlineto
+          -64 0 -64 0 -64 0 -64 0 -64 0 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 64 0 rlineto
+          64 0 64 0 64 0 64 0 64 0 64 0 0 64 0 64 0 64 0 64 0 64 -64 0 -64 0 -64 0 0 -64 rlineto
+          64 0 64 0 0 -64 0 -64 -64 0 -64 0 -64 0 -64 0 0 64 0 64 0 64 0 64 0 64 0 64 64 0 rlineto
+          64 0 64 0 rlineto
+          endchar
+        </CharString>
+        <CharString name="H">
+          448 hmoveto
+          64 64 hlineto
+          0 64 0 64 0 64 0 64 0 64 0 64 0 64 0 64 -64 0 0 -64 0 -64 0 -64 -64 0 -64 0 -64 0 rlineto
+          -64 64 hlineto
+          0 64 0 64 -64 0 -64 0 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 64 0 64 0 rlineto
+          0 64 0 64 0 64 0 64 64 0 64 0 64 0 64 0 0 -64 0 -64 0 -64 rlineto
+          endchar
+        </CharString>
+        <CharString name="I">
+          -149 128 hmoveto
+          64 64 hlineto
+          0 64 0 64 0 64 0 64 0 64 0 64 0 64 0 64 -64 0 -64 0 0 -64 0 -64 0 -64 0 -64 0 -64 rlineto
+          0 -64 0 -64 0 -64 0 -64 rlineto
+          endchar
+        </CharString>
+        <CharString name="J">
+          43 320 hmoveto
+          64 64 hlineto
+          0 64 0 64 0 64 0 64 0 64 0 64 0 64 0 64 -64 0 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 rlineto
+          -64 -64 vlineto
+          -64 64 -64 hlineto
+          -64 -64 hlineto
+          0 -64 0 -64 64 0 64 0 64 0 rlineto
+          endchar
+        </CharString>
+        <CharString name="K">
+          448 hmoveto
+          64 64 hlineto
+          0 64 0 64 -64 0 -64 0 -64 0 0 64 64 0 64 0 0 64 0 64 0 64 0 64 0 64 -64 0 0 -64 rlineto
+          0 -64 0 -64 0 -64 -64 0 -64 0 -64 0 0 64 0 64 0 64 0 64 -64 0 -64 0 0 -64 0 -64 0 -64 rlineto
+          0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 64 0 64 0 0 64 0 64 0 64 0 64 64 0 0 -64 0 -64 rlineto
+          64 0 64 0 64 0 0 -64 rlineto
+          endchar
+        </CharString>
+        <CharString name="L">
+          107 384 hmoveto
+          64 64 hlineto
+          64 -64 vlineto
+          -64 0 -64 0 -64 0 0 64 0 64 0 64 0 64 0 64 0 64 0 64 -64 0 -64 0 0 -64 0 -64 0 -64 rlineto
+          0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 64 0 64 0 64 0 64 0 rlineto
+          endchar
+        </CharString>
+        <CharString name="M">
+          299 576 hmoveto
+          64 64 hlineto
+          0 64 0 64 0 64 0 64 0 64 0 64 0 64 0 64 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 rlineto
+          -64 0 -64 0 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 64 0 64 0 0 64 0 64 rlineto
+          0 64 0 64 0 64 0 64 0 64 0 64 64 0 64 0 64 0 0 -64 0 -64 0 -64 0 -64 0 -64 64 0 rlineto
+          0 64 0 64 0 64 0 64 0 64 64 0 64 0 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 rlineto
+          endchar
+        </CharString>
+        <CharString name="N">
+          448 hmoveto
+          64 64 hlineto
+          0 64 0 64 0 64 0 64 0 64 0 64 0 64 0 64 -64 0 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 rlineto
+          -64 64 hlineto
+          64 -64 64 vlineto
+          64 -64 vlineto
+          -64 64 hlineto
+          64 -64 vlineto
+          -64 -64 hlineto
+          0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 64 0 64 0 0 64 0 64 0 64 0 64 0 64 rlineto
+          64 64 -64 vlineto
+          -64 64 -64 vlineto
+          -64 64 vlineto
+          64 -64 hlineto
+          endchar
+        </CharString>
+        <CharString name="O">
+          448 hmoveto
+          64 64 hlineto
+          0 64 0 64 0 64 0 64 0 64 0 64 0 64 0 64 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 rlineto
+          0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 64 0 64 0 64 0 64 0 64 0 rlineto
+          128 vmoveto
+          -64 0 -64 0 -64 0 0 64 0 64 0 64 0 64 0 64 0 64 64 0 64 0 64 0 64 0 0 -64 0 -64 rlineto
+          0 -64 0 -64 0 -64 0 -64 rlineto
+          endchar
+        </CharString>
+        <CharString name="Oslash">
+          235 256 -64 rmoveto
+          64 64 64 hlineto
+          64 0 64 0 64 0 0 64 0 64 0 64 0 64 0 64 0 64 0 64 0 64 0 64 0 64 -64 0 -64 0 rlineto
+          64 -64 -64 -64 vlineto
+          -64 0 -64 0 -64 0 -64 0 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 64 0 rlineto
+          64 0 64 0 rlineto
+          128 384 rmoveto
+          64 64 hlineto
+          0 64 0 64 64 0 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 -64 0 -64 0 -64 0 0 64 0 64 rlineto
+          64 -64 -64 vlineto
+          0 -64 0 -64 -64 0 0 64 0 64 0 64 0 64 0 64 0 64 0 64 64 0 64 0 64 0 0 -64 0 -64 rlineto
+          endchar
+        </CharString>
+        <CharString name="P">
+          128 hmoveto
+          64 64 hlineto
+          0 64 0 64 64 0 64 0 64 0 64 0 64 0 0 64 0 64 0 64 0 64 0 64 0 64 -64 0 -64 0 rlineto
+          -64 0 -64 0 -64 0 -64 0 -64 0 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 rlineto
+          320 320 rmoveto
+          -94 callsubr
+          endchar
+        </CharString>
+        <CharString name="Q">
+          235 512 hmoveto
+          64 64 hlineto
+          64 -64 64 vlineto
+          0 64 0 64 0 64 0 64 0 64 0 64 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 0 -64 0 -64 rlineto
+          0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 64 0 64 0 64 0 64 0 64 0 64 0 rlineto
+          -192 128 rmoveto
+          -64 64 hlineto
+          0 64 0 64 0 64 0 64 0 64 64 0 64 0 64 0 64 0 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 rlineto
+          -64 64 hlineto
+          64 -64 -64 vlineto
+          -64 vlineto
+          endchar
+        </CharString>
+        <CharString name="R">
+          448 hmoveto
+          64 64 hlineto
+          64 -64 vlineto
+          -64 64 64 hlineto
+          64 64 hlineto
+          0 64 0 64 0 64 0 64 0 64 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 0 -64 0 -64 0 -64 rlineto
+          0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 64 0 64 0 0 64 0 64 0 64 64 0 64 0 0 -64 0 -64 rlineto
+          64 0 64 0 rlineto
+          -64 256 rmoveto
+          -94 callsubr
+          endchar
+        </CharString>
+        <CharString name="S">
+          448 hmoveto
+          64 64 hlineto
+          0 64 0 64 0 64 0 64 0 64 -64 0 -64 0 -64 0 -64 0 -64 0 0 64 0 64 64 0 64 0 64 0 rlineto
+          64 0 64 0 0 64 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 0 -64 0 -64 0 -64 0 -64 0 -64 rlineto
+          64 0 64 0 64 0 64 0 64 0 0 -64 0 -64 -64 0 -64 0 -64 0 -64 0 -64 0 0 -64 0 -64 64 0 rlineto
+          64 0 64 0 64 0 64 0 rlineto
+          endchar
+        </CharString>
+        <CharString name="T">
+          235 320 hmoveto
+          64 64 hlineto
+          0 64 0 64 0 64 0 64 0 64 0 64 0 64 64 0 64 0 64 0 0 64 -64 0 -64 0 -64 0 -64 0 rlineto
+          -64 0 -64 0 -64 0 -64 0 0 -64 64 0 64 0 64 0 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 rlineto
+          -64 vlineto
+          endchar
+        </CharString>
+        <CharString name="U">
+          448 hmoveto
+          64 64 hlineto
+          0 64 0 64 0 64 0 64 0 64 0 64 0 64 0 64 -64 0 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 rlineto
+          -64 -64 vlineto
+          -64 0 -64 0 -64 0 0 64 0 64 0 64 0 64 0 64 0 64 0 64 -64 0 -64 0 0 -64 0 -64 0 -64 rlineto
+          0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 64 0 64 0 64 0 64 0 64 0 rlineto
+          endchar
+        </CharString>
+        <CharString name="V">
+          107 256 hmoveto
+          64 64 hlineto
+          64 64 64 vlineto
+          0 64 0 64 64 0 0 64 0 64 0 64 0 64 -64 0 0 -64 0 -64 0 -64 -64 0 0 -64 0 -64 0 -64 rlineto
+          -64 -64 hlineto
+          -64 -64 64 vlineto
+          0 64 0 64 0 64 0 64 0 64 0 64 0 64 -64 0 -64 0 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 rlineto
+          0 -64 0 -64 0 -64 64 0 64 0 rlineto
+          endchar
+        </CharString>
+        <CharString name="W">
+          299 576 hmoveto
+          64 64 hlineto
+          0 64 0 64 0 64 0 64 0 64 0 64 0 64 0 64 -64 0 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 rlineto
+          -64 -64 vlineto
+          -64 64 hlineto
+          0 64 0 64 0 64 -64 0 0 -64 0 -64 0 -64 0 -64 -64 0 -64 0 -64 0 0 64 0 64 0 64 0 64 rlineto
+          0 64 0 64 0 64 -64 0 -64 0 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 64 0 rlineto
+          64 0 64 0 64 0 64 0 64 0 64 0 rlineto
+          endchar
+        </CharString>
+        <CharString name="X">
+          235 512 hmoveto
+          64 64 hlineto
+          0 64 0 64 -64 0 -64 0 -64 0 0 64 0 64 64 0 64 0 64 0 0 64 0 64 0 64 0 64 -64 0 rlineto
+          0 -64 0 -64 0 -64 -64 0 -64 0 -64 0 -64 0 -64 0 0 64 0 64 0 64 -64 0 -64 0 0 -64 0 -64 rlineto
+          0 -64 0 -64 64 0 64 0 64 0 0 -64 0 -64 -64 0 -64 0 -64 0 0 -64 0 -64 0 -64 64 0 64 0 rlineto
+          0 64 0 64 64 0 64 0 64 0 64 0 64 0 0 -64 rlineto
+          endchar
+        </CharString>
+        <CharString name="Y">
+          320 hmoveto
+          64 64 hlineto
+          0 64 0 64 0 64 64 0 64 0 0 64 0 64 0 64 0 64 0 64 -64 0 0 -64 0 -64 0 -64 0 -64 rlineto
+          -64 0 -64 0 -64 0 -64 0 0 64 0 64 0 64 0 64 -64 0 -64 0 0 -64 0 -64 0 -64 0 -64 0 -64 rlineto
+          64 0 64 0 64 0 0 -64 0 -64 0 -64 0 -64 rlineto
+          endchar
+        </CharString>
+        <CharString name="Z">
+          235 512 hmoveto
+          64 64 hlineto
+          64 -64 vlineto
+          -64 0 -64 0 -64 0 -64 0 -64 0 0 64 64 0 64 0 0 64 0 64 64 0 64 0 0 64 64 0 64 0 rlineto
+          0 64 0 64 0 64 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 0 -64 64 0 64 0 64 0 rlineto
+          64 0 64 0 64 0 64 0 0 -64 -64 0 -64 0 0 -64 -64 0 -64 0 0 -64 0 -64 -64 0 -64 0 -64 0 rlineto
+          0 -64 0 -64 0 -64 0 -64 64 0 64 0 64 0 64 0 64 0 64 0 rlineto
+          endchar
+        </CharString>
+        <CharString name="a">
+          448 hmoveto
+          64 64 hlineto
+          0 64 0 64 0 64 0 64 0 64 -64 0 -64 0 -64 0 -64 0 -64 0 0 -64 64 0 64 0 64 0 64 0 rlineto
+          -64 -64 vlineto
+          -64 0 -64 0 -64 0 -64 0 -64 0 0 -64 0 -64 0 -64 0 -64 64 0 64 0 64 0 64 0 64 0 rlineto
+          128 vmoveto
+          -64 0 -64 0 -64 0 0 64 64 0 64 0 64 0 64 0 0 -64 rlineto
+          endchar
+        </CharString>
+        <CharString name="ampersand">
+          299 576 -64 rmoveto
+          64 64 -64 64 -64 hlineto
+          -64 64 64 hlineto
+          64 64 hlineto
+          64 -64 -64 -64 vlineto
+          -64 64 -64 64 64 hlineto
+          64 64 hlineto
+          0 64 0 64 0 64 0 64 -64 0 -64 0 -64 0 -64 0 -64 0 0 -64 0 -64 0 -64 0 -64 0 -64 64 0 rlineto
+          -64 -64 vlineto
+          -64 -64 hlineto
+          0 -64 0 -64 0 -64 64 0 64 0 64 0 64 0 64 0 64 0 64 0 0 -64 rlineto
+          -192 128 rmoveto
+          -64 0 -64 0 0 64 0 64 64 0 64 0 0 -64 64 0 0 -64 rlineto
+          -64 320 rmoveto
+          -104 callsubr
+          endchar
+        </CharString>
+        <CharString name="asciicircum">
+          448 448 rmoveto
+          64 64 hlineto
+          64 -64 vlineto
+          -64 64 hlineto
+          64 -64 vlineto
+          -64 0 -64 0 0 -64 0 -64 -64 0 -64 0 0 -64 0 -64 64 0 0 64 64 0 64 0 0 64 0 64 64 0 rlineto
+          0 -64 0 -64 64 0 64 0 rlineto
+          endchar
+        </CharString>
+        <CharString name="asciitilde">
+          43 64 320 rmoveto
+          64 64 64 -64 64 hlineto
+          64 0 64 0 0 64 0 64 -64 0 0 -64 -64 0 0 64 -64 0 -64 0 -64 0 0 -64 rlineto
+          endchar
+        </CharString>
+        <CharString name="asterisk">
+          43 320 384 rmoveto
+          64 64 -64 64 64 64 -64 hlineto
+          -64 64 -64 -64 -64 hlineto
+          -64 -64 64 -64 -64 -64 64 hlineto
+          64 64 64 -64 hlineto
+          endchar
+        </CharString>
+        <CharString name="at">
+          299 448 128 rmoveto
+          -64 0 -64 0 -64 0 -64 0 -64 0 0 64 0 64 0 64 0 64 0 64 0 64 0 64 64 0 64 0 64 0 rlineto
+          64 0 64 0 64 0 64 0 0 -64 0 -64 0 -64 0 -64 -64 0 0 64 0 64 0 64 -64 0 -64 0 -64 0 rlineto
+          -64 0 -64 0 0 -64 0 -64 0 -64 0 -64 0 -64 64 0 64 0 64 0 64 0 64 0 64 0 64 0 0 64 rlineto
+          0 64 0 64 0 64 0 64 0 64 0 64 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 rlineto
+          0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 64 0 64 0 64 0 64 0 64 0 64 0 rlineto
+          64 64 hlineto
+          -128 192 rmoveto
+          -105 callsubr
+          endchar
+        </CharString>
+        <CharString name="b">
+          448 hmoveto
+          64 64 hlineto
+          0 64 0 64 0 64 0 64 0 64 -64 0 -64 0 -64 0 -64 0 -64 0 0 64 0 64 0 64 -64 0 -64 0 rlineto
+          0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 64 0 64 0 64 0 64 0 64 0 rlineto
+          128 vmoveto
+          -94 callsubr
+          endchar
+        </CharString>
+        <CharString name="backslash">
+          107 384 hmoveto
+          -102 callsubr
+          -128 128 rmoveto
+          -106 callsubr
+          -128 64 rmoveto
+          -98 callsubr
+          endchar
+        </CharString>
+        <CharString name="bar">
+          -213 64 -64 rmoveto
+          64 64 hlineto
+          0 64 0 64 0 64 0 64 0 64 0 64 0 64 0 64 0 64 0 64 0 64 -64 0 0 -64 0 -64 0 -64 rlineto
+          0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 rlineto
+          endchar
+        </CharString>
+        <CharString name="braceleft">
+          -21 256 -64 rmoveto
+          64 64 hlineto
+          64 -64 64 vlineto
+          0 64 0 64 0 64 -64 0 -64 0 0 64 64 0 64 0 0 64 0 64 0 64 0 64 64 0 0 64 -64 0 rlineto
+          -64 -64 hlineto
+          0 -64 0 -64 0 -64 -64 0 -64 0 0 -64 0 -64 0 -64 64 0 64 0 0 -64 0 -64 0 -64 0 -64 0 -64 rlineto
+          endchar
+        </CharString>
+        <CharString name="braceright">
+          -21 128 -64 rmoveto
+          64 64 hlineto
+          0 64 0 64 0 64 0 64 64 0 64 0 0 64 0 64 0 64 -64 0 -64 0 0 64 0 64 0 64 0 64 rlineto
+          -64 0 -64 0 0 -64 64 0 0 -64 0 -64 0 -64 0 -64 64 0 64 0 0 -64 -64 0 -64 0 0 -64 0 -64 rlineto
+          0 -64 0 -64 -64 0 0 -64 0 -64 rlineto
+          endchar
+        </CharString>
+        <CharString name="bracketleft">
+          -85 192 hmoveto
+          64 64 hlineto
+          64 -64 vlineto
+          -64 64 hlineto
+          0 64 0 64 0 64 0 64 0 64 0 64 0 64 64 0 64 0 0 64 -64 0 -64 0 -64 0 0 -64 0 -64 rlineto
+          0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 64 0 rlineto
+          endchar
+        </CharString>
+        <CharString name="bracketright">
+          -85 192 hmoveto
+          64 64 hlineto
+          0 64 0 64 0 64 0 64 0 64 0 64 0 64 0 64 0 64 0 64 -64 0 -64 0 -64 0 0 -64 64 0 rlineto
+          64 -64 hlineto
+          0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 -64 0 -64 0 0 -64 0 -64 64 0 rlineto
+          endchar
+        </CharString>
+        <CharString name="brokenbar">
+          -149 128 -64 rmoveto
+          -92 callsubr
+          64 448 rmoveto
+          -92 callsubr
+          endchar
+        </CharString>
+        <CharString name="c">
+          107 384 hmoveto
+          64 64 hlineto
+          64 -64 vlineto
+          -64 0 -64 0 -64 0 0 64 0 64 0 64 64 0 64 0 64 0 64 0 0 64 -64 0 -64 0 -64 0 -64 0 rlineto
+          -64 0 -64 0 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 64 0 64 0 64 0 64 0 rlineto
+          endchar
+        </CharString>
+        <CharString name="cent">
+          107 256 64 rmoveto
+          64 64 64 hlineto
+          64 64 hlineto
+          64 -64 vlineto
+          -64 64 hlineto
+          0 64 0 64 64 0 64 0 0 64 -64 0 -64 0 0 64 -64 0 0 -64 -64 0 -64 0 -64 0 0 -64 0 -64 rlineto
+          0 -64 0 -64 0 -64 0 -64 64 0 64 0 64 0 rlineto
+          128 vmoveto
+          -103 callsubr
+          endchar
+        </CharString>
+        <CharString name="colon">
+          -21 64 256 rmoveto
+          -106 callsubr
+          192 -192 rmoveto
+          -107 callsubr
+          64 256 rmoveto
+          -107 callsubr
+          endchar
+        </CharString>
+        <CharString name="comma">
+          -149 128 -128 rmoveto
+          -100 callsubr
+          endchar
+        </CharString>
+        <CharString name="copyright">
+          299 576 hmoveto
+          -91 callsubr
+          64 vmoveto
+          -90 callsubr
+          -128 64 rmoveto
+          64 64 hlineto
+          64 -64 vlineto
+          -64 0 -64 0 0 64 0 64 64 0 64 0 64 0 0 64 -64 0 -64 0 -64 0 -64 0 -64 0 0 -64 0 -64 rlineto
+          0 -64 0 -64 0 -64 64 0 64 0 64 0 rlineto
+          endchar
+        </CharString>
+        <CharString name="currency">
+          107 384 128 rmoveto
+          64 64 -64 64 hlineto
+          0 64 0 64 0 64 64 0 0 64 -64 0 -64 0 0 -64 -64 0 -64 0 0 64 -64 0 -64 0 0 -64 64 0 rlineto
+          0 -64 0 -64 0 -64 0 -64 -64 0 0 -64 64 0 64 0 0 64 64 0 64 0 0 -64 rlineto
+          -64 128 rmoveto
+          -105 callsubr
+          endchar
+        </CharString>
+        <CharString name="d">
+          448 hmoveto
+          64 64 hlineto
+          0 64 0 64 0 64 0 64 0 64 0 64 0 64 0 64 -64 0 0 -64 0 -64 0 -64 -64 0 -64 0 -64 0 rlineto
+          -64 0 -64 0 -64 0 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 64 0 64 0 64 0 64 0 64 0 rlineto
+          128 vmoveto
+          -94 callsubr
+          endchar
+        </CharString>
+        <CharString name="degree">
+          -21 256 384 rmoveto
+          -89 callsubr
+          64 vmoveto
+          -105 callsubr
+          endchar
+        </CharString>
+        <CharString name="dieresis">
+          107 384 448 rmoveto
+          -107 callsubr
+          -192 hmoveto
+          -107 callsubr
+          endchar
+        </CharString>
+        <CharString name="divide">
+          107 256 128 rmoveto
+          -107 callsubr
+          192 256 rmoveto
+          -64 0 -64 0 -64 0 -64 0 -64 0 0 -64 64 0 64 0 64 0 64 0 64 0 64 0 0 64 rlineto
+          -192 64 rmoveto
+          -107 callsubr
+          endchar
+        </CharString>
+        <CharString name="dollar">
+          256 hmoveto
+          64 64 64 hlineto
+          64 0 64 0 0 64 0 64 0 64 0 64 0 64 -64 0 -64 0 -64 0 0 64 0 64 0 64 64 0 64 0 rlineto
+          64 -64 vlineto
+          -64 64 -64 -64 -64 hlineto
+          -64 0 -64 0 0 -64 0 -64 0 -64 0 -64 0 -64 64 0 64 0 64 0 0 -64 0 -64 0 -64 -64 0 -64 0 rlineto
+          -64 -64 64 hlineto
+          64 0 64 0 rlineto
+          128 64 rmoveto
+          -104 callsubr
+          -192 256 rmoveto
+          -103 callsubr
+          endchar
+        </CharString>
+        <CharString name="e">
+          448 64 rmoveto
+          -64 0 -64 0 -64 0 -64 0 0 64 64 0 64 0 64 0 64 0 64 0 0 64 0 64 0 64 0 64 -64 0 rlineto
+          -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 64 0 64 0 64 0 rlineto
+          64 0 64 0 64 0 64 0 0 64 rlineto
+          -128 128 rmoveto
+          -93 callsubr
+          endchar
+        </CharString>
+        <CharString name="eight">
+          448 hmoveto
+          64 64 hlineto
+          0 64 0 64 0 64 0 64 0 64 0 64 -64 0 0 64 0 64 0 64 -64 0 -64 0 -64 0 -64 0 -64 0 rlineto
+          0 -64 0 -64 0 -64 -64 0 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 64 0 64 0 64 0 64 0 rlineto
+          64 hlineto
+          128 vmoveto
+          -97 callsubr
+          -128 320 rmoveto
+          -64 0 -64 0 0 64 0 64 64 0 64 0 64 0 0 -64 0 -64 rlineto
+          endchar
+        </CharString>
+        <CharString name="equal">
+          -21 256 320 rmoveto
+          -99 callsubr
+          -64 128 rmoveto
+          -99 callsubr
+          endchar
+        </CharString>
+        <CharString name="exclam">
+          -21 192 hmoveto
+          -107 callsubr
+          64 192 rmoveto
+          64 64 hlineto
+          64 64 64 vlineto
+          0 64 0 64 0 64 -64 0 0 64 -64 0 -64 0 0 -64 -64 0 0 -64 0 -64 0 -64 0 -64 64 0 0 -64 rlineto
+          -64 vlineto
+          endchar
+        </CharString>
+        <CharString name="exclamdown">
+          -21 192 hmoveto
+          64 64 64 64 hlineto
+          0 64 0 64 0 64 -64 0 0 64 0 64 -64 0 -64 0 0 -64 0 -64 -64 0 0 -64 0 -64 0 -64 0 -64 rlineto
+          64 -64 hlineto
+          64 512 rmoveto
+          -107 callsubr
+          endchar
+        </CharString>
+        <CharString name="f">
+          43 192 hmoveto
+          64 64 hlineto
+          0 64 0 64 0 64 0 64 64 0 64 0 0 64 -64 0 -64 0 0 64 0 64 64 0 64 0 0 64 -64 0 rlineto
+          -64 0 -64 0 -64 0 0 -64 0 -64 0 -64 -64 0 0 -64 64 0 0 -64 0 -64 0 -64 0 -64 0 -64 rlineto
+          endchar
+        </CharString>
+        <CharString name="five">
+          448 hmoveto
+          64 64 hlineto
+          0 64 0 64 0 64 0 64 0 64 0 64 -64 0 -64 0 -64 0 -64 0 -64 0 0 64 0 64 64 0 64 0 rlineto
+          64 0 64 0 64 0 0 64 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 0 -64 0 -64 0 -64 0 -64 rlineto
+          -64 64 vlineto
+          64 64 64 hlineto
+          64 0 64 0 64 0 0 -64 0 -64 0 -64 0 -64 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 0 -64 0 -64 rlineto
+          64 0 64 0 64 0 64 0 64 0 rlineto
+          endchar
+        </CharString>
+        <CharString name="four">
+          448 hmoveto
+          64 64 hlineto
+          0 64 0 64 0 64 0 64 0 64 0 64 0 64 -64 0 0 -64 0 -64 -64 0 -64 0 -64 0 -64 0 0 64 rlineto
+          0 64 0 64 0 64 -64 0 -64 0 0 -64 0 -64 0 -64 0 -64 0 -64 64 0 64 0 64 0 64 0 64 0 rlineto
+          64 -64 hlineto
+          0 -64 0 -64 0 -64 rlineto
+          endchar
+        </CharString>
+        <CharString name="g">
+          448 -128 rmoveto
+          64 64 hlineto
+          0 64 0 64 0 64 0 64 0 64 0 64 0 64 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 0 -64 rlineto
+          0 -64 0 -64 0 -64 0 -64 0 -64 64 0 64 0 64 0 64 0 64 0 64 0 0 -64 -64 0 -64 0 -64 0 rlineto
+          -64 0 -64 0 -64 0 0 -64 64 0 64 0 64 0 64 0 64 0 rlineto
+          256 vmoveto
+          -94 callsubr
+          endchar
+        </CharString>
+        <CharString name="grave">
+          -149 128 512 rmoveto
+          64 64 hlineto
+          64 -64 64 -64 -64 vlineto
+          -64 64 vlineto
+          endchar
+        </CharString>
+        <CharString name="greater">
+          -21 128 128 rmoveto
+          -95 callsubr
+          endchar
+        </CharString>
+        <CharString name="guillemotleft">
+          235 512 128 rmoveto
+          -96 callsubr
+          -192 hmoveto
+          -96 callsubr
+          endchar
+        </CharString>
+        <CharString name="guillemotright">
+          235 384 128 rmoveto
+          -95 callsubr
+          -192 hmoveto
+          -95 callsubr
+          endchar
+        </CharString>
+        <CharString name="h">
+          107 384 hmoveto
+          64 64 hlineto
+          0 64 0 64 0 64 0 64 0 64 -64 0 -64 0 -64 0 -64 0 0 64 0 64 0 64 -64 0 -64 0 0 -64 rlineto
+          0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 64 0 64 0 0 64 0 64 0 64 0 64 0 64 rlineto
+          64 0 64 0 64 0 0 -64 0 -64 0 -64 0 -64 rlineto
+          endchar
+        </CharString>
+        <CharString name="hyphen">
+          -21 256 320 rmoveto
+          -99 callsubr
+          endchar
+        </CharString>
+        <CharString name="i">
+          -149 128 hmoveto
+          64 64 hlineto
+          0 64 0 64 0 64 0 64 0 64 -64 0 -64 0 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 rlineto
+          64 448 rmoveto
+          -107 callsubr
+          endchar
+        </CharString>
+        <CharString name="j">
+          -85 192 -128 rmoveto
+          64 64 hlineto
+          0 64 0 64 0 64 0 64 0 64 0 64 0 64 -64 0 -64 0 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 rlineto
+          -64 -64 vlineto
+          -64 -64 64 hlineto
+          64 hlineto
+          64 576 rmoveto
+          -107 callsubr
+          endchar
+        </CharString>
+        <CharString name="k">
+          107 384 hmoveto
+          64 64 hlineto
+          0 64 0 64 -64 0 -64 0 0 64 64 0 0 64 0 64 0 64 -64 0 0 -64 0 -64 -64 0 -64 0 0 64 rlineto
+          0 64 0 64 0 64 -64 0 -64 0 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 64 0 rlineto
+          64 64 hlineto
+          0 64 0 64 0 64 64 0 0 -64 0 -64 64 0 64 0 0 -64 rlineto
+          endchar
+        </CharString>
+        <CharString name="l">
+          -85 192 hmoveto
+          64 64 hlineto
+          64 -64 64 vlineto
+          0 64 0 64 0 64 0 64 0 64 0 64 -64 0 -64 0 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 rlineto
+          0 -64 0 -64 64 0 rlineto
+          endchar
+        </CharString>
+        <CharString name="less">
+          -21 256 128 rmoveto
+          -96 callsubr
+          endchar
+        </CharString>
+        <CharString name="m">
+          299 576 hmoveto
+          64 64 hlineto
+          0 64 0 64 0 64 0 64 0 64 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 0 -64 rlineto
+          0 -64 0 -64 0 -64 0 -64 0 -64 64 0 64 0 0 64 0 64 0 64 0 64 0 64 64 0 64 0 64 0 rlineto
+          0 -64 0 -64 0 -64 64 0 0 64 0 64 0 64 64 0 64 0 0 -64 0 -64 0 -64 0 -64 rlineto
+          endchar
+        </CharString>
+        <CharString name="multiply">
+          107 384 192 rmoveto
+          64 64 hlineto
+          64 -64 vlineto
+          -64 64 64 hlineto
+          64 64 hlineto
+          64 -64 -64 -64 vlineto
+          -64 0 -64 0 -64 0 0 64 -64 0 0 -64 0 -64 64 0 64 0 0 -64 -64 0 -64 0 0 -64 0 -64 64 0 rlineto
+          64 64 vlineto
+          64 0 64 0 64 0 rlineto
+          endchar
+        </CharString>
+        <CharString name="n">
+          107 384 hmoveto
+          64 64 hlineto
+          0 64 0 64 0 64 0 64 0 64 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 0 -64 0 -64 0 -64 0 -64 rlineto
+          0 -64 0 -64 64 0 64 0 0 64 0 64 0 64 0 64 0 64 64 0 64 0 64 0 0 -64 0 -64 0 -64 rlineto
+          -64 vlineto
+          endchar
+        </CharString>
+        <CharString name="nine">
+          448 hmoveto
+          64 64 hlineto
+          0 64 0 64 0 64 0 64 0 64 0 64 0 64 0 64 0 64 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 rlineto
+          -64 -64 hlineto
+          0 -64 0 -64 0 -64 0 -64 0 -64 64 0 64 0 64 0 64 0 64 0 64 0 0 -64 0 -64 0 -64 rlineto
+          -64 256 rmoveto
+          -97 callsubr
+          endchar
+        </CharString>
+        <CharString name="nonmarkingreturn">
+          -64 endchar
+        </CharString>
+        <CharString name="numbersign">
+          384 64 rmoveto
+          64 64 64 64 hlineto
+          64 -64 64 vlineto
+          64 64 64 -64 64 -64 -64 -64 vlineto
+          -64 64 -64 hlineto
+          -64 -64 -64 -64 64 -64 hlineto
+          -64 -64 -64 vlineto
+          -64 64 -64 64 vlineto
+          64 64 64 hlineto
+          64 hlineto
+          -64 128 rmoveto
+          -105 callsubr
+          endchar
+        </CharString>
+        <CharString name="o">
+          448 hmoveto
+          64 64 hlineto
+          0 64 0 64 0 64 0 64 0 64 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 0 -64 0 -64 0 -64 rlineto
+          0 -64 0 -64 0 -64 64 0 64 0 64 0 64 0 64 0 rlineto
+          128 vmoveto
+          -94 callsubr
+          endchar
+        </CharString>
+        <CharString name="one">
+          -21 256 hmoveto
+          64 64 hlineto
+          64 -64 64 vlineto
+          0 64 0 64 0 64 0 64 0 64 0 64 0 64 -64 0 -64 0 -64 0 0 -64 64 0 0 -64 0 -64 0 -64 rlineto
+          0 -64 0 -64 0 -64 0 -64 -64 0 0 -64 0 -64 64 0 64 0 rlineto
+          endchar
+        </CharString>
+        <CharString name="oslash">
+          235 256 -64 rmoveto
+          64 64 64 hlineto
+          64 0 64 0 64 0 0 64 0 64 0 64 0 64 0 64 0 64 -64 0 -64 0 0 64 -64 0 0 -64 -64 0 rlineto
+          -64 0 -64 0 -64 0 -64 0 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 64 0 64 0 64 0 rlineto
+          128 256 rmoveto
+          64 64 64 -64 hlineto
+          0 -64 0 -64 -64 0 -64 0 -64 0 0 64 -64 0 0 -64 -64 0 0 64 0 64 0 64 64 0 64 0 64 0 rlineto
+          endchar
+        </CharString>
+        <CharString name="p">
+          128 -128 rmoveto
+          64 64 hlineto
+          64 64 vlineto
+          64 0 64 0 64 0 64 0 0 64 0 64 0 64 0 64 0 64 0 64 -64 0 -64 0 -64 0 -64 0 -64 0 rlineto
+          -64 0 -64 0 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 rlineto
+          320 256 rmoveto
+          -94 callsubr
+          endchar
+        </CharString>
+        <CharString name="parenleft">
+          -85 192 hmoveto
+          64 64 -64 64 hlineto
+          64 -64 64 vlineto
+          0 64 0 64 0 64 0 64 64 0 0 64 0 64 64 0 0 64 -64 0 -64 0 0 -64 0 -64 -64 0 0 -64 rlineto
+          0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 64 0 0 -64 0 -64 rlineto
+          endchar
+        </CharString>
+        <CharString name="parenright">
+          -85 128 hmoveto
+          64 64 hlineto
+          64 64 64 vlineto
+          0 64 0 64 0 64 0 64 0 64 0 64 -64 0 0 64 0 64 -64 0 -64 0 0 -64 64 0 0 -64 0 -64 rlineto
+          64 -64 hlineto
+          0 -64 0 -64 0 -64 0 -64 -64 0 0 -64 0 -64 -64 0 0 -64 rlineto
+          endchar
+        </CharString>
+        <CharString name="percent">
+          299 192 hmoveto
+          -102 callsubr
+          128 128 rmoveto
+          -106 callsubr
+          128 64 rmoveto
+          -102 callsubr
+          128 -384 rmoveto
+          -101 callsubr
+          64 64 rmoveto
+          -64 64 64 hlineto
+          -384 256 rmoveto
+          -101 callsubr
+          64 64 rmoveto
+          -64 64 64 hlineto
+          endchar
+        </CharString>
+        <CharString name="period">
+          -149 128 hmoveto
+          -107 callsubr
+          endchar
+        </CharString>
+        <CharString name="periodcentered">
+          -21 256 192 rmoveto
+          -89 callsubr
+          endchar
+        </CharString>
+        <CharString name="plus">
+          107 256 192 rmoveto
+          64 64 hlineto
+          64 64 vlineto
+          64 64 -64 hlineto
+          -64 64 hlineto
+          64 -64 vlineto
+          -64 -64 hlineto
+          -64 -64 vlineto
+          -64 -64 64 hlineto
+          64 -64 hlineto
+          -64 vlineto
+          endchar
+        </CharString>
+        <CharString name="q">
+          448 -128 rmoveto
+          64 64 hlineto
+          0 64 0 64 0 64 0 64 0 64 0 64 0 64 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 0 -64 rlineto
+          0 -64 0 -64 0 -64 0 -64 0 -64 64 0 64 0 64 0 64 0 64 0 64 0 0 -64 rlineto
+          -64 192 rmoveto
+          -94 callsubr
+          endchar
+        </CharString>
+        <CharString name="question">
+          320 hmoveto
+          -107 callsubr
+          64 192 rmoveto
+          64 64 64 hlineto
+          64 64 hlineto
+          0 64 0 64 0 64 0 64 0 64 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 0 -64 0 -64 64 0 rlineto
+          64 64 64 hlineto
+          64 0 64 0 64 0 0 -64 0 -64 0 -64 0 -64 -64 0 -64 0 -64 0 0 -64 0 -64 rlineto
+          endchar
+        </CharString>
+        <CharString name="quotedbl">
+          43 320 512 rmoveto
+          -106 callsubr
+          -192 -64 rmoveto
+          64 64 hlineto
+          0 64 0 64 -64 0 -64 0 0 -64 0 -64 0 -64 rlineto
+          endchar
+        </CharString>
+        <CharString name="quotesingle">
+          -213 64 512 rmoveto
+          -106 callsubr
+          endchar
+        </CharString>
+        <CharString name="r">
+          43 128 hmoveto
+          64 64 hlineto
+          0 64 0 64 0 64 0 64 64 0 64 0 64 0 0 64 -64 0 -64 0 -64 0 -64 0 -64 0 0 -64 0 -64 rlineto
+          0 -64 0 -64 0 -64 0 -64 rlineto
+          endchar
+        </CharString>
+        <CharString name="registered">
+          299 384 128 rmoveto
+          64 64 hlineto
+          64 64 64 vlineto
+          0 64 0 64 -64 0 -64 0 -64 0 -64 0 -64 0 0 -64 0 -64 0 -64 0 -64 0 -64 64 0 64 0 0 64 rlineto
+          64 64 -64 vlineto
+          192 -192 rmoveto
+          -91 callsubr
+          64 vmoveto
+          -90 callsubr
+          -192 256 rmoveto
+          -64 64 64 hlineto
+          64 -64 hlineto
+          endchar
+        </CharString>
+        <CharString name="s">
+          448 hmoveto
+          64 64 hlineto
+          0 64 0 64 0 64 -64 0 -64 0 -64 0 -64 0 -64 0 0 64 64 0 64 0 64 0 64 0 0 64 -64 0 rlineto
+          -64 0 -64 0 -64 0 -64 0 -64 0 0 -64 0 -64 0 -64 64 0 64 0 64 0 64 0 64 0 64 0 0 -64 rlineto
+          -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 0 -64 0 -64 64 0 64 0 64 0 64 0 64 0 rlineto
+          endchar
+        </CharString>
+        <CharString name="section">
+          43 320 hmoveto
+          64 64 hlineto
+          0 64 0 64 0 64 -64 0 0 64 0 64 -64 0 -64 0 -64 0 0 64 0 64 64 0 64 0 64 0 0 64 rlineto
+          -64 0 -64 0 -64 0 -64 0 0 -64 0 -64 0 -64 0 -64 64 0 0 -64 0 -64 64 0 64 0 64 0 0 -64 rlineto
+          -64 -64 vlineto
+          -64 0 -64 0 0 -64 64 0 64 0 rlineto
+          256 vmoveto
+          -64 64 64 hlineto
+          endchar
+        </CharString>
+        <CharString name="semicolon">
+          -149 128 -128 rmoveto
+          -100 callsubr
+          320 vmoveto
+          -107 callsubr
+          endchar
+        </CharString>
+        <CharString name="seven">
+          320 hmoveto
+          64 64 hlineto
+          0 64 0 64 0 64 64 0 64 0 0 64 0 64 0 64 0 64 0 64 0 64 -64 0 -64 0 -64 0 -64 0 rlineto
+          -64 0 -64 0 -64 0 0 -64 64 0 64 0 64 0 64 0 64 0 64 0 0 -64 0 -64 0 -64 0 -64 -64 0 rlineto
+          -64 0 -64 0 0 -64 0 -64 0 -64 0 -64 0 -64 rlineto
+          endchar
+        </CharString>
+        <CharString name="six">
+          448 hmoveto
+          64 64 hlineto
+          0 64 0 64 0 64 0 64 0 64 0 64 -64 0 -64 0 -64 0 -64 0 -64 0 0 64 0 64 64 0 64 0 rlineto
+          64 64 -64 hlineto
+          -64 0 -64 0 -64 0 -64 0 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 64 0 rlineto
+          64 0 64 0 64 0 64 0 rlineto
+          128 vmoveto
+          -97 callsubr
+          endchar
+        </CharString>
+        <CharString name="slash">
+          256 192 rmoveto
+          -106 callsubr
+          -128 -256 rmoveto
+          -98 callsubr
+          384 320 rmoveto
+          -98 callsubr
+          endchar
+        </CharString>
+        <CharString name="space">
+          -85 endchar
+        </CharString>
+        <CharString name="sterling">
+          299 448 448 rmoveto
+          64 64 hlineto
+          64 -64 vlineto
+          -64 0 -64 0 -64 0 -64 0 -64 0 0 -64 0 -64 0 -64 0 -64 -64 0 0 -64 64 0 0 -64 0 -64 -64 0 rlineto
+          0 -64 0 -64 64 0 64 0 64 0 64 0 64 0 64 0 64 0 64 0 64 0 0 64 0 64 -64 0 -64 0 rlineto
+          -64 0 -64 0 -64 0 -64 0 0 64 0 64 64 0 64 0 0 64 -64 0 -64 0 0 64 0 64 0 64 64 0 rlineto
+          64 0 64 0 rlineto
+          endchar
+        </CharString>
+        <CharString name="t">
+          43 192 hmoveto
+          64 64 hlineto
+          0 64 0 64 0 64 0 64 64 0 64 0 0 64 -64 0 -64 0 0 64 -64 0 -64 0 0 -64 -64 0 0 -64 rlineto
+          64 -64 hlineto
+          0 -64 0 -64 0 -64 0 -64 rlineto
+          endchar
+        </CharString>
+        <CharString name="three">
+          448 hmoveto
+          64 64 hlineto
+          0 64 0 64 0 64 0 64 0 64 0 64 0 64 0 64 0 64 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 rlineto
+          -64 -64 hlineto
+          -64 64 vlineto
+          64 64 64 hlineto
+          64 0 64 0 64 0 0 -64 0 -64 -64 0 -64 0 0 -64 0 -64 64 0 64 0 0 -64 0 -64 0 -64 -64 0 rlineto
+          -64 0 -64 0 -64 0 -64 0 -64 0 0 -64 0 -64 64 0 64 0 64 0 64 0 64 0 rlineto
+          endchar
+        </CharString>
+        <CharString name="two">
+          448 hmoveto
+          64 64 hlineto
+          64 -64 vlineto
+          -64 0 -64 0 -64 0 -64 0 0 64 0 64 64 0 64 0 64 0 64 0 64 0 0 64 0 64 0 64 0 64 rlineto
+          0 64 0 64 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 0 -64 0 -64 64 0 64 0 0 64 64 0 rlineto
+          64 0 64 0 64 0 0 -64 0 -64 0 -64 0 -64 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 0 -64 0 -64 rlineto
+          0 -64 0 -64 0 -64 64 0 64 0 64 0 64 0 64 0 rlineto
+          endchar
+        </CharString>
+        <CharString name="u">
+          448 hmoveto
+          64 64 hlineto
+          0 64 0 64 0 64 0 64 0 64 -64 0 0 -64 0 -64 0 -64 0 -64 -64 0 -64 0 -64 0 -64 0 0 64 rlineto
+          0 64 0 64 0 64 -64 0 -64 0 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 64 0 64 0 64 0 64 0 rlineto
+          64 hlineto
+          endchar
+        </CharString>
+        <CharString name="underscore">
+          235 512 -192 rmoveto
+          64 64 hlineto
+          64 -64 vlineto
+          -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 0 -64 0 -64 64 0 64 0 64 0 64 0 rlineto
+          64 0 64 0 64 0 64 0 rlineto
+          endchar
+        </CharString>
+        <CharString name="uni00A0">
+          -85 endchar
+        </CharString>
+        <CharString name="uni3000">
+          619 endchar
+        </CharString>
+        <CharString name="v">
+          43 256 hmoveto
+          64 64 hlineto
+          0 64 0 64 64 0 0 64 0 64 0 64 -64 0 0 -64 0 -64 -64 0 0 -64 0 -64 0 -64 -64 0 0 64 rlineto
+          0 64 0 64 0 64 0 64 -64 0 -64 0 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 64 0 64 0 rlineto
+          endchar
+        </CharString>
+        <CharString name="w">
+          299 576 hmoveto
+          64 64 hlineto
+          0 64 0 64 0 64 0 64 0 64 -64 0 0 -64 0 -64 0 -64 0 -64 -64 0 -64 0 0 64 0 64 -64 0 rlineto
+          0 -64 0 -64 -64 0 -64 0 -64 0 0 64 0 64 0 64 0 64 -64 0 -64 0 0 -64 0 -64 0 -64 0 -64 rlineto
+          0 -64 0 -64 64 0 64 0 64 0 64 0 64 0 64 0 64 0 rlineto
+          endchar
+        </CharString>
+        <CharString name="x">
+          448 hmoveto
+          64 64 hlineto
+          64 -64 vlineto
+          -64 64 hlineto
+          64 64 vlineto
+          64 64 hlineto
+          64 -64 -64 -64 vlineto
+          -64 0 -64 0 -64 0 0 64 -64 0 -64 0 0 -64 0 -64 64 0 64 0 64 0 0 -64 0 -64 -64 0 -64 0 rlineto
+          -64 -64 hlineto
+          -64 64 vlineto
+          64 64 64 hlineto
+          64 0 64 0 64 0 rlineto
+          endchar
+        </CharString>
+        <CharString name="y">
+          448 -128 rmoveto
+          64 64 hlineto
+          0 64 0 64 0 64 0 64 0 64 0 64 0 64 -64 0 0 -64 0 -64 0 -64 0 -64 -64 0 -64 0 -64 0 rlineto
+          -64 64 hlineto
+          0 64 0 64 0 64 -64 0 -64 0 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 64 0 64 0 64 0 64 0 rlineto
+          64 0 64 0 0 -64 -64 0 -64 0 -64 0 -64 0 0 -64 64 0 64 0 64 0 rlineto
+          endchar
+        </CharString>
+        <CharString name="yen">
+          448 64 rmoveto
+          -64 64 64 hlineto
+          64 64 -64 hlineto
+          -64 64 64 hlineto
+          64 64 hlineto
+          0 64 0 64 0 64 0 64 -64 0 0 -64 0 -64 0 -64 0 -64 -64 0 -64 0 -64 0 -64 0 0 64 0 64 rlineto
+          0 64 0 64 -64 0 -64 0 0 -64 0 -64 0 -64 0 -64 0 -64 64 0 64 0 64 0 0 -64 -64 0 -64 0 rlineto
+          -64 64 vlineto
+          64 -64 -64 hlineto
+          -64 -64 64 hlineto
+          64 0 64 0 64 0 64 0 64 0 0 64 rlineto
+          endchar
+        </CharString>
+        <CharString name="z">
+          107 384 hmoveto
+          64 64 hlineto
+          64 -64 vlineto
+          -64 0 -64 0 -64 0 0 64 64 0 64 0 64 0 0 64 0 64 64 0 0 64 -64 0 -64 0 -64 0 -64 0 rlineto
+          -64 0 -64 0 0 -64 64 0 64 0 64 0 64 0 0 -64 -64 0 -64 0 -64 0 0 -64 0 -64 -64 0 0 -64 rlineto
+          -64 64 vlineto
+          64 0 64 0 64 0 rlineto
+          endchar
+        </CharString>
+        <CharString name="zero">
+          320 256 rmoveto
+          -106 callsubr
+          128 -320 rmoveto
+          64 64 hlineto
+          0 64 0 64 0 64 0 64 0 64 0 64 0 64 0 64 0 64 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 rlineto
+          -64 -64 hlineto
+          0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 64 0 64 0 64 0 64 0 64 0 rlineto
+          128 vmoveto
+          -64 0 -64 0 -64 0 0 64 0 64 0 64 0 64 0 64 0 64 0 64 64 0 64 0 64 0 64 0 0 -64 rlineto
+          0 -64 0 -64 0 -64 0 -64 0 -64 0 -64 rlineto
+          endchar
+        </CharString>
+      </CharStrings>
+    </CFFFont>
+
+    <GlobalSubrs>
+      <!-- The 'index' attribute is only for humans; it is ignored when parsed. -->
+    </GlobalSubrs>
+  </CFF>
+
+  <FFTM>
+    <!-- FontForge's timestamp, font source creation and modification dates -->
+    <version value="1"/>
+    <FFTimeStamp value="Tue Oct  4 06:50:53 2016"/>
+    <sourceCreated value="Fri Jul 30 07:09:53 2010"/>
+    <sourceModified value="Sun Oct 30 16:54:29 2016"/>
+  </FFTM>
+
+  <GDEF>
+    <Version value="0x00010000"/>
+    <GlyphClassDef>
+      <ClassDef glyph=".null" class="1"/>
+      <ClassDef glyph="A" class="1"/>
+      <ClassDef glyph="B" class="1"/>
+      <ClassDef glyph="C" class="1"/>
+      <ClassDef glyph="D" class="1"/>
+      <ClassDef glyph="E" class="1"/>
+      <ClassDef glyph="Euro" class="1"/>
+      <ClassDef glyph="F" class="1"/>
+      <ClassDef glyph="G" class="1"/>
+      <ClassDef glyph="H" class="1"/>
+      <ClassDef glyph="I" class="1"/>
+      <ClassDef glyph="J" class="1"/>
+      <ClassDef glyph="K" class="1"/>
+      <ClassDef glyph="L" class="1"/>
+      <ClassDef glyph="M" class="1"/>
+      <ClassDef glyph="N" class="1"/>
+      <ClassDef glyph="O" class="1"/>
+      <ClassDef glyph="Oslash" class="1"/>
+      <ClassDef glyph="P" class="1"/>
+      <ClassDef glyph="Q" class="1"/>
+      <ClassDef glyph="R" class="1"/>
+      <ClassDef glyph="S" class="1"/>
+      <ClassDef glyph="T" class="1"/>
+      <ClassDef glyph="U" class="1"/>
+      <ClassDef glyph="V" class="1"/>
+      <ClassDef glyph="W" class="1"/>
+      <ClassDef glyph="X" class="1"/>
+      <ClassDef glyph="Y" class="1"/>
+      <ClassDef glyph="Z" class="1"/>
+      <ClassDef glyph="a" class="1"/>
+      <ClassDef glyph="ampersand" class="1"/>
+      <ClassDef glyph="asciicircum" class="1"/>
+      <ClassDef glyph="asciitilde" class="1"/>
+      <ClassDef glyph="asterisk" class="1"/>
+      <ClassDef glyph="at" class="1"/>
+      <ClassDef glyph="b" class="1"/>
+      <ClassDef glyph="backslash" class="1"/>
+      <ClassDef glyph="bar" class="1"/>
+      <ClassDef glyph="braceleft" class="1"/>
+      <ClassDef glyph="braceright" class="1"/>
+      <ClassDef glyph="bracketleft" class="1"/>
+      <ClassDef glyph="bracketright" class="1"/>
+      <ClassDef glyph="brokenbar" class="1"/>
+      <ClassDef glyph="c" class="1"/>
+      <ClassDef glyph="cent" class="1"/>
+      <ClassDef glyph="colon" class="1"/>
+      <ClassDef glyph="comma" class="1"/>
+      <ClassDef glyph="copyright" class="1"/>
+      <ClassDef glyph="currency" class="1"/>
+      <ClassDef glyph="d" class="1"/>
+      <ClassDef glyph="degree" class="1"/>
+      <ClassDef glyph="dieresis" class="1"/>
+      <ClassDef glyph="divide" class="1"/>
+      <ClassDef glyph="dollar" class="1"/>
+      <ClassDef glyph="e" class="1"/>
+      <ClassDef glyph="eight" class="1"/>
+      <ClassDef glyph="equal" class="1"/>
+      <ClassDef glyph="exclam" class="1"/>
+      <ClassDef glyph="exclamdown" class="1"/>
+      <ClassDef glyph="f" class="1"/>
+      <ClassDef glyph="five" class="1"/>
+      <ClassDef glyph="four" class="1"/>
+      <ClassDef glyph="g" class="1"/>
+      <ClassDef glyph="grave" class="1"/>
+      <ClassDef glyph="greater" class="1"/>
+      <ClassDef glyph="guillemotleft" class="1"/>
+      <ClassDef glyph="guillemotright" class="1"/>
+      <ClassDef glyph="h" class="1"/>
+      <ClassDef glyph="hyphen" class="1"/>
+      <ClassDef glyph="i" class="1"/>
+      <ClassDef glyph="j" class="1"/>
+      <ClassDef glyph="k" class="1"/>
+      <ClassDef glyph="l" class="1"/>
+      <ClassDef glyph="less" class="1"/>
+      <ClassDef glyph="m" class="1"/>
+      <ClassDef glyph="multiply" class="1"/>
+      <ClassDef glyph="n" class="1"/>
+      <ClassDef glyph="nine" class="1"/>
+      <ClassDef glyph="nonmarkingreturn" class="1"/>
+      <ClassDef glyph="numbersign" class="1"/>
+      <ClassDef glyph="o" class="1"/>
+      <ClassDef glyph="one" class="1"/>
+      <ClassDef glyph="oslash" class="1"/>
+      <ClassDef glyph="p" class="1"/>
+      <ClassDef glyph="parenleft" class="1"/>
+      <ClassDef glyph="parenright" class="1"/>
+      <ClassDef glyph="percent" class="1"/>
+      <ClassDef glyph="period" class="1"/>
+      <ClassDef glyph="periodcentered" class="1"/>
+      <ClassDef glyph="plus" class="1"/>
+      <ClassDef glyph="q" class="1"/>
+      <ClassDef glyph="question" class="1"/>
+      <ClassDef glyph="quotedbl" class="1"/>
+      <ClassDef glyph="quotesingle" class="1"/>
+      <ClassDef glyph="r" class="1"/>
+      <ClassDef glyph="registered" class="1"/>
+      <ClassDef glyph="s" class="1"/>
+      <ClassDef glyph="section" class="1"/>
+      <ClassDef glyph="semicolon" class="1"/>
+      <ClassDef glyph="seven" class="1"/>
+      <ClassDef glyph="six" class="1"/>
+      <ClassDef glyph="slash" class="1"/>
+      <ClassDef glyph="space" class="1"/>
+      <ClassDef glyph="sterling" class="1"/>
+      <ClassDef glyph="t" class="1"/>
+      <ClassDef glyph="three" class="1"/>
+      <ClassDef glyph="two" class="1"/>
+      <ClassDef glyph="u" class="1"/>
+      <ClassDef glyph="underscore" class="1"/>
+      <ClassDef glyph="uni00A0" class="1"/>
+      <ClassDef glyph="uni3000" class="1"/>
+      <ClassDef glyph="v" class="1"/>
+      <ClassDef glyph="w" class="1"/>
+      <ClassDef glyph="x" class="1"/>
+      <ClassDef glyph="y" class="1"/>
+      <ClassDef glyph="yen" class="1"/>
+      <ClassDef glyph="z" class="1"/>
+      <ClassDef glyph="zero" class="1"/>
+    </GlyphClassDef>
+    <LigCaretList>
+      <Coverage>
+      </Coverage>
+      <!-- LigGlyphCount=0 -->
+    </LigCaretList>
+    <MarkAttachClassDef>
+    </MarkAttachClassDef>
+  </GDEF>
+
+  <hmtx>
+    <mtx name=".notdef" width="374" lsb="34"/>
+    <mtx name=".null" width="0" lsb="0"/>
+    <mtx name="A" width="576" lsb="64"/>
+    <mtx name="B" width="576" lsb="64"/>
+    <mtx name="C" width="576" lsb="64"/>
+    <mtx name="D" width="576" lsb="64"/>
+    <mtx name="E" width="576" lsb="64"/>
+    <mtx name="Euro" width="576" lsb="64"/>
+    <mtx name="F" width="512" lsb="64"/>
+    <mtx name="G" width="576" lsb="64"/>
+    <mtx name="H" width="576" lsb="64"/>
+    <mtx name="I" width="256" lsb="64"/>
+    <mtx name="J" width="448" lsb="64"/>
+    <mtx name="K" width="576" lsb="64"/>
+    <mtx name="L" width="512" lsb="64"/>
+    <mtx name="M" width="704" lsb="64"/>
+    <mtx name="N" width="576" lsb="64"/>
+    <mtx name="O" width="576" lsb="64"/>
+    <mtx name="Oslash" width="640" lsb="64"/>
+    <mtx name="P" width="576" lsb="64"/>
+    <mtx name="Q" width="640" lsb="64"/>
+    <mtx name="R" width="576" lsb="64"/>
+    <mtx name="S" width="576" lsb="64"/>
+    <mtx name="T" width="640" lsb="64"/>
+    <mtx name="U" width="576" lsb="64"/>
+    <mtx name="V" width="512" lsb="64"/>
+    <mtx name="W" width="704" lsb="64"/>
+    <mtx name="X" width="640" lsb="64"/>
+    <mtx name="Y" width="576" lsb="64"/>
+    <mtx name="Z" width="640" lsb="64"/>
+    <mtx name="a" width="576" lsb="64"/>
+    <mtx name="ampersand" width="704" lsb="64"/>
+    <mtx name="asciicircum" width="576" lsb="64"/>
+    <mtx name="asciitilde" width="448" lsb="64"/>
+    <mtx name="asterisk" width="448" lsb="64"/>
+    <mtx name="at" width="704" lsb="64"/>
+    <mtx name="b" width="576" lsb="64"/>
+    <mtx name="backslash" width="512" lsb="64"/>
+    <mtx name="bar" width="192" lsb="64"/>
+    <mtx name="braceleft" width="384" lsb="64"/>
+    <mtx name="braceright" width="384" lsb="64"/>
+    <mtx name="bracketleft" width="320" lsb="64"/>
+    <mtx name="bracketright" width="320" lsb="64"/>
+    <mtx name="brokenbar" width="256" lsb="64"/>
+    <mtx name="c" width="512" lsb="64"/>
+    <mtx name="cent" width="512" lsb="64"/>
+    <mtx name="colon" width="384" lsb="64"/>
+    <mtx name="comma" width="256" lsb="64"/>
+    <mtx name="copyright" width="704" lsb="64"/>
+    <mtx name="currency" width="512" lsb="64"/>
+    <mtx name="d" width="576" lsb="64"/>
+    <mtx name="degree" width="384" lsb="64"/>
+    <mtx name="dieresis" width="512" lsb="64"/>
+    <mtx name="divide" width="512" lsb="64"/>
+    <mtx name="dollar" width="576" lsb="64"/>
+    <mtx name="e" width="576" lsb="64"/>
+    <mtx name="eight" width="576" lsb="64"/>
+    <mtx name="equal" width="384" lsb="64"/>
+    <mtx name="exclam" width="384" lsb="64"/>
+    <mtx name="exclamdown" width="384" lsb="64"/>
+    <mtx name="f" width="448" lsb="64"/>
+    <mtx name="five" width="576" lsb="64"/>
+    <mtx name="four" width="576" lsb="64"/>
+    <mtx name="g" width="576" lsb="64"/>
+    <mtx name="grave" width="256" lsb="64"/>
+    <mtx name="greater" width="384" lsb="64"/>
+    <mtx name="guillemotleft" width="640" lsb="64"/>
+    <mtx name="guillemotright" width="640" lsb="64"/>
+    <mtx name="h" width="512" lsb="64"/>
+    <mtx name="hyphen" width="384" lsb="64"/>
+    <mtx name="i" width="256" lsb="64"/>
+    <mtx name="j" width="320" lsb="0"/>
+    <mtx name="k" width="512" lsb="64"/>
+    <mtx name="l" width="320" lsb="64"/>
+    <mtx name="less" width="384" lsb="64"/>
+    <mtx name="m" width="704" lsb="64"/>
+    <mtx name="multiply" width="512" lsb="64"/>
+    <mtx name="n" width="512" lsb="64"/>
+    <mtx name="nine" width="576" lsb="64"/>
+    <mtx name="nonmarkingreturn" width="341" lsb="0"/>
+    <mtx name="numbersign" width="576" lsb="64"/>
+    <mtx name="o" width="576" lsb="64"/>
+    <mtx name="one" width="384" lsb="64"/>
+    <mtx name="oslash" width="640" lsb="64"/>
+    <mtx name="p" width="576" lsb="64"/>
+    <mtx name="parenleft" width="320" lsb="64"/>
+    <mtx name="parenright" width="320" lsb="64"/>
+    <mtx name="percent" width="704" lsb="64"/>
+    <mtx name="period" width="256" lsb="64"/>
+    <mtx name="periodcentered" width="384" lsb="64"/>
+    <mtx name="plus" width="512" lsb="64"/>
+    <mtx name="q" width="576" lsb="64"/>
+    <mtx name="question" width="576" lsb="64"/>
+    <mtx name="quotedbl" width="448" lsb="64"/>
+    <mtx name="quotesingle" width="192" lsb="64"/>
+    <mtx name="r" width="448" lsb="64"/>
+    <mtx name="registered" width="704" lsb="64"/>
+    <mtx name="s" width="576" lsb="64"/>
+    <mtx name="section" width="448" lsb="64"/>
+    <mtx name="semicolon" width="256" lsb="64"/>
+    <mtx name="seven" width="576" lsb="64"/>
+    <mtx name="six" width="576" lsb="64"/>
+    <mtx name="slash" width="576" lsb="64"/>
+    <mtx name="space" width="320" lsb="0"/>
+    <mtx name="sterling" width="704" lsb="64"/>
+    <mtx name="t" width="448" lsb="64"/>
+    <mtx name="three" width="576" lsb="64"/>
+    <mtx name="two" width="576" lsb="64"/>
+    <mtx name="u" width="576" lsb="64"/>
+    <mtx name="underscore" width="640" lsb="-64"/>
+    <mtx name="uni00A0" width="320" lsb="0"/>
+    <mtx name="uni3000" width="1024" lsb="0"/>
+    <mtx name="v" width="448" lsb="64"/>
+    <mtx name="w" width="704" lsb="64"/>
+    <mtx name="x" width="576" lsb="64"/>
+    <mtx name="y" width="576" lsb="64"/>
+    <mtx name="yen" width="576" lsb="64"/>
+    <mtx name="z" width="512" lsb="64"/>
+    <mtx name="zero" width="576" lsb="64"/>
+  </hmtx>
+
+  <DSIG>
+    <!-- note that the Digital Signature will be invalid after recompilation! -->
+    <tableHeader flag="0x0" numSigs="0" version="1"/>
+  </DSIG>
+
+</ttFont>

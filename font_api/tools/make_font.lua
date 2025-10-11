@@ -22,12 +22,12 @@ end
 if
 	not check("convert --version", "Error: This program requires convert from ImageMagick!") or
 	not check("identify --version", "Error: This program requires identify from ImageMagick!") or
-	not check("ttx --version", "Error: This program requires ttx from FontTools!")
+	not check("ttx --version", "Error: This program requires ttx from FontTools!") or
+	not check("xmlstarlet --version", "Error: This program requires xmlstarlet!")
 then
 	print("Please fix above problem and retry.")
 	os.exit(1)
 end
-
 
 --
 -- Argument & parameters management
@@ -115,19 +115,23 @@ local function measure(font, codepoint)
 
 	local cmd = string.format(
 		"convert -font \"%s\" -pointsize %d label:\"%s\" -define trim:edges=east,west -trim info:",
-		font.file, font.height, escape(char)
+		font.file, font.glyphs_height, escape(char)
 	)
-
 	local _, _, w, h = string.find(command(cmd), "([0-9]+)x([0-9]+)" )
-
 	return tonumber(w), tonumber(h)
 end
 
 -- Read all available codepoints from ttf file
 local function read_available_codepoints(file)
+	-- Takes only first cmap table found.
+	-- TODO: Should choose table according to platformID (3 else 0 else 2)
+	-- (see https://stackoverflow.com/a/29424838)
 	local cmd, errmsg, status = io.popen(string.format(
-		"ttx -o - \"%s\" 2>/dev/null | grep \"<map code=\" | cut -d \\\" -f 2",
+		"ttx -o - \"%s\" 2>/dev/null | " ..
+		"xmlstarlet sel -t -v \"//*[starts-with(name(), 'cmap_format_')][1]/map/@code\" | " ..
+		"sort -u",
 		file), 'r')
+
 	if cmd == nil then
 		print(string.format(
 			"Could not open font file %s:\n%s", file, errmsg))
@@ -152,15 +156,19 @@ local function add_codepoints(font, from, to)
 			-- Glyph size
 			local w, h = measure(font, codepoint)
 			if h > font.glyphs_height then font.glyphs_height = h end
-			font.glyph_widths[codepoint] = w
 
-			-- Tile width
-		    local tile_w = tile_width(w)
-			if font.by_width[tile_w] == nil then
-				font.by_width[tile_w] = {}
-				table.insert(font.tile_widths, tile_w)
+			-- Detect and discard eventual buggy glyphs (may be spaces)
+			if h > 1 then
+				font.glyph_widths[codepoint] = w
+
+				-- Tile width
+				local tile_w = tile_width(w)
+				if font.by_width[tile_w] == nil then
+					font.by_width[tile_w] = {}
+					table.insert(font.tile_widths, tile_w)
+				end
+				table.insert(font.by_width[tile_w], codepoint)
 			end
-			table.insert(font.by_width[tile_w], codepoint)
 		end
 	end
 end
@@ -168,7 +176,7 @@ end
 -- Make font texture
 -- Font must have all its codepoints added
 local function make_final_texture(font)
-	local texture_file = string.format("%/textures/font_%s.png",
+	local texture_file = string.format("%s/textures/font_%s.png",
 		mod_dir, font.name)
 
 	-- We start with a single line
@@ -190,7 +198,7 @@ local function make_final_texture(font)
 		for _, codepoint in ipairs(font.by_width[tile_width]) do
 			local glyph_x = math.ceil(x / tile_width)
 			x = glyph_x * tile_width
-			if x + tile_width > font.texture_width then -- no space left on current line
+			if x + tile_width > texture_width then -- no space left on current line
 				x = 0
 				glyph_x = 0
 				glyph_y = glyph_y + 1
@@ -206,13 +214,13 @@ local function make_final_texture(font)
 	-- Compose texture
 	command(string.format(
 		"convert -size %dx%d xc:transparent %s",
-		texture_width, texture_height, texture_file
+		texture_width, font.texture_height, texture_file
 	))
 
-	for codepoint, n in pairs(glyph_ns) do
+	for codepoint, n in pairs(font.glyph_ns) do
 		local w = math.floor(texture_width / n)
-		local x = w * glyph_xs[codepoint]
-		local y = font.glyphs_height * glyph_ys[codepoint]
+		local x = w * font.glyph_xs[codepoint]
+		local y = font.glyphs_height * font.glyph_ys[codepoint]
 		
 		local cmd
 		-- Subtexture subcommand
@@ -243,8 +251,16 @@ local function make_final_texture(font)
 end
 
 local function process_font(font)
-	print(string.format("Processing font \"%s\" (%s)", font.label, font.name)
 
+	-- Defaults
+	font.label = font.label or font.name:gsub("^%l", string.upper)
+    font.margin_top = font.margin_top or 0
+	font.line_spacing = font.line_spacing or 0
+	font.char_spacing = font.char_spacing or 0
+
+	print(string.format("Processing font \"%s\" (%s)", font.label, font.name))
+
+	-- Computed values
 	font.by_width = {} -- Codepoints by tile width
 	font.tile_widths = {} -- Used tile widths
 	font.glyph_widths = {} -- Exact width of reach glyph
@@ -285,20 +301,20 @@ local function process_font(font)
 	-- Add invisible chars : Spaces
 	-- TODO: Should be computed from ttx
 	-- TODO: manage half/quater spaces
-	glyph_widths[0x0020] = glyph_widths[0x0030]
+	font.glyph_widths[0x0020] = font.glyph_widths[0x0030]
 
 end
 
 local function get_font_registration_lua(font)
 
-	local glyphs = ""
+	local glyphs = "{"
 	local curlinesize = 1000
 
-	for codepoint, w in pairs(glyph_widths) do
+	for codepoint, w in pairs(font.glyph_widths) do
 		local glyph
-		local x = glyph_xs[codepoint]
-		local y = glyph_ys[codepoint]
-		local n = glyph_ns[codepoint]
+		local x = font.glyph_xs[codepoint]
+		local y = font.glyph_ys[codepoint]
+		local n = font.glyph_ns[codepoint]
 		if x ~= nil and y ~=nil and n ~= nil then
 			glyph = string.format("[%d] = { %d, %d, %d, %d },", codepoint, w, n, x, y)
 		else
@@ -307,12 +323,13 @@ local function get_font_registration_lua(font)
 
 		curlinesize = curlinesize + glyph:len() + 1
 		if curlinesize > 80 then
-			glyphs = glyphs + "\n\t\t\t" +  glyph
+			glyphs = glyphs .. "\n\t\t\t" ..  glyph
 			curlinesize = 12 + glyph:len()
 		else
-			glyphs = glyphs + " " + glyph
+			glyphs = glyphs .. " " .. glyph
 		end
 	end
+	glyphs = glyphs .. "\n\t\t}"
 
 	return string.format([[
 -- Font generated from file %s with pointsize %d
@@ -326,27 +343,22 @@ font_api.register_font(
 		charspacing = 2,
 		texture_height = %d,
 		glyphs_height = %d,
-		glyphs = {
-%s
-		}
-]],	font.file, font.pointsize, font.texture_height, font.glyphd_height, glyphs)
+		glyphs = %s,
+	}
+)
+]],	font.file, font.pointsize, font.name, font.texture_height, font.glyphs_height, glyphs)
 end
 
 --
 -- Main code
 --
 
--- Defaults (TODO)
-if not font.label then
-	font.label = font.name:gsub("^%l", string.upper)
-end
-
-for _, font in ipairs(font.fonts) do
+for _, font in ipairs(params.fonts) do
 	process_font(font)
 end
 
 -- Write init.lua
-file = io.open(mod_dir .. "/init.lua", "w")
+local file = io.open(mod_dir .. "/init.lua", "w")
 
 file:write(string.format([[
 --
@@ -358,23 +370,17 @@ file:write(string.format([[
 ]], params.mod_name, arg[0], os.date("%Y-%m-%d at %H:%M")
 ))
 
-for _, font in ipairs(font.fonts) do
+for _, font in ipairs(params.fonts) do
 	file:write(get_font_registration_lua(font))
 end
 
-file:write([[
-		}
-	}
-);
-]])
 file:close()
 
 --
 -- Write mod.conf
 --
 
-
-file = io.open(mod_dir .. "/mod.conf", "w")
+local file = io.open(mod_dir .. "/mod.conf", "w")
 file:write(string.format([[
 name = %s
 title = %s

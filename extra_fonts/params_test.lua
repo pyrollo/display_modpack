@@ -14,7 +14,7 @@ params = {
 	mod_title = "Extra fonts",
 
     -- A good description would be "... fonts for font_api"
-	mod_descriptiion = "Extra fonts for font_api: botic",
+	mod_description = "Extra fonts for font_api: botic",
 
 	-- List of fons to include to the mod.
 	fonts = {
@@ -29,7 +29,7 @@ params = {
 			label = "Botic",
 
 			-- True type font file to get glyphs from (required)
-			file = "sources/pixeldroidBoticRegular.ttf",
+			file = "sources/pixeldroidBoticRegular.otf",
 
 			-- Render pointsize (integer, required)
 			-- Try to find a proper value for a good rendering
@@ -57,11 +57,11 @@ params = {
             -- Codepoints not existing in font file will be ignored.
 			-- Refer to https://en.wikipedia.org/wiki/Unicode
 			codepoints = {
-				-- 00a0-00ff Latin-1 Supplement (full)
-				{ from=0x00a0, to=0x00ff },
+				-- 00a0-00ff Latin-1 Supplement (full except nbsp)
+				{ from = 0x00a1, to = 0x00ff },
 
 				-- 20a0-20cf Currency Symbols (Limited to Euro symbol)
-				{ from=0x20ac, 0x20ac },		
+				{ from = 0x20ac, to = 0x20ac },
 			},
 		}
 	}
