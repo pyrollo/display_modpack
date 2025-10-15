@@ -1,3 +1,7 @@
+## TODO: 
+* Update documentation with new format
+* add information about texture having to be escaped in formspecs with `:gsub("[\\^]", "\\%0")`
+
 # Font API
 This document describes Font API. Font API creates textures for font display on entities.
 

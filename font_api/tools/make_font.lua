@@ -2,8 +2,8 @@
 -- A font mod generator for font_api
 --
 
--- This files generates only code and textures - should not be translated
-
+-- This is an utility script for code and texture generator,
+-- not intended to be tranlslated.
 
 -- TODO : detect and manage fixed width fonts
 
@@ -192,7 +192,7 @@ local function make_final_texture(font)
 	local glyph_y = 0
 
 	table.sort(font.tile_widths)
-
+    print("    Computing positions")
 	-- Compute positions
 	for _, tile_width in ipairs(font.tile_widths) do
 		for _, codepoint in ipairs(font.by_width[tile_width]) do
@@ -211,6 +211,8 @@ local function make_final_texture(font)
 		end
 	end
 
+	print("    Composing texture")
+
 	-- Compose texture
 	command(string.format(
 		"convert -size %dx%d xc:transparent %s",
@@ -218,6 +220,7 @@ local function make_final_texture(font)
 	))
 
 	for codepoint, n in pairs(font.glyph_ns) do
+		print(codepoint)
 		local w = math.floor(texture_width / n)
 		local x = w * font.glyph_xs[codepoint]
 		local y = font.glyphs_height * font.glyph_ys[codepoint]
@@ -266,12 +269,12 @@ local function process_font(font)
 	font.glyph_widths = {} -- Exact width of reach glyph
 	font.glyphs_height = 0 -- Max height of all glyphs
 
-	print("Read available glyphs")
+	print("  Reading available glyphs")
 
 	-- Available codepoints from file
 	font.cp = read_available_codepoints(font.file)
 
-	print("Compute glyphs properties")
+	print("  Computing glyphs properties")
 
 	-- Special char: unknown char
 	-- We use size of glyph "0" (rounded) but it would be better to get size from ttx
@@ -294,7 +297,7 @@ local function process_font(font)
 		end
 	end
 
-	print("Create final texture")
+	print("  Creating final texture")
 
 	make_final_texture(font)
 
@@ -338,15 +341,17 @@ font_api.register_font(
 	{
 		version = 2,
 		default = true,
-		margintop = 3,
-		linespacing = -2,
-		charspacing = 2,
+		margintop = %d,
+		linespacing = %d,
+		charspacing = %d,
 		texture_height = %d,
 		glyphs_height = %d,
 		glyphs = %s,
 	}
 )
-]],	font.file, font.pointsize, font.name, font.texture_height, font.glyphs_height, glyphs)
+]],	font.file, font.pointsize, font.name,
+	font.margin_top, font.line_spacing, font.char_spacing,
+	font.texture_height, font.glyphs_height, glyphs)
 end
 
 --
@@ -357,7 +362,14 @@ for _, font in ipairs(params.fonts) do
 	process_font(font)
 end
 
+print("All fonts processed, writing mod files")
+
+--
 -- Write init.lua
+--
+
+print("  Writing init.lua")
+
 local file = io.open(mod_dir .. "/init.lua", "w")
 
 file:write(string.format([[
@@ -379,6 +391,7 @@ file:close()
 --
 -- Write mod.conf
 --
+print("  Writing mod.conf")
 
 local file = io.open(mod_dir .. "/mod.conf", "w")
 file:write(string.format([[
@@ -388,4 +401,59 @@ description = %s
 depends = font_api
 ]], params.mod_name, params.mod_title, params.mod_description))
 
+--
+-- Write README.md
+--
 
+print("  Writing README.md")
+
+local function list(t)
+	return #t == 1 and t[1]	or
+		table.concat(t, ", ", 1, #t - 1) .. " and " .. t[#t]
+end
+
+local font_labels = {}
+for _, font in ipairs(params.fonts) do
+	table.insert(font_name, font.label)
+end
+
+local function font_description(font)
+	local orignal = string.format("%s by %s", font.label, font.author)
+	if font.url and font.url ~= "" then
+		original = string.format("[%s](%s)", original, font.url)
+	end
+
+	return string.format([[
+![%s font preview](screenshot_%s.png)
+
+**Original font**: %s
+
+**License**: %s
+]], font.label, font.name, orignal, font.license)
+end
+
+local file = io.open(mod_dir .. "/README.md", "w")
+file:write(string.format([[
+# %s minetest mod for font API
+
+This mod adds %s to Font API mod (from [display_modpack](https://github.com/pyrollo/display_modpack)).
+
+For more information, see the [forum topic](https://forum.minetest.net/viewtopic.php?t=13563) at the Minetest forums.
+]], params.mod_title, list(font_labels)))
+
+file:write([[
+**Dependancies**: font_api
+
+**License**: code under LGPL v2.1
+]])
+
+if #params.fonts > 1 then
+	for _, font in ipairs(params.fonts) do
+		file:write("## %s font\n", font.label)
+		file:write(font_description(font))
+	end
+else
+	file:write(font_description(params.font[1]))
+end
+
+-- This font includes uppercase, lowercase and many accentuated latin letters, greek and cyrillic letters.

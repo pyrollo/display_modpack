@@ -10,10 +10,10 @@ params = {
 	-- please avoid long names but keep explicit anyway.
 	mod_name = "<your mod name>",
 
-    -- If only one font, have font in title, like "xxx font"
+	-- If only one font, have font in title, like "xxx font"
 	mod_title = "<your mod title>",
 
-    -- A good description would be "... fonts for font_api"
+	-- A good description would be "... fonts for font_api"
 	mod_description = "<your mod description>",
 
 	-- List of fons to include to the mod.
@@ -30,6 +30,20 @@ params = {
 
 			-- True type font file to get glyphs from (required)
 			file = "<your font true type font>",
+
+			-- Author(s) of the original font (required)
+			author = "<author or list of authors>",
+			
+			-- License of the original font (required)
+			-- Join license text, as a text file, to your mod.
+			license = "<name of the license>",
+
+			-- URL of the original font (optional)
+			-- If there is an URL about this font, it is recommended to have it
+			-- here. It should be URL of font project if it exists or at least
+			-- an URL where to download the font with details about author and
+			-- license. 
+			url = "<URL>",
 
 			-- Render pointsize (integer, required)
 			-- Try to find a proper value for a good rendering
@@ -54,7 +68,7 @@ params = {
 			-- Extra codepoints to include to font mod (optional, default none)
 			-- Codepoints from 0x0020 to 0x007f (ASCII) are always included.
 			-- Codepoint 0x0020 is always considered as a space.
-            -- Codepoints not existing in font file will be ignored.
+			-- Codepoints not existing in font file will be ignored.
 			-- Refer to https://en.wikipedia.org/wiki/Unicode
 			codepoints = {
 				-- 00a0-00ff Latin-1 Supplement (full except nbsp)
@@ -78,6 +92,6 @@ params = {
 				-- 20a0-20cf Currency Symbols (Limited to Euro symbol)
 				{ from = 0x20ac, to = 0x20ac },		
 			},
-		}
+		},
 	}
 }
