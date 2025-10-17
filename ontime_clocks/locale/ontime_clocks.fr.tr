@@ -2,6 +2,8 @@
 Green digital clock=Horloge numérique verte
 Red digital clock=Horloge numérique rouge
 White clock=Horloge blanche
-Frameless clock=Horloge sans cadre
-Frameless gold clock=Horloge dorée sans cadre
-Frameless white clock=Horloge blanche sans cadre
+@1 frameless @2 clock=Horloge @2 sans cadre @1
+gold=dorée
+black=noire
+white=blanche
+Frameless @1 clock=Horloge @1 sans cadre
