@@ -2,6 +2,8 @@
 Green digital clock=
 Red digital clock=
 White clock=
-Frameless clock=
-Frameless gold clock=
-Frameless white clock=
+@1 frameless @2 clock=
+gold=
+black=
+white=
+Frameless @1 clock=
