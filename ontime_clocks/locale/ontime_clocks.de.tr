@@ -2,6 +2,15 @@
 Green digital clock=Grüne Digitaluhr
 Red digital clock=Rote Digitaluhr
 White clock=Weiße Uhr
+@1 frameless @2 clock=
+gold=
+black=
+white=
+Frameless @1 clock=
+
+
+##### not used anymore #####
+
 Frameless clock=Rahmenlose Uhr
 Frameless gold clock=Rahmenlose goldene Uhr
 Frameless white clock=Rahmenlose weiße Uhr

@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="35.98333mm"
+   height="21.166664mm"
+   viewBox="0 0 35.98333 21.166664"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   sodipodi:docname="ontime_clocks_large_clock_parts.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="true"
+     inkscape:zoom="2.71877"
+     inkscape:cx="51.309968"
+     inkscape:cy="44.321513"
+     inkscape:window-width="1720"
+     inkscape:window-height="1282"
+     inkscape:window-x="26"
+     inkscape:window-y="23"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer4">
+    <inkscape:grid
+       type="xygrid"
+       id="grid132"
+       empspacing="8"
+       empcolor="#9f00e5"
+       empopacity="0.30196078"
+       originx="-23.283334"
+       originy="-12.699997" />
+  </sodipodi:namedview>
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Guides"
+     inkscape:groupmode="layer"
+     id="layer1"
+     style="display:none"
+     transform="translate(-23.283334,-12.699999)">
+    <g
+       id="g5227"
+       style="display:inline"
+       inkscape:label="center 3x3"
+       inkscape:export-filename="../textures/ontime_clocks_3x3_center.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96">
+      <rect
+         style="display:inline;fill:#ff0000;fill-opacity:0.2;fill-rule:evenodd;stroke:none;stroke-width:0.433012;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stop-color:#000000"
+         id="rect236-23"
+         width="2.1166666"
+         height="6.3500009"
+         x="31.75"
+         y="16.933332"
+         inkscape:label="Size"
+         transform="matrix(2.0000002,0,0,0.66666676,-40.216672,9.8777758)" />
+      <path
+         style="display:inline;fill:#ff0000;stroke:#ff0000;stroke-width:0.05;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:0.5"
+         d="m 23.283334,23.283333 h 4.233333"
+         id="path1869-2" />
+      <path
+         style="display:inline;fill:#ff0000;stroke:#ff0000;stroke-width:0.05;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:0.5"
+         d="M 25.4,21.166667 V 25.4"
+         id="path1869-2-2" />
+    </g>
+    <g
+       id="g792"
+       style="display:inline"
+       inkscape:label="center 5x5"
+       transform="translate(6.3500021)"
+       inkscape:export-filename="../textures/ontime_clocks_5x5_center.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96">
+      <rect
+         style="display:inline;fill:#ff0000;fill-opacity:0.2;fill-rule:evenodd;stroke:none;stroke-width:0.433012;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stop-color:#000000"
+         id="rect786"
+         width="2.1166666"
+         height="6.3500009"
+         x="31.75"
+         y="16.933332"
+         inkscape:label="Size"
+         transform="matrix(2.0000002,0,0,0.66666676,-40.216672,9.8777758)" />
+      <path
+         style="display:inline;fill:#ff0000;stroke:#ff0000;stroke-width:0.05;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:0.5"
+         d="m 23.283334,23.283333 h 4.233333"
+         id="path788" />
+      <path
+         style="display:inline;fill:#ff0000;stroke:#ff0000;stroke-width:0.05;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:0.5"
+         d="M 25.4,21.166667 V 25.4"
+         id="path790" />
+    </g>
+    <g
+       id="g1880"
+       inkscape:label="minutes 3x3"
+       transform="matrix(2.0000002,0,0,2.333333,-27.516673,-23.636104)"
+       style="stroke-width:0.46291"
+       inkscape:export-filename="../textures/ontime_clocks_3x3_needle_minutes.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96">
+      <rect
+         style="fill:#ff0000;fill-opacity:0.2;fill-rule:evenodd;stroke:none;stroke-width:0.231455;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stop-color:#000000"
+         id="rect236"
+         width="2.1166666"
+         height="6.3500009"
+         x="31.75"
+         y="16.933332"
+         inkscape:label="Size" />
+      <path
+         style="fill:#ff0000;stroke:#ff0000;stroke-width:0.0231455;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:0.5"
+         d="m 31.75,20.108333 h 2.116666"
+         id="path1869" />
+      <path
+         style="fill:#ff0000;stroke:#ff0000;stroke-width:0.0231455;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:0.5"
+         d="m 32.808333,16.933333 v 6.35"
+         id="path1871" />
+    </g>
+    <g
+       id="g1885"
+       inkscape:label="minutes 5x5"
+       transform="matrix(1.9999998,0,0,1.9999995,-29.633327,-16.933326)"
+       style="stroke-width:0.5"
+       inkscape:export-filename="../textures/ontime_clocks_5x5_needle_minutes.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96">
+      <rect
+         style="fill:#ff0000;fill-opacity:0.2;fill-rule:evenodd;stroke:none;stroke-width:0.250001;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stop-color:#000000"
+         id="rect236-3"
+         width="2.1166663"
+         height="10.583334"
+         x="35.983334"
+         y="14.816667"
+         inkscape:label="Size" />
+      <path
+         style="fill:#ff0000;stroke:#ff0000;stroke-width:0.025;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:0.5"
+         d="M 37.041666,25.4 V 14.816666"
+         id="path1873" />
+      <path
+         style="fill:#ff0000;stroke:#ff0000;stroke-width:0.025;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:0.5"
+         d="M 35.983333,20.108333 H 38.1"
+         id="path1875" />
+    </g>
+    <g
+       id="g1880-6"
+       inkscape:label="hours 3x3"
+       transform="matrix(2.0000002,0,0,2.333333,-14.816673,-23.636104)"
+       style="display:inline;stroke-width:0.46291"
+       inkscape:export-filename="../textures/ontime_clocks_3x3_needle_hours.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96">
+      <rect
+         style="fill:#ff0000;fill-opacity:0.2;fill-rule:evenodd;stroke:none;stroke-width:0.231455;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stop-color:#000000"
+         id="rect236-2"
+         width="2.1166666"
+         height="6.3500009"
+         x="31.75"
+         y="16.933332"
+         inkscape:label="Size" />
+      <path
+         style="fill:#ff0000;stroke:#ff0000;stroke-width:0.0231455;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:0.5"
+         d="m 31.75,20.108333 h 2.116666"
+         id="path1869-6" />
+      <path
+         style="fill:#ff0000;stroke:#ff0000;stroke-width:0.0231455;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:0.5"
+         d="m 32.808333,16.933333 v 6.35"
+         id="path1871-1" />
+    </g>
+    <g
+       id="g1885-8"
+       inkscape:label="hours 5x5"
+       transform="matrix(1.9999998,0,0,1.9999995,-16.933327,-16.933326)"
+       style="display:inline;stroke-width:0.5"
+       inkscape:export-filename="../textures/ontime_clocks_5x5_needle_hours.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96">
+      <rect
+         style="fill:#ff0000;fill-opacity:0.2;fill-rule:evenodd;stroke:none;stroke-width:0.250001;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stop-color:#000000"
+         id="rect236-3-7"
+         width="2.1166663"
+         height="10.583334"
+         x="35.983334"
+         y="14.816667"
+         inkscape:label="Size" />
+      <path
+         style="fill:#ff0000;stroke:#ff0000;stroke-width:0.025;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:0.5"
+         d="M 37.041666,25.4 V 14.816666"
+         id="path1873-9" />
+      <path
+         style="fill:#ff0000;stroke:#ff0000;stroke-width:0.025;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:0.5"
+         d="M 35.983333,20.108333 H 38.1"
+         id="path1875-2" />
+    </g>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer4"
+     inkscape:label="Centers"
+     style="display:inline"
+     transform="translate(-23.283334,-12.699999)">
+    <g
+       id="g4762-3-3-8"
+       transform="matrix(1.4999983,0,0,0.17647065,-31.749933,19.874876)"
+       style="display:inline;stroke-width:1.94365">
+      <rect
+         style="fill:#333333;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.0971825;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:0.5;stop-color:#000000"
+         id="rect1943-5-6-9"
+         width="1.0583333"
+         height="8.9958334"
+         x="37.570831"
+         y="14.816667"
+         ry="0" />
+    </g>
+    <g
+       id="g4762-3-3-8-3"
+       transform="matrix(1.9999979,0,0,0.23529412,-44.449917,18.738726)"
+       style="display:inline;stroke-width:1.45774">
+      <rect
+         style="fill:#333333;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.0728869;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:0.5;stop-color:#000000"
+         id="rect1943-5-6-9-6"
+         width="1.0583333"
+         height="8.9958334"
+         x="37.570831"
+         y="14.816667"
+         ry="0" />
+    </g>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Minutes"
+     style="display:inline"
+     transform="translate(-23.283334,-12.699999)">
+    <g
+       id="g4762-7"
+       transform="matrix(0.9999994,0,0,1.2352942,6.350025,-5.6029436)"
+       style="stroke-width:0.899737">
+      <rect
+         style="fill:#333333;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.0449866;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:0.5;stop-color:#000000"
+         id="rect1943-0"
+         width="1.0583333"
+         height="8.9958334"
+         x="37.570831"
+         y="14.816667"
+         ry="0" />
+    </g>
+    <g
+       id="g4762-3-3"
+       transform="matrix(0.50000006,0,0,0.85294118,19.049999,3.2372533)"
+       style="stroke-width:1.53128">
+      <rect
+         style="fill:#333333;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.076564;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:0.5;stop-color:#000000"
+         id="rect1943-5-6"
+         width="1.0583333"
+         height="8.9958334"
+         x="37.570831"
+         y="14.816667"
+         ry="0" />
+    </g>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="Hours"
+     style="display:inline"
+     transform="translate(-23.283334,-12.699999)">
+    <g
+       id="g4762"
+       transform="matrix(1.4999979,0,0,1,8.3634505e-5,3.2499997e-8)"
+       style="stroke-width:0.816497">
+      <rect
+         style="fill:#333333;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.0408248;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:0.5;stop-color:#000000"
+         id="rect1943"
+         width="1.0583333"
+         height="8.9958334"
+         x="37.570831"
+         y="14.816667"
+         ry="0" />
+    </g>
+    <g
+       id="g4762-3"
+       transform="matrix(1,0,0,0.76470588,12.700002,5.6029412)"
+       style="stroke-width:1.14354">
+      <rect
+         style="fill:#333333;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.0571771;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:0.5;stop-color:#000000"
+         id="rect1943-5"
+         width="1.0583333"
+         height="8.9958334"
+         x="37.570831"
+         y="14.816667"
+         ry="0" />
+    </g>
+  </g>
+</svg>

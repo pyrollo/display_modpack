@@ -57,10 +57,46 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
+	output = 'ontime_clocks:3x3_clock_black',
+	recipe = {
+		{mat.steel_ingot, mat.dye_black, mat.steel_ingot},
+		{'', 'ontime_clocks:frameless_black', ''},
+		{'', '', ''},
+	}
+})
+
+minetest.register_craft({
+	output = 'ontime_clocks:5x5_clock_black',
+	recipe = {
+		{mat.steel_ingot, mat.dye_black, mat.steel_ingot},
+		{'', 'ontime_clocks:3x3_clock_black', ''},
+		{'', '', ''},
+	}
+})
+
+minetest.register_craft({
 	output = 'ontime_clocks:frameless_gold',
 	recipe = {
 		{mat.gold_ingot, '', mat.gold_ingot},
 		{'', mat.mese_crystal, ''},
+		{'', '', ''},
+	}
+})
+
+minetest.register_craft({
+	output = 'ontime_clocks:3x3_clock_gold',
+	recipe = {
+		{mat.gold_ingot, '', mat.gold_ingot},
+		{'', 'ontime_clocks:frameless_gold', ''},
+		{'', '', ''},
+	}
+})
+
+minetest.register_craft({
+	output = 'ontime_clocks:5x5_clock_gold',
+	recipe = {
+		{mat.gold_ingot, '', mat.gold_ingot},
+		{'', 'ontime_clocks:3x3_clock_gold', ''},
 		{'', '', ''},
 	}
 })
@@ -74,4 +110,21 @@ minetest.register_craft({
 	}
 })
 
+minetest.register_craft({
+	output = 'ontime_clocks:3x3_clock_white',
+	recipe = {
+		{mat.steel_ingot, mat.dye_white, mat.steel_ingot},
+		{'', 'ontime_clocks:frameless_white', ''},
+		{'', '', ''},
+	}
+})
+
+minetest.register_craft({
+	output = 'ontime_clocks:5x5_clock_white',
+	recipe = {
+		{mat.steel_ingot, mat.dye_white, mat.steel_ingot},
+		{'', 'ontime_clocks:3x3_clock_white', ''},
+		{'', '', ''},
+	}
+})
 

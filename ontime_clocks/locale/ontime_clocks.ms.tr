@@ -2,6 +2,15 @@
 Green digital clock=Jam digital hijau
 Red digital clock=Jam digital merah
 White clock=Jam putih
+@1 frameless @2 clock=
+gold=
+black=
+white=
+Frameless @1 clock=
+
+
+##### not used anymore #####
+
 Frameless clock=Jam tanpa bingkai
 Frameless gold clock=Jam emas tanpa bingkai
 Frameless white clock=Jam putih tanpa bingkai

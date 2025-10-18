@@ -95,7 +95,7 @@ local function get_orientation_values(node)
 		local paramtype2 = ndef.paramtype2
 		if paramtype2 == "wallmounted" or paramtype2 == "colorwallmounted" then
 			return wallmounted_values[node.param2 % 8]
-		elseif paramtype2 == "facedir" or paramtype2 == "colorfacedir"  then
+		elseif paramtype2 == "facedir" or paramtype2 == "colorfacedir" then
 			return facedir_values[node.param2 % 32]
 		else
 			-- No orientation or unknown orientation type
@@ -147,7 +147,8 @@ function display_api.update_entities(pos)
 	end
 
 	for _, objref in pairs(get_display_objrefs(pos, true)) do
-		local edef = ndef.display_entities[objref:get_luaentity().name]
+		local entity = objref:get_luaentity()
+		local edef = ndef.display_entities[entity.name]
 		local depth = clip_pos_prop(edef.depth)
 		local right = clip_pos_prop(edef.right)
 		local top = clip_pos_prop(edef.top)
@@ -160,14 +161,19 @@ function display_api.update_entities(pos)
 
 		if objref.set_rotation then
 			objref:set_rotation({
-				x = ov.rotation.x*math.pi/2,
-				y = ov.rotation.y*math.pi/2 + (edef.yaw or 0),
-				z = ov.rotation.z*math.pi/2,
+				x = ov.rotation.x * math.pi / 2 +
+					(entity.rotation and entity.rotation.x or 0),
+				y = ov.rotation.y * math.pi / 2 +
+					(entity.rotation and entity.rotation.y or 0) +
+					(edef.yaw or 0),
+				z = ov.rotation.z * math.pi / 2 +
+					(entity.rotation and entity.rotation.z or 0),
 			})
 		else
 			if ov.rotation.x ~=0 or ov.rotation.y ~= 0 then
 				minetest.log("warning", string.format(
-					"[display_api] unable to rotate correctly entity for node at %s without set_rotation method.",
+					"[display_api] unable to rotate correctly entity for " ..
+					"node at %s without set_rotation method.",
 					minetest.pos_to_string(pos)))
 			end
 			objref:set_yaw(ov.rotation.y*math.pi/2 + (edef.yaw or 0))
@@ -229,7 +235,7 @@ function display_api.on_place(itemstack, placer, pointed_thing, override_param2)
 			param2 = minetest.dir_to_wallmounted(dir)
 
 		elseif ndef.paramtype2 == "facedir" or
-			ndef.paramtype2 == "colorfacedir"  then
+			ndef.paramtype2 == "colorfacedir" then
 			param2 = minetest.dir_to_facedir(dir, true)
 		end
 	end
@@ -276,24 +282,27 @@ end
 
 --- Creates display entity with some fields and the on_activate callback
 function display_api.register_display_entity(entity_name)
-	if not minetest.registered_entities[entity_name] then
-		minetest.register_entity(':'..entity_name, {
-			initial_properties = {
-				collisionbox = {0, 0, 0, 0, 0, 0},
-				visual = "upright_sprite",
-				textures = {},
-				collide_with_objects = false,
-				pointable = false
-			},
-			on_activate = display_api.on_activate,
-			get_staticdata = function(self)
-				return minetest.serialize({ nodepos = self.nodepos })
-			end,
-			on_blast = function(self, damage)
-				return false, false, {}
-			end,
-		})
+
+	if minetest.registered_entities[entity_name] then
+		return
 	end
+
+	minetest.register_entity(':'..entity_name, {
+			initial_properties = {
+			collisionbox = {0, 0, 0, 0, 0, 0},
+			visual = "upright_sprite",
+			textures = {},
+			collide_with_objects = false,
+			pointable = false,
+		},
+		on_activate = display_api.on_activate,
+		get_staticdata = function(self)
+			return minetest.serialize({ nodepos = self.nodepos })
+		end,
+		on_blast = function(self, damage)
+			return false, false, {}
+		end,
+	})
 end
 
 minetest.register_lbm({
@@ -301,6 +310,7 @@ minetest.register_lbm({
 	name = "display_api:update_entities",
 	run_at_every_load = true,
 	nodenames = {"group:display_api",
-		"group:display_modpack_node", "group:display_lib_node"}, -- See deprecated(1)
+		"group:display_modpack_node",
+		"group:display_lib_node"},  -- See deprecated(1)
 	action = function(pos, node) display_api.update_entities(pos) end,
 })
