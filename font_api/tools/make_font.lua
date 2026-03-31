@@ -45,7 +45,7 @@ if #arg ~= 2 then
 end
 
 print("Reading paramaters.")
-dofile(arg[1])
+local params = require(arg[1])
 
 local mod_dir = arg[2]
 if os.execute("[ -d " .. mod_dir .. " ]") then
@@ -59,7 +59,7 @@ os.execute("mkdir -p " .. mod_dir .. "/textures")
 --
 
 local function compute_tile_sizes(texture_size)
-	results = {}
+	local results = {}
 	for size = 1, texture_size do
 		if texture_size % size == 0 then
 			table.insert(results, size)
@@ -76,7 +76,7 @@ table.sort(tile_widths)
 local texture_width = tile_widths[#tile_widths]
 
 -- Rounds glyph width up to available tile width (first width larger than given one)
-local function tile_width(width)
+local function round_to_tile_width(width)
 	for _, w in ipairs(tile_widths) do
 		if width < w then
 			return w
@@ -98,7 +98,7 @@ local function command(cmd)
 end
 
 -- Escape chars that could harm commands
-local function escape(char) 
+local function escape(char)
 	if char == "\\" then return "\\\\\\\\" end
 	if char == "\"" then return "\\\"" end
 	if char == "`"  then return "\\`" end
@@ -162,7 +162,7 @@ local function add_codepoints(font, from, to)
 				font.glyph_widths[codepoint] = w
 
 				-- Tile width
-				local tile_w = tile_width(w)
+				local tile_w = round_to_tile_width(w)
 				if font.by_width[tile_w] == nil then
 					font.by_width[tile_w] = {}
 					table.insert(font.tile_widths, tile_w)
@@ -175,6 +175,7 @@ end
 
 -- Make font texture
 -- Font must have all its codepoints added
+-- This will make a texture usable with `[sheet` texture modifier.
 local function make_final_texture(font)
 	local texture_file = string.format("%s/textures/font_%s.png",
 		mod_dir, font.name)
@@ -184,22 +185,26 @@ local function make_final_texture(font)
 
 	-- Characteristics of [sheet:NxM:x,y
 	-- M is always the same and depends on font and texture height.
-	font.glyph_xs = {} -- x for each glyph
-	font.glyph_ys = {} -- y for each glyph
-	font.glyph_ns = {} -- n of tiles in sheet for each glyph (=texturewidth / tilewidth)
+	font.glyph_xs = {} -- x for each glyph (in sheet tiles, not in pixels)
+	font.glyph_ys = {} -- y for each glyph (in sheet tiles, not in pixels)
+	font.glyph_ns = {} -- number of tiles in sheet for each glyph
 
-	local x = 0 -- cursor x
+	local cursor_x = 0
 	local glyph_y = 0
 
 	table.sort(font.tile_widths)
-    print("    Computing positions")
-	-- Compute positions
+	print("    Computing positions")
+
+	-- Each glyph has to be placed in the texture so it could be got using
+	-- `[sheet` texture modifier. This means each glyph has to be aligned
+	-- on a grid corresponding to its dimensions (rounded up to allowed widths)
 	for _, tile_width in ipairs(font.tile_widths) do
 		for _, codepoint in ipairs(font.by_width[tile_width]) do
-			local glyph_x = math.ceil(x / tile_width)
-			x = glyph_x * tile_width
-			if x + tile_width > texture_width then -- no space left on current line
-				x = 0
+			local glyph_x = math.ceil(cursor_x / tile_width)
+			cursor_x = glyph_x * tile_width
+			if cursor_x + tile_width > texture_width then
+				-- No space left, jump to next line
+				cursor_x = 0
 				glyph_x = 0
 				glyph_y = glyph_y + 1
 				font.texture_height = font.texture_height + font.glyphs_height
@@ -207,13 +212,12 @@ local function make_final_texture(font)
 			font.glyph_xs[codepoint] = glyph_x
 			font.glyph_ys[codepoint] = glyph_y
 			font.glyph_ns[codepoint] = math.floor(texture_width / tile_width)
-			x = x + tile_width
+			cursor_x = cursor_x + tile_width
 		end
 	end
 
 	print("    Composing texture")
 
-	-- Compose texture
 	command(string.format(
 		"convert -size %dx%d xc:transparent %s",
 		texture_width, font.texture_height, texture_file
@@ -224,12 +228,12 @@ local function make_final_texture(font)
 		local w = math.floor(texture_width / n)
 		local x = w * font.glyph_xs[codepoint]
 		local y = font.glyphs_height * font.glyph_ys[codepoint]
-		
+
 		local cmd
 		-- Subtexture subcommand
 		if codepoint == 0 then
 			-- The "unknown" char
-  			cmd = string.format(
+			cmd = string.format(
 				"convert %s" ..
 				" -stroke black -fill transparent -strokewidth 1 " ..
 				" -draw \"rectangle %d,%d %d,%d\" %s",
@@ -239,25 +243,26 @@ local function make_final_texture(font)
 			-- Other glyhp chars
 			cmd = string.format(
 				"convert %s \\(" ..
-				" -background none -font \"%s\" -pointsize %d label:\"%s\"" .. 
+				" -background none -font \"%s\" -pointsize %d label:\"%s\"" ..
 				" -define trim:edges=east,west -trim" ..
 				" -repage +%d+%d \\) -flatten %s",
-				texture_file, font.file, font.pointsize, escape(utf8.char(codepoint)),
-				x, y, texture_file
+				texture_file, font.file, font.pointsize,
+				escape(utf8.char(codepoint)), x, y, texture_file
 			)
-			
+
 		end
 		command(cmd)
 	end
 
-    command(string.format("convert %s -channel alpha -threshold 50%% %s", texture_file, texture_file))
+	command(string.format("convert %s -channel alpha -threshold 50%% %s",
+		texture_file, texture_file))
 end
 
 local function process_font(font)
 
 	-- Defaults
 	font.label = font.label or font.name:gsub("^%l", string.upper)
-    font.margin_top = font.margin_top or 0
+	font.margin_top = font.margin_top or 0
 	font.line_spacing = font.line_spacing or 0
 	font.char_spacing = font.char_spacing or 0
 
@@ -280,9 +285,10 @@ local function process_font(font)
 	-- We use size of glyph "0" (rounded) but it would be better to get size from ttx
 
 	-- TODO: We could get information from ttx:
-	--   <mtx> gives a width always divisible by 125 for metro font (check if its somehow proportional to what magick gives)
+	--   <mtx> gives a width always divisible by 125 for metro font (check if
+	--   its somehow proportional to what magick gives)
 
-	local w = tile_width(measure(font, 0x0030))
+	local w = round_to_tile_width(measure(font, 0x0030))
 	font.glyph_widths[0] = w
 	font.by_width[w] = { 0 }
 	font.tile_widths = { w }
@@ -319,9 +325,15 @@ local function get_font_registration_lua(font)
 		local y = font.glyph_ys[codepoint]
 		local n = font.glyph_ns[codepoint]
 		if x ~= nil and y ~=nil and n ~= nil then
-			glyph = string.format("[%d] = { %d, %d, %d, %d },", codepoint, w, n, x, y)
+			glyph = string.format(
+				"[%d] = { %d, %d, %d, %d },",
+				codepoint, w, n, x, y
+			)
 		else
-			glyph = string.format("[%d] = { %d },", codepoint, w)
+			glyph = string.format(
+				"[%d] = { %d },",
+				codepoint, w
+			)
 		end
 
 		curlinesize = curlinesize + glyph:len() + 1
@@ -363,6 +375,7 @@ for _, font in ipairs(params.fonts) do
 end
 
 print("All fonts processed, writing mod files")
+local file
 
 --
 -- Write init.lua
@@ -370,8 +383,7 @@ print("All fonts processed, writing mod files")
 
 print("  Writing init.lua")
 
-local file = io.open(mod_dir .. "/init.lua", "w")
-
+file = io.open(mod_dir .. "/init.lua", "w")
 file:write(string.format([[
 --
 -- %s: A font mod for font_api
@@ -393,7 +405,7 @@ file:close()
 --
 print("  Writing mod.conf")
 
-local file = io.open(mod_dir .. "/mod.conf", "w")
+file = io.open(mod_dir .. "/mod.conf", "w")
 file:write(string.format([[
 name = %s
 title = %s
@@ -414,11 +426,11 @@ end
 
 local font_labels = {}
 for _, font in ipairs(params.fonts) do
-	table.insert(font_name, font.label)
+	table.insert(font.name, font.label)
 end
 
 local function font_description(font)
-	local orignal = string.format("%s by %s", font.label, font.author)
+	local original = string.format("%s by %s", font.label, font.author)
 	if font.url and font.url ~= "" then
 		original = string.format("[%s](%s)", original, font.url)
 	end
@@ -429,16 +441,19 @@ local function font_description(font)
 **Original font**: %s
 
 **License**: %s
-]], font.label, font.name, orignal, font.license)
+]], font.label, font.name, original, font.license)
 end
 
-local file = io.open(mod_dir .. "/README.md", "w")
+file = io.open(mod_dir .. "/README.md", "w")
 file:write(string.format([[
-# %s minetest mod for font API
+# %s Luanti mod for Font API
 
-This mod adds %s to Font API mod (from [display_modpack](https://github.com/pyrollo/display_modpack)).
+This mod adds %s to Font API mod
+(from [display_modpack](https://github.com/pyrollo/display_modpack)).
 
-For more information, see the [forum topic](https://forum.minetest.net/viewtopic.php?t=13563) at the Minetest forums.
+For more information, see the
+[forum topic](https://forum.minetest.net/viewtopic.php?t=13563)
+at the Minetest forums.
 ]], params.mod_title, list(font_labels)))
 
 file:write([[
@@ -456,4 +471,4 @@ else
 	file:write(font_description(params.font[1]))
 end
 
--- This font includes uppercase, lowercase and many accentuated latin letters, greek and cyrillic letters.
+file:close()

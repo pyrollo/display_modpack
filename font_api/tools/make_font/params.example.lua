@@ -4,7 +4,7 @@
 -- Replace values between brakets <> to your choices.
 -- Launch make_font.lua params.lua
 
-params = {
+return {
 	-- Resulting mod name (required)
 	-- As this name will be use as texture prefix and so repeated many times,
 	-- please avoid long names but keep explicit anyway.
@@ -47,7 +47,7 @@ params = {
 
 			-- Render pointsize (integer, required)
 			-- Try to find a proper value for a good rendering
-			pointsize  = <proper rendering height>,
+			pointsize = <proper rendering height>,
 
 			-- Shoud chars be trimmed? (boolean, required)
 			-- Set it to true to reduce texture size
