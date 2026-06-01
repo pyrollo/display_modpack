@@ -52,7 +52,7 @@ local function on_receive_fields(pos, formname, fields, player)
 	end
 end
 
-local wood_texture = xcompat.textures.wood.planks
+local wood_texture = xcompat.textures.wood.apple.planks
 
 local models = {
 	black_board = {
