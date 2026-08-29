@@ -34,12 +34,19 @@ local function deprecated_global_table(deprecated_global_name, replacement_globa
 	assert(type(replacement_global_name) == 'string', "replacement_global_name should be a string.")
 	assert(deprecated_global_name ~= '', "deprecated_global_name should not be empty.")
 	assert(replacement_global_name ~= '', "replacement_global_name should not be empty.")
-	assert(rawget(_G, deprecated_global_name) == nil, "deprecated global does not exist.")
+
+	if rawget(_G, deprecated_global_name) ~= nil then
+		minetest.log('warning', string.format(
+			'Deprecated global "%s" still exists, not deprecating it.', deprecated_global_name))
+		return
+	end
+
 	if _G[replacement_global_name] == nil then
 		minetest.log('warning', string.format(
 			'Replacement global "%s" does not exists.', replacement_global_name))
 		return
 	end
+
 	local meta = {
 		deprecated = deprecated_global_name,
 		replacement = replacement_global_name,
@@ -65,7 +72,6 @@ local function deprecated_global_table(deprecated_global_name, replacement_globa
 	rawset(_G, deprecated_global_name, {})
 	setmetatable(_G[deprecated_global_name], meta)
 end
-
 
 -- deprecated(1) -- December 2018 - Deprecation of groups display_modpack_node and display_lib_node
 -- Group to be removed from display API register_lbm
